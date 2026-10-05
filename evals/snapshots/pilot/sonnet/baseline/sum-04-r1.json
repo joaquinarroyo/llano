@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Ana propuso migrar de REST a GraphQL en la app mobile para evitar las 7 requests que se hacen por pantalla, pero Luis objetó que GraphQL complica el caching HTTP y que el equipo no tiene experiencia; Ana sugirió persisted queries como solución al caching, y Marta ofreció una alternativa: un endpoint BFF agregado en REST, que resolvería las múltiples requests sin cambiar de stack. Luis apoyó el BFF por ser menos riesgoso, y Ana aceptó, por lo que acordaron probarlo primero en la pantalla de inicio y medir los resultados antes de decidir más cambios.",
+  "output_tokens": 228,
+  "thinking_tokens": 0,
+  "input_tokens": 2802,
+  "duration_ms": 2079,
+  "wall_s": 3.34,
+  "created_at": "2026-10-05T23:20:56.097440+00:00"
+}

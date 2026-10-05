@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "## Notificaciones — migración a Amazon SES\n\n**Cambios**\n\n- **Proveedor de email:** el envío de emails pasó de SendGrid a Amazon SES.\n- **Plantillas:** las plantillas HTML se migraron a MJML.\n- **Reintentos:** se agregaron reintentos con backoff exponencial (3 intentos, base de 2 s) ante fallos de envío.\n\n**Breaking change**\n\n- Se eliminó el endpoint `/v1/notify`, que ya no tenía uso. Cualquier cliente que aún lo llame recibirá un error.\n\n**Notas**\n\n- La suite de tests pasa completa (132 tests).\n\nSi querés, te lo dejo en inglés o con el formato de tu CHANGELOG (Keep a Changelog, con secciones Added/Changed/Removed).",
+  "output_tokens": 281,
+  "thinking_tokens": 0,
+  "input_tokens": 2731,
+  "duration_ms": 3242,
+  "wall_s": 4.54,
+  "created_at": "2026-10-05T23:20:51.313527+00:00"
+}

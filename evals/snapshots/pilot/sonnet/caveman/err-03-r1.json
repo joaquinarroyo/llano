@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Bucle infinito. El efecto depende de `filters`, y dentro hace `setFilters({ ...filters, page: 1 })`. Eso crea un objeto nuevo cada vez, con otra referencia. React ve `filters` cambiado, re-renderiza, el efecto corre de nuevo, y se repite.\n\nFix según intención:\n\n**1. Resetear página cuando cambian los filtros (caso común).** Separa `page` del resto y depende solo de lo que cambia:\n\n```jsx\nconst [filters, setFilters] = useState({ search: '', category: '' });\nconst [page, setPage] = useState(1);\n\nuseEffect(() => {\n  setPage(1);\n}, [filters]);\n```\n\nMejor aún: resetea `page` en el handler que cambia el filtro, sin efecto:\n\n```jsx\nconst updateFilters = (next) => {\n  setFilters(next);\n  setPage(1);\n};\n```\n\n**2. Si `page` debe quedar dentro de `filters`.** Usa la forma funcional y devuelve el mismo objeto si no hay cambio:\n\n```jsx\nuseEffect(() => {\n  setFilters(f => (f.page === 1 ? f : { ...f, page: 1 }));\n}, [filters.search, filters.category]);\n```\n\nDevolver el mismo estado hace que React corte el re-render. Dependencias primitivas evitan el problema de referencia.\n\nRegla: no pongas en las dependencias un estado que el mismo efecto actualiza con un objeto nuevo.",
+  "output_tokens": 507,
+  "thinking_tokens": 0,
+  "input_tokens": 4277,
+  "duration_ms": 4304,
+  "wall_s": 5.57,
+  "created_at": "2026-10-05T23:20:17.660521+00:00"
+}

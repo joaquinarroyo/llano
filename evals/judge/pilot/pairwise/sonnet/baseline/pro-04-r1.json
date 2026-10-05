@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da el mismo orden esencial (generar, desplegar, revocar, auditar, limpiar, prevenir) con más concisión y una advertencia clara de que limpiar el historial no protege la key, mientras que A es más largo y repite ideas sin aportar mucho más, aunque ambas cubren lo importante.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica con frases cortas y estructura clara, aclara que la C no es la de ACID, enumera tres límites concretos y cierra con preguntas prácticas, mientras B es correcta pero más densa y con párrafos más cargados.",
+  "judge_model": "sonnet"
+}

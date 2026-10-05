@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "A",
+  "winner": "terse",
+  "reason": "B ofrece una comparación clara con un arranque rápido ejecutable y menciona la integración con Turborepo/Nx/Changesets, mientras que A, aunque precisa y honesta sobre no haber medido rendimiento, omite la fila de velocidad y no da comandos concretos para empezar.",
+  "judge_model": "sonnet"
+}

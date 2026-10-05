@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Revoca primero la key filtrada. Limpiar el repo no sirve si la key sigue activa, porque bots ya la pueden haber copiado.\n\n1. **Genera una key nueva** en el panel del proveedor. Si el proveedor permite dos keys activas a la vez, esto evita una caída.\n2. **Despliega la key nueva** en tus servicios, variables de entorno y gestor de secretos (CI, producción, local).\n3. **Revoca la key filtrada** en el panel del proveedor. No esperes a limpiar el repo.\n4. **Revisa el uso de la key vieja.** Busca en los logs del proveedor llamadas desde IPs, regiones u horas que no reconoces. Revisa también la facturación.\n5. **Si hubo uso ajeno**, revisa qué datos o recursos pudo tocar esa key. Rota también los secretos que esos recursos exponían.\n6. **Quita la key del repo.** Reemplázala por una variable de entorno y agrega el archivo de secretos a `.gitignore`.\n7. **Limpia el historial** con `git filter-repo` o BFG, y haz force push. Pídele a los colaboradores que vuelvan a clonar.\n\n**Atención:** el paso 7 no protege la key. Los forks, los clones y las cachés de GitHub conservan los commits viejos. La revocación del paso 3 es la única protección real.\n\n**Prevención:** activa push protection y secret scanning en GitHub. Agrega un hook de pre-commit con `gitleaks` o `trufflehog`.\n\nSi me dices el proveedor (OpenAI, AWS, Stripe, etc.), te doy los pasos exactos de su panel. Si quieres, también puedo buscar la key en tu repo local, aunque este directorio no es un repositorio git.",
+  "output_tokens": 720,
+  "thinking_tokens": 109,
+  "input_tokens": 11121,
+  "duration_ms": 9744,
+  "wall_s": 10.76,
+  "created_at": "2026-10-05T23:21:32.999677+00:00"
+}

@@ -1,0 +1,9 @@
+[project]
+name = "llano-evals"
+version = "0.1.0"
+description = "Evals for the llano writing-style skill"
+requires-python = ">=3.11"
+dependencies = ["matplotlib>=3.8"]
+
+[tool.uv]
+package = false

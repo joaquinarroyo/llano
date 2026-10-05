@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da la misma recomendación con los puntos técnicos esenciales (ACID, restricciones, NUMERIC, JSONB, RLS, inmutabilidad) en un formato más breve y directo, mientras que B añade bastante contenido extra que alarga la lectura sin cambiar la decisión.",
+  "judge_model": "sonnet"
+}

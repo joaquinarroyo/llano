@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más compacto y se lee en orden (pasos numerados, advertencias destacadas, incluye URL de conexión, --clean y el aviso sobre borrar objetos) sin perder lo técnico esencial, mientras que A es más largo y repite secciones, aunque cubre más detalles como Docker y --exclude-table-data.",
+  "judge_model": "sonnet"
+}

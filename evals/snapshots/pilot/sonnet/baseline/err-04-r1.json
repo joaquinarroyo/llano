@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Hay dos problemas combinados:\n\n1. **`+cu118` no está en PyPI.** Las versiones con sufijo CUDA (`2.1.0+cu118`) solo existen en el índice de PyTorch (`https://download.pytorch.org/whl/cu118`). pip está mirando solo PyPI.\n2. **Python 3.13 no tiene wheels de torch 2.1.0.** Torch 2.1.0 solo soporta hasta Python 3.11. Por eso la lista de versiones que ves empieza en 2.4.0 (y aun esas, solo las que soportan 3.13).\n\n## Opciones\n\n**A) Mantener torch 2.1.0 + cu118 (cambiar la imagen base)**\n\n```dockerfile\nFROM python:3.11-slim\n...\nRUN pip install --extra-index-url https://download.pytorch.org/whl/cu118 -r requirements.txt\n```\n\nO pon la línea en `requirements.txt`:\n\n```\n--extra-index-url https://download.pytorch.org/whl/cu118\ntorch==2.1.0+cu118\n```\n\n**B) Mantener Python 3.13 (subir torch)**\n\nNecesitas una versión de torch con wheels para 3.13 (2.5.0 en adelante). Para CUDA 11.8 los wheels oficiales de versiones recientes ya pueden no estar disponibles; revisa qué hay en `https://download.pytorch.org/whl/cu118`. Si no, usa cu121/cu124:\n\n```\n--extra-index-url https://download.pytorch.org/whl/cu124\ntorch==2.5.0+cu124\n```\n\nEsto implica que tu código y el resto de dependencias funcionen con torch 2.5, y que el driver del host soporte esa versión de CUDA.\n\n## Recomendación\n\nSi el proyecto está fijado a torch 2.1.0, la opción **A** es el cambio mínimo y más seguro. Si no hay una razón para quedarte en 2.1.0, la **B** es mejor a largo plazo.\n\nNota: `python:*-slim` no incluye CUDA, pero los wheels de torch traen sus propias librerías CUDA, así que no hace falta una imagen `nvidia/cuda` para ejecutar; solo necesitas el driver NVIDIA en el host y `--gpus all` al correr el contenedor.\n\nSi quieres, mándame tu `Dockerfile` y `requirements.txt` y te dejo los cambios exactos.",
+  "output_tokens": 834,
+  "thinking_tokens": 0,
+  "input_tokens": 2748,
+  "duration_ms": 6557,
+  "wall_s": 7.57,
+  "created_at": "2026-10-05T23:20:20.122731+00:00"
+}

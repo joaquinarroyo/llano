@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica con frases completas y gramaticales, incluye la entropía baja de las contraseñas como causa raíz, añade la tabla clara con notas (límite de 72 bytes de bcrypt) y la advertencia de que la sal sola no arregla la velocidad, mientras que A usa un estilo telegráfico con artículos omitidos y es más difícil de leer.",
+  "judge_model": "sonnet"
+}

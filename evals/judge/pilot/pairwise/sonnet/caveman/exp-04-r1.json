@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica en prosa con secciones claras el origen, la same-origin policy y el preflight, cubre además Django y la advertencia de credenciales con el origen exacto, mientras que A es más telegráfica y mezcla ideas en viñetas densas.",
+  "judge_model": "sonnet"
+}

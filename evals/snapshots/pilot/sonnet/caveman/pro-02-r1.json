@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Usa `git revert`, no `git reset` + `push --force`. Revert crea un commit nuevo que deshace el cambio y no reescribe historia, así que no rompe los clones del equipo.\n\n```bash\ngit checkout main\ngit pull origin main\ngit log --oneline          # ubica el hash\ngit revert <hash>          # abre editor para el mensaje\n# correr tests\ngit push origin main       # push normal, sin --force\n```\n\nCasos especiales:\n- **Commit de merge:** `git revert -m 1 <hash>`. `-m 1` mantiene el lado de main.\n- **Varios commits:** `git revert <viejo>^..<nuevo>`.\n- **Conflictos:** resuélvelos y ejecuta `git revert --continue`. Para cancelar: `git revert --abort`.\n- **Main protegida:** haz el revert en una rama y abre PR.\n\nDespués, avisa al equipo para que hagan `git pull`.\n\nSi más adelante quieres reaplicar el cambio, haz revert del revert. Si no, un `git merge` de la rama original no volverá a traer esos cambios.\n\nEvita `reset --hard` + `push --force` en main compartida: reescribe historia y deja a los demás con commits huérfanos o les puede borrar trabajo.",
+  "output_tokens": 725,
+  "thinking_tokens": 297,
+  "input_tokens": 4184,
+  "duration_ms": 7022,
+  "wall_s": 8.03,
+  "created_at": "2026-10-05T23:21:18.467489+00:00"
+}

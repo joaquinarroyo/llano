@@ -1,0 +1,18 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos (definición, métodos HTTP, reintentos por fallos de red, Idempotency-Key en POST y evitar cobros duplicados) sin errores técnicos; el dato de Stripe con 24 horas es correcto.",
+  "judge_model": "sonnet"
+}

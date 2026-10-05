@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B ya marca la eliminación de /v1/notify como breaking change dentro del propio resumen y aclara su efecto, mientras que A la deja como 'Eliminado' y delega al usuario mover la línea; ambas incluyen todos los datos técnicos, pero B queda listo para pegar.",
+  "judge_model": "sonnet"
+}

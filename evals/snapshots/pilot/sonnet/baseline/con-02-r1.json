@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "# El teorema CAP\n\nFormulado por Eric Brewer (2000) y demostrado formalmente por Gilbert y Lynch (2002). Dice que un sistema de datos distribuido no puede garantizar simultáneamente estas tres propiedades:\n\n- **Consistencia (C)**: toda lectura recibe la escritura más reciente (linealizabilidad), o un error.\n- **Disponibilidad (A)**: toda petición a un nodo que funciona recibe una respuesta no-error, aunque no sea la más reciente.\n- **Tolerancia a particiones (P)**: el sistema sigue funcionando aunque la red pierda o retrase mensajes entre nodos.\n\n## La lectura correcta\n\nEl \"elige 2 de 3\" es engañoso. En un sistema distribuido real las particiones de red **ocurren**, así que P no es opcional. La elección real es:\n\n> **Cuando hay una partición, ¿sacrificas consistencia o disponibilidad?**\n\n- **CP**: ante una partición, rechazas peticiones (o bloqueas) para no devolver datos inconsistentes. Ejemplos: ZooKeeper, etcd, HBase, Spanner (en la práctica).\n- **AP**: ante una partición, sigues respondiendo con posibles datos desactualizados y reconcilias después. Ejemplos: Cassandra (configuración por defecto), DynamoDB, Riak.\n\nSin partición, puedes tener C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\n**Sí, como modelo mental; no tanto como herramienta de clasificación.** Las críticas habituales:\n\n1. **Es muy binario.** C, A y P se definen de forma estricta; los sistemas reales ofrecen grados (consistencia ajustable por consulta, como `QUORUM` en Cassandra).\n2. **Solo habla del caso de fallo.** Ignora lo que pasa el 99,9 % del tiempo, cuando no hay partición. Ahí el compromiso real es **latencia vs. consistencia**. Por eso Daniel Abadi propuso **PACELC**: si hay partición (P), elige A o C; si no (Else), elige entre latencia (L) o consistencia (C).\n3. **Etiquetar bases de datos como \"CP\" o \"AP\" suele ser simplista.** Muchos sistemas se comportan distinto según la operación y la configuración.\n4. **Brewer mismo matizó** (2012) que la gestión de particiones y la recuperación posterior importan más que la elección rígida.\n\n## Qué ha cambiado\n\nSistemas como Spanner o CockroachDB muestran que con relojes precisos, buena infraestructura de red y replicación por consenso (Paxos/Raft) se puede ofrecer consistencia fuerte con disponibilidad muy alta en la práctica. No violan CAP: simplemente hacen las particiones muy raras y eligen C cuando ocurren.\n\n## Conclusión práctica\n\nÚsalo para hacerte la pregunta correcta al diseñar: *\"¿qué prefiero que ocurra si la red falla: un error o un dato posiblemente viejo?\"* Para análisis más fino, complementa con PACELC y con los modelos de consistencia (linealizable, causal, eventual, etc.).",
+  "output_tokens": 1120,
+  "thinking_tokens": 0,
+  "input_tokens": 2619,
+  "duration_ms": 9669,
+  "wall_s": 10.69,
+  "created_at": "2026-10-05T23:22:19.886301+00:00"
+}

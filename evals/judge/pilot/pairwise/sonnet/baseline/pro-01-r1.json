@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B cubre los mismos pasos esenciales (generar, config, ssh-add, pbcopy, GitHub, prueba, remote) de forma numerada y concisa, mientras que A añade extras (identidad git, gh, nota de macOS antiguo) y una confusión menor entre el orden de ssh-agent y la config que diluye la lectura rápida.",
+  "judge_model": "sonnet"
+}

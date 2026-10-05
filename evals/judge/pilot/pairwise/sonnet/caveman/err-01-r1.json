@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica en prosa clara qué ocurre (falla TCP antes del login), da los pasos en orden con contexto y comandos, mientras que A es más telegráfica y mezcla pistas condicionales y un paso extra (ruta/VPC) que añade ruido sin ser necesario en una sola lectura.",
+  "judge_model": "sonnet"
+}

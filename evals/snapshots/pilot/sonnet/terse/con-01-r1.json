@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Idempotencia**: una operación es idempotente si ejecutarla una vez o varias veces con los mismos parámetros produce el mismo estado final en el servidor.\n\n**Ejemplos por método HTTP**\n- `GET`, `PUT`, `DELETE`, `HEAD`: idempotentes por diseño. `PUT /usuarios/5` con el mismo cuerpo siempre deja el mismo resultado; `DELETE /usuarios/5` deja al usuario borrado aunque lo repitas.\n- `POST`: normalmente **no** es idempotente. Repetir `POST /pagos` puede crear dos cobros.\n- `PATCH`: depende de cómo se defina (`set x = 5` sí; `incrementar x` no).\n\n**Por qué importa**\n- **Reintentos seguros**: en redes reales hay timeouts, caídas y respuestas perdidas. El cliente no sabe si la petición llegó; si es idempotente, puede reintentar sin miedo.\n- **Evita duplicados**: cobros dobles, pedidos repetidos, correos enviados varias veces.\n- **Robustez en sistemas distribuidos**: colas, webhooks y balanceadores suelen entregar \"al menos una vez\", así que los duplicados son esperables.\n- **Simplifica a los clientes**: no necesitan lógica compleja para averiguar qué pasó.\n\n**Cómo lograrlo en operaciones no idempotentes (como POST)**\nUsar una **clave de idempotencia** (`Idempotency-Key: <uuid>`): el cliente la genera y la envía en cada reintento. El servidor guarda la clave junto con el resultado; si recibe la misma clave otra vez, devuelve la respuesta original en lugar de repetir la acción. Stripe y muchas APIs de pagos funcionan así.\n\n**Detalles prácticos**\n- Guardar las claves con un TTL (p. ej. 24 h).\n- Validar que la misma clave no se use con un cuerpo distinto (devolver error 409/422).\n- Manejar concurrencia: dos peticiones simultáneas con la misma clave deben serializarse (por ejemplo con una restricción única en base de datos).",
+  "output_tokens": 749,
+  "thinking_tokens": 0,
+  "input_tokens": 2633,
+  "duration_ms": 6153,
+  "wall_s": 7.2,
+  "created_at": "2026-10-05T23:22:09.241168+00:00"
+}

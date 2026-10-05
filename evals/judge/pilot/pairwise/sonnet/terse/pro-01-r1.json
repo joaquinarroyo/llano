@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B sigue una secuencia lineal y numerada que empieza verificando si ya existe una clave, evita el paso innecesario de iniciar el agente manualmente, incluye la advertencia de no compartir la clave privada y deja todo en una sola lectura sin ofrecimientos fuera de lugar.",
+  "judge_model": "sonnet"
+}

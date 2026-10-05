@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Idempotencia: repetir la misma petición N veces deja el servidor en el mismo estado que hacerla una vez. La respuesta puede variar; el efecto no.\n\n**Por métodos HTTP**\n- Idempotentes: `GET`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`.\n- No idempotente: `POST` (crea un recurso nuevo en cada llamada). `PATCH` depende de la operación.\n\nEjemplos:\n- `PUT /users/1 {\"name\":\"Ana\"}`: da igual cuántas veces se envíe, el resultado es igual.\n- `DELETE /users/1`: la primera borra, las siguientes devuelven 404 o 204. El estado final es el mismo.\n- `POST /payments`: dos envíos, dos cobros.\n\n**Por qué importa**\n- Las redes fallan. Timeout, y el cliente no sabe si la petición llegó.\n- Los clientes reintentan (manualmente, por retry automático, proxies, colas con entrega \"at least once\").\n- Sin idempotencia, los reintentos causan duplicados: doble cobro, doble pedido, doble email.\n\n**Cómo lograrlo en `POST`**\n1. El cliente envía una cabecera `Idempotency-Key: <uuid>` única por operación.\n2. El servidor guarda la clave junto con el resultado.\n3. Si llega la misma clave otra vez, devuelve la respuesta guardada sin ejecutar de nuevo.\n\nDetalles clave:\n- Guardar la clave y ejecutar la operación de forma atómica (restricción única en la BD), para evitar condiciones de carrera.\n- Misma clave con cuerpo distinto: rechazar (por ejemplo, 422 o 409).\n- Expirar claves tras un tiempo (24 h es habitual).\n\nStripe y otras APIs de pagos usan este patrón.",
+  "output_tokens": 646,
+  "thinking_tokens": 0,
+  "input_tokens": 4157,
+  "duration_ms": 5515,
+  "wall_s": 6.53,
+  "created_at": "2026-10-05T23:22:09.654185+00:00"
+}

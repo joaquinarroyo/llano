@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Celery**\n- Broker flexible: Redis, RabbitMQ, SQS.\n- Features completas: tareas periódicas (beat), reintentos con backoff, rate limits, chains/groups/chords, enrutado por colas, prioridades.\n- Más configuración y más piezas: worker, beat, monitoreo (Flower).\n- Soporte Django maduro, muchos ejemplos.\n- Complejidad alta; problemas conocidos con `acks_late`, visibility timeout en Redis, tareas duplicadas.\n\n**RQ**\n- Solo Redis.\n- API mínima: `queue.enqueue(fn, args)`. Curva de aprendizaje baja.\n- Reintentos básicos, jobs programados con `rq-scheduler` o `django-rq` (cron nativo en versiones recientes).\n- Sin workflows complejos ni routing avanzado.\n- Worker hace `fork` por job: aísla memoria, pero es más lento por job. Sin Windows nativo.\n- `django-rq` da integración y dashboard en admin.\n\n**Elige RQ si:**\n- Tareas simples (emails, webhooks, informes).\n- Ya usas Redis.\n- Equipo pequeño, poco volumen.\n\n**Elige Celery si:**\n- Necesitas workflows, prioridades, rate limiting, o RabbitMQ/SQS.\n- Alto volumen o muchos tipos de tareas.\n- Tareas periódicas complejas.\n\n**Recomendación:** empieza con RQ si tus necesidades son simples. Migrar luego es barato: las tareas son funciones Python normales. Elige Celery solo si ya sabes que necesitas sus features.",
+  "output_tokens": 571,
+  "thinking_tokens": 0,
+  "input_tokens": 4185,
+  "duration_ms": 5414,
+  "wall_s": 6.42,
+  "created_at": "2026-10-05T23:22:02.037656+00:00"
+}

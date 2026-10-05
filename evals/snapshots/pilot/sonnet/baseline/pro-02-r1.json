@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Cuando el commit ya está en `main` y lo comparte el equipo, lo seguro es **`git revert`**, que crea un commit nuevo que deshace los cambios, en lugar de reescribir la historia.\n\n## Pasos\n\n1. **Actualiza tu copia local**\n   ```bash\n   git checkout main\n   git pull --ff-only origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -n 20\n   git show <sha>   # confirma que es el correcto\n   ```\n\n3. **Revierte**\n   ```bash\n   git revert <sha>\n   ```\n   - Si es un **merge commit**, necesitas indicar el padre: `git revert -m 1 <sha>` (el `1` suele ser la rama principal).\n   - Si son **varios commits**: `git revert <sha_viejo>^..<sha_nuevo>`, o añade `--no-commit` para agruparlos en un solo commit.\n\n4. **Resuelve conflictos si los hay**, luego `git add` y `git revert --continue`.\n\n5. **Verifica antes de subir**: ejecuta tests/build y revisa con `git show HEAD`.\n\n6. **Súbelo**\n   ```bash\n   git push origin main\n   ```\n   Es un push normal, sin `--force`. Si `main` está protegida, haz el revert en una rama y abre un PR:\n   ```bash\n   git switch -c revert-<descripcion>\n   git push -u origin revert-<descripcion>\n   ```\n\n7. **Avisa al equipo** para que hagan `git pull`, e indica en el mensaje del commit o PR el motivo del revert.\n\n## Qué evitar\n\n- **`git reset --hard` + `git push --force`** en `main`: reescribe la historia compartida, y quienes ya hicieron pull tendrán historias divergentes y podrían reintroducir el commit sin querer.\n- **`git commit --amend` o `rebase`** sobre commits ya publicados.\n\n## Nota\n\nSi más adelante quieres volver a aplicar los cambios originales, **no puedes hacer merge de la rama tal cual**, porque Git considera que ya están aplicados. Tendrías que hacer un *revert del revert* (`git revert <sha_del_revert>`) o cherry-pick de los commits originales.\n\nAdemás, el directorio actual no es un repositorio git, así que no he ejecutado nada. Si me indicas la ruta del repo y el commit, puedo ayudarte a revisarlo y prepararlo.",
+  "output_tokens": 926,
+  "thinking_tokens": 82,
+  "input_tokens": 2640,
+  "duration_ms": 8176,
+  "wall_s": 9.2,
+  "created_at": "2026-10-05T23:21:13.386440+00:00"
+}

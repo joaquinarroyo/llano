@@ -1,0 +1,179 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\usepackage{fontspec}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\input{run.tex}
+\input{\resdir/macros.tex}
+
+\title{Llano: evaluación de un estilo de escritura controlado\\para agentes de código en español}
+\author{\href{https://github.com/joaquinarroyo/llano}{github.com/joaquinarroyo/llano}}
+\date{Corrida del \evalDate}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{abstract.tex}
+\end{abstract}
+
+\section{Introducción}
+
+Los agentes de código producen cada vez más texto que una persona debe leer. Ese texto suele ser largo, repetitivo y lleno de fórmulas vacías. Andrej Karpathy propuso pedirle al modelo que escriba en ASD-STE100 (\emph{Simplified Technical English}). Es un lenguaje controlado que la industria aeronáutica usa desde 1986 para los manuales de mantenimiento.
+
+Llano adapta esa idea. Tiene un núcleo de reglas independiente del idioma y un paquete de idioma para el español neutro. Este informe mide si llano cumple tres objetivos:
+
+\begin{enumerate}
+  \item Producir respuestas más cortas.
+  \item Producir respuestas que cumplen mejor las reglas de escritura clara.
+  \item No perder información en el proceso.
+\end{enumerate}
+
+La comparación principal es contra una instrucción simple de concisión, no contra una respuesta sin instrucciones. El harness de evaluación de caveman mostró que comparar solo contra ``sin instrucciones'' infla el beneficio de un estilo, porque mezcla el estilo con el pedido genérico de brevedad.
+
+\section{Método}
+
+\subsection{Grupos}
+
+Cada prompt se ejecuta en cuatro grupos. Todos usan el system prompt por defecto de Claude Code. Los grupos solo cambian el texto agregado con \texttt{--append-system-prompt}.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Grupo & Texto agregado \\
+\midrule
+Sin instrucción & ninguno \\
+Concisa & ``Responde de forma concisa.'' \\
+Llano & ``Responde de forma concisa.'' + SKILL.md + paquete \texttt{es} \\
+Caveman & ``Responde de forma concisa.'' + SKILL.md de caveman \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Prompts y modelo}
+
+El conjunto tiene \evalPrompts{} prompts en español, en seis categorías: explicación, error, resumen, procedimiento, comparación y conceptual. Cada prompt incluye todo su contexto (logs, commits, hilos de discusión) y una lista de cinco hechos clave que una buena respuesta debe conservar.
+
+El modelo generador es Claude \evalModel{} (\texttt{\evalModelId}), con \evalRuns{} corrida por combinación. Todas las llamadas usan Claude Code \evalCli{} en modo no interactivo (\texttt{claude -p}).
+
+\subsection{Aislamiento}
+
+Cada llamada corre sin la configuración del usuario: sin hooks, sin plugins, sin skills, sin servidores MCP y sin herramientas. Antes de cada corrida, un canario le pide al modelo que copie todas las instrucciones extra que recibió. La corrida se cancela si la respuesta menciona llano, caveman o context-mode. Un control positivo, sin aislamiento, confirmó que el canario detecta esas instrucciones cuando están presentes.
+
+\subsection{Métricas}
+
+\begin{description}
+  \item[Tokens visibles] Tokens de salida informados por Claude, menos los tokens de razonamiento interno.
+  \item[Palabras] Palabras del texto en prosa. Se excluyen bloques de código, código en línea y tablas.
+  \item[Violaciones cada 100 palabras] Un linter determinístico cuenta frases largas (más de 25 palabras, o 20 en pasos numerados), punto y coma, párrafos de más de seis frases, muletillas prohibidas, palabras del diccionario a evitar, dudas apiladas y gerundios en cadena. El diccionario y las muletillas salen del paquete \texttt{es}.
+  \item[INFLESZ] Índice de legibilidad de Szigriszt-Pazos para el español. Un valor más alto indica un texto más fácil de leer. Entre 55 y 65 es ``normal''.
+  \item[Fidelidad] Un juez (Claude Sonnet, también aislado) indica qué hechos clave conserva cada respuesta y cuenta las afirmaciones incorrectas.
+  \item[Preferencia a ciegas] El mismo juez compara llano contra cada otro grupo. Ve las dos respuestas como A y B, en orden aleatorio, y elige la que un desarrollador entiende mejor en una lectura sin perder información.
+\end{description}
+
+\section{Resultados}
+
+\subsection{Visión general}
+
+\begin{table}[H]
+\centering
+\small
+\input{\resdir/table_main.tex}
+\caption{Medianas por respuesta. Violaciones e INFLESZ son promedios. Fidelidad es el promedio de hechos clave conservados. Errores es el total de afirmaciones incorrectas.}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{\resdir/fig_overview.pdf}
+\caption{Largo, cumplimiento de reglas y fidelidad por grupo.}
+\end{figure}
+
+\subsection{Diferencias pareadas}
+
+Para cada prompt se calcula el cociente entre llano y el grupo de referencia. La tabla muestra la mediana de esos cocientes y su intervalo de confianza del 95\% por bootstrap.
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Llano contra & Palabras & Tokens visibles \\
+\midrule
+Concisa & \deltaWordsTerse{} [\deltaWordsTerseLo, \deltaWordsTerseHi] & \deltaTokensTerse{} [\deltaTokensTerseLo, \deltaTokensTerseHi] \\
+Sin instrucción & \deltaWordsBaseline{} [\deltaWordsBaselineLo, \deltaWordsBaselineHi] & \deltaTokensBaseline{} [\deltaTokensBaselineLo, \deltaTokensBaselineHi] \\
+Caveman & \deltaWordsCaveman{} [\deltaWordsCavemanLo, \deltaWordsCavemanHi] & \deltaTokensCaveman{} [\deltaTokensCavemanLo, \deltaTokensCavemanHi] \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Cumplimiento de reglas por tipo}
+
+\begin{table}[H]
+\centering
+\small
+\input{\resdir/table_violations.tex}
+\caption{Violaciones cada 100 palabras, por tipo de regla.}
+\end{table}
+
+\subsection{Por categoría}
+
+\begin{table}[H]
+\centering
+\small
+\input{\resdir/table_category.tex}
+\caption{Llano contra la instrucción de concisión, por categoría de prompt.}
+\end{table}
+
+\subsection{Preferencia a ciegas}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{\resdir/fig_pairwise.pdf}
+\caption{Resultado de la comparación a ciegas.}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\small
+\input{\resdir/table_pairwise.tex}
+\caption{Comparaciones a ciegas, en número de prompts.}
+\end{table}
+
+\subsection{Costo de entrada}
+
+Llano agrega su SKILL.md y el paquete de idioma a cada llamada. La entrada mediana por llamada es \llanoInputTokens{} tokens con llano y \terseInputTokens{} con la instrucción de concisión. En una sesión real la mayor parte de ese costo se cachea, pero ocupa contexto en cada turno.
+
+\section{Discusión}
+
+\input{discussion.tex}
+
+\section{Limitaciones}
+
+\begin{itemize}
+  \item \textbf{Una corrida, un modelo.} Este es un piloto. La variación entre corridas no está medida.
+  \item \textbf{Juez de la misma familia.} El juez y el generador son modelos Claude. Un juez puede preferir el estilo de su propia familia.
+  \item \textbf{Linter heurístico.} El linter cuenta lo que una expresión regular puede ver. No detecta el ``se'' impersonal ni el uso de ``el mismo'' como pronombre. El conteo de sílabas para INFLESZ es aproximado.
+  \item \textbf{El linter usa las reglas de llano.} El grupo llano conoce esas reglas y los demás grupos no. Por eso la métrica de violaciones mide adherencia a llano, no calidad general. La fidelidad y la preferencia a ciegas compensan ese sesgo.
+  \item \textbf{Prompts propios.} Los prompts los escribió el autor de la skill.
+\end{itemize}
+
+\section{Reproducción}
+
+\begin{verbatim}
+cd evals
+uv run run.py --run-id <id> --models sonnet --runs 1
+uv run judge.py --run-id <id> --judge-model sonnet
+uv run measure.py --run-id <id>
+cd report && tectonic report.tex
+\end{verbatim}
+
+Las respuestas, los veredictos del juez y el resumen quedan en \texttt{snapshots/}, \texttt{judge/} y \texttt{results/}.
+
+\end{document}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Deuda técnica:** el costo futuro de haber elegido una solución rápida o imperfecta hoy en lugar de la mejor. Como una deuda financiera, te permite avanzar más rápido ahora, pero pagas \"intereses\" después.\n\n**Cómo explicarlo a negocio**\n\nUsa la analogía financiera:\n\n- **Préstamo:** recortar camino para lanzar a tiempo es pedir prestado. A veces es una buena decisión (llegar al mercado antes que la competencia).\n- **Intereses:** cada cambio posterior cuesta más: funcionalidades que tardan semanas en vez de días, más errores, más tiempo en corregir incidentes.\n- **Capital:** el trabajo de refactorizar o rehacer para eliminar la deuda.\n- **Quiebra:** si no se paga nunca, el equipo dedica casi todo su tiempo a mantener lo existente y ya no puede innovar.\n\n**Otra analogía útil:** una cocina de restaurante. Si no se limpia ni se organiza durante la hora punta, se sirve más rápido esa noche, pero cada servicio siguiente es más lento y arriesgado.\n\n**Qué les importa a ellos (traduce a impacto)**\n\n- Velocidad: \"Entregar esta función nos toma 3x más que hace un año.\"\n- Riesgo: \"Este módulo falla seguido y nadie se atreve a tocarlo.\"\n- Costo: \"Un 30% de la capacidad del equipo se va en arreglar en vez de construir.\"\n- Talento: \"Es difícil incorporar gente o retenerla en código así.\"\n\n**Consejos**\n\n1. **No es mala por definición.** Es una herramienta; lo malo es no gestionarla.\n2. **Usa números**, no jerga: horas perdidas, incidentes, retrasos en el roadmap.\n3. **Propón un presupuesto fijo**, por ejemplo 15-20% de la capacidad de cada sprint para pagarla.\n4. **Prioriza por impacto:** paga primero la deuda que más frena el negocio.\n\n**Frase resumen:** *\"Nos movimos rápido y eso fue valioso, pero ahora estamos pagando intereses en forma de entregas más lentas y más fallos. Invertir un poco de tiempo en reducirla nos devuelve velocidad.\"*",
+  "output_tokens": 794,
+  "thinking_tokens": 0,
+  "input_tokens": 2640,
+  "duration_ms": 7656,
+  "wall_s": 8.68,
+  "created_at": "2026-10-05T23:22:34.259448+00:00"
+}

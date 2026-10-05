@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "1. Generar clave:\n```sh\nssh-keygen -t ed25519 -C \"tu_email@ejemplo.com\"\n```\nEnter para aceptar la ruta por defecto (`~/.ssh/id_ed25519`). Pon una passphrase.\n\n2. Configurar agente y Keychain. Añadir a `~/.ssh/config` (créalo si no existe):\n```\nHost github.com\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519\n```\n\n3. Cargar clave en el agente:\n```sh\nssh-add --apple-use-keychain ~/.ssh/id_ed25519\n```\n\n4. Copiar clave pública:\n```sh\npbcopy < ~/.ssh/id_ed25519.pub\n```\n\n5. En GitHub: Settings → SSH and GPG keys → New SSH key. Pega la clave, pon un título, guarda.\n\n6. Probar:\n```sh\nssh -T git@github.com\n```\nPrimera vez pregunta por el fingerprint: escribe `yes`. Éxito: `Hi <usuario>! You've successfully authenticated...`.\n\n7. Usar SSH en repos existentes:\n```sh\ngit remote set-url origin git@github.com:USUARIO/REPO.git\n```",
+  "output_tokens": 716,
+  "thinking_tokens": 271,
+  "input_tokens": 4164,
+  "duration_ms": 5196,
+  "wall_s": 6.24,
+  "created_at": "2026-10-05T23:21:08.180967+00:00"
+}

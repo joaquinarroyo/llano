@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "# Backup de Postgres de producción y restauración local\n\n## 1. Hacer el backup (desde producción)\n\nUsa `pg_dump` en formato custom (comprimido, permite restauración selectiva y paralela):\n\n```bash\npg_dump \\\n  --host=HOST_PROD \\\n  --port=5432 \\\n  --username=USUARIO \\\n  --dbname=NOMBRE_DB \\\n  --format=custom \\\n  --no-owner \\\n  --no-privileges \\\n  --file=backup.dump\n```\n\nNotas:\n- `pg_dump` toma un snapshot consistente sin bloquear escrituras, así que es seguro en producción. Aun así, genera carga de lectura: hazlo en horario de bajo tráfico o contra una réplica de lectura si tienes una.\n- Para bases grandes, usa dump en directorio con paralelismo: `--format=directory --jobs=4 --file=backup_dir`.\n- Usa una versión de `pg_dump` igual o superior a la del servidor.\n- La contraseña la puedes pasar con `PGPASSWORD=...` o `~/.pgpass` (evita ponerla en el historial del shell).\n- Si está detrás de un bastión, abre un túnel: `ssh -L 5433:HOST_PROD:5432 usuario@bastion` y usa `--host=localhost --port=5433`.\n\n## 2. Restaurar en local\n\nCrea la base vacía y restaura:\n\n```bash\ncreatedb nombre_db_local\npg_restore \\\n  --dbname=nombre_db_local \\\n  --no-owner \\\n  --no-privileges \\\n  --jobs=4 \\\n  backup.dump\n```\n\nSi usaste formato plano (`--format=plain`, un `.sql`):\n\n```bash\npsql -d nombre_db_local -f backup.sql\n```\n\n## 3. Verificación rápida\n\n```bash\npsql -d nombre_db_local -c '\\dt'\npsql -d nombre_db_local -c 'SELECT count(*) FROM alguna_tabla;'\n```\n\n## Consideraciones importantes\n\n- **Datos sensibles**: un dump de producción suele contener datos personales. Considera anonimizarlos tras restaurar (emails, teléfonos, tokens) o excluir tablas con `--exclude-table-data=tabla`. No lo subas a repositorios ni lo compartas sin cifrar.\n- **Extensiones**: si producción usa extensiones (PostGIS, pgcrypto, etc.), instálalas localmente antes de restaurar.\n- **Roles**: `--no-owner` evita errores por roles inexistentes. Si los necesitas, usa `pg_dumpall --globals-only`.\n- **Versiones**: restaurar en una versión local igual o más nueva que la de producción funciona; al revés puede fallar.\n- **Docker**: si usas Postgres en contenedor: `docker exec -i contenedor pg_restore -U postgres -d nombre_db_local < backup.dump`.\n\nSi me dices tu entorno (versión de Postgres, tamaño aproximado, si es RDS/Cloud SQL, etc.), te ajusto los comandos.",
+  "output_tokens": 1059,
+  "thinking_tokens": 0,
+  "input_tokens": 2626,
+  "duration_ms": 8284,
+  "wall_s": 9.3,
+  "created_at": "2026-10-05T23:21:22.237511+00:00"
+}

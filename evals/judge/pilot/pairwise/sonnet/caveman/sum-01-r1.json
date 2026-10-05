@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "caveman",
+  "reason": "A es una descripción de PR lista para pegar, organizada por cambio y con una advertencia útil sobre el alcance de la invalidación, mientras que B es más literal, repite la lista de commits y deja el middleware sin explicar.",
+  "judge_model": "sonnet"
+}

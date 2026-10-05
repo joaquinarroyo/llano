@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "terse",
+  "reason": "A da el mismo orden correcto y toda la información clave (revocar ya, revisar uso, limpiar historial con la advertencia de forks, prevención) en una lista única y sin contradicciones, mientras que B abre diciendo 'revoca primero' pero luego lista generar y desplegar antes de revocar, lo que confunde en una sola lectura.",
+  "judge_model": "sonnet"
+}

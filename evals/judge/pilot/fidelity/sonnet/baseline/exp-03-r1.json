@@ -1,0 +1,18 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos; solo hay imprecisiones menores, como decir que hay 'tres niveles de nodos' (son tres tipos) o que todo UPDATE toca todos los índices (ignora HOT), pero no llegan a ser errores técnicos claros.",
+  "judge_model": "sonnet"
+}

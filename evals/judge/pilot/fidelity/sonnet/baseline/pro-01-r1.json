@@ -1,0 +1,18 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre los cinco hechos; error: afirma que la passphrase se guarda en el llavero ya en el paso 2 antes de configurarlo (menor), y 'ssh-add -K' como versión antigua es correcto, por lo que solo cuenta la imprecisión del orden/causalidad.",
+  "judge_model": "sonnet"
+}

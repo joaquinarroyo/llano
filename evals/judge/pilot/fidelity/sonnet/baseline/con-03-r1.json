@@ -1,0 +1,18 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre la velocidad de SHA-256, el uso de funciones lentas con sal (bcrypt/scrypt/Argon2), las rainbow tables, Argon2id como recomendada y el factor de costo ajustable con el hardware (hecho 5 implícito en 'no puedes hacerlo más lento a medida que el hardware mejora'); no hay afirmaciones incorrectas.",
+  "judge_model": "sonnet"
+}

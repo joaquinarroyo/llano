@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B incluye una tabla comparativa inicial, más información técnica útil (long polling explicado, escalado con Redis pub/sub, proxies corporativos que bloquean WebSocket, patrón POST + SSE) y mantiene una estructura igual de clara que A.",
+  "judge_model": "sonnet"
+}

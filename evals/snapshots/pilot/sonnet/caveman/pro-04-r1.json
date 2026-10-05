@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Rota primero, limpia el repo después. Borrar el commit no sirve: bots ya la tienen, y forks y cachés la conservan.\n\n1. **Crea la key nueva** en el panel del proveedor.\n2. **Despliega la nueva** en tus servicios (secret manager o variables de entorno, nunca en código).\n3. **Revoca la vieja** en cuanto la nueva funcione. Si el despliegue tarda, revoca ya y acepta el corte: la key pública se considera comprometida.\n4. **Revisa el uso**: logs, facturación y alertas del proveedor desde el momento del commit. Busca IPs, regiones o picos raros. Si hay abuso, avisa al proveedor y rota también credenciales relacionadas.\n5. **Quita la key del código**: usa variable de entorno y haz commit.\n6. **Opcional: reescribe el historial** con `git filter-repo --replace-text` o BFG, y haz force-push. Esto es cosmético: la key ya está revocada. Pide a GitHub Support que purgue vistas en caché si hace falta.\n7. **Previene**: activa secret scanning y push protection en GitHub, añade `gitleaks` como pre-commit, y mantén `.env` en `.gitignore`.\n\nDime el proveedor (AWS, Stripe, OpenAI, etc.) y te doy los pasos exactos de revocación y auditoría.",
+  "output_tokens": 892,
+  "thinking_tokens": 414,
+  "input_tokens": 4171,
+  "duration_ms": 8370,
+  "wall_s": 9.41,
+  "created_at": "2026-10-05T23:21:33.994491+00:00"
+}

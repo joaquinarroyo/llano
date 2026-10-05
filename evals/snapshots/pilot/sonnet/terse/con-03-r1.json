@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "SHA-256 es un hash criptográficamente seguro, pero **está diseñado para ser rápido**, y para contraseñas eso es un defecto.\n\n**Problemas principales**\n\n1. **Velocidad = fuerza bruta barata.** Una GPU moderna calcula miles de millones de SHA-256 por segundo. Si se filtra la base de datos, un atacante puede probar todas las contraseñas comunes y muchas combinaciones en minutos u horas.\n\n2. **Las contraseñas tienen poca entropía.** Los humanos eligen contraseñas predecibles. La resistencia a colisiones o preimagen de SHA-256 no ayuda cuando el espacio de búsqueda real es pequeño (diccionarios, patrones, filtraciones previas).\n\n3. **Sin sal, hay rainbow tables y duplicados visibles.** SHA-256 puro da el mismo hash para la misma contraseña, así que se pueden usar tablas precalculadas y detectar usuarios con contraseñas iguales. Añadir sal lo mitiga, pero no resuelve el problema de la velocidad.\n\n4. **Sin factor de coste ajustable.** No puedes hacerlo más lento a medida que el hardware mejora.\n\n5. **Hardware especializado.** ASICs y GPUs optimizan muy bien SHA-256 (de ahí Bitcoin). Con funciones *memory-hard* ese ahorro se reduce mucho.\n\n**Qué usar en su lugar**\n\nFunciones diseñadas para contraseñas, deliberadamente lentas y con sal incorporada:\n\n- **Argon2id** (recomendada hoy)\n- **scrypt**\n- **bcrypt** (válida, límite de 72 bytes)\n- **PBKDF2** con muchas iteraciones (si se exige cumplimiento FIPS)\n\n**Idea clave:** un buen hash general busca ser rápido; un buen hash de contraseñas busca ser lento y costoso de paralelizar.",
+  "output_tokens": 678,
+  "thinking_tokens": 0,
+  "input_tokens": 2652,
+  "duration_ms": 6038,
+  "wall_s": 7.14,
+  "created_at": "2026-10-05T23:22:26.499661+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "La causa es la aritmética de punto flotante. `0.1` no tiene representación exacta en binario, y cada operación acumula un error de hasta ~1e-16. El test compara con `==`, así que ese error basta para fallar.\n\nCon `price=100.0` y `discount=0.1` literales, `100.0 * (1 - 0.1)` da `90.0` exacto en CPython. No lo ejecuté aquí, es un cálculo a mano. Entonces los valores reales del test probablemente vienen de otro cálculo (por ejemplo `discount = 10 / 100`, o un `price` que ya pasó por otras operaciones). Revisa cómo se construyen en `tests/test_invoice.py`.\n\nSoluciones:\n\n1. **Si el valor es dinero, usa `Decimal`** (recomendado):\n\n   ```python\n   from decimal import Decimal\n\n   total = Decimal(\"100.00\") * (1 - Decimal(\"0.10\"))  # Decimal('90.0000')\n   ```\n\n   Crea los `Decimal` desde strings, no desde floats.\n\n2. **Si es un cálculo científico o aproximado, compara con tolerancia en el test:**\n\n   ```python\n   import pytest\n\n   assert total == pytest.approx(90.0)\n   ```\n\n3. **Si necesitas un float redondeado**, usa `round(total, 2)` en el código. Es más frágil que `Decimal` para sumas y totales de facturas.\n\nPara una factura, usa la opción 1. Los céntimos acumulan error con floats.",
+  "output_tokens": 1185,
+  "thinking_tokens": 673,
+  "input_tokens": 11199,
+  "duration_ms": 9875,
+  "wall_s": 10.91,
+  "created_at": "2026-10-05T23:20:14.167486+00:00"
+}

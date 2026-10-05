@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "## Qué hace `git rebase`\n\n`git rebase` **reescribe la historia** de tu rama: toma los commits que existen en tu rama pero no en la base, los \"levanta\" y los vuelve a aplicar uno por uno encima de otro commit (normalmente la punta de otra rama).\n\nEjemplo: tienes esto:\n\n```\nA---B---C   main\n     \\\n      D---E   feature\n```\n\nTras `git switch feature && git rebase main`:\n\n```\nA---B---C   main\n         \\\n          D'---E'   feature\n```\n\n`D'` y `E'` tienen el mismo contenido (diff) que `D` y `E`, pero son **commits nuevos**, con hashes distintos, porque su padre cambió.\n\n## Qué hace `git merge`\n\n`git merge` **une** dos historias sin modificarlas, creando (normalmente) un commit de merge con dos padres:\n\n```\nA---B---C-------M   main\n     \\         /\n      D-------E   feature\n```\n\nLos commits `D` y `E` se conservan intactos.\n\n## Diferencias clave\n\n| | `merge` | `rebase` |\n|---|---|---|\n| Historia | Se preserva tal cual, con bifurcaciones | Se reescribe, queda lineal |\n| Commits | Añade un commit de merge | Crea commits nuevos (hashes distintos) |\n| Conflictos | Se resuelven una sola vez | Pueden aparecer en cada commit que se reaplica |\n| Trazabilidad | Se ve cuándo y cómo se integró cada rama | Se pierde el contexto de la bifurcación |\n| Seguridad | No destructivo | Reescribe commits; requiere cuidado |\n\n## Cuándo usar cada uno\n\n- **Rebase**: para actualizar tu rama local de trabajo con los últimos cambios de `main` y mantener una historia limpia y lineal antes de abrir un PR. También `git rebase -i` para limpiar commits (squash, reordenar, editar mensajes).\n- **Merge**: para integrar ramas ya compartidas o cuando quieres conservar el registro real de cómo se desarrolló el trabajo (por ejemplo, al fusionar una feature en `main`).\n\n## Regla de oro\n\n**No hagas rebase de commits que ya has publicado y que otras personas pueden haber usado como base.** Como el rebase cambia los hashes, quienes tengan la versión antigua verán historias divergentes y tendrán que resolver el desorden. Si tu rama es solo tuya, puedes hacer rebase y luego `git push --force-with-lease`.\n\n## Recuperación\n\nSi un rebase sale mal: `git rebase --abort` durante el proceso, o `git reflog` después para encontrar el commit anterior y volver con `git reset --hard <hash>`.",
+  "output_tokens": 939,
+  "thinking_tokens": 0,
+  "input_tokens": 2620,
+  "duration_ms": 7590,
+  "wall_s": 8.63,
+  "created_at": "2026-10-05T23:19:32.001480+00:00"
+}

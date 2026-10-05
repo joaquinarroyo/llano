@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Qué dice:** si hay una partición de red, un sistema distribuido no puede garantizar a la vez consistencia y disponibilidad. Eric Brewer lo propuso en 2000. Gilbert y Lynch lo demostraron en 2002.\n\n- **Consistencia (C):** toda lectura ve la escritura más reciente (linealizabilidad). No es la \"C\" de ACID.\n- **Disponibilidad (A):** todo nodo que funciona responde a cada solicitud.\n- **Tolerancia a particiones (P):** el sistema sigue funcionando aunque la red pierda mensajes entre nodos.\n\nLas particiones ocurren en cualquier red real. Por eso no eliges \"dos de tres\". Eliges qué sacrificas durante una partición:\n\n- **CP:** el sistema rechaza solicitudes para no devolver datos viejos. Ejemplos: etcd, ZooKeeper.\n- **AP:** el sistema responde con datos posiblemente viejos y reconcilia después. Ejemplos: Cassandra y DynamoDB en su configuración por defecto.\n\n**¿Sigue siendo relevante?** Sí, como modelo básico. Como guía de diseño completa, no. Tiene tres límites:\n\n1. Solo describe el comportamiento durante una partición. Sin partición, no dice nada.\n2. Ignora la latencia, que en la práctica pesa más. PACELC (Abadi, 2010) lo corrige: si hay partición, eliges A o C. Si no la hay, eliges latencia o consistencia.\n3. Presenta C y A como binarias. Los sistemas actuales las ajustan por operación, por ejemplo con niveles de consistencia en Cassandra.\n\nSi evalúas una base de datos, pregunta qué pasa en una partición, qué latencia cuesta cada nivel de consistencia y qué modelo de consistencia ofrece. Una etiqueta \"CP\" o \"AP\" no responde esas preguntas.",
+  "output_tokens": 1014,
+  "thinking_tokens": 340,
+  "input_tokens": 11113,
+  "duration_ms": 8683,
+  "wall_s": 9.7,
+  "created_at": "2026-10-05T23:22:19.356044+00:00"
+}

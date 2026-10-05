@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B está organizada con secciones claras (por qué bloquea / cómo corregirlo), frases cortas, aclara que la petición suele llegar al servidor y solo se bloquea la lectura, y muestra los headers concretos, mientras que A cubre casi lo mismo pero en un formato más denso y fragmentado.",
+  "judge_model": "sonnet"
+}

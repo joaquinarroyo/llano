@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B sigue un flujo numerado más claro, incluye verificación, el túnel SSH, la conexión por URL, advertencias explícitas sobre operaciones destructivas y la nota sobre pg_dumpall, mientras que A es buena pero omite esos puntos relevantes y mezcla la alternativa SQL plano con los consejos.",
+  "judge_model": "sonnet"
+}

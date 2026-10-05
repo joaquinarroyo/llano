@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Recomendación: pnpm.** Para un monorepo nuevo es la opción más sólida hoy.\n\n## Comparación\n\n| | **pnpm** | **npm** | **Yarn (Berry 4+)** |\n|---|---|---|---|\n| **Workspaces** | Excelente (`pnpm-workspace.yaml`, filtros `--filter`) | Funcionales pero básicos (`-w`, `--workspaces`) | Muy buenos (`yarn workspaces foreach`) |\n| **Velocidad / disco** | La mejor: store global con hard links | La más lenta | Rápida (con PnP o cache) |\n| **Estrictez de dependencias** | Alta: no hay \"phantom dependencies\" por defecto | Baja: hoisting plano, puedes importar lo que no declaraste | Alta con PnP; media con `node_modules` linker |\n| **Compartir versiones** | `catalogs` para centralizar versiones | Sin equivalente nativo | `constraints` y resoluciones |\n| **Compatibilidad** | Muy buena; algún paquete raro puede requerir `public-hoist-pattern` | La máxima (viene con Node) | PnP rompe algunas herramientas; hay que usar `nodeLinker: node-modules` |\n| **Instalación** | `corepack enable` o `npm i -g pnpm` | Ya viene con Node | `corepack enable` |\n| **Ecosistema monorepo** | Turborepo, Nx y Changesets lo soportan de primera | Soportado | Soportado |\n\n## Por qué pnpm\n\n- **Correctitud:** su `node_modules` estricto te avisa cuando un paquete usa una dependencia que no declaró. En un monorepo eso evita bugs que solo aparecen al publicar.\n- **Eficiencia:** instalaciones rápidas y mucho menos disco, algo que se nota con muchos paquetes y en CI.\n- **Ergonomía:** `pnpm --filter ./apps/web... build` y el protocolo `workspace:*` son simples y claros.\n- **Catalogs:** permiten fijar una versión de React, TypeScript, etc. en un único lugar para todos los paquetes.\n\n## Cuándo elegir otra\n\n- **npm:** si el equipo es pequeño, el monorepo es simple (2-3 paquetes) y quieres cero herramientas extra. Es la opción de menor fricción, pero con menos garantías.\n- **Yarn:** si ya tienes experiencia en el equipo con Berry, o necesitas sus `constraints`, el plugin system o Plug'n'Play con zero-installs.\n\n## Setup mínimo sugerido\n\n```bash\ncorepack enable\npnpm init\n```\n\n```yaml\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n```\n\nY fija la versión en el `package.json` raíz con `\"packageManager\": \"pnpm@<versión>\"` para que todos (y el CI) usen la misma.\n\nSi me cuentas qué stack usarás (Next, Vite, librerías publicables, etc.), puedo ayudarte a montar la estructura inicial, con Turborepo si lo ves útil.",
+  "output_tokens": 1087,
+  "thinking_tokens": 0,
+  "input_tokens": 2627,
+  "duration_ms": 9635,
+  "wall_s": 10.66,
+  "created_at": "2026-10-05T23:21:46.740569+00:00"
+}

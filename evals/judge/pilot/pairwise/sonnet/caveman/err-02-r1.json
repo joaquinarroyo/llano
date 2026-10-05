@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A señala correctamente que `100.0 * (1 - 0.1)` da `90.0` exacto y manda a revisar cómo se construyen los valores en el test, mientras que B afirma sin base que ese cálculo da `89.99999999999999`; ambas ofrecen soluciones válidas (`Decimal`, `approx`).",
+  "judge_model": "sonnet"
+}

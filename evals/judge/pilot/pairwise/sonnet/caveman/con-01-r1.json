@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "A",
+  "winner": "caveman",
+  "reason": "Ambas explican bien el concepto y el porqué, pero B añade ejemplos concretos, causas de reintentos (proxies, colas at-least-once) y el caso de misma clave con cuerpo distinto (409/422), con la restricción única para atomicidad, mientras A solo aporta una tabla clara de métodos y omite esos detalles.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**CAP**: un sistema de datos distribuido no puede garantizar a la vez estas tres propiedades cuando hay partición de red:\n\n- **Consistencia (C)**: toda lectura ve la escritura más reciente (linealizabilidad).\n- **Disponibilidad (A)**: toda petición a un nodo sano recibe respuesta.\n- **Tolerancia a particiones (P)**: el sistema sigue funcionando aunque se pierdan mensajes entre nodos.\n\nLas particiones ocurren en redes reales, así que P no es opcional. La elección real es **C o A durante una partición**:\n\n- **CP**: rechaza o bloquea peticiones para no devolver datos inconsistentes (ZooKeeper, etcd, HBase).\n- **AP**: responde siempre, pero puede devolver datos desactualizados y reconcilia después (Cassandra, DynamoDB en modo eventual).\n\n**¿Sigue siendo relevante?** Sí, pero como modelo mental básico, no como guía de diseño completa:\n\n- Sin partición, CAP no dice nada. El compromiso cotidiano es **latencia vs. consistencia** (modelo **PACELC**).\n- C y A son binarios en CAP. En la práctica hay un espectro: consistencia causal, de sesión, *read-your-writes*, etc.\n- Muchas bases modernas permiten elegir consistencia por consulta (Cosmos DB, DynamoDB, Cassandra con niveles de quórum).\n- Spanner muestra que, con relojes precisos y red privada, las particiones son tan raras que se ve \"CA efectivo\". Sigue siendo CP en teoría.\n\nÚsalo para razonar sobre qué falla ocurre en una partición. Para decisiones de diseño, mira PACELC y los modelos de consistencia.",
+  "output_tokens": 667,
+  "thinking_tokens": 46,
+  "input_tokens": 4163,
+  "duration_ms": 6279,
+  "wall_s": 7.37,
+  "created_at": "2026-10-05T23:22:19.826533+00:00"
+}

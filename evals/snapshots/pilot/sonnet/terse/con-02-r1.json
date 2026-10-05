@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Teorema CAP** (Brewer, 2000; demostrado por Gilbert y Lynch, 2002): en un sistema distribuido que comparte datos, solo se pueden garantizar simultáneamente dos de estas tres propiedades:\n\n- **Consistencia (C):** todas las lecturas ven la escritura más reciente (linealizabilidad).\n- **Disponibilidad (A):** toda petición a un nodo sin fallos recibe respuesta.\n- **Tolerancia a particiones (P):** el sistema sigue funcionando aunque la red pierda o retrase mensajes entre nodos.\n\n**Matiz clave:** las particiones de red ocurren inevitablemente, así que en la práctica no se \"elige\" P. La decisión real es qué sacrificar *durante una partición*: C (rechazar peticiones, sistemas CP como etcd, ZooKeeper, HBase) o A (responder con datos posiblemente obsoletos, sistemas AP como Cassandra o DynamoDB en su configuración por defecto).\n\n**¿Sigue siendo relevante?** Sí, pero como modelo mental, no como clasificación de productos:\n\n- Es útil para razonar sobre fallos y compromisos de diseño.\n- Es limitado: solo describe el comportamiento *durante* particiones y usa definiciones estrictas de C y A. Cuando no hay partición, el compromiso real es **latencia vs. consistencia**, lo que formaliza **PACELC** (Abadi).\n- Muchos sistemas modernos son configurables por operación (niveles de consistencia en Cassandra, lecturas fuertes en DynamoDB) o consiguen consistencia fuerte con alta disponibilidad práctica (Spanner, con relojes sincronizados y redes privadas muy fiables), sin violar el teorema.\n- Etiquetar una base de datos como \"CP\" o \"AP\" suele ser una simplificación excesiva.\n\nEn resumen: vigente como principio, insuficiente como único criterio; hoy se complementa con PACELC y con modelos de consistencia más finos (causal, eventual, snapshot isolation).",
+  "output_tokens": 724,
+  "thinking_tokens": 0,
+  "input_tokens": 2639,
+  "duration_ms": 6334,
+  "wall_s": 7.37,
+  "created_at": "2026-10-05T23:22:16.611692+00:00"
+}

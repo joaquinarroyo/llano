@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más clara y directa, con oraciones cortas que separan cada postura y conservan todos los puntos técnicos (7 requests, caching HTTP, persisted queries, BFF, prueba en inicio con medición), mientras que A concentra todo en una oración larga y difícil de seguir; además, A añade 'antes de decidir más cambios', que no está en el hilo.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**WebSocket**: usa cuando necesitas comunicación bidireccional de baja latencia. Cliente y servidor envían mensajes en cualquier momento.\n- Chat, juegos multijugador, edición colaborativa, trading.\n- Costo: conexión con estado, más difícil de escalar y balancear. Proxies y firewalls a veces lo bloquean. Reconexión la implementas tú.\n\n**SSE (Server-Sent Events)**: usa cuando solo el servidor empuja datos al cliente.\n- Notificaciones, feeds en vivo, progreso de tareas, streaming de respuestas de LLM.\n- Ventajas: HTTP normal, reconexión automática y `Last-Event-ID` incluidos, funciona bien con proxies y HTTP/2.\n- Límites: solo texto, un sentido. El cliente envía con peticiones HTTP aparte. Con HTTP/1.1 el navegador limita ~6 conexiones por dominio.\n\n**Polling**: usa cuando las actualizaciones son poco frecuentes o no necesitas inmediatez.\n- Dashboards que refrescan cada 30 s, estado de un job largo, entornos con infraestructura restrictiva.\n- Ventajas: más simple, sin estado, cacheable, trivial de escalar.\n- Costo: peticiones desperdiciadas y latencia igual al intervalo.\n- Long polling: el servidor retiene la petición hasta tener datos. Úsalo como fallback cuando no hay SSE ni WebSocket.\n\n**Regla rápida**:\n1. ¿Actualizaciones raras o tolerantes a retraso? Polling.\n2. ¿Solo servidor → cliente? SSE.\n3. ¿Ambos sentidos, alta frecuencia o baja latencia? WebSocket.\n\nAnte la duda, empieza con SSE o polling. Pasa a WebSocket solo cuando de verdad necesites bidireccionalidad.",
+  "output_tokens": 671,
+  "thinking_tokens": 0,
+  "input_tokens": 4171,
+  "duration_ms": 5616,
+  "wall_s": 6.66,
+  "created_at": "2026-10-05T23:21:55.613987+00:00"
+}

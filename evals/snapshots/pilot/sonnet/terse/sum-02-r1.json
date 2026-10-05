@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Incidente: latencia alta en checkout (resuelto)**\n\n- **Impacto:** entre las 09:12 y las 09:35, la latencia p95 del checkout pasó de 300 ms a 4 s. No se perdieron pedidos, pero 212 usuarios abandonaron el checkout.\n- **Causa:** un job de reindexado de Elasticsearch, programado por error en horario laboral, saturó el cluster.\n- **Cronología:**\n  - 09:12: sube la latencia.\n  - 09:20: se identifica el job como causa.\n  - 09:31: se pausa el job.\n  - 09:35: la latencia vuelve a la normalidad.\n- **Pendiente:**\n  - Mover el job a las 03:00.\n  - Agregar una alerta de CPU del cluster.",
+  "output_tokens": 272,
+  "thinking_tokens": 0,
+  "input_tokens": 2808,
+  "duration_ms": 2351,
+  "wall_s": 3.63,
+  "created_at": "2026-10-05T23:20:30.507152+00:00"
+}

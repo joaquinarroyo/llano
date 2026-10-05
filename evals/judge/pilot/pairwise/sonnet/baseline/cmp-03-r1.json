@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A cubre los mismos criterios técnicos clave (dirección, reconexión, binario, escalado, límite de conexiones, proxies) de forma más compacta, con tabla resumen al inicio y una regla práctica clara, mientras que B repite la información en secciones y tabla y es más extensa.",
+  "judge_model": "sonnet"
+}

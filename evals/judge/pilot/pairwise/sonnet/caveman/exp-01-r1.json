@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "caveman",
+  "reason": "A es más claro y directo para alguien de Python síncrono: ciclo numerado, ejemplo con su explicación del orden, trampas concretas (await no bloquea, CPU-bound) y comparación con asyncio, mientras que B tiene un diagrama confuso y una frase errónea ('En Python esto es normal') además de omitir la explicación explícita del orden del ejemplo.",
+  "judge_model": "sonnet"
+}

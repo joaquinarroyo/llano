@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Usa `pg_dump` en producción y `pg_restore` en tu máquina. El formato custom (`-Fc`) es comprimido y permite restaurar de forma selectiva.\n\n**Atención:** `pg_dump` solo lee, pero consume I/O y conexiones. Ejecútalo en horas de poco tráfico o contra una réplica.\n\n1. Crea el backup:\n\n   ```bash\n   pg_dump -h PROD_HOST -U PROD_USER -d PROD_DB -Fc --no-owner --no-acl -f backup.dump\n   ```\n\n   Si usas la URL de conexión: `pg_dump \"$DATABASE_URL\" -Fc --no-owner --no-acl -f backup.dump`.\n\n2. Crea la base local vacía:\n\n   ```bash\n   createdb mi_base_local\n   ```\n\n3. Restaura:\n\n   ```bash\n   pg_restore -d mi_base_local --no-owner --no-acl -j 4 backup.dump\n   ```\n\n   `-j 4` restaura con 4 trabajos en paralelo.\n\n4. Verifica:\n\n   ```bash\n   psql mi_base_local -c '\\dt'\n   ```\n\nPuntos a tener en cuenta:\n\n- La versión de `pg_dump` debe ser igual o mayor que la del servidor. Verifícala con `pg_dump --version`.\n- Si la restauración muestra errores por extensiones (por ejemplo `postgis`), instálalas en local antes de restaurar.\n- Si la base ya existe y quieres reemplazarla, agrega `--clean --if-exists` a `pg_restore`. **Peligro:** esto borra los objetos existentes en la base local.\n- **Peligro:** el dump contiene datos reales de producción. Anonimiza los datos personales o no los copies a un equipo sin cifrar. Borra `backup.dump` cuando termines.\n- Si el servidor de producción solo es accesible por SSH, abre un túnel: `ssh -L 5433:localhost:5432 usuario@bastion` y usa `-h localhost -p 5433`.\n\nPara un backup de toda la instancia (roles incluidos), usa `pg_dumpall`. No soporta el formato custom.",
+  "output_tokens": 745,
+  "thinking_tokens": 0,
+  "input_tokens": 11120,
+  "duration_ms": 5653,
+  "wall_s": 6.69,
+  "created_at": "2026-10-05T23:21:21.878095+00:00"
+}

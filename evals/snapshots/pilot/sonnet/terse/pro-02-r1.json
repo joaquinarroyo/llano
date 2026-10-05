@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Usa `git revert`, no `reset`/`force push`: crea un commit nuevo que deshace el cambio sin reescribir el historial compartido.\n\n1. **Actualiza main**\n   ```\n   git checkout main\n   git pull --ff-only\n   ```\n\n2. **Identifica el commit**\n   ```\n   git log --oneline -n 20\n   git show <sha>   # confirma que es el correcto\n   ```\n\n3. **Revierte**\n   ```\n   git revert <sha>\n   ```\n   - Si es un merge commit: `git revert -m 1 <sha>` (1 = rama principal como padre).\n   - Varios commits: `git revert <sha1>..<sha2>` o `git revert -n <sha>...` para agruparlos en un solo commit.\n\n4. **Resuelve conflictos** (si los hay), luego `git add` y `git revert --continue`.\n\n5. **Verifica** antes de subir: compila y corre los tests.\n\n6. **Sube**\n   ```\n   git push origin main\n   ```\n   Si main está protegido, hazlo mediante una rama y PR:\n   ```\n   git switch -c revert-<sha>\n   git revert <sha>\n   git push -u origin revert-<sha>\n   ```\n\n7. **Avisa al equipo** para que hagan `git pull`, y menciona el motivo en el mensaje del commit.\n\n**Nota:** si más adelante quieres volver a introducir el cambio, no basta con hacer merge de la rama original; tendrás que revertir el revert (`git revert <sha-del-revert>`).\n\nEvita `git reset --hard` + `git push --force` en main: obliga a todos a reconciliar su historial y puede perder trabajo.\n\nEste directorio no es un repo git, así que ejecuta estos pasos en el repositorio correcto. Si quieres, te ayudo ahí.",
+  "output_tokens": 614,
+  "thinking_tokens": 0,
+  "input_tokens": 2660,
+  "duration_ms": 6025,
+  "wall_s": 7.13,
+  "created_at": "2026-10-05T23:21:12.936203+00:00"
+}

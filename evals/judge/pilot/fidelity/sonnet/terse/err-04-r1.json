@@ -1,0 +1,18 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta cubre los hechos 1, 2 y 4, pero dice que pip ve '2.4.0+' sin dar el rango 2.4.0-2.5.0, y no menciona de forma explícita el paso RUN pip install como origen del error. Además se contradice al decir que las versiones con soporte para 3.13 empiezan en 2.5 cuando pip lista 2.4.0 como disponible.",
+  "judge_model": "sonnet"
+}

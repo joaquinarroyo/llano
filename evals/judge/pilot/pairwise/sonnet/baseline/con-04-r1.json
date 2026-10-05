@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A explica la deuda técnica con dos analogías, una tabla que traduce síntomas técnicos a impacto de negocio, un guion de 30 segundos y consejos concretos, lo que cubre mejor cómo explicarla a alguien de negocio, mientras que B es más breve pero menos completa en esa traducción.",
+  "judge_model": "sonnet"
+}

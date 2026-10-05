@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "caveman",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B pone la recomendación al inicio y compara punto por punto en una tabla fácil de escanear, además cubre lo mismo que A (broker, periódicas, reintentos, flujos, monitoreo, Windows) y cierra con una advertencia útil sobre la migración.",
+  "judge_model": "sonnet"
+}

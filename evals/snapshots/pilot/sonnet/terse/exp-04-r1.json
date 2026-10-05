@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**CORS** (Cross-Origin Resource Sharing) es un mecanismo del navegador que controla qué páginas pueden leer respuestas de un servidor de *otro origen*.\n\n**Origen** = esquema + host + puerto. `localhost:3000` y `localhost:8000` tienen puertos distintos, así que son orígenes diferentes, y el navegador aplica la *same-origin policy*: bloquea que el JS de tu frontend lea la respuesta a menos que el servidor lo autorice explícitamente.\n\n**Cómo funciona**\n- El navegador envía `Origin: http://localhost:3000`.\n- Tu API debe responder con `Access-Control-Allow-Origin: http://localhost:3000` (o `*`).\n- Si la petición no es \"simple\" (por ejemplo, `Content-Type: application/json`, cabeceras personalizadas como `Authorization`, o métodos como PUT/DELETE), el navegador antes envía un **preflight** `OPTIONS`. Tu API debe responderlo con:\n  - `Access-Control-Allow-Methods`\n  - `Access-Control-Allow-Headers`\n  - estado 2xx\n\n**Notas**\n- El bloqueo lo hace el navegador, no el servidor: curl o Postman funcionan sin problema.\n- Si usas cookies/credenciales, necesitas `Access-Control-Allow-Credentials: true` y un origen explícito (no `*`), además de `credentials: 'include'` en el fetch.\n- Errores típicos: no responder al `OPTIONS`, o que un middleware de auth lo rechace antes de añadir las cabeceras CORS.\n\n**Soluciones**\nHabilita CORS en tu API para `http://localhost:3000`. Ejemplos:\n\n- **Express:** `app.use(require('cors')({ origin: 'http://localhost:3000' }))`\n- **FastAPI:** `app.add_middleware(CORSMiddleware, allow_origins=[\"http://localhost:3000\"], allow_methods=[\"*\"], allow_headers=[\"*\"])`\n- **Django:** `django-cors-headers` con `CORS_ALLOWED_ORIGINS = [\"http://localhost:3000\"]`\n\nAlternativa en desarrollo: configurar un proxy en el dev server del frontend (p. ej. `proxy` en Vite/CRA) para que las peticiones sean same-origin.\n\nSi me dices qué framework usa tu API, te indico la configuración exacta o la reviso en tu código.",
+  "output_tokens": 850,
+  "thinking_tokens": 0,
+  "input_tokens": 2653,
+  "duration_ms": 6166,
+  "wall_s": 7.18,
+  "created_at": "2026-10-05T23:19:48.714197+00:00"
+}

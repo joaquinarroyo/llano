@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "```markdown\n## [Sin versión] - 2026-10-05\n\n### Cambiado\n- El envío de emails del servicio de notificaciones migró de SendGrid a Amazon SES.\n- Las plantillas de email pasaron de HTML a MJML.\n\n### Agregado\n- Reintentos automáticos en el envío de emails con backoff exponencial (3 intentos, base de 2 s).\n\n### Eliminado\n- **Breaking:** se eliminó el endpoint `/v1/notify`, que ya no tenía uso.\n```\n\nSi tu changelog no marca breaking changes, quitá el prefijo. Falta asignar el número de versión. Como se elimina un endpoint, probablemente corresponda un bump mayor, según cómo versionen.",
+  "output_tokens": 439,
+  "thinking_tokens": 186,
+  "input_tokens": 4275,
+  "duration_ms": 4220,
+  "wall_s": 5.49,
+  "created_at": "2026-10-05T23:20:57.776076+00:00"
+}

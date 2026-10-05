@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la causa (ETIMEDOUT vs ECONNREFUSED, falla antes del login) y da los pasos clave en orden con comandos, de forma más concisa y fácil de leer en una sola pasada, mientras que A añade pasos extra (VPC/rutas, cambios de v2.4.1) con valor pero con más carga de lectura.",
+  "judge_model": "sonnet"
+}

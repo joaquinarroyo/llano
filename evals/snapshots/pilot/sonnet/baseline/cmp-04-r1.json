@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Recomendación:** si tus necesidades son simples (enviar emails, procesar archivos, llamar APIs externas), usa **RQ**. Si necesitas tareas periódicas complejas, reintentos sofisticados, enrutamiento o flujos encadenados, usa **Celery**.\n\n## Diferencias principales\n\n| Aspecto | Celery | Redis + RQ |\n|---|---|---|\n| **Complejidad** | Alta: muchas opciones de configuración, workers, beat, serializers | Baja: API pequeña, se aprende en una hora |\n| **Brokers** | Redis, RabbitMQ, SQS, etc. | Solo Redis |\n| **Tareas periódicas** | Celery Beat integrado (y `django-celery-beat` para gestionarlas desde el admin) | Requiere `rq-scheduler` o `django-rq` + cron; menos maduro |\n| **Reintentos** | Muy configurables (backoff, `autoretry_for`, límites) | Soportados con `Retry`, más básicos |\n| **Workflows** | Canvas: `chain`, `group`, `chord` | Dependencias simples con `depends_on` |\n| **Enrutamiento** | Múltiples colas, routing por tarea, prioridades | Colas con nombre, prioridad por orden de colas |\n| **Resultados** | Backends configurables | Se guardan en Redis con TTL |\n| **Monitorización** | Flower | `rq-dashboard` o el panel de `django-rq` |\n| **Modelo de worker** | Prefork, gevent, eventlet, threads | Fork por trabajo (en Windows no funciona bien) |\n| **Integración Django** | Buena, pero con más piezas | `django-rq` es muy directa e incluye admin |\n\n## Cuándo elegir cada uno\n\n**RQ** encaja si:\n- El equipo es pequeño y quieres menos cosas que mantener.\n- Ya usas Redis.\n- Las tareas son independientes y poco numerosas en tipos.\n- Prefieres depurar fácilmente (el código es corto y legible).\n\n**Celery** encaja si:\n- Necesitas muchas tareas programadas o dinámicas.\n- Necesitas control fino de reintentos, límites de tiempo, rate limiting.\n- Tienes un volumen alto o varios tipos de carga que requieren enrutamiento.\n- Quieres poder cambiar de broker (por ejemplo a RabbitMQ o SQS) más adelante.\n\n## Cosas a tener en cuenta\n\n- **Migrar después es posible pero costoso**: ambos usan decoradores/funciones distintas, así que conviene aislar la lógica de negocio en funciones normales y que la tarea sea solo un envoltorio fino.\n- **Idempotencia**: en ambos casos diseña las tareas para que puedan ejecutarse dos veces sin dañar nada.\n- **Transacciones**: encola con `transaction.on_commit(...)` para que el worker no ejecute una tarea antes de que los datos estén confirmados en la base de datos.\n- **Operación**: Celery suele dar más problemas de configuración en producción (ajustes de `prefetch`, `acks_late`, timeouts de visibilidad); RQ tiene menos opciones, por tanto menos sorpresas.\n\nSi me cuentas el tipo de tareas, el volumen aproximado y si necesitas programación periódica, te concreto cuál elegir.",
+  "output_tokens": 1175,
+  "thinking_tokens": 0,
+  "input_tokens": 2641,
+  "duration_ms": 9467,
+  "wall_s": 10.5,
+  "created_at": "2026-10-05T23:22:03.120641+00:00"
+}

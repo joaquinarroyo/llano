@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "```markdown\n## 2026-10-05 · Servicio de notificaciones\n\n### Cambiado\n- El envío de emails usa Amazon SES en vez de SendGrid.\n- Las plantillas de email están en MJML en vez de HTML.\n\n### Agregado\n- Reintentos con backoff exponencial en el envío: 3 intentos, base de 2 s.\n\n### Eliminado\n- Endpoint `/v1/notify`. No tenía uso.\n\n### Verificación\n- Los 132 tests pasan.\n```\n\nAtención: borrar `/v1/notify` es un cambio incompatible. Si el changelog marca esos cambios, mueve esa línea a una sección \"Breaking\".",
+  "output_tokens": 398,
+  "thinking_tokens": 167,
+  "input_tokens": 11225,
+  "duration_ms": 3900,
+  "wall_s": 5.14,
+  "created_at": "2026-10-05T23:20:56.775227+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A se queda en lo que los commits y el diffstat respaldan y avisa con claridad que no sabe qué cambió en el middleware, mientras que B inventa detalles (el middleware maneja el reuso, los clientes deben guardar el nuevo token) que no se pueden deducir de lo que se vio.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "Postgres.\n\nRazones:\n- **Transacciones ACID**: facturación exige consistencia. Pagos, asientos y numeración de facturas no toleran estados a medias.\n- **Datos relacionales**: clientes, planes, suscripciones, facturas, líneas, impuestos. Encajan en tablas con claves foráneas y restricciones.\n- **Integridad**: `UNIQUE`, `CHECK`, FK y tipos `NUMERIC` exactos para dinero. Nunca uses floats.\n- **Reportes**: SQL con joins y agregaciones para conciliación, cierres y auditoría.\n- **Flexibilidad cuando haga falta**: `JSONB` cubre payloads de pasarelas de pago o metadatos variables sin otro motor.\n- **Multi-tenant**: Row Level Security aísla datos por cliente.\n\nMongoDB solo si el dominio fuera sobre todo documentos sin relaciones ni transacciones multi-entidad. No es el caso aquí.\n\nConsejo: guarda importes en centavos (`BIGINT`) o `NUMERIC(19,4)`, con moneda explícita, y haz las facturas emitidas inmutables.",
+  "output_tokens": 409,
+  "thinking_tokens": 0,
+  "input_tokens": 4177,
+  "duration_ms": 4013,
+  "wall_s": 5.27,
+  "created_at": "2026-10-05T23:21:39.265119+00:00"
+}

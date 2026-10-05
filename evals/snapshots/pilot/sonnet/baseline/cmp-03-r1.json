@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "# Guía rápida\n\n## Polling\nEl cliente pregunta cada X segundos (o long polling: el servidor retiene la petición hasta tener datos).\n\n**Úsalo cuando:**\n- Las actualizaciones son poco frecuentes o la latencia de segundos/minutos es aceptable (estado de un job, de un pago, un export).\n- Necesitas máxima simplicidad: HTTP normal, funciona con cualquier proxy, CDN, caché y load balancer.\n- Pocos clientes, o el intervalo es largo.\n\n**Contras:** desperdicia peticiones si casi nunca hay cambios y añade latencia igual al intervalo.\n\n## Server-Sent Events (SSE)\nUna conexión HTTP larga, **unidireccional servidor → cliente**, con formato de texto (`text/event-stream`).\n\n**Úsalo cuando:**\n- Solo el servidor empuja datos: notificaciones, feeds, dashboards, progreso de tareas, streaming de tokens de un LLM.\n- Quieres reconexión automática y `Last-Event-ID` para reanudar sin escribir esa lógica.\n- Quieres seguir sobre HTTP estándar (auth con cookies/headers, HTTP/2 multiplexado).\n\n**Contras:** solo texto (no binario nativo), un solo sentido (el cliente envía con peticiones HTTP aparte), y en HTTP/1.1 hay un límite de ~6 conexiones por dominio en el navegador.\n\n## WebSocket\nConexión persistente **bidireccional** y full-duplex, con texto y binario.\n\n**Úsalo cuando:**\n- Ambos lados envían mensajes con frecuencia y baja latencia: chat, juegos multijugador, edición colaborativa, trading, cursores compartidos.\n- Necesitas datos binarios o un protocolo propio.\n\n**Contras:** más complejo de operar. Hay que gestionar reconexión, heartbeats, backpressure y autenticación por tu cuenta; algunos proxies y firewalls lo complican; el escalado horizontal requiere sticky sessions o un bus (Redis pub/sub, etc.).\n\n## Cómo decidir\n\n| Pregunta | Respuesta → opción |\n|---|---|\n| ¿Los cambios son raros o tolero segundos de retraso? | Polling |\n| ¿Solo el servidor envía datos en tiempo real? | SSE |\n| ¿El cliente también envía mucho y con baja latencia? | WebSocket |\n| ¿Necesito binario? | WebSocket |\n\n## Regla práctica\nEmpieza por lo más simple que cumpla el requisito: **polling → SSE → WebSocket**. Mucha gente elige WebSocket por defecto cuando SSE (o incluso polling) bastaba. Pasa a WebSocket solo cuando de verdad necesites comunicación bidireccional frecuente.\n\nSi me cuentas tu caso de uso concreto, te digo cuál encaja mejor.",
+  "output_tokens": 1023,
+  "thinking_tokens": 0,
+  "input_tokens": 2627,
+  "duration_ms": 8419,
+  "wall_s": 9.45,
+  "created_at": "2026-10-05T23:21:53.099426+00:00"
+}

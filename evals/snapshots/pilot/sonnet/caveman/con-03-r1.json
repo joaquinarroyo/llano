@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "SHA-256 es seguro como hash, pero demasiado rápido. Para contraseñas, rápido es defecto.\n\n- **Velocidad:** una GPU calcula miles de millones de SHA-256 por segundo. Atacante prueba diccionarios y contraseñas comunes en horas.\n- **Sin sal:** SHA-256 plano da el mismo hash para la misma contraseña. Tablas rainbow y ataques masivos funcionan. Una sal única por usuario lo evita, pero no arregla la velocidad.\n- **Sin factor de coste:** no se puede hacer más lento al pasar los años. Hardware mejora, SHA-256 no se adapta.\n- **Hardware especializado:** ASIC y GPU optimizan SHA-256 (minería de Bitcoin). Atacante tiene ventaja barata.\n\nSHA-256 está diseñado para integridad de datos y firmas, donde la velocidad es ventaja. Contraseñas necesitan lo contrario: función deliberadamente lenta y costosa en memoria.\n\nUsa:\n- **Argon2id** (primera opción)\n- **scrypt**\n- **bcrypt**\n- **PBKDF2** (si exige cumplimiento FIPS), con muchas iteraciones\n\nEstos incluyen sal propia, coste ajustable y, en Argon2 y scrypt, uso de memoria que frena GPU y ASIC.",
+  "output_tokens": 480,
+  "thinking_tokens": 0,
+  "input_tokens": 4176,
+  "duration_ms": 4434,
+  "wall_s": 5.69,
+  "created_at": "2026-10-05T23:22:25.578458+00:00"
+}

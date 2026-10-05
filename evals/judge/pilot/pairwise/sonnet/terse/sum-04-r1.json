@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B divide la información en oraciones cortas y directas que se leen de una sola pasada, conserva todos los puntos técnicos clave (7 requests, caching HTTP, falta de experiencia, persisted queries, BFF, medición) y evita la oración única larga y encadenada de A, que agrega un 'antes de decidir más' no presente en el hilo.",
+  "judge_model": "sonnet"
+}

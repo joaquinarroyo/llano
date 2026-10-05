@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "arm": "caveman",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "`git rebase` reaplica tus commits sobre otra base. `git merge` une dos historiales con un commit nuevo.\n\n**`git rebase main`** (estando en `feature`):\n- Busca el ancestro común de `feature` y `main`.\n- Guarda los commits de `feature` desde ahí.\n- Mueve `feature` a la punta de `main`.\n- Reaplica esos commits uno a uno. Los commits nuevos tienen **hashes distintos**; los originales quedan huérfanos.\n- Resultado: historial lineal, sin commit de merge.\n\n**`git merge main`** (estando en `feature`):\n- Crea un commit de merge con dos padres.\n- Los commits existentes no cambian.\n- Historial no lineal, pero fiel a lo ocurrido.\n\n| | rebase | merge |\n|---|---|---|\n| Historial | Lineal | Ramificado |\n| Commits existentes | Reescritos (nuevo hash) | Intactos |\n| Conflictos | Se resuelven por commit | Una sola vez |\n| Seguro en ramas compartidas | No | Sí |\n\n**Regla clave:** nunca hagas rebase de commits ya publicados que otros usan. Reescribir historial obliga a `git push --force`, y rompe el trabajo de quien tenga los hashes antiguos.\n\n**Uso típico:**\n- Rebase para actualizar tu rama local privada antes de abrir PR.\n- Merge para integrar la rama en `main`, o en ramas compartidas.\n\nExtra: `git rebase -i` permite reordenar, juntar (`squash`), editar o borrar commits antes de publicar.",
+  "output_tokens": 555,
+  "thinking_tokens": 0,
+  "input_tokens": 4164,
+  "duration_ms": 5508,
+  "wall_s": 6.54,
+  "created_at": "2026-10-05T23:19:37.573848+00:00"
+}

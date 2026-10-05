@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "**Por qué falla:** `0.1` no se puede representar exactamente en binario (punto flotante IEEE 754). `1 - 0.1` da `0.9` con un pequeño error, y `100.0 * 0.9` arrastra ese error: `89.99999999999999` en vez de `90.0`.\n\n**Cómo arreglarlo** (según el caso):\n\n1. **Solo en el test**: compara con tolerancia.\n   ```python\n   import pytest\n   assert total == pytest.approx(90.0)\n   ```\n\n2. **En el código (dinero)**: usa `Decimal` para evitar errores de flotante.\n   ```python\n   from decimal import Decimal\n\n   total = Decimal(\"100.00\") * (1 - Decimal(\"0.1\"))  # Decimal('90.000')\n   ```\n   Pasa los valores como strings (`Decimal(\"0.1\")`), no como floats.\n\n3. **Redondeo simple**: si prefieres seguir con floats,\n   ```python\n   total = round(price * (1 - discount), 2)\n   ```\n\nPara facturas recomiendo la opción 2 (o trabajar en centavos con enteros). Si solo quieres que el test pase sin cambiar el código, usa la opción 1.",
+  "output_tokens": 411,
+  "thinking_tokens": 0,
+  "input_tokens": 2725,
+  "duration_ms": 3982,
+  "wall_s": 5.29,
+  "created_at": "2026-10-05T23:20:05.161204+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "baseline",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A incluye el setup mínimo concreto (pnpm-workspace.yaml, corepack), una tabla clara y matices útiles como `nodeLinker: node-modules` y `public-hoist-pattern`, mientras que B es más breve pero omite el ejemplo de configuración y tiene un error (dice que pnpm 'viene con corepack', cuando corepack solo lo habilita).",
+  "judge_model": "sonnet"
+}

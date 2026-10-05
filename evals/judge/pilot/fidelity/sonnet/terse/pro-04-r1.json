@@ -1,0 +1,18 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "terse",
+  "model_alias": "sonnet",
+  "run": 1,
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre revocar (paso 3), generar y desplegar la nueva clave, la persistencia en historia/forks/clones (implícito al decir que borrar del historial no protege y que la revocación es lo que protege), revisión de logs y limpieza opcional con filter-repo/BFG; el orden de generar antes de revocar es una práctica válida.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "model": "claude-sonnet-5-5",
+  "run": 1,
+  "text": "El efecto crea un objeto nuevo cada vez que se ejecuta, y `filters` es su propia dependencia. Eso produce un bucle infinito.\n\n1. El efecto se ejecuta y llama a `setFilters({ ...filters, page: 1 })`.\n2. `{ ...filters }` crea un objeto con otra referencia, aunque tenga los mismos valores.\n3. React compara por referencia y ve que `filters` cambió.\n4. El efecto se ejecuta otra vez, y el ciclo se repite hasta el límite de React.\n\n**Corrección:** haz que el efecto dependa solo de lo que debe reiniciar la página, no de `filters` completo. Usa la forma funcional de `setFilters`.\n\n```jsx\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }));\n}, [filters.search, filters.category]); // solo los filtros que reinician la página\n```\n\nCambia la lista de dependencias por los campos reales de tu componente. `page` no debe estar en ella, porque el efecto lo modifica.\n\n**Mejor opción:** evita el efecto. Reinicia `page` en el mismo handler que cambia el filtro:\n\n```jsx\nconst onSearchChange = (search) =>\n  setFilters(prev => ({ ...prev, search, page: 1 }));\n```\n\nAsí no hay un render extra ni riesgo de bucle. Si me pasas el componente, te indico dónde aplicarlo.",
+  "output_tokens": 640,
+  "thinking_tokens": 141,
+  "input_tokens": 11227,
+  "duration_ms": 5646,
+  "wall_s": 6.66,
+  "created_at": "2026-10-05T23:20:15.898715+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "other": "terse",
+  "llano_position": "A",
+  "winner": "terse",
+  "reason": "B integra la advertencia de breaking change directamente en la entrada eliminada, con secciones claras y sin necesidad de reubicar nada, mientras que A deja esa información crítica como nota aparte que el desarrollador debe aplicar por su cuenta.",
+  "judge_model": "sonnet"
+}
