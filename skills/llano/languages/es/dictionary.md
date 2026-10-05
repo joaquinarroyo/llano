@@ -73,7 +73,6 @@ column says when to use each one.
 | eventualmente (= finalmente) | al final, con el tiempo | "eventualmente" means "possibly" |
 | librería (code) | biblioteca | "librería" is a bookshop |
 | soportar (= ser compatible) | admitir, ser compatible con | |
-| ignorar (= no hacer caso) | ignorar is fine; "desconocer" if it means "not know" | |
 | en orden a, en orden de | para | |
 | jugar un rol | cumplir una función, servir para | |
 

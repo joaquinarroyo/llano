@@ -87,8 +87,8 @@ aplicación" is gone (T4). If the repo writes commits in English, write them in 
 
 Question: "¿Cómo fluye una solicitud de login?"
 
-> El login pasa por tres componentes. El gateway valida el formato, el servicio de
-> autenticación verifica la contraseña y Redis guarda la sesión.
+> El login pasa por cuatro componentes. El gateway valida el formato. El servicio de
+> autenticación verifica la contraseña en Postgres. Redis guarda la sesión.
 >
 > ```
 > Cliente ──POST /login──▶ Gateway ──▶ Auth service ──▶ Postgres
@@ -101,6 +101,6 @@ Question: "¿Cómo fluye una solicitud de login?"
 >
 > Si Postgres no responde en 2 s, el servicio de autenticación devuelve 503.
 
-Notes: there are 4 actors that relate to each other, so level 2 applies. One sentence
-before the diagram says what it shows. The labels are short and use the same terms as
-the text (C1).
+Notes: there are 4 components that relate to each other, so level 2 applies. The text
+before the diagram says what it shows, with one action per sentence (C7).
+The labels are short and use the same terms as the text (C1).

@@ -66,13 +66,17 @@ Where the active configuration comes from, in order:
 |---|---|
 | `/llano <mode>` or "llano all" | Change the mode for this session only. |
 | `/llano lang <id>` | Change the language for this session only. |
-| `/llano set mode=<m> lang=<id>` | Save the change: run `node scripts/doctor.mjs --set mode=<m> lang=<id>`. |
+| `/llano set mode=<m> lang=<id>` | Save the change: run `node "<doctor>" --set mode=<m> lang=<id>`. |
 | `/llano status` | Show the current mode and language. |
-| `/llano doctor` | Run `node scripts/doctor.mjs` and summarize the result in llano. |
-| `/llano install-hook` | Run `node scripts/doctor.mjs --install-hook` (Claude Code only). |
+| `/llano doctor` | Run `node "<doctor>"` and summarize the result in llano. |
+| `/llano install-hook` | Run `node "<doctor>" --install-hook` (Claude Code only). |
 
-Paths are relative to this skill's folder. Confirm a change in one sentence, written
-in llano.
+`<doctor>` is an absolute path. Take it from the SessionStart hook message. Without
+that message, use `scripts/doctor.mjs` inside the folder that contains this SKILL.md
+(usually `~/.claude/skills/llano` or `~/.agents/skills/llano`). Do not run a relative
+path: the working directory is the user's project, not the skill folder.
+
+Confirm a change in one sentence, written in llano.
 
 ## Language packs
 
@@ -125,9 +129,9 @@ list does not need a diagram.
 The order is: **accuracy > clarity > rule.**
 
 Break a llano rule if following it would:
-- lose a fact, a nuance, a condition or a real uncertainty;
-- change the meaning or create ambiguity;
-- force a precise technical term to become a vague one.
+- lose a fact, a nuance, a condition or a real uncertainty
+- change the meaning or create ambiguity
+- force a precise technical term to become a vague one
 
 Breaking a rule for these reasons is correct behavior. Do not announce it.
 

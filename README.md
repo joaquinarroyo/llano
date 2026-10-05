@@ -49,6 +49,9 @@ node ~/.claude/skills/llano/scripts/doctor.mjs --set mode=all lang=es
 
 ## Doctor
 
+The paths below assume the Claude Code install. If the skill lives in
+`~/.agents/skills/llano`, use that path instead.
+
 ```bash
 node ~/.claude/skills/llano/scripts/doctor.mjs
 ```
