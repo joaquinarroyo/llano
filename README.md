@@ -70,6 +70,10 @@ It checks the config, the language pack, duplicate installs, conflicting style s
 
 Levels: **1** text (always), **2** diagram (when the subject has 3+ related parts).
 
+Karpathy's other two formats, interactive HTML and explainer videos, are out of scope.
+Other tools and skills produce them (for example, Claude Code artifacts). Llano only
+governs the text inside them.
+
 Commands: `/llano <mode>`, `/llano lang <id>`, `/llano set …`, `/llano status`,
 `/llano doctor`, `/llano install-hook`.
 

@@ -124,6 +124,11 @@ list does not need a diagram.
 - The diagram supports the text. Write one or two sentences before it that say what it
   shows.
 
+**Other formats are not llano's job.** Pages, artifacts, documents, slides and videos
+come from other tools and skills. Those tools decide the format and the design. When
+they produce text in modes `responses` or `all`, that text follows llano: headings,
+body, labels, captions and narration scripts.
+
 ## Priority and exceptions
 
 The order is: **accuracy > clarity > rule.**
