@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa `pg_dump` en producción, descarga el archivo y restaura con `psql` localmente.\n\n## Paso 1: Backup en producción\n\nConecta a la máquina de producción y ejecuta:\n\n```bash\npg_dump -U <usuario> -h <host> -d <base_datos> > backup.sql\n```\n\nO con compresión (más rápido de descargar):\n\n```bash\npg_dump -U <usuario> -h <host> -d <base_datos> | gzip > backup.sql.gz\n```\n\nReemplaza `<usuario>`, `<host>` y `<base_datos>` con los valores reales.\n\n## Paso 2: Descarga a tu máquina\n\n```bash\nscp <usuario_prod>@<host_prod>:/ruta/backup.sql.gz ~/backup.sql.gz\n```\n\n## Paso 3: Restaura localmente\n\nPrimero, crea la base de datos vacía:\n\n```bash\ncreatedb -U postgres <base_datos>\n```\n\nLuego restaura:\n\n```bash\ngunzip -c ~/backup.sql.gz | psql -U postgres -d <base_datos>\n```\n\nO sin compresión:\n\n```bash\npsql -U postgres -d <base_datos> < ~/backup.sql\n```\n\n## Notas\n\n- **Tiempo:** los backups grandes tardan. Hazlo en horas de poco uso.\n- **Espacio:** necesitas espacio en disco para el backup comprimido + la base de datos restaurada.\n- **Credenciales:** si Postgres pide contraseña cada vez, usa un archivo `.pgpass` o configura conexiones sin contraseña (SSH keys).\n- **Versiones:** si las versiones de Postgres difieren mucho (producción vs local), puede haber incompatibilidades. Usa `pg_dump --version` para verificar.",
+  "output_tokens": 775,
+  "thinking_tokens": 310,
+  "input_tokens": 9908,
+  "wall_s": 8.39,
+  "created_at": "2026-10-06T23:04:53.565154+00:00"
+}

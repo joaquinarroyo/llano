@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A usa frases más cortas y directas, con pasos numerados y avisos claros, y aun así conserva toda la información técnica relevante (medir etapas, paralelizar, cachear, Packwerk en modo informativo, canary/rollback, plan con tabla de metas), mientras que B es más denso y largo con más viñetas anidadas y detalles repetidos.",
+  "judge_model": "sonnet"
+}

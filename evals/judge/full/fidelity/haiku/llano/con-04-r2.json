@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre la definición, el interés y el lenguaje de velocidad/costo/riesgo, pero no dice que pueda ser una decisión consciente y válida ni que haya que hacerla visible y planificar su pago de forma explícita (solo lo sugiere el ejemplo del trimestre).",
+  "judge_model": "sonnet"
+}

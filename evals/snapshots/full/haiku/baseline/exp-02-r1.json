@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# `git rebase` vs `git merge`\n\n**`git merge`**: Integra dos ramas creando un commit de fusión que une ambas historias. El historial mantiene todas las ramas originales.\n\n```\nmain:  A — B — C — D (merge commit)\n            ↘ ↗\nfeature:    E — F\n```\n\n**`git rebase`**: Replantea los commits de una rama sobre otra, reescribiendo el historial. Mueve todos tus commits encima de la rama base, creando un historial lineal.\n\n```\nmain:    A — B — C\nfeature:           E' — F'\n```\n\n## Diferencias clave:\n\n| Aspecto | Merge | Rebase |\n|---------|-------|--------|\n| **Historial** | Preserva toda la historia con bifurcaciones | Lineal y limpio |\n| **Commits** | Crea un commit de fusión extra | Reescribe commits (nuevos hashes) |\n| **Conflictos** | Resueltos una sola vez | Pueden requerirse soluciones por commit |\n| **Ramas remotas** | Seguro, no reescribe | Peligroso en ramas compartidas |\n\n## Cuándo usar cada uno:\n\n- **`merge`**: Ramas compartidas/públicas, querés preservar el historial completo\n- **`rebase`**: Ramas locales/personales, querés historial limpio antes de hacer push\n\n**Regla de oro**: Nunca hagas `rebase` de commits ya pusheados a un repositorio compartido, porque reescribe el historial y crea conflictos en otros desarrolladores.",
+  "output_tokens": 541,
+  "thinking_tokens": 124,
+  "input_tokens": 3399,
+  "wall_s": 6.32,
+  "created_at": "2026-10-06T22:59:32.972563+00:00"
+}

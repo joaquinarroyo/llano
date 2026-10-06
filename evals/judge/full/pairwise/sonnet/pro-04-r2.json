@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da el mismo orden esencial (crear, desplegar, revocar, auditar, limpiar, prevenir), con una advertencia clara sobre el force push y menos relleno, mientras que B añade valor (otros secretos, GitHub Support) pero es más denso y menos directo.",
+  "judge_model": "sonnet"
+}

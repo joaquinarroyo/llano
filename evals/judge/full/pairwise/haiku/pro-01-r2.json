@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A está mejor estructurada con encabezados numerados y mantiene los pasos en orden lógico (generar, agente, config opcional, copiar, GitHub, verificar), además incluye la alternativa RSA; B condiciona el config a 'macOS 12 o más nuevo' de forma confusa y obliga a repetir ssh-add.",
+  "judge_model": "sonnet"
+}

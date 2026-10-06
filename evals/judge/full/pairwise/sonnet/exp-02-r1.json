@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B responde 'qué hace exactamente' con un paso a paso claro (ancestro común, parches, mover, aplicar), usa diagramas y tabla compactos y conserva lo técnico clave (conflictos, --force-with-lease, deshacer), con menos relleno que A.",
+  "judge_model": "sonnet"
+}

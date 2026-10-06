@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Cubre los cinco hechos; sin embargo, presenta process.nextTick como una microtask (tiene su propia cola, previa a la de promesas) y dice que async/await de Node funciona 'igual' que asyncio, lo cual es una simplificación excesiva (las promesas son eager, las corrutinas de Python no arrancan hasta ser programadas).",
+  "judge_model": "sonnet"
+}

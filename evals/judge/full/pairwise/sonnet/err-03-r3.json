@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica el bucle igual de bien, es más corta y evita el error de la opción 2 de A, cuya dependencia `filters.page` impediría salir de la página 1; además advierte expresamente de ese riesgo.",
+  "judge_model": "sonnet"
+}

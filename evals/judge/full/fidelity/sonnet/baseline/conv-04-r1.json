@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Todos los hechos clave están cubiertos en cada turno; no se detectan afirmaciones técnicamente incorrectas relevantes.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Todos los hechos clave aparecen en cada turno (el turno 3 usa una revisión en la semana 7 en lugar de 'unos meses', pero expresa la misma idea de reevaluar la extracción de servicios) y no detecté afirmaciones técnicamente incorrectas.",
+  "judge_model": "sonnet"
+}

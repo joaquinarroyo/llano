@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Qué es\n\n**Deuda técnica** es el costo futuro que asumes cuando eliges una solución rápida o imperfecta en lugar de la adecuada. Como una deuda financiera, te da algo ahora (velocidad, salir antes al mercado), pero genera **intereses**: cada cambio posterior en esa parte del sistema cuesta más tiempo y es más arriesgado, hasta que la \"pagas\" (refactorizas, rediseñas, actualizas).\n\nEjemplos típicos:\n- Código copiado y pegado en vez de reutilizable.\n- Falta de tests automatizados.\n- Dependencias o frameworks desactualizados.\n- Arquitectura pensada para 100 usuarios que hoy sirve a 100.000.\n- Atajos tomados \"temporalmente\" para cumplir una fecha.\n\nNo toda deuda es mala: a veces endeudarse es una buena decisión de negocio (validar un producto rápido). El problema es la deuda **no reconocida** o la que nunca se paga.\n\n## Cómo explicarla a alguien de negocio\n\n**1. Usa la metáfora financiera, que ya entienden:**\n> \"Es como financiar con tarjeta de crédito. Nos permitió lanzar en marzo en vez de junio, pero ahora pagamos intereses: cada funcionalidad nueva en el módulo de facturación tarda el doble de lo que debería.\"\n\n**2. Habla de consecuencias, no de código.** Evita \"el acoplamiento es alto\". Di:\n- \"Las nuevas funciones tardan más en salir.\"\n- \"Hay más incidentes en producción.\"\n- \"Incorporar a un desarrollador nuevo lleva semanas en vez de días.\"\n- \"Tenemos un riesgo de seguridad por usar versiones sin soporte.\"\n\n**3. Cuantifica cuando puedas:**\n> \"El 30 % del tiempo del equipo se va en corregir errores de este sistema. Invertir 4 semanas en rehacerlo libera ese tiempo para nuevas funcionalidades.\"\n\n**4. Plantéalo como decisión de inversión, no como queja técnica:**\n- Costo de pagarla ahora vs. costo de seguir pagando intereses.\n- Riesgo de no hacerlo (caídas, brechas, pérdida de clientes).\n- Propuesta concreta: p. ej., dedicar un 15–20 % de cada sprint a reducir deuda.\n\n**5. Otras analogías útiles:**\n- **Cocina de restaurante:** si nunca limpias mientras cocinas, llega un punto en que no puedes servir platos a tiempo.\n- **Casa con reformas improvisadas:** cada arreglo encima de otro hace que el siguiente sea más caro y peligroso.\n\n## Frase resumen\n\n> \"La deuda técnica son los atajos que tomamos para ir rápido hoy y que nos hacen ir más lento mañana. Gestionarla es decidir conscientemente cuándo endeudarnos y cuándo pagar, para no terminar trabajando solo para cubrir los intereses.\"",
+  "output_tokens": 1046,
+  "thinking_tokens": 0,
+  "input_tokens": 1563,
+  "wall_s": 12.85,
+  "created_at": "2026-10-06T23:20:48.397607+00:00"
+}

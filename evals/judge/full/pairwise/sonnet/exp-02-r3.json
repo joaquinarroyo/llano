@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica qué hace cada comando y en qué se diferencian con un diagrama único y exacto, una tabla corta y la advertencia sobre force-push, y se lee de una vez; A añade detalles útiles (fast-forward, rebase interactivo, comandos) pero se extiende más allá de lo que pide la pregunta.",
+  "judge_model": "sonnet"
+}

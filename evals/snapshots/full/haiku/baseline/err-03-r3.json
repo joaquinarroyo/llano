@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es un **bucle infinito**: el effect modifica `filters`, lo que dispara el effect nuevamente, que modifica `filters` de nuevo, etc.\n\n```javascript\n// ❌ Bucle infinito\nuseEffect(() => {\n  setFilters({ ...filters, page: 1 })\n}, [filters])  // filters cambia → effect se ejecuta → filters cambia → ...\n```\n\n**Solución:** Separa `filters` y `page` en estados diferentes:\n\n```javascript\nconst [filters, setFilters] = useState({...})\nconst [page, setPage] = useState(1)\n\n// Cuando los filtros cambien, resetea la página\nuseEffect(() => {\n  setPage(1)\n}, [filters])  // Ahora solo modifica page, no filters\n```\n\nO si necesitas que `page` esté dentro del objeto `filters`, usa un dependency array que no incluya `page`:\n\n```javascript\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }))\n}, [filters.category, filters.search])  // Solo las props que realmente importan\n```\n\n**¿Cuál es el flujo que intentas lograr?** Si me muestras dónde se actualizan los filtros, puedo darte la solución exacta.",
+  "output_tokens": 659,
+  "thinking_tokens": 339,
+  "input_tokens": 3476,
+  "wall_s": 7.19,
+  "created_at": "2026-10-06T23:04:24.749401+00:00"
+}

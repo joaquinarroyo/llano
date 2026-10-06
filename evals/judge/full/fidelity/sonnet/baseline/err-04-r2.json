@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre las causas (sin wheels para 3.13 y el índice de PyTorch para +cu118) y las dos opciones, pero no menciona las versiones 2.4.0 a 2.5.0 que ve pip ni dice que el fallo ocurre en el paso RUN pip install.",
+  "judge_model": "sonnet"
+}

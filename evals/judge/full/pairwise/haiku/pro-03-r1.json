@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B sigue un flujo lineal paso a paso con un ejemplo único y una alternativa en un solo comando, por lo que se entiende mejor de una lectura; A es correcta en lo básico pero sus tips están dispersos e incluyen un error (`pg_dump -Fc -j` no funciona, el dump paralelo requiere formato directorio).",
+  "judge_model": "sonnet"
+}

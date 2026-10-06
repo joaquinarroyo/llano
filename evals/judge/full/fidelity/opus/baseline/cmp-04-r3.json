@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos (RQ simple y solo Redis; Celery con más funciones, más complejo y difícil de depurar; RQ basta para tareas simples; Celery para tareas programadas o encadenadas) y no contiene afirmaciones técnicas incorrectas.",
+  "judge_model": "sonnet"
+}

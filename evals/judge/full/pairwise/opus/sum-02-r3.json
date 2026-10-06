@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A separa impacto, causa, cronología y acciones en secciones breves que se leen de un vistazo, con las cifras clave en negrita y sin repetir información; B es igual de completa pero más fragmentada (tabla más listas) y menos directa.",
+  "judge_model": "sonnet"
+}

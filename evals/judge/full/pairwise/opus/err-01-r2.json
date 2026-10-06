@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica el problema y da un orden claro de revisión en pasos numerados con ramificación simple, sin perder lo técnico esencial; B es correcta y más completa, pero más densa, con causas y pasos que se solapan, lo que dificulta captarla en una sola lectura.",
+  "judge_model": "sonnet"
+}

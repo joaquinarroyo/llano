@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica en español con pasos ordenados y comandos concretos, y su mensaje de PR queda en el idioma del desarrollador con una nota sobre qué reemplazar. B es más breve, pero su primer turno es menos útil (GC) y su PR sale en inglés.",
+  "judge_model": "sonnet"
+}

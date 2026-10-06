@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da comandos concretos y un orden claro, y explica que ETIMEDOUT apunta a red y no a código; B asume Kubernetes y sugiere revisar `listen_addresses`, que causaría ECONNREFUSED y no un timeout.",
+  "judge_model": "sonnet"
+}

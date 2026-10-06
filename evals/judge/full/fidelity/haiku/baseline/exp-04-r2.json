@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Explica que el navegador aplica CORS, que el puerto distinto cuenta como otro origen y que hace falta Access-Control-Allow-Origin, pero no menciona el preflight OPTIONS ni que curl no aplica CORS. Además atribuye a CORS la protección contra sitios maliciosos, que en realidad es de la Same-Origin Policy: CORS la relaja.",
+  "judge_model": "sonnet"
+}

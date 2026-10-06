@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Resumen:** Celery hace más y cuesta más de configurar. RQ hace menos y se aprende en una tarde. Si tus necesidades son simples, elige RQ.\n\n| Aspecto | Celery | Redis + RQ |\n|---|---|---|\n| Broker | RabbitMQ, Redis, SQS y otros | Solo Redis |\n| Configuración | Mucha: serializadores, rutas, timeouts, acks | Poca |\n| Tareas periódicas | Celery Beat (incluido) | Necesitas `rq-scheduler` u otro programador |\n| Flujos de tareas | Chains, groups, chords | No tiene. Los armas tú |\n| Reintentos | Configurables por tarea, con espera creciente | Soportados, con opciones más básicas |\n| Límites de frecuencia | Sí (`rate_limit`) | No |\n| Enrutamiento | Colas y rutas por tipo de tarea | Colas con nombre, sin enrutamiento avanzado |\n| Integración con Django | `django-celery-beat` y `django-celery-results` | `django-rq` (panel de administración incluido) |\n| Depuración | Más difícil: muchas piezas | Más fácil: un worker, un Redis |\n| Sistemas operativos | Linux, macOS y Windows (con limitaciones) | Linux y macOS. No funciona en Windows |\n\n**Elige RQ si:**\n- Tienes pocas tareas, por ejemplo correos, informes o llamadas a APIs.\n- Ya usas Redis.\n- Quieres menos código de configuración y menos cosas que fallen.\n\n**Elige Celery si:**\n- Necesitas flujos con dependencias entre tareas.\n- Tienes muchas tareas periódicas con reglas complejas.\n- Necesitas RabbitMQ, SQS o límites de frecuencia.\n- Esperas mucho volumen o varios equipos que comparten la infraestructura.\n\n**Atención:** migrar de RQ a Celery después es posible, pero tienes que reescribir los decoradores y las llamadas de encolado. Si aislas el encolado en una función propia (`enqueue_report(...)`), el cambio será pequeño.\n\nMi recomendación: empieza con RQ y cambia a Celery solo cuando una necesidad concreta de la tabla lo exija. Si me dices qué tareas tienes y con qué frecuencia, puedo afinar la recomendación.",
+  "output_tokens": 1362,
+  "thinking_tokens": 530,
+  "input_tokens": 10071,
+  "wall_s": 11.83,
+  "created_at": "2026-10-06T23:07:44.606422+00:00"
+}

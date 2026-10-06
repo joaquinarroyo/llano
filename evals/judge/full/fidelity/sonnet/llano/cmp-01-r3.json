@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos clave; la frase de que el modelo de MongoDB 'no está pensado' para transacciones es una simplificación discutible, pero no un error técnico claro.",
+  "judge_model": "sonnet"
+}

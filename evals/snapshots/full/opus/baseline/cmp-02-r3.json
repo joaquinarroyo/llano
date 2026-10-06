@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "**Recomendación: pnpm.** Para un monorepo nuevo es la opción más sólida hoy.\n\n## Comparación rápida\n\n| | **pnpm** | **npm** | **Yarn (Berry, v4)** |\n|---|---|---|---|\n| Workspaces | Excelentes (`pnpm-workspace.yaml`, filtros `--filter`, `workspace:` protocol) | Básicos, funcionales | Muy buenos (`workspace:`, constraints, plugins) |\n| Velocidad de instalación | Muy rápida | La más lenta | Rápida (sobre todo con PnP) |\n| Uso de disco | Store global con hard links, mínimo | Duplica todo por proyecto | Bajo con PnP, normal con `node_modules` |\n| Estrictez de dependencias | Estricto: no puedes importar lo que no declaras (evita *phantom deps*) | Hoisting plano, permite *phantom deps* | PnP es aún más estricto; con `nodeLinker: node-modules` se comporta como npm |\n| Compatibilidad con el ecosistema | Alta; algún paquete raro requiere `hoist`/`shamefully-hoist` | Máxima, es el estándar | PnP rompe herramientas que asumen `node_modules` (IDEs, algunos bundlers) |\n| Catálogos de versiones | Sí (`catalog:`) para centralizar versiones | No | No nativo (hay plugins/constraints) |\n| Instalación | Vía Corepack o standalone | Viene con Node | Vía Corepack |\n| Seguridad de supply chain | Bloquea scripts `postinstall` por defecto (v10+), `minimumReleaseAge` | Scripts habilitados por defecto | Configurable (`enableScripts`) |\n\n## Por qué pnpm para un monorepo\n\n- **Aislamiento real entre paquetes**: si `apps/web` usa `lodash` sin declararlo, falla. Esto atrapa errores que en npm aparecen recién al publicar o desplegar.\n- **Filtros potentes**: `pnpm --filter \"./apps/**\" build`, `pnpm --filter web...` (con dependencias), `--filter \"[origin/main]\"` (solo lo cambiado).\n- **Catálogos**: defines `react: ^19.0.0` una vez y todos los paquetes usan `catalog:`, evitando desalineación de versiones.\n- **Lo usan como estándar** Turborepo, Nx, Vite, Vue, Next.js y muchos otros monorepos grandes, así que la documentación y ejemplos abundan.\n\n## Cuándo elegir los otros\n\n- **npm**: si quieres cero fricción, el equipo es poco experimentado o el monorepo es pequeño (2-3 paquetes). Funciona, pero escala peor.\n- **Yarn Berry**: si ya lo usan en tu organización, o te interesan los *constraints* (reglas declarativas sobre los `package.json`) o Zero-Installs con PnP. Si no tienes esa razón concreta, pnpm da casi lo mismo con menos fricción.\n- **Evita Yarn Classic (v1)**: está en modo mantenimiento.\n\n## Setup mínimo con pnpm\n\n```yaml\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n\ncatalog:\n  typescript: ^5.9.0\n```\n\n```json\n// package.json raíz\n{\n  \"private\": true,\n  \"packageManager\": \"pnpm@10.x.x\"\n}\n```\n\nCombínalo con **Turborepo** (simple) o **Nx** (más completo) para cachear builds y tests; pnpm resuelve dependencias, pero no orquesta tareas con caché.",
+  "output_tokens": 1277,
+  "thinking_tokens": 0,
+  "input_tokens": 1572,
+  "wall_s": 14.64,
+  "created_at": "2026-10-06T23:25:02.896928+00:00"
+}

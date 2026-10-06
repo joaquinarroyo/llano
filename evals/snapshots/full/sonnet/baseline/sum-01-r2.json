@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Resumen\n\nEste PR agrega rotación de refresh tokens al flujo de autenticación y detección de reuso de tokens.\n\n### Cambios principales\n- **Rotación de refresh tokens** (`src/auth/tokens.ts`): cada vez que se usa un refresh token se emite uno nuevo y el anterior deja de ser válido.\n- **Detección de reuso**: si se presenta un refresh token ya rotado, se invalida el token viejo (y se trata como un posible intento de uso indebido).\n- **Middleware** (`src/auth/middleware.ts`): ajustes menores para integrarse con el nuevo flujo de rotación.\n- **Tests** (`tests/auth/tokens.test.ts`): ~96 líneas nuevas que cubren la rotación y el escenario de reuso.\n- **Dependencias**: `jsonwebtoken` 9.0.0 → 9.0.2 (bump de patch).\n\n### Commits\n- `a1f3c2e` feat(auth): add refresh token rotation\n- `9b2d7e1` fix(auth): invalidate old refresh token on reuse\n- `4c8e1a0` test(auth): cover token reuse detection\n- `77d0b3f` chore: bump jsonwebtoken 9.0.0 -> 9.0.2\n\nArmé esto solo a partir de los mensajes de commit y el diffstat, sin ver el código. Si querés que detalle el comportamiento exacto (por ejemplo, si al detectar reuso se revoca toda la familia de tokens o solo el viejo), pasame el diff de `tokens.ts` y lo ajusto.",
+  "output_tokens": 551,
+  "thinking_tokens": 0,
+  "input_tokens": 1782,
+  "wall_s": 4.2,
+  "created_at": "2026-10-06T23:09:40.396218+00:00"
+}

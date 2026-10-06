@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    false,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "No explica que torch 2.1.0 carece de wheels para Python 3.13; propone Python 3.12, que tampoco soporta torch 2.1.0 (llega hasta 3.11), y la opción 2 seguiría fallando en 3.13.",
+  "judge_model": "sonnet"
+}

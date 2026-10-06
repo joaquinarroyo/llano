@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da la recomendación al inicio y compara de forma estructurada en una tabla y listas, con criterios concretos (scheduling, workflows, número de workers, brokers) que A solo menciona de forma general.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más conciso, con pasos numerados y comandos concretos fáciles de seguir en una lectura, y su mensaje de PR es directo; B es más completo pero más denso y con mezcla de voseo/tuteo, y en el PR afirma sin evidencia que 'pg 8.12 no muestra impacto'.",
+  "judge_model": "sonnet"
+}

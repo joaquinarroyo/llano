@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre los hechos 1-4 (CORS como mecanismo del navegador, puerto distinto = origen distinto, Access-Control-Allow-Origin, preflight OPTIONS) pero no menciona que curl u otras herramientas no aplican CORS; no se detectan afirmaciones incorrectas.",
+  "judge_model": "sonnet"
+}

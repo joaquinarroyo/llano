@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Peligro:** una key expuesta puede usarse para acceder a tus datos. Actúa ahora.\n\n1. **Revoca la key en el proveedor (AWS, GitHub, etc.)** inmediatamente. Esto detiene el acceso no autorizado. No esperes a limpiar el repo.\n\n2. **Crea una key nueva** y pruébala en tu código local.\n\n3. **Limpia el histórico de git:**\n   ```bash\n   git filter-branch --tree-filter 'grep -r \"old-key-value\" . && sed -i \"\" \"s/old-key-value/new-key-value/g\" $(grep -r \"old-key-value\" . | cut -d: -f1)'\n   git push --force-with-lease\n   ```\n   O usa `git-filter-repo` (más fiable): `pip install git-filter-repo` y luego `git-filter-repo --replace-text replacements.txt`.\n\n4. **Audita el acceso** con los logs del proveedor. Busca quién usó la key, cuándo, y desde dónde. ¿Accedió a datos sensibles?\n\n5. **Notifica a los usuarios** si hubo acceso no autorizado a sus datos. Muchas jurisdicciones lo requieren por ley.\n\n6. **Configura secrets management** para el futuro:\n   - Variables de entorno en `.env` (nunca comitear).\n   - Gestores como 1Password, HashiCorp Vault, AWS Secrets Manager.\n   - Pre-commit hooks que revisen secretos: `detect-secrets`, `git-secrets`.\n\n¿Dónde estaba la key? (código, archivo de configuración, variables) — el contexto cambia si necesitas más limpieza.",
+  "output_tokens": 719,
+  "thinking_tokens": 276,
+  "input_tokens": 9910,
+  "wall_s": 8.15,
+  "created_at": "2026-10-06T23:00:32.385604+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Explica la causa binaria, cita math.isclose, Decimal para dinero y el valor 89.99999999999999, pero no dice explícitamente que comparar floats con == sea frágil (solo lo implica al sugerir isclose); además, la respuesta intenta usar herramientas y termina pidiendo el código.",
+  "judge_model": "sonnet"
+}

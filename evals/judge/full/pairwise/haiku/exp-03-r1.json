@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A es más concisa y técnicamente correcta (nodos de 8KB con varias claves, hojas con TID, rangos y ORDER BY, costo en escrituras), mientras que B tiene imprecisiones (dice que las hojas contienen las filas reales, un diagrama binario engañoso) y omite el trade-off de escritura.",
+  "judge_model": "sonnet"
+}

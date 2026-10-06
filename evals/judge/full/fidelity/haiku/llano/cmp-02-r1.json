@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta cubre el store con enlaces, la estrictitud de pnpm, los workspaces en los tres y la recomendación de pnpm, pero no menciona que npm viene con Node; además atribuye 'máxima compatibilidad' a yarn, lo que contradice su propia tabla, que da esa máxima compatibilidad a npm.",
+  "judge_model": "sonnet"
+}

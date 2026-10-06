@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "**Atención:** si el impacto en producción es alto, restaura primero el lockfile anterior y diagnostica después, en staging.\n\nEmpieza por confirmar que las dependencias son la causa. Después mide dónde se va el tiempo.\n\n1. **Compara los lockfiles.** Ejecuta `git diff <commit-bueno> -- package-lock.json`. Revisa también las dependencias transitivas, no solo las que actualizaste tú.\n2. **Restaura el lockfile anterior en staging.** Ejecuta `npm ci` y mide el p95. Si vuelve a 120 ms, la causa son las dependencias. Si no, revisa la versión de Node, la imagen base, la base de datos y el tráfico.\n3. **Haz bisect por grupos de paquetes.** Actualiza la mitad, mide y repite hasta encontrar el paquete.\n4. **Mide en paralelo.**\n   - Retraso del event loop: `monitorEventLoopDelay` de `perf_hooks`. Si sube, algo bloquea el hilo.\n   - Perfil de CPU: `node --cpu-prof app.js`, y compara con una versión anterior.\n   - Latencia de llamadas salientes (base de datos, otras APIs). Si sube solo ahí, la causa está en el driver o el cliente HTTP.\n\nSospechosos frecuentes tras una actualización:\n- Driver de base de datos u ORM (tamaño del pool, timeouts).\n- Cliente HTTP (keep-alive, DNS, reintentos).\n- Logger o middleware que ahora hace más trabajo por solicitud.\n- Cambio de versión de Node por la imagen base.\n\nNo puedo ver tu repositorio desde aquí: el directorio actual no es un repo git. Si me compartes el diff del lockfile, lo reviso y señalo los candidatos.",
+      "output_tokens": 1482,
+      "thinking_tokens": 850,
+      "input_tokens": 10091
+    },
+    {
+      "text": "La causa más probable es el ORM. 14 queries con `BEGIN` y `COMMIT` extra suman 28 viajes más a la base de datos por request. Eso cuadra con un p95 que sube de 120 ms a 900 ms.\n\n1. **Fija el ORM a la versión anterior.** Es el arreglo más rápido. Cambia la versión en `package.json` a una exacta (sin `^`), ejecuta `npm ci` y despliega.\n2. **Verifica en staging.** Mide el p95 y cuenta las queries por request en el APM. Debe volver a 14 sin `BEGIN` ni `COMMIT` extra.\n3. **Descarta `pg`.** Con el ORM anterior fijo y `pg` en 8.12, si el p95 vuelve a 120 ms, `pg` no influye. Si no vuelve, fija también `pg` en 8.11.\n4. **Busca la causa en el changelog del ORM.** Puede ser un cambio de comportamiento por defecto con una opción para desactivarlo, o un bug. Si es un bug, abre un issue con el conteo de queries.\n\nDespués de fijar la versión, puedes reducir el costo de fondo. Agrupa las 14 queries en una sola transacción por request, o combínalas con joins. Así pagas un solo `BEGIN` y `COMMIT`, aunque el ORM cambie otra vez.\n\n¿Qué ORM usas y qué versiones? Con eso busco la opción exacta en su documentación.",
+      "output_tokens": 826,
+      "thinking_tokens": 315,
+      "input_tokens": 11694
+    },
+    {
+      "text": "Reemplaza los datos entre `<>` con los reales.\n\n```\nfix(deps): fijar <orm> en <versión-anterior> por regresión de latencia\n\nEl p95 de la API subió de 120 ms a 900 ms después de actualizar dependencias.\n\nCausa: <orm> <versión-nueva> abre una transacción por cada query. Cada\nrequest hace 14 queries, así que agrega 14 `BEGIN` y 14 `COMMIT`. El APM\nmuestra esas queries extra en cada request.\n\nCambios:\n- `package.json`: fija <orm> en <versión-anterior> (versión exacta, sin `^`).\n- `package-lock.json`: actualizado con `npm ci`.\n- `pg` se queda en 8.12.\n\nResultado en <staging/producción>: el p95 volvió a 130 ms.\n\nPendiente:\n- Revisar el changelog de <orm> y buscar una opción para desactivar la\n  transacción por query, o abrir un issue.\n- Considerar una sola transacción por request para reducir los viajes a la base de datos.\n```\n\nSi el repositorio escribe los commits en inglés, dime y lo traduzco. Si el resultado de 130 ms vino de staging y no de producción, escríbelo así en el mensaje.",
+      "output_tokens": 729,
+      "thinking_tokens": 300,
+      "input_tokens": 12594
+    }
+  ],
+  "created_at": "2026-10-06T23:14:27.082103+00:00"
+}

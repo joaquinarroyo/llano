@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A explica claramente las tres propiedades y la elección CP/AP durante una partición, y su parte de relevancia menciona PACELC y el trade-off consistencia-latencia, mientras que B mezcla conceptos (define CP/AP como 'Consistencia + Particiones', afirma que casi siempre se elige AP, dice que el teorema es 'binario') con menos precisión técnica.",
+  "judge_model": "sonnet"
+}

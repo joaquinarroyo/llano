@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Turno 1: el hecho 4 queda implícito en la mención de deploy, monitoreo, logs, timeouts, reintentos y fallas parciales; el turno 3 cubre el punto de decisión como revisión posterior (semana 8), sin afirmaciones técnicas incorrectas detectadas.",
+  "judge_model": "sonnet"
+}

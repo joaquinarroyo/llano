@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Deuda Técnica\n\nLa **deuda técnica** es el costo futuro causado por atajos o decisiones técnicas deficientes hoy. Es como un préstamo: obtienes beneficio inmediato (lanzo más rápido), pero pagas intereses después (mantenimiento costoso, bugs frecuentes, cambios lentos).\n\n## Cómo explicarlo a negocio:\n\n**Analogía simple:**\n> \"Es como construir una casa con materiales baratos para ahorrar tiempo. Sale rápido, pero después gastas más en reparaciones constantes y eventualmente necesitarás reconstruir paredes.\"\n\n**Ejemplos concretos:**\n- **Deuda \"buena\":** Lanzo MVP sin documentación para ganar clientes en 2 semanas. Luego documento. Ganancia > costo.\n- **Deuda \"mala\":** Código sin tests ni estructura. Cada nueva feature toma 3x más tiempo. Los bugs se multiplican. Los desarrolladores se van por frustración.\n\n## El impacto en negocio:\n\n| Aspecto | Con deuda técnica | Sin deuda técnica |\n|---------|-------------------|-------------------|\n| **Velocidad de cambios** | Lenta (cada cambio toca 5 sistemas) | Rápida |\n| **Bugs en producción** | Frecuentes | Raros |\n| **Retención de talento** | Baja (desarrolladores se aburren/frustran) | Alta |\n| **Costo total** | Alto a largo plazo | Inversión inicial mayor, menor costo total |\n\n## La recomendación:\nLa deuda técnica es inevitable, pero **controlada es inversión, descontrolada es ruina**. Necesitas balance: puedes asumir deuda estratégica cuando hay valor (speed-to-market), pero mantenerla \"visible\" para pagarla gradualmente.",
+  "output_tokens": 568,
+  "thinking_tokens": 99,
+  "input_tokens": 3400,
+  "wall_s": 6.96,
+  "created_at": "2026-10-06T23:05:29.022471+00:00"
+}

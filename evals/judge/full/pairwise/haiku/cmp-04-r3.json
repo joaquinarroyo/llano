@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B presenta la comparación en una tabla escaneable y criterios concretos de decisión (monitoreo, scheduler, dead letter queues, volumen), mientras que A es más breve pero omite detalles técnicos relevantes como rq-scheduler, Flower y el tradeoff de dependencias.",
+  "judge_model": "sonnet"
+}

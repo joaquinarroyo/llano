@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B está bien estructurada y cubre casos que A omite (varios commits, conflictos, `--abort`, rotar credenciales filtradas), y es correcta al decir que el cherry-pick sí permite reaplicar el cambio, mientras que A afirma erróneamente que no funciona.",
+  "judge_model": "sonnet"
+}

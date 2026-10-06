@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "La tabla comparativa y las listas de 'Elige X si' permiten ver las diferencias de un vistazo y cubren más aspectos técnicos (prioridades, brokers, reintentos con backoff, scheduling), mientras que A es más vago y tiene el error de decir 'Django no es crítico'.",
+  "judge_model": "sonnet"
+}

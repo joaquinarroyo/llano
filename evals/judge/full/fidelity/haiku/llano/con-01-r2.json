@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Recomienda PATCH como idempotente (no lo es por definición) y dice que una \"suma\" es válida frente a un incremento (confuso/incorrecto); además no menciona GET ni DELETE como idempotentes.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre los cinco hechos; la única imprecisión es que SSE soporte auth con headers, ya que el EventSource nativo del navegador solo permite cookies, no headers personalizados.",
+  "judge_model": "sonnet"
+}

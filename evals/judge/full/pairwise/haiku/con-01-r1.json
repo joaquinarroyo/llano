@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B es más claro y completo: cubre PUT (que A omite), explica por qué importa con más ángulos (reintentos automáticos, proxies) y muestra un ejemplo concreto de Idempotency-Key en HTTP, mientras que A tiene imprecisiones como llamar idempotente al POST con clave y clasificar DELETE por el 404.",
+  "judge_model": "sonnet"
+}

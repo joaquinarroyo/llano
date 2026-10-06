@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre la conexión fallida a 10.0.3.17:5432, el timeout de 30 s y las revisiones de red; omite el código de salida 1 y la versión v2.4.1, y afirma que lo más probable es que Postgres esté caído, cuando un ETIMEDOUT apunta más a firewall o red que a un servicio caído (que daría ECONNREFUSED).",
+  "judge_model": "sonnet"
+}

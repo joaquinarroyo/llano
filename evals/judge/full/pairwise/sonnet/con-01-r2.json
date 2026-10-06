@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica con ejemplos concretos, distingue idempotente de seguro, enumera por qué importa y añade detalles prácticos (validar cuerpo distinto, expiración de claves, unicidad), mientras que A es claro pero omite esos puntos.",
+  "judge_model": "sonnet"
+}

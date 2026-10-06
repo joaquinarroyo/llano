@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# WebSocket vs Server-Sent Events vs Polling\n\n**Polling**: El cliente pregunta repetidamente al servidor por cambios. Úsalo cuando:\n- Los cambios son muy ocasionales y no es crítico que sean inmediatos\n- Necesitas máxima compatibilidad con navegadores antiguos\n- La latencia de algunos segundos es aceptable\n\n**Server-Sent Events (SSE)**: El servidor envía datos al cliente por una conexión HTTP unidireccional. Úsalo cuando:\n- Solo necesitas comunicación **servidor → cliente** (datos en una dirección)\n- Quieres reconexión automática sin código extra\n- Los eventos llegan de forma continua pero no necesitas baja latencia extrema\n- Simplicidad es importante\n\n**WebSocket**: Conexión bidireccional persistente. Úsalo cuando:\n- Necesitas **comunicación bidireccional** constante (cliente ↔ servidor)\n- La latencia baja es crítica (juegos, chats en tiempo real)\n- Hay mucho volumen de mensajes\n- Puedes manejar la complejidad de reconexión y heartbeat\n\n## Resumen rápido:\n| Caso | Solución |\n|------|----------|\n| Datos del servidor cada minuto | **Polling** |\n| Feed de notificaciones servidor → cliente | **SSE** |\n| Chat, juego multijugador, colaboración en tiempo real | **WebSocket** |\n\n¿Hay un caso específico que estés considerando? Puedo ayudarte a elegir la mejor opción.",
+  "output_tokens": 500,
+  "thinking_tokens": 114,
+  "input_tokens": 3398,
+  "wall_s": 5.74,
+  "created_at": "2026-10-06T23:00:38.128104+00:00"
+}

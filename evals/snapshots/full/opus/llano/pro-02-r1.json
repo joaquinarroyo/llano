@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Usa `git revert`. Este comando crea un commit nuevo que deshace los cambios del commit original. No reescribe la historia, por eso el resto del equipo no tiene conflictos al hacer pull.\n\n**Peligro:** no uses `git reset` seguido de `git push --force` en `main`. Ese método reescribe la historia compartida. Los commits de otras personas pueden desaparecer y sus copias locales quedan desincronizadas.\n\n## Pasos\n\n1. Actualiza tu copia local de `main`:\n   ```bash\n   git switch main\n   git pull --ff-only\n   ```\n2. Busca el hash del commit que quieres revertir:\n   ```bash\n   git log --oneline\n   ```\n3. Revisa el contenido del commit antes de revertirlo:\n   ```bash\n   git show <hash>\n   ```\n4. Crea el commit de reversión:\n   ```bash\n   git revert <hash>\n   ```\n   Git abre el editor con un mensaje predeterminado. Agrega el motivo de la reversión.\n5. Si hay conflictos, corrígelos en los archivos. Después ejecuta:\n   ```bash\n   git add <archivos>\n   git revert --continue\n   ```\n   Para cancelar la reversión, ejecuta `git revert --abort`.\n6. Ejecuta los tests localmente.\n7. Sube el cambio:\n   ```bash\n   git push\n   ```\n\n## Casos especiales\n\n| Caso | Comando |\n|---|---|\n| El commit es un merge | `git revert -m 1 <hash>` (el `1` indica el padre que se conserva, normalmente `main`) |\n| Varios commits seguidos | `git revert --no-commit <más_antiguo>^..<más_reciente>` y después `git commit` |\n| `main` está protegida | Crea una rama, haz el revert ahí y abre un PR |\n\n**Atención:** si reviertes un merge y después quieres volver a integrar esa rama, Git no aplica otra vez los cambios. Primero tienes que revertir el commit de reversión.\n\nAvisa al equipo después del push. Así nadie construye trabajo nuevo sobre el cambio revertido.",
+  "output_tokens": 769,
+  "thinking_tokens": 40,
+  "input_tokens": 10066,
+  "wall_s": 8.76,
+  "created_at": "2026-10-06T23:15:57.937214+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta dice que ante reutilización se invalida el token vigente asociado, en lugar del token anterior como indica el commit (inferencia no respaldada); también afirma que los tests cubren la rotación, cosa que el commit no indica.",
+  "judge_model": "sonnet"
+}

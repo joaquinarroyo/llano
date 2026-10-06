@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A es más clara y está bien estructurada (problema, causa, cronología, impacto, acciones) e incluye todo, mientras que B inventa un dato no presente en el original (job programado a las 09:00) y deja el impacto de los 212 usuarios fuera de su sección de impacto.",
+  "judge_model": "sonnet"
+}

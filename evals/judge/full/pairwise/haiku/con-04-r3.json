@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da una definición clara, un ejemplo concreto y frases listas para decir a negocio (con números y qué decir/no decir), lo que responde directamente al «cómo la explico», mientras que B es más genérica y su tabla y ejemplos aportan menos para usar en una conversación real.",
+  "judge_model": "sonnet"
+}

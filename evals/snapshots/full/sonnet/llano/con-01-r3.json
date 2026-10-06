@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Una operación es idempotente si repetirla deja el sistema en el mismo estado que ejecutarla una vez. La respuesta puede cambiar, pero el efecto en el servidor no.\n\n## Ejemplos\n\n- `PUT /usuarios/7` con el mismo cuerpo deja al usuario igual, sin importar cuántas veces lo envíes.\n- `DELETE /usuarios/7` deja el mismo estado final. La segunda llamada puede devolver 404 en vez de 204.\n- `POST /pagos` no es idempotente. Cada llamada crea un cobro nuevo.\n\n## Por qué importa\n\nLas redes fallan. Si el cliente no recibe la respuesta, no sabe si el servidor procesó la solicitud. Si reintenta una operación no idempotente, puede cobrar dos veces o crear registros duplicados. Con una operación idempotente, el cliente reintenta sin riesgo.\n\n## Idempotencia en los métodos HTTP\n\n| Método | ¿Idempotente? |\n|---|---|\n| GET, HEAD, OPTIONS | Sí |\n| PUT, DELETE | Sí |\n| POST | No |\n| PATCH | No por defecto |\n\n## Cómo hacer idempotente un POST\n\nEl cliente envía un header `Idempotency-Key` con un valor único, por ejemplo un UUID. El servidor guarda la clave junto con la respuesta. Si la misma clave llega otra vez, el servidor devuelve la respuesta guardada y no ejecuta la operación.\n\n```\nCliente ──POST + clave K──▶ API ──¿existe K?──▶ Almacén de claves\n                             │                       │\n                             │◀── no: ejecuta y guarda respuesta\n                             │◀── sí: devuelve respuesta guardada\nCliente ◀──────── respuesta ─┘\n```\n\nAtención: guarda la clave y ejecuta la operación en la misma transacción. Si no, dos solicitudes simultáneas con la misma clave pueden ejecutarse las dos.\n\nTambién define cuánto tiempo guardas las claves. Stripe, por ejemplo, las conserva 24 horas.",
+  "output_tokens": 1429,
+  "thinking_tokens": 696,
+  "input_tokens": 10043,
+  "wall_s": 10.91,
+  "created_at": "2026-10-06T23:13:25.760168+00:00"
+}

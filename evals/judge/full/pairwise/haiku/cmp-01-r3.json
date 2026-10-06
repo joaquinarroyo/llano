@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da la recomendación y la justifica con detalle técnico concreto (ACID, integridad referencial con la cadena clientes → facturas → pagos → auditoría) y explica el tradeoff, mientras que B es más breve pero menos específico y con una frase ambigua sobre 'perder dinero'.",
+  "judge_model": "sonnet"
+}

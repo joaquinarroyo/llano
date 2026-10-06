@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A sigue un orden lineal claro (verificar versiones, exportar, crear, restaurar, verificar) con advertencias bien ubicadas y cubre lo esencial, incluido Docker, mientras que B mezcla opciones avanzadas (túnel SSH, formato directorio, restauración parcial) que dispersan la lectura y repite el mismo contenido en una sección de consideraciones al final.",
+  "judge_model": "sonnet"
+}

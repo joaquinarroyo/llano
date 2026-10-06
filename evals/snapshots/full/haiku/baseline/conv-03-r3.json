@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "# Índice Compuesto en SQL\n\nUn **índice compuesto** (o índice multi-columna) es un índice que se crea sobre dos o más columnas de una tabla simultáneamente. Sirve para optimizar consultas que filtran o buscan datos usando varias columnas juntas.\n\n## Ejemplo básico\n\n```sql\nCREATE INDEX idx_usuario_ciudad_edad ON usuarios(ciudad, edad);\n```\n\nEste índice indexa las columnas `ciudad` y `edad` juntas.\n\n## Cómo funciona\n\n- La base de datos ordena los datos **primero por la primera columna** (`ciudad`), y dentro de cada grupo, **luego por la segunda columna** (`edad`).\n- Es eficiente para consultas como:\n  ```sql\n  SELECT * FROM usuarios WHERE ciudad = 'Madrid' AND edad > 25;\n  ```\n\n## Características clave\n\n| Aspecto | Detalle |\n|---------|---------|\n| **Orden importa** | `(ciudad, edad)` ≠ `(edad, ciudad)` |\n| **Prefijo válido** | Sirve para `WHERE ciudad = ...` pero también para `WHERE ciudad = ... AND edad = ...` |\n| **Selectividad** | Pon primero la columna más restrictiva (menos valores únicos) |\n| **Overhead** | Ralentiza inserciones/actualizaciones porque el índice debe mantenerse |\n\n## Ventaja principal\n\nEvita que la BD busque en la tabla completa. Con un buen índice compuesto, la consulta es muy rápida incluso con millones de filas.\n\n¿Tienes alguna consulta específica que quieras optimizar?",
+      "output_tokens": 513,
+      "thinking_tokens": 95,
+      "input_tokens": 3388
+    },
+    {
+      "text": "**No, no es eficiente.**\n\nLos índices compuestos funcionan mejor cuando usas las columnas **en el orden que fueron definidas**. Como tu índice está `(cliente_id, fecha)`, está ordenado primero por `cliente_id` y luego por `fecha`.\n\n## Por qué no funciona\n\nCuando consultas solo por `fecha` sin `cliente_id`:\n\n```sql\nWHERE fecha > '2026-01-01'\n```\n\nLa base de datos no puede usar el índice para un búsqueda rápida (seek). En su lugar, hace un **scan completo del índice**, que es casi tan lento como leer toda la tabla.\n\nEs como buscar en un directorio ordenado por apellido cuando solo tienes el nombre de pila.\n\n## Soluciones\n\n1. **Si consultas frecuentemente por fecha sola**, crea un índice separado:\n   ```sql\n   CREATE INDEX idx_fecha ON tabla(fecha);\n   ```\n\n2. **Si necesitas ambas columnas**, depende de tu caso de uso:\n   - `(cliente_id, fecha)` → bueno para `WHERE cliente_id = X AND fecha > Y`\n   - `(fecha, cliente_id)` → bueno para `WHERE fecha > Y AND cliente_id = X`\n\nElige el orden según **qué consulta es más frecuente o restrictiva** en tu aplicación.",
+      "output_tokens": 534,
+      "thinking_tokens": 196,
+      "input_tokens": 3972
+    },
+    {
+      "text": "**Sí, es muy eficiente.**\n\nCon `(cliente_id, fecha)` esta consulta funciona perfectamente:\n\n```sql\nWHERE cliente_id = 7 ORDER BY fecha DESC LIMIT 10\n```\n\n## Por qué funciona bien\n\n1. **Filtra por `cliente_id`** → el índice busca rápidamente todos los registros donde `cliente_id = 7` (uso de la primera columna)\n2. **Ya están ordenados por `fecha`** → como el índice está ordenado por fecha en segundo lugar, los registros de ese cliente ya están en orden\n3. **LIMIT 10** → solo toma los 10 primeros, sin necesidad de ordenar nada\n\nEs casi el **caso de uso ideal** para este índice compuesto. La BD hace:\n- **Seek** en el índice por `cliente_id = 7`\n- Lee 10 registros (ya en orden DESC por fecha)\n- Listo\n\nSin el índice, tendría que leer toda la tabla, filtrar, ordenar y luego tomar 10 registros, mucho más lento.\n\n**Conclusión:** Tu índice `(cliente_id, fecha)` está bien diseñado para esta consulta. 👍",
+      "output_tokens": 532,
+      "thinking_tokens": 226,
+      "input_tokens": 4570
+    }
+  ],
+  "created_at": "2026-10-06T23:05:57.583069+00:00"
+}

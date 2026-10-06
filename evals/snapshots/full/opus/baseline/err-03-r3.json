@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## El problema: un bucle infinito\n\n```js\nuseEffect(() => {\n  setFilters({ ...filters, page: 1 })\n}, [filters])\n```\n\n1. El efecto se ejecuta porque `filters` cambió.\n2. `{ ...filters, page: 1 }` crea un **objeto nuevo** (nueva referencia), aunque `page` ya fuera `1`.\n3. React compara dependencias con `Object.is`, o sea por referencia. Como `filters` es otro objeto, considera que cambió.\n4. El efecto se vuelve a ejecutar y vuelve al paso 2.\n\nReact corta el ciclo tras unas decenas de iteraciones y muestra el warning. Mientras tanto la app re-renderiza sin parar, y por eso se cuelga.\n\n## Cómo arreglarlo\n\nSupongo que la intención es **volver a la página 1 cuando cambia algún filtro**. Hay varias opciones, de mejor a peor:\n\n### 1. Resetear `page` en el handler, sin `useEffect` (recomendado)\n\nUn efecto no es necesario aquí, porque el cambio lo provoca una acción del usuario:\n\n```js\nconst handleFilterChange = (name, value) => {\n  setFilters(prev => ({ ...prev, [name]: value, page: 1 }))\n}\n\nconst handlePageChange = (page) => {\n  setFilters(prev => ({ ...prev, page }))\n}\n```\n\nEs un solo render, sin bucle, y la lógica queda explícita. Encaja con la guía de React [\"You Might Not Need an Effect\"](https://react.dev/learn/you-might-not-need-an-effect).\n\n### 2. Separar `page` del resto de filtros\n\n```js\nconst [filters, setFilters] = useState({ search: '', category: '' })\nconst [page, setPage] = useState(1)\n\nuseEffect(() => {\n  setPage(1)\n}, [filters])\n```\n\nAsí funciona porque `setPage(1)` no modifica `filters`. Aun así provoca un render extra, así que la opción 1 sigue siendo más limpia.\n\n### 3. Si necesitas mantener el efecto, añade una guarda\n\n```js\nuseEffect(() => {\n  setFilters(prev => (prev.page === 1 ? prev : { ...prev, page: 1 }))\n}, [filters])\n```\n\nDevolver `prev` tal cual hace que React no actualice el estado y se rompe el bucle. Pero esto tiene un bug: cuando el usuario pase a la página 2, el efecto lo devolverá a la 1 de inmediato, porque `page` forma parte de `filters`. Por eso las opciones 1 o 2 son mejores.\n\n## Regla general\n\nSi un efecto llama a `setX` y `X` está en sus dependencias, casi siempre tienes un bucle. Revisa si ese cálculo puede hacerse en el handler del evento o derivarse directamente durante el render.\n\nSi me pasas el componente completo, te lo dejo refactorizado.",
+  "output_tokens": 1096,
+  "thinking_tokens": 89,
+  "input_tokens": 1680,
+  "wall_s": 11.23,
+  "created_at": "2026-10-06T23:23:02.132351+00:00"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza por confirmar que las dependencias son la causa. Revierte el lockfile en staging o en un canary y mide el p95 de nuevo. Si vuelve a unos 120 ms, bisecta los paquetes. Si no baja, la causa está en otro lado.\n\n1. **Revisa el diff del lockfile.** Ejecuta `git diff <commit-anterior> -- package-lock.json`. Busca saltos de versión mayor en el driver de base de datos, el cliente HTTP, el logger y la instrumentación de APM.\n2. **Verifica la versión de Node.** Una imagen base con tag flotante (`node:lts`) puede haber cambiado de versión sin que lo notes. Compara `node -v` entre producción y el despliegue anterior.\n3. **Mide dónde se va el tiempo.** Usa `node --cpu-prof` o `clinic flame` bajo carga. Mide también el retraso del event loop con `perf_hooks.monitorEventLoopDelay`. Si el retraso sube, el cuello de botella es CPU. Si no, es espera de I/O.\n4. **Si es I/O, revisa los pools y los clientes.** Un cambio en el tamaño por defecto del pool de la base de datos o en el keep-alive del cliente HTTP produce justo este síntoma.\n\nAtención: no actualices más paquetes mientras diagnosticas. Cada cambio extra dificulta aislar la causa.\n\nSi me muestras el diff del lockfile, lo reviso y te digo qué paquetes sospecho primero.",
+      "output_tokens": 1111,
+      "thinking_tokens": 582,
+      "input_tokens": 10091
+    },
+    {
+      "text": "La causa probable es el ORM. Cada request pasa de 14 a 42 round trips a la base de datos, porque cada query agrega un `BEGIN` y un `COMMIT`. Además, cada transacción mantiene la conexión ocupada más tiempo, y eso puede saturar el pool. Es una inferencia a partir de tus datos. No la verifiqué.\n\n1. **Fija la versión anterior del ORM.** Usa la versión exacta en `package.json`, sin `^` ni `~`. Despliega a staging y mide el p95. Esta es la corrección más rápida y la de menor riesgo.\n2. **Busca la opción en el changelog del ORM.** Muchos ORM permiten desactivar la transacción implícita por query. Si existe, desactívala y actualiza de nuevo.\n3. **Deja `pg` en 8.12.** Nada indica que cause el problema. Si el p95 no baja con el paso 1, entonces revierte también `pg`.\n4. **Agrupa las queries a propósito.** Si necesitas atomicidad, abre una sola transacción por request. Así pagas un `BEGIN` y un `COMMIT` en vez de 14.\n\nAtención: si el código depende de que cada query sea atómica por sí sola, el cambio de comportamiento del ORM puede afectar la consistencia. Revisa ese caso antes de desactivar la opción.\n\nDime qué ORM usas y su versión nueva. Con eso te indico la opción exacta para desactivar la transacción implícita.",
+      "output_tokens": 844,
+      "thinking_tokens": 328,
+      "input_tokens": 11323
+    },
+    {
+      "text": "Completa los datos entre `<>`, porque no sé qué ORM usas ni sus versiones.\n\n```markdown\nfix(deps): fijar <orm> en <versión anterior> para corregir la latencia\n\n## Problema\n\nDesde el 2026-10-05 el p95 de la API pasó de 120 ms a 900 ms. No hubo cambios de código. Solo se actualizaron dependencias.\n\n## Causa\n\n<orm> <versión nueva> abre una transacción por cada query. Cada request hace 14 queries, así que agrega 14 `BEGIN` y 14 `COMMIT`. El APM mostró estas queries extra. Esto sube los round trips por request de 14 a 42.\n\n## Cambio\n\n- Fija <orm> en `<versión anterior>` en `package.json`, sin `^` ni `~`.\n- Mantiene `pg` en 8.12. No hay indicio de que afecte la latencia.\n\n## Verificación\n\nCon este cambio en staging, el p95 volvió a 130 ms. El valor antes de la actualización era 120 ms.\n\n## Pendiente\n\nActualizar <orm> de nuevo cuando exista una opción para desactivar la transacción implícita por query. Issue: #<número>.\n```\n\nAtención: la sección \"Verificación\" dice staging. Si mediste el 130 ms en producción, cámbiala para que el PR sea exacto.",
+      "output_tokens": 804,
+      "thinking_tokens": 340,
+      "input_tokens": 12241
+    }
+  ],
+  "created_at": "2026-10-06T23:08:26.427375+00:00"
+}

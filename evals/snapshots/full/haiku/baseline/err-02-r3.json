@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Este es el clásico problema de **precisión en punto flotante IEEE 754**. El número 0.1 no se puede representar exactamente en binario, causando errores de redondeo microscópicos que se acumulan.\n\n```python\n>>> 100.0 * (1 - 0.1)\n89.99999999999999  # No es exactamente 90.0\n```\n\nAquí están las soluciones más comunes:\n\n**Opción 1: Usar `pytest.approx()`** (más simple para tests)\n```python\ndef test_total_with_discount():\n    total = 100.0 * (1 - 0.1)\n    assert total == pytest.approx(90.0)\n```\n\n**Opción 2: Usar `decimal.Decimal`** (para cálculos financieros)\n```python\nfrom decimal import Decimal\n\ndef calculate_total(price, discount):\n    price = Decimal(str(price))\n    discount = Decimal(str(discount))\n    return float(price * (1 - discount))\n\ndef test_total_with_discount():\n    total = calculate_total(100.0, 0.1)\n    assert total == 90.0  # Funciona exacto\n```\n\n**Opción 3: Redondear el resultado**\n```python\ntotal = round(100.0 * (1 - 0.1), 2)\nassert total == 90.0\n```\n\n¿Cuál prefieres? Para finanzas, `Decimal` es lo correcto. Para tests rápidos, `pytest.approx()` es lo más simple. Dame acceso al código y lo arreglo.",
+  "output_tokens": 798,
+  "thinking_tokens": 383,
+  "input_tokens": 3472,
+  "wall_s": 6.4,
+  "created_at": "2026-10-06T23:04:19.029852+00:00"
+}

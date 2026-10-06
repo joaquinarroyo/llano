@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B pone el impacto primero, separa la causa en su propia sección y mantiene todos los datos técnicos (incluye 'de Elasticsearch' en la alerta y los valores 300 ms→4 s en la cronología), así que se entiende mejor de una lectura.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# CORS (Cross-Origin Resource Sharing)\n\nCORS es un mecanismo de seguridad que los navegadores implementan para proteger a los usuarios. **Por defecto, el navegador bloquea peticiones HTTP que cruzan entre diferentes orígenes** (esquema, dominio o puerto).\n\nEn tu caso:\n- **Origen del navegador**: `http://localhost:3000` (tu frontend)\n- **Origen de la API**: `http://localhost:8000` (tu backend)\n\nAunque ambos están en tu máquina local, tienen **puertos diferentes**, por lo que se consideran orígenes distintos. El navegador bloquea la petición por seguridad.\n\n## Por qué existe CORS\n\nSin CORS, un sitio malicioso podría hacer peticiones a tu banco, redes sociales, etc. usando tus cookies de sesión, sin tu consentimiento.\n\n## Cómo resolver\n\nEn tu API (backend), necesitas permitir peticiones desde `localhost:3000` agregando headers CORS. Ejemplos según tu stack:\n\n**Express (Node.js)**\n```javascript\nconst cors = require('cors');\napp.use(cors({ origin: 'http://localhost:3000' }));\n```\n\n**Python/Flask**\n```python\nfrom flask_cors import CORS\nCORS(app, origins=['http://localhost:3000'])\n```\n\n**Python/FastAPI**\n```python\nfrom fastapi.middleware.cors import CORSMiddleware\napp.add_middleware(CORSMiddleware, allow_origins=['http://localhost:3000'])\n```\n\nDespués de esto, el navegador permitirá las peticiones. En producción, cambiarías `localhost:3000` por el dominio real de tu frontend.\n\n¿Qué tecnología usa tu API? Puedo ayudarte con la configuración específica.",
+  "output_tokens": 562,
+  "thinking_tokens": 119,
+  "input_tokens": 3410,
+  "wall_s": 6.14,
+  "created_at": "2026-10-06T22:59:43.382297+00:00"
+}

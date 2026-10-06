@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la causa (ETIMEDOUT vs ECONNREFUSED) y da una lista ordenada y concisa de pasos con el comando clave, mientras que A, aunque completa, es más larga y con más estructura anidada que dificulta una sola lectura.",
+  "judge_model": "sonnet"
+}

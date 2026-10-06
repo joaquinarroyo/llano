@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# `git rebase` vs `git merge`\n\nAmbos integran cambios de una rama en otra, pero lo hacen de forma distinta y producen historiales diferentes.\n\n## Qué hace `git rebase`\n\nToma los commits de tu rama que no están en la rama destino y **los vuelve a aplicar uno por uno encima** de la punta de esa rama. Cada commit se recrea con un hash nuevo, porque cambia su padre.\n\n```\nAntes:\n      A---B---C  feature\n     /\nD---E---F---G    main\n\nDespués de `git rebase main` (estando en feature):\n              A'--B'--C'  feature\n             /\nD---E---F---G             main\n```\n\nEl resultado es un historial lineal, como si hubieras empezado a trabajar desde `G`.\n\n## Qué hace `git merge`\n\nCrea un **nuevo commit de merge** con dos padres, que une ambas líneas de historia sin modificar los commits existentes.\n\n```\n      A---B---C\n     /         \\\nD---E---F---G---M  main\n```\n\n(Si main no ha avanzado, Git puede hacer un *fast-forward* y no crea commit de merge.)\n\n## Diferencias clave\n\n| | `merge` | `rebase` |\n|---|---|---|\n| Historial | Conserva la historia real, con bifurcaciones | Lineal, reescrita |\n| Commits existentes | No se alteran | Se recrean (nuevos hashes) |\n| Commit extra | Sí (commit de merge) | No |\n| Conflictos | Se resuelven una vez | Pueden aparecer en cada commit reaplicado |\n| Trazabilidad | Se ve cuándo y cómo se integró | Se pierde el contexto de la bifurcación |\n| Seguridad | Muy segura | Reescribe historia: más riesgo |\n\n## Cuándo usar cada uno\n\n- **`rebase`**: para actualizar tu rama local de trabajo con los últimos cambios de `main` antes de abrir un PR, o para limpiar commits (`git rebase -i`: squash, reordenar, editar mensajes).\n- **`merge`**: para integrar ramas ya compartidas, o cuando quieres preservar el registro exacto de cómo se unió el trabajo.\n\n## Regla de oro\n\n**No hagas rebase de commits que ya has publicado y que otras personas pueden haber usado.** Al reescribir la historia, sus copias divergen de las tuyas y obligas a hacer `git push --force`, lo que causa conflictos y puede perder trabajo ajeno. Si tienes que forzar el push en tu propia rama, usa `--force-with-lease`, que es más seguro.\n\n## Comandos básicos\n\n```bash\n# Merge\ngit switch main\ngit merge feature\n\n# Rebase\ngit switch feature\ngit rebase main\n\n# Si hay conflictos en un rebase:\ngit add <archivo>\ngit rebase --continue    # o: git rebase --abort\n```",
+  "output_tokens": 984,
+  "thinking_tokens": 0,
+  "input_tokens": 1571,
+  "wall_s": 8.32,
+  "created_at": "2026-10-06T23:06:20.279598+00:00"
+}

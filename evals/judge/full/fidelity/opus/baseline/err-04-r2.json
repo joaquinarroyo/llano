@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "No menciona explícitamente el rango 2.4.0–2.5.0 (solo dice 'versiones más nuevas') ni que el fallo ocurre en el paso RUN pip install; además afirma erróneamente que cu118 está descontinuado en las versiones nuevas, cuando torch 2.5.x aún publica builds cu118.",
+  "judge_model": "sonnet"
+}

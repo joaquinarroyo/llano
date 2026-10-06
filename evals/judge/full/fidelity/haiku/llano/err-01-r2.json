@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Identifica el timeout de red hacia db.internal:5432 y sugiere revisar firewall/BD, pero no menciona el exit code 1 por fallo del pool ni la versión v2.4.1; además, listen_addresses está en postgresql.conf, no en el log.",
+  "judge_model": "sonnet"
+}

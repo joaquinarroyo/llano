@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más claro y directo en los tres turnos: usa una tabla comparativa, código completo (incluye la función de revocación y la vista de logout con TokenBlacklistView) y una lista numerada de cuidados fácil de seguir, mientras que B es más largo, referencia una LogoutView sin definirla y añade detalles menos esenciales.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica el concepto con una tabla clara, da pasos concretos y un mensaje de ejemplo listo para usar, además de advertir que los números deben medirse; A es completa pero más dispersa, con analogías extra que añaden poco.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Un índice compuesto es un índice que usa dos o más columnas juntas.\n\nCuando buscas datos por varias columnas a la vez, un índice compuesto es más rápido que buscar en cada columna por separado. La base de datos consulta el índice una sola vez.\n\n**Ejemplo:**\n\n```sql\nCREATE INDEX idx_usuario_pais_edad \nON usuarios (pais, edad);\n```\n\nEsta consulta usa el índice:\n```sql\nSELECT * FROM usuarios \nWHERE pais = 'España' AND edad > 25;\n```\n\nEl orden importa. Si defines el índice como `(pais, edad)`, una búsqueda por `pais` usa el índice. Una búsqueda por `edad` sola no lo usa.\n\n**Cuándo usar un índice compuesto:**\n\n- Tus consultas filtran siempre por las mismas columnas.\n- Buscas por varias columnas a la vez en la cláusula `WHERE`.\n- La primera columna del índice es la más restrictiva (elimina más filas).\n\nUn índice compuesto guarda espacio respecto a dos índices simples, pero hace más lento cada cambio en esas columnas (INSERT, UPDATE, DELETE). Úsalo solo si lo necesitas.",
+      "output_tokens": 687,
+      "thinking_tokens": 366,
+      "input_tokens": 9894
+    },
+    {
+      "text": "No. El índice no sirve para ese filtro.\n\nUn índice compuesto se usa de izquierda a derecha. Como el tuyo es `(cliente_id, fecha)`, la base de datos espera encontrar `cliente_id` primero. Si solo buscas por `fecha`, el índice no aplica.\n\n**Sí usa el índice:**\n```sql\nWHERE cliente_id = 5 AND fecha > '2026-01-01'\n```\n\n**No usa el índice:**\n```sql\nWHERE fecha > '2026-01-01'\n```\n\nSi necesitas búsquedas frecuentes por fecha sola, crea un índice simple en `fecha`:\n\n```sql\nCREATE INDEX idx_fecha ON tabla (fecha);\n```\n\nEntonces la base de datos tendrá dos índices: uno para búsquedas por cliente, otro para búsquedas por fecha.",
+      "output_tokens": 509,
+      "thinking_tokens": 289,
+      "input_tokens": 10652
+    },
+    {
+      "text": "Sí. El índice `(cliente_id, fecha)` es perfecto para esa consulta.\n\nLa base de datos:\n1. Usa `cliente_id = 7` para filtrar en el índice.\n2. Los resultados ya vienen ordenados por `fecha` (porque el índice los almacena así).\n3. Toma los 10 primeros sin necesidad de ordenar.\n\nEs un caso óptimo. No hay paso adicional de ordenamiento. La consulta es rápida.\n\nSi invertieras el índice a `(fecha, cliente_id)`, tendrías que ordenar después del filtro. Eso es más lento.",
+      "output_tokens": 388,
+      "thinking_tokens": 223,
+      "input_tokens": 11225
+    }
+  ],
+  "created_at": "2026-10-06T23:03:47.268111+00:00"
+}

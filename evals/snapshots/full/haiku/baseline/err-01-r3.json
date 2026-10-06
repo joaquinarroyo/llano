@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es **conectividad de red a la base de datos**, no configuración. El timeout de 30 segundos indica que:\n\n- ✅ La aplicación inicia correctamente\n- ✅ El DNS resuelve `db.internal` a `10.0.3.17`\n- ❌ No puede alcanzar el puerto 5432\n\n**Revisa en este orden:**\n\n1. **¿Está corriendo Postgres?** Verifica que el contenedor/servidor de BD esté up\n   ```bash\n   # Si es Docker/K8s, revisa logs del servicio postgres\n   ```\n\n2. **¿Hay conectividad de red?** Prueba desde el contenedor de la app:\n   ```bash\n   nc -zv db.internal 5432\n   # o: telnet db.internal 5432\n   ```\n\n3. **¿Firewall/Security Groups?** Si usas cloud (AWS, GCP, Azure), revisa que:\n   - El puerto 5432 esté abierto entre redes\n   - El security group del BD permita conexiones desde la app\n   - Las network policies (si usas K8s) no bloquean\n\n4. **¿Mismo cluster/VPC?** Confirma que app y BD están en la misma red o que pueden comunicarse\n\nEl más probable: el servicio de Postgres está down o inaccesible. Comprueba ahí primero.",
+  "output_tokens": 864,
+  "thinking_tokens": 513,
+  "input_tokens": 3542,
+  "wall_s": 9.3,
+  "created_at": "2026-10-06T23:04:17.560641+00:00"
+}

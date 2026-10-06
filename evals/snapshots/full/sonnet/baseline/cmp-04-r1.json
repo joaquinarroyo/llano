@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Celery vs RQ en Django\n\n**Recomendación:** si tus necesidades son simples (enviar emails, procesar archivos, llamar APIs externas) y ya usas Redis, empieza con **RQ** (con `django-rq`). Elige **Celery** si sabes que necesitarás tareas periódicas complejas, workflows o enrutamiento avanzado.\n\n## Diferencias principales\n\n| Aspecto | Celery | RQ |\n|---|---|---|\n| **Complejidad** | Alta: muchas opciones y configuración | Baja: API pequeña, fácil de entender |\n| **Brokers** | RabbitMQ, Redis, SQS, etc. | Solo Redis |\n| **Tareas periódicas** | Celery Beat (integrado, con `django-celery-beat` para gestionarlas desde el admin) | `rq-scheduler` o `django-rq` con scheduler (más básico) |\n| **Workflows** | Chains, groups, chords | Dependencias simples (`depends_on`) |\n| **Reintentos** | Muy configurables (backoff, `autoretry_for`, límites) | Soportados (`Retry`), menos flexibles |\n| **Enrutamiento** | Múltiples colas, routing, prioridades por tarea | Colas con nombre; prioridad por orden de colas |\n| **Concurrencia** | Prefork, threads, gevent/eventlet | Un proceso por job (fork); escalas con más workers |\n| **Rate limiting** | Integrado por tarea | No integrado |\n| **Monitorización** | Flower, eventos | `rq-dashboard`, o el admin de `django-rq` |\n| **Resultados** | Backends configurables | Se guardan en Redis con TTL |\n| **Windows** | Problemático | No funciona nativamente (usa `fork`) |\n\n## Cuándo elegir cada uno\n\n**RQ:**\n- Equipo pequeño, proyecto que quieres mantener sencillo.\n- Ya tienes Redis y no quieres añadir RabbitMQ.\n- Depurar es más fácil: menos \"magia\" y menos piezas.\n\n**Celery:**\n- Necesitas cron-like schedules gestionados desde el admin.\n- Pipelines de tareas, rate limits, prioridades finas, múltiples brokers.\n- Volumen alto y necesidad de ajustar concurrencia (gevent para I/O masivo).\n- Hay mucha documentación, ejemplos y soporte de la comunidad.\n\n## Consideraciones prácticas\n\n- **Costo de migrar:** ambos se usan como \"función + encolar\", así que cambiar después no es traumático si mantienes tus tareas como funciones simples y las encolas desde un único punto.\n- **Transacciones:** en ambos, encola con `transaction.on_commit(...)` para que el worker no ejecute la tarea antes de que los datos estén confirmados en la base de datos.\n- **Idempotencia:** diseña las tareas para que puedan ejecutarse más de una vez sin efectos duplicados; ambos pueden reintentar o entregar más de una vez.\n- **Fiabilidad de Redis:** como broker, Redis puede perder tareas si se cae sin persistencia bien configurada (AOF). RabbitMQ con Celery es más robusto en ese aspecto.\n\nSi me cuentas qué tipo de tareas tienes, el volumen aproximado y si necesitas tareas periódicas, te puedo afinar la recomendación o ayudarte a configurar el que elijas.",
+  "output_tokens": 1247,
+  "thinking_tokens": 46,
+  "input_tokens": 1588,
+  "wall_s": 10.52,
+  "created_at": "2026-10-06T23:07:40.541364+00:00"
+}

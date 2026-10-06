@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da una lista numerada única y lineal, con matices claros (revocar antes si hay abuso, verificar con 401/403, advertencia sobre force push) y sin ambigüedad en el orden, mientras que B tiene una contradicción menor entre el paso 1 (revocar) y el 2 (desplegar), lo que dificulta entender el orden en una sola lectura.",
+  "judge_model": "sonnet"
+}

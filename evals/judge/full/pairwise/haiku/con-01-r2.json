@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A está mejor estructurada y clasifica correctamente los métodos HTTP (GET, PUT, DELETE idempotentes; POST no) con ejemplo concreto de Idempotency-Key, mientras que B recomienda erróneamente PATCH como idempotente y tiene un typo ('imperfecibles'), aunque A también tiene un typo menor.",
+  "judge_model": "sonnet"
+}

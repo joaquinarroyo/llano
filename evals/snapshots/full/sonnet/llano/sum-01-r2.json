@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Aquí tienes una descripción para el PR. La escribí solo con los mensajes de los commits y el resumen de archivos. No leí el código.\n\n```markdown\n## Resumen\n\nAgrega rotación de refresh tokens. Cada vez que se usa un refresh token, el servicio emite uno nuevo. Si alguien reutiliza un token viejo, el servicio lo invalida.\n\n## Cambios\n\n- `src/auth/tokens.ts`: lógica de rotación e invalidación del token viejo al detectar reutilización.\n- `src/auth/middleware.ts`: ajustes en el middleware para usar la rotación.\n- `tests/auth/tokens.test.ts`: tests nuevos para la detección de reutilización.\n- `package.json`: `jsonwebtoken` pasa de 9.0.0 a 9.0.2.\n\n## Pruebas\n\nLos tests nuevos cubren la reutilización de tokens.\n```\n\nRevisa estos puntos antes de publicar:\n\n- **Middleware:** no sé qué cambió en `middleware.ts` (12 líneas). Reemplaza esa línea con el cambio real.\n- **Reutilización:** no sé si el servicio invalida solo el token reutilizado o toda la familia de tokens. Si lo sabes, agrégalo, porque es lo que más va a revisar quien haga el review.\n- **Cambio de comportamiento:** si los clientes existentes deben guardar el nuevo refresh token en cada uso, agrega una nota de compatibilidad.",
+  "output_tokens": 900,
+  "thinking_tokens": 387,
+  "input_tokens": 10265,
+  "wall_s": 8.05,
+  "created_at": "2026-10-06T23:09:44.806920+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Estos son los pasos completos:\n\n## 1. Comprobar si ya tienes claves\n\n```bash\nls -al ~/.ssh\n```\n\nSi ves `id_ed25519` y `id_ed25519.pub`, ya tienes una clave y puedes saltar al paso 3, o crear una nueva.\n\n## 2. Generar una clave nueva\n\n```bash\nssh-keygen -t ed25519 -C \"tu_email@ejemplo.com\"\n```\n\n- Pulsa Enter para aceptar la ruta por defecto (`~/.ssh/id_ed25519`).\n- Elige una **passphrase**. Es recomendable, y el Llavero de macOS la recordará por ti.\n\n## 3. Configurar el agente SSH y el Llavero\n\nInicia el agente:\n\n```bash\neval \"$(ssh-agent -s)\"\n```\n\nCrea o edita `~/.ssh/config`:\n\n```bash\ntouch ~/.ssh/config\nopen -e ~/.ssh/config\n```\n\nAñade esto:\n\n```\nHost github.com\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519\n```\n\nAñade la clave al agente y guarda la passphrase en el Llavero:\n\n```bash\nssh-add --apple-use-keychain ~/.ssh/id_ed25519\n```\n\n## 4. Añadir la clave pública a GitHub\n\nCopia la clave **pública** al portapapeles:\n\n```bash\npbcopy < ~/.ssh/id_ed25519.pub\n```\n\nDespués, en GitHub:\n1. Ve a **Settings → SSH and GPG keys → New SSH key**.\n2. Ponle un título, por ejemplo \"MacBook personal\".\n3. Deja el tipo en **Authentication Key**.\n4. Pega la clave y guarda.\n\n⚠️ Nunca compartas el archivo sin `.pub`, porque es tu clave privada.\n\n## 5. Probar la conexión\n\n```bash\nssh -T git@github.com\n```\n\nLa primera vez te preguntará si confías en el host. Escribe `yes`. Si todo va bien verás:\n\n```\nHi tu-usuario! You've successfully authenticated, but GitHub does not provide shell access.\n```\n\n## 6. Usar SSH en tus repos\n\nAl clonar, usa la URL SSH:\n\n```bash\ngit clone git@github.com:usuario/repo.git\n```\n\nPara cambiar un repo existente que usa HTTPS:\n\n```bash\ngit remote set-url origin git@github.com:usuario/repo.git\n```\n\n---\n\n**Si algo falla:** `ssh -vT git@github.com` muestra el detalle de qué clave se intenta usar y dónde falla. Los errores más comunes son `IdentityFile` con una ruta incorrecta o haber pegado en GitHub la clave privada en lugar de la `.pub`.",
+  "output_tokens": 1021,
+  "thinking_tokens": 50,
+  "input_tokens": 1563,
+  "wall_s": 9.85,
+  "created_at": "2026-10-06T23:15:56.471010+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Revertir un commit ya pusheado a `main`\n\n**Usa `git revert`, no `git reset` ni `push --force`.** Revert crea un commit nuevo que deshace los cambios, así que no reescribe el historial y no rompe los clones del resto del equipo.\n\n## Pasos\n\n1. **Actualiza tu copia local**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -20\n   ```\n\n3. **Revierte**\n   ```bash\n   git revert <hash>\n   ```\n   Se abre el editor con el mensaje del commit. Conviene añadir el motivo del revert.\n\n4. **Verifica antes de subir**\n   ```bash\n   git show HEAD        # revisa que el diff sea el inverso del original\n   ```\n   Ejecuta los tests o el build si aplica.\n\n5. **Sube**\n   ```bash\n   git push origin main\n   ```\n   Si `main` está protegida, haz el revert en una rama (`git switch -c revert-<hash>`) y abre un PR.\n\n6. **Avisa al equipo** para que hagan `git pull` y no reintroduzcan el cambio por accidente.\n\n## Casos especiales\n\n- **Es un merge commit:** hay que indicar qué padre conservar:\n  ```bash\n  git revert -m 1 <hash>\n  ```\n  `-m 1` mantiene la rama principal (`main`) como línea base.\n- **Varios commits seguidos:**\n  ```bash\n  git revert <viejo>^..<nuevo>\n  ```\n  O usa `--no-commit` (`-n`) para agruparlos en un solo commit.\n- **Conflictos:** resuélvelos y continúa con `git revert --continue`. Para cancelar: `git revert --abort`.\n- **Quieres volver a aplicar el cambio más adelante:** haz `git revert` del commit de revert, o cherry-pick del original en una rama nueva. Un simple merge de la rama original no lo reaplicará, porque Git considera ese cambio ya incorporado.\n\n## Qué evitar\n\n- `git reset --hard` + `git push --force` en `main`: reescribe el historial compartido y obliga a todos a recuperar sus copias. Solo es defendible en emergencias, como un secreto filtrado, y aun así debe coordinarse con el equipo. Además, si lo que se filtró es una credencial, hay que rotarla igualmente, porque el historial antiguo puede seguir en clones y forks.\n\nSi me dices el hash o si es un merge commit, te preparo el comando exacto.",
+  "output_tokens": 937,
+  "thinking_tokens": 53,
+  "input_tokens": 1587,
+  "wall_s": 8.13,
+  "created_at": "2026-10-06T23:09:56.866306+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      false,
+      false
+    ],
+    [
+      true,
+      true,
+      false,
+      true
+    ],
+    [
+      true,
+      true,
+      false,
+      false
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 3,
+  "notes": "Los turnos 2 y 3 omiten los tests de integración para login, y el turno 3 omite la revisión posterior. Además hay afirmaciones técnicamente erróneas: borrar tests que no fallan hace 6 meses, que mover carpetas aísle dominios y evite cargar la app, y que un monolito permita deployar solo facturación.",
+  "judge_model": "sonnet"
+}

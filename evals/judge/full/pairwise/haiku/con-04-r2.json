@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica el concepto con una analogía clara, una tabla comparativa, ejemplos concretos con costos cuantificados y una frase lista para decir a negocio, mientras que B es más genérica y sus cifras y ejemplos son vagos.",
+  "judge_model": "sonnet"
+}

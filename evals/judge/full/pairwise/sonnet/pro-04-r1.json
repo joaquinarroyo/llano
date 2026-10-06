@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B presenta un orden claro y consistente (revocar, desplegar, revisar uso, limpiar, prevenir, documentar) e incluye detalles útiles como BFG, avisar a quienes tienen clones y documentar el incidente, mientras que A tiene una inconsistencia (dice que el paso 3 cierra el problema pero también sugiere revocar primero, y su orden de pasos confunde) y omite la documentación y la notificación.",
+  "judge_model": "sonnet"
+}

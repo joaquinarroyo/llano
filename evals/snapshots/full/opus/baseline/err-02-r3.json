@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Por qué falla\n\nLos `float` en Python (IEEE 754) se guardan en binario, y valores como `0.1` no tienen representación binaria exacta; se almacenan como `0.1000000000000000055…`. Cada operación aritmética acumula pequeños errores de redondeo, y por eso obtienes `89.99999999999999` en lugar de `90.0`. Comparar floats con `==` es frágil por este motivo.\n\nUn detalle: con los literales exactos `100.0 * (1 - 0.1)`, Python devuelve `90.0`. Si obtienes `89.99999999999999`, probablemente alguno de los valores ya viene con error de un cálculo previo (por ejemplo, un descuento calculado como `0.3 - 0.2`, o un precio que viene de una suma). Si me indicas dónde están `tests/test_invoice.py` y el código de la factura, lo reviso.\n\n## Cómo arreglarlo\n\n**Opción 1: comparar con tolerancia en el test.** Es lo mínimo si solo falla el test:\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert calculate_total(100.0, 0.1) == pytest.approx(90.0)\n```\n\n**Opción 2: usar `Decimal` para dinero.** Es lo recomendable en facturación, porque los errores de redondeo en importes monetarios son un bug real y no solo un problema del test:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef calculate_total(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (1 - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n\n# Test\nassert calculate_total(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` a partir de strings (`Decimal(\"0.1\")`), no de floats. `Decimal(0.1)` hereda el error de representación.\n\n**Opción 3: redondear a céntimos** (`round(total, 2)`). Es rápido, pero sigue usando floats por debajo y `round` aplica redondeo bancario, así que no lo recomiendo para facturas.\n\n**Mi recomendación:** usa `Decimal` en el código de facturación. Si no puedes cambiarlo ahora, usa `pytest.approx` en el test como solución temporal.",
+  "output_tokens": 1535,
+  "thinking_tokens": 716,
+  "input_tokens": 1652,
+  "wall_s": 16.15,
+  "created_at": "2026-10-06T23:22:56.306467+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica el salto de latencia con cuentas claras (28 round-trips × ~25 ms ≈ 700 ms) y su mensaje de PR es más completo, mientras que A en el turno 2 dice que 28 viajes de 28 ms no explican 780 ms cuando sí lo hacen, lo que confunde.",
+  "judge_model": "sonnet"
+}

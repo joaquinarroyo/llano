@@ -1,0 +1,19 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre SES, MJML, reintentos y la eliminación de /v1/notify, pero omite deliberadamente los 132 tests; la frase sobre que los clientes recibirán un error es una suposición señalada como tal, no una afirmación incorrecta evidente.",
+  "judge_model": "sonnet"
+}

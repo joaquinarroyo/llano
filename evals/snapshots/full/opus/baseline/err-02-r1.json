@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Por qué falla\n\nEs un problema de **representación en coma flotante binaria** (IEEE 754), no un bug de tu lógica.\n\n`0.1` no se puede representar exactamente en binario, igual que `1/3` no se puede escribir exactamente en decimal. Python guarda el valor más cercano posible, que es ligeramente distinto:\n\n```python\n>>> 1 - 0.1\n0.9\n>>> f\"{1 - 0.1:.20f}\"\n'0.90000000000000002220'   # en realidad, ni siquiera 0.9 es exacto\n>>> 100.0 * (1 - 0.1)\n89.99999999999999\n```\n\nEse pequeño error se arrastra en la multiplicación y el `==` exacto contra `90.0` falla.\n\n## Cómo arreglarlo\n\nDepende de qué quieras corregir:\n\n### 1. Si solo el test es demasiado estricto → `pytest.approx`\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert calculate_total(100.0, 0.1) == pytest.approx(90.0)\n```\n\nEs la forma idiomática de comparar floats en pytest. Útil si los cálculos son científicos o aproximados por naturaleza.\n\n### 2. Si son importes de dinero (lo más probable en una factura) → `Decimal`\n\nPara facturación, los errores de redondeo acaban apareciendo en totales, impuestos y céntimos descuadrados. Lo correcto es usar `decimal.Decimal`:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef calculate_total(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (1 - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n```\n\n```python\ndef test_total_with_discount():\n    assert calculate_total(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\nOjo: crea los `Decimal` desde **strings** (`Decimal(\"0.1\")`), no desde floats (`Decimal(0.1)` hereda el error).\n\n### Recomendación\n\nComo es un módulo de facturas, usaría **`Decimal`** en el código. Con `pytest.approx` el test pasaría, pero el problema de precisión seguiría en producción. Alternativa válida: trabajar en céntimos con enteros (`int`).\n\nSi me indicas dónde está la función en el proyecto, puedo hacer el cambio y ajustar los tests.",
+  "output_tokens": 923,
+  "thinking_tokens": 66,
+  "input_tokens": 1652,
+  "wall_s": 10.07,
+  "created_at": "2026-10-06T23:15:18.952849+00:00"
+}

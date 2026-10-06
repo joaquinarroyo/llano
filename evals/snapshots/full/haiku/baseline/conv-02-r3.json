@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "**Sesiones** es lo recomendado para aplicaciones web Django tradicionales: son más simples, Django las maneja bien, y ofrecen mejor seguridad contra CSRF y XSS. **JWT** es mejor si necesitas una API stateless o múltiples dominios (móvil + web), pero agrega complejidad y requiere manejo cuidadoso del refresh.\n\n¿Es una app monolítica (servidor + frontend juntos) o necesitas separar frontend/API?",
+      "output_tokens": 247,
+      "thinking_tokens": 126,
+      "input_tokens": 3398
+    },
+    {
+      "text": "Entonces **JWT es la mejor opción**. Las sesiones basadas en cookies no funcionan bien con React Native (el manejo de cookies es diferente), mientras que JWT funciona perfectamente en ambas plataformas: guardas el token en AsyncStorage en mobile y en localStorage/cookies en web.\n\nEl tradeoff: JWT requiere más cuidado con refresh tokens, invalidación de tokens, y manejo de expiración, pero vale la pena por la simplicidad de tener una única API para ambos clientes.\n\n¿Quieres que te ayude a implementar autenticación con JWT en Django?",
+      "output_tokens": 321,
+      "thinking_tokens": 175,
+      "input_tokens": 3704
+    },
+    {
+      "text": "**Antes de continuar**: tener dos mecanismos de autenticación distintos es más complicado de mantener (lógica duplicada, bugs en sincronización). ¿Está seguro? Normalmente es mejor JWT para ambos o sesiones para ambos.\n\nSi decides hacerlo así, usa **Django REST Framework SimpleJWT** para tokens. Los cuidados principales:\n- **Refresh tokens**: implementa un endpoint para renovar el access token expirado\n- **Revocación**: los tokens no se pueden \"cancelar\" fácilmente (necesitas blacklist o versiones)\n- **CORS**: configura correctamente para que mobile acceda desde otro origen\n- **HttpOnly cookies**: en web, guarda el token en una cookie HttpOnly para evitar XSS\n\n¿Quieres que te ayude con la implementación o prefieres reconsiderar el enfoque?",
+      "output_tokens": 402,
+      "thinking_tokens": 185,
+      "input_tokens": 4100
+    }
+  ],
+  "created_at": "2026-10-06T23:05:40.957860+00:00"
+}

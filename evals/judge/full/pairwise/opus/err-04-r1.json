@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B es más directa y precisa: explica las dos causas sin repetirse, da la opción B con versiones concretas (cu124, torch 2.6.0) y reúne la nota sobre CUDA/GPU y CPU en un solo lugar, mientras que A repite avisos y tiene la recomendación algo confusa.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Un índice B-tree es un árbol ordenado de páginas de 8 kB. Permite encontrar una fila leyendo pocas páginas en lugar de toda la tabla.\n\n## Estructura\n\nPostgres usa una variante llamada B+tree. La raíz y los nodos internos solo guían la búsqueda. Las hojas guardan cada clave junto con su `ctid`, que es la posición de la fila en la tabla. Las hojas están enlazadas entre sí en orden.\n\n```\n                  [ raíz:  100 | 500 ]\n                  /         |         \\\n         [10|40|70]   [150|300|450]   [600|800]     nodos internos\n          /  |  \\         /  |  \\        /  \\\n     [hoja] ⇄ [hoja] ⇄ [hoja] ⇄ [hoja] ⇄ [hoja]     hojas: clave → ctid\n```\n\n## Búsqueda de `WHERE id = 4242`\n\n1. Postgres lee la raíz y elige la rama cuyo rango contiene 4242.\n2. Baja por los nodos internos con el mismo criterio.\n3. En la hoja encuentra la clave y su `ctid`.\n4. Lee solo la página de la tabla que indica el `ctid`.\n\n## Por qué es rápido\n\nSin índice, Postgres hace un Seq Scan. Lee todas las páginas de la tabla, así que el costo crece con el número de filas.\n\nCon índice, el costo crece con la altura del árbol. Cada página guarda cientos de claves, por eso el árbol es muy bajo. Una tabla de millones de filas suele necesitar 3 o 4 niveles. Las páginas de la raíz y de los niveles altos casi siempre están en `shared_buffers`. En la práctica la búsqueda lee de disco una o dos páginas.\n\nLos rangos también son rápidos. Postgres busca la primera clave y recorre las hojas enlazadas hasta salir del rango. Por eso `ORDER BY` sobre la columna indexada no necesita un paso de ordenamiento.\n\n## Qué consultas aprovechan un B-tree\n\n- Operadores `=`, `<`, `<=`, `>`, `>=`, `BETWEEN`, `IN` e `IS NULL`.\n- `ORDER BY` y `LIMIT` sobre la columna indexada.\n- `LIKE 'abc%'`, solo con collation `C` o con la clase de operador `text_pattern_ops`.\n- En índices de varias columnas, solo si la consulta filtra por el prefijo izquierdo. Un índice en `(a, b)` sirve para `a` y para `a, b`, pero no para `b` solo.\n\n## Costos\n\nAtención: cada `INSERT`, `UPDATE` y `DELETE` también modifica el índice. Si una hoja se llena, Postgres la divide en dos, y eso cuesta escritura extra. El índice además ocupa espacio en disco.\n\nEl planificador puede ignorar el índice si la consulta devuelve una parte grande de la tabla. En ese caso el Seq Scan es más barato. Para verificar qué plan usa Postgres, ejecuta:\n\n```sql\nEXPLAIN (ANALYZE, BUFFERS) SELECT * FROM usuarios WHERE id = 4242;\n```\n\nBusca `Index Scan` o `Index Only Scan` en el resultado. `Buffers` muestra cuántas páginas leyó.",
+  "output_tokens": 2400,
+  "thinking_tokens": 1234,
+  "input_tokens": 10055,
+  "wall_s": 18.12,
+  "created_at": "2026-10-06T23:12:08.425445+00:00"
+}

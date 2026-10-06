@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B es claro y correcto, con tabla, recomendación y alternativas sin errores técnicos; A incluye afirmaciones erróneas (p. ej. 'solo workspace A se reinstala', 'packageManager: pnpm@latest' inválido, 'Los hoisting fantasma') que confunden.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre ACID, integridad referencial, recomendación de Postgres y flexibilidad de MongoDB, pero omite JSONB y las consultas de reportes; afirma que Postgres 'garantiza' auditoría inmutable, algo que no ofrece por sí solo.",
+  "judge_model": "sonnet"
+}

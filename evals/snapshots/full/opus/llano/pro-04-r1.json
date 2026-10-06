@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Primero revoca la key. Limpiar el repo no basta, porque bots escanean GitHub en segundos y la key ya puede estar copiada. Trata la key como comprometida desde el momento del push.\n\n## Orden\n\n1. **Crea una key nueva** en el panel del proveedor. Dale los permisos mínimos que necesita tu aplicación.\n2. **Actualiza la key en todos los lugares que la usan.** Revisa variables de entorno, secret managers, CI/CD, servidores y apps de otros equipos.\n3. **Peligro:** si revocas la key vieja antes de terminar el paso 2, los servicios que todavía la usan fallan. Si no puedes esperar, revoca ahora y acepta la caída.\n   **Revoca la key vieja.** Después de este paso, la key filtrada deja de funcionar.\n4. **Revisa los logs de uso del proveedor.** Busca solicitudes desde IPs desconocidas, picos de consumo o recursos creados desde la fecha del commit. Revisa también la facturación.\n5. **Si encuentras uso no autorizado,** borra los recursos que creó el atacante. Avisa al proveedor y a tu equipo de seguridad.\n6. **Quita la key del historial de Git** con `git filter-repo` o BFG. Después haz `git push --force`.\n   **Atención:** el force push reescribe el historial. Avisa a los colaboradores, porque deben volver a clonar el repo. Los forks y clones existentes conservan la key. Por eso este paso no reemplaza al paso 3.\n7. **Evita que pase otra vez.** Agrega el archivo de secretos a `.gitignore`. Activa GitHub Secret Scanning y push protection, o un hook de pre-commit como `gitleaks`.\n\n## Cuándo revocar primero\n\nSi la key da acceso a datos sensibles, pagos o infraestructura, haz el paso 3 antes del paso 1. Una caída corta cuesta menos que un atacante con acceso. Si el proveedor no permite dos keys activas a la vez, el orden también es revocar, crear y actualizar.\n\nSi me dices qué proveedor es (AWS, OpenAI, Stripe, etc.), te doy los comandos exactos.",
+  "output_tokens": 947,
+  "thinking_tokens": 182,
+  "input_tokens": 10053,
+  "wall_s": 12.21,
+  "created_at": "2026-10-06T23:16:12.694685+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Rota la key en este orden:\n\n1. **Desactiva la key comprometida ahora.** No esperes. Ve a la consola del proveedor y revócala o desactívala.\n\n2. **Crea una key nueva** en el proveedor.\n\n3. **Actualiza tu código** en todos los lugares donde usas la key:\n   - Variables de entorno (`.env`, `.env.local`, secretos del servidor)\n   - Archivos de configuración\n   - Sistemas desplegados (servicio, contenedor, worker)\n\n4. **Limpia el historial del repo.** Si el repo es público:\n   - Si la key está en el `main` desplegado: usa `git filter-repo` o `BFG` para borrarla del historial completo, luego force-push\n   - Si está solo en ramas o en commits no desplegados: borra las ramas, no necesitas filter-repo\n   - Nota: el repositorio será modificado. Avisa al equipo.\n\n5. **Monitorea acceso.** Durante 24-48 h, revisa los logs del proveedor para ver si alguien usa la key vieja. Si hay actividad, investiga.\n\n6. **Verifica que no haya copias** en otras ramas, wikis, documentación o comentarios del repo.\n\n¿La key ya está revocada, o la revocas ahora?",
+  "output_tokens": 640,
+  "thinking_tokens": 291,
+  "input_tokens": 9910,
+  "wall_s": 7.89,
+  "created_at": "2026-10-06T23:04:58.726659+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "SHA-256 es seguro como hash, pero no sirve para contraseñas porque es demasiado rápido. Esa velocidad ayuda al atacante.\n\n**Por qué falla**\n\n1. **Es rápido.** Una GPU actual calcula del orden de miles de millones de SHA-256 por segundo. La cifra depende del hardware y no la medí aquí.\n2. **Las contraseñas son predecibles.** Si la base de datos se filtra, el atacante no rompe el hash. Prueba contraseñas comunes y compara los resultados.\n3. **No tiene sal.** SHA-256 solo da el mismo hash a la misma contraseña. Dos usuarios con la misma contraseña quedan iguales, y las tablas precalculadas (rainbow tables) funcionan.\n4. **Usa poca memoria.** Las GPU y los ASIC lo ejecutan en paralelo de forma muy barata.\n\n**Qué usar**\n\n| Algoritmo | Cuándo |\n|---|---|\n| Argon2id | Primera opción. Es lento y exige memoria. |\n| scrypt | Alternativa con costo de memoria. |\n| bcrypt | Opción madura y muy extendida. |\n| PBKDF2 | Solo si necesitas cumplir FIPS. Usa muchas iteraciones. |\n\nEstos algoritmos son lentos a propósito. Generan una sal aleatoria por usuario y la guardan junto al hash. Ajusta el costo para que una verificación tarde unos cientos de milisegundos en tu servidor.\n\nAtención: SHA-256 sí es correcto para otros usos, como verificar la integridad de un archivo. El problema es solo usarlo para contraseñas.",
+  "output_tokens": 1461,
+  "thinking_tokens": 878,
+  "input_tokens": 10062,
+  "wall_s": 12.15,
+  "created_at": "2026-10-06T23:08:00.986513+00:00"
+}

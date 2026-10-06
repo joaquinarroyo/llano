@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Explica bien el ciclo y propone depender de propiedades primitivas, pero no menciona que el spread crea un objeto nuevo en cada render, ni el corte de React por profundidad máxima, ni que la forma funcional de setState no basta si se sigue dependiendo de filters.",
+  "judge_model": "sonnet"
+}

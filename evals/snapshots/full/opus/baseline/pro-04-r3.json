@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "El orden importa: **primero invalida la key y después limpia el repo.** Asume que ya está comprometida: los bots escanean GitHub en segundos.\n\n## 1. Revoca o rota la key de inmediato\n- En el panel del proveedor (AWS, OpenAI, Stripe, etc.), **genera una key nueva y revoca la filtrada**.\n- Si no puedes revocarla sin cortar el servicio, crea la nueva, despliégala y revoca la vieja en cuanto termines. Hazlo en minutos, no en días.\n- No borres primero el commit pensando que eso basta. La key ya está en forks, clones, caches y en el historial de eventos de GitHub.\n\n## 2. Despliega la nueva key de forma segura\n- Guárdala en un gestor de secretos (Vault, AWS Secrets Manager, 1Password, GitHub Actions Secrets, etc.) o en variables de entorno.\n- Actualiza todos los entornos que la usan: prod, staging, CI/CD y máquinas locales del equipo.\n- Verifica que todo funciona **antes** de revocar la vieja, si elegiste la rotación escalonada.\n\n## 3. Revisa si hubo abuso\n- Consulta los logs de uso o auditoría del proveedor (p. ej. CloudTrail en AWS) desde la fecha del commit que la expuso.\n- Busca llamadas inusuales, recursos creados, cargos inesperados o accesos a datos.\n- Si encuentras actividad sospechosa, trátalo como un incidente: contén, documenta y avisa a los afectados si se tocaron datos de terceros.\n\n## 4. Limpia el historial de git (opcional, pero recomendable)\n- Usa `git filter-repo` o BFG Repo-Cleaner para eliminar el secreto de todo el historial:\n  ```bash\n  git filter-repo --replace-text <(echo 'LA_KEY_FILTRADA==>REDACTED')\n  git push --force --all && git push --force --tags\n  ```\n- Avisa al equipo de que deben volver a clonar el repo, porque se reescribe el historial.\n- En GitHub puedes pedir a soporte que purgue las vistas cacheadas y las referencias a commits huérfanos.\n- Recuerda que esto es higiene, no remediación. La key ya debe estar revocada (paso 1).\n\n## 5. Prevén que vuelva a pasar\n- Añade `.env` y archivos similares al `.gitignore`.\n- Activa **GitHub Secret Scanning + Push Protection** en el repo o la organización.\n- Añade un hook pre-commit con `gitleaks`, `trufflehog` o `detect-secrets`.\n- Escanea el resto del historial por si hay otros secretos: `gitleaks detect --source .`\n\n---\n\n**Resumen del orden:** revocar/rotar → desplegar la nueva → auditar el uso → limpiar el historial → prevenir.\n\nSi me dices qué proveedor es (AWS, GCP, OpenAI, Stripe…) o me das acceso al repo, puedo darte los pasos concretos o ayudarte a escanearlo y limpiarlo.",
+  "output_tokens": 1111,
+  "thinking_tokens": 33,
+  "input_tokens": 1572,
+  "wall_s": 12.96,
+  "created_at": "2026-10-06T23:24:48.253436+00:00"
+}

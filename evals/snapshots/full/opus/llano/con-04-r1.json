@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La deuda técnica es el costo futuro de una decisión técnica rápida hoy. El equipo elige una solución más simple o más rápida para entregar antes. Esa solución hace más lento y más riesgoso cada cambio posterior, hasta que alguien la corrige.\n\n## De dónde viene\n\n- **Decisión consciente:** el equipo entrega rápido para cumplir una fecha y planea corregir después.\n- **Falta de conocimiento:** el equipo no conocía una solución mejor en ese momento.\n- **Desgaste:** el código era correcto, pero el negocio cambió y el diseño ya no encaja.\n- **Descuido:** no hay tests, no hay documentación o nadie revisa el código.\n\nNo toda deuda técnica es mala. Pedir un préstamo para llegar antes al mercado puede ser una buena decisión. El problema aparece cuando nadie la registra ni la paga.\n\n## Cómo explicarla a alguien de negocio\n\nUsa la analogía de la deuda financiera, porque esa persona ya la entiende:\n\n| Deuda financiera | Deuda técnica |\n|---|---|\n| Préstamo | Atajo técnico para entregar antes |\n| Capital | Trabajo para corregir el atajo |\n| Intereses | Tiempo extra en cada cambio nuevo, más bugs |\n| Default | El sistema es tan frágil que cada cambio rompe algo |\n\nUn ejemplo de frase: *\"Hace un año entregamos el módulo de pagos en 3 semanas en vez de 6. Ahora cada cambio en pagos tarda el doble y genera más incidentes. Si invertimos 4 semanas en corregirlo, los cambios siguientes vuelven a tardar lo normal.\"*\n\n## Consejos para la conversación\n\n1. **Habla de impacto, no de código.** Di \"cada nueva función de facturación tarda 3 semanas en vez de 1\". No digas \"el acoplamiento es alto\".\n2. **Usa datos.** Muestra tiempos de entrega, cantidad de incidentes o horas de soporte. Una tendencia en el tiempo convence más que una opinión.\n3. **Presenta una opción de negocio.** Da el costo de corregir, el costo de no corregir y el riesgo de cada opción. La persona de negocio decide la prioridad.\n4. **Propón pagos pequeños.** Por ejemplo, el 20 % de cada sprint para reducir deuda. Es más fácil de aprobar que un proyecto de 3 meses sin funciones nuevas.\n5. **No culpes a nadie.** La deuda casi siempre fue una decisión razonable con la información de ese momento.",
+  "output_tokens": 940,
+  "thinking_tokens": 34,
+  "input_tokens": 10046,
+  "wall_s": 11.03,
+  "created_at": "2026-10-06T23:17:09.593699+00:00"
+}

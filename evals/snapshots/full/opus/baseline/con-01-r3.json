@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Idempotencia en una API\n\nUna operación es **idempotente** si ejecutarla una vez o muchas veces con los mismos parámetros produce **el mismo estado final en el servidor**. La respuesta puede variar (por ejemplo, un `DELETE` repetido puede devolver `404`), pero el efecto sobre los datos es el mismo.\n\n### Métodos HTTP\n\n| Método | ¿Idempotente? | Ejemplo |\n|---|---|---|\n| `GET`, `HEAD`, `OPTIONS` | Sí (además son *seguros*: no modifican nada) | Leer un usuario |\n| `PUT` | Sí | \"Deja el usuario 42 con *estos* datos\" |\n| `DELETE` | Sí | Borrar el pedido 7 (la segunda vez ya no existe) |\n| `POST` | **No** por defecto | \"Crea un pedido nuevo\" → cada llamada crea otro |\n| `PATCH` | Depende | `{\"saldo\": 100}` sí; `{\"incrementar\": 10}` no |\n\n### Por qué importa\n\n1. **Las redes fallan.** Si un cliente envía una petición y se corta la conexión, no sabe si el servidor la procesó. Con operaciones idempotentes puede **reintentar sin miedo**.\n2. **Evita duplicados peligrosos.** Cobrar dos veces una tarjeta, crear dos pedidos o enviar dos transferencias son errores graves causados por reintentos sobre operaciones no idempotentes.\n3. **Habilita reintentos automáticos.** Proxies, balanceadores, SDKs y colas de mensajes (con entrega *at-least-once*) reintentan por su cuenta; la idempotencia hace que eso sea seguro.\n4. **Simplifica los sistemas distribuidos.** Es mucho más fácil lograr idempotencia que garantizar entrega *exactly-once*.\n\n### Cómo hacer idempotente un `POST`: claves de idempotencia\n\nEl patrón estándar (usado por Stripe, PayPal, etc.):\n\n```http\nPOST /pagos\nIdempotency-Key: 8f14e45f-ceea-467a-9c2e-1f0a3b7d2c11\nContent-Type: application/json\n\n{\"importe\": 5000, \"moneda\": \"EUR\"}\n```\n\nEn el servidor:\n\n1. El cliente genera un UUID único por *intención* de operación (no por intento).\n2. El servidor guarda la clave junto con el resultado de la primera ejecución.\n3. Si llega otra petición con la misma clave, **devuelve el resultado guardado** sin volver a ejecutar.\n4. Si llega la misma clave con un cuerpo distinto, responde con error (p. ej. `422`).\n5. Si la primera aún se está procesando, responde `409` o espera, para evitar ejecuciones concurrentes.\n6. Las claves caducan tras un tiempo (24 h es habitual).\n\nOtras técnicas: usar identificadores generados por el cliente (`PUT /pedidos/{id}`), restricciones `UNIQUE` en base de datos, o diseñar operaciones como asignaciones absolutas (`saldo = 100`) en lugar de relativas (`saldo += 10`).\n\n**En resumen:** la idempotencia convierte \"no sé si funcionó\" en \"lo reintento y listo\", que es justo lo que necesitas en cualquier sistema que hable por red.",
+  "output_tokens": 1186,
+  "thinking_tokens": 18,
+  "input_tokens": 1558,
+  "wall_s": 13.08,
+  "created_at": "2026-10-06T23:25:24.323924+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Postgres.** Para un SaaS de facturación es la opción por defecto y, en la práctica, la correcta.\n\n**Por qué Postgres**\n\n- **Transacciones ACID sólidas.** Facturas, pagos, notas de crédito y asientos deben ser consistentes. Si un cobro se registra, la factura debe cambiar de estado en la misma transacción. Mongo soporta transacciones multi-documento, pero es más incómodo y menos natural.\n- **Modelo relacional.** Clientes, planes, suscripciones, líneas de factura, impuestos y pagos tienen relaciones claras. Las foreign keys y constraints (`CHECK`, `UNIQUE`, `NOT NULL`) evitan datos corruptos a nivel de base de datos, no solo en la aplicación.\n- **Tipos numéricos exactos.** `NUMERIC` evita errores de redondeo con dinero. Guarda siempre la moneda junto al importe, o usa enteros en la unidad mínima (centavos).\n- **Reporting y consultas.** Conciliaciones, MRR, antigüedad de saldos, informes fiscales: todo eso es SQL con joins y agregaciones, y Postgres lo hace muy bien.\n- **Flexibilidad cuando la necesitas.** `JSONB` cubre metadatos variables, payloads de pasarelas de pago o configuraciones por cliente, sin renunciar a lo relacional.\n- **Multi-tenancy.** Row-Level Security te da aislamiento por tenant a nivel de base de datos.\n- **Auditoría y cumplimiento.** Es más fácil construir tablas append-only, triggers de auditoría y trazabilidad, algo que suele exigir la normativa fiscal.\n\n**Cuándo MongoDB tendría sentido**\n\n- Datos muy heterogéneos y sin esquema fijo como dominio principal.\n- Volúmenes de escritura enormes con sharding horizontal como requisito desde el día uno.\n\nNinguno de los dos es el caso típico de facturación.\n\n**Recomendación práctica**\n\n- Postgres gestionado (RDS, Cloud SQL, Neon, Supabase, etc.) con backups y point-in-time recovery.\n- Importes en `NUMERIC` o enteros en centavos, con moneda explícita.\n- Facturas emitidas inmutables: corrige con notas de crédito, no con `UPDATE`.\n- Migraciones versionadas (Flyway, Prisma Migrate, Alembic, etc.).\n- Si más adelante necesitas búsqueda o analítica pesada, añade un sistema aparte (Elasticsearch/OpenSearch, un warehouse) sin cambiar la fuente de verdad.\n\nSi me cuentas el stack que usas y los países/impuestos que debes cubrir, puedo ayudarte a esbozar el esquema inicial.",
+  "output_tokens": 1037,
+  "thinking_tokens": 49,
+  "input_tokens": 1580,
+  "wall_s": 8.42,
+  "created_at": "2026-10-06T23:07:26.222916+00:00"
+}

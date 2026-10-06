@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B usa frases cortas y pasos numerados, y en el turno 2 aclara que los viajes extra solos no explican los 780 ms (la causa es la espera por el pool), mientras que A, más denso, sugiere que los 42 round-trips ya triplican el tiempo; además B avisa de la diferencia 130 vs 120 ms y de que `pg` sigue sin verificar.",
+  "judge_model": "sonnet"
+}

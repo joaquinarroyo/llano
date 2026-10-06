@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa `git revert`, no `git reset`. El reset borra el historial y fuerza a todos los demás a rebase. El revert crea un nuevo commit que deshace los cambios.\n\n**Pasos:**\n\n1. **Identifica el commit a revertir.**\n   ```\n   git log --oneline main | head\n   ```\n   Anota el hash (por ejemplo, `abc1234`).\n\n2. **Revertir el commit.**\n   ```\n   git revert abc1234\n   ```\n   Git abre un editor. Edita el mensaje si necesitas, o guarda sin cambios.\n\n3. **Resuelve conflictos si aparecen.**\n   ```\n   git status\n   ```\n   Si hay conflictos, resuélvelos en los archivos, luego:\n   ```\n   git add .\n   git revert --continue\n   ```\n\n4. **Push al servidor.**\n   ```\n   git push origin main\n   ```\n\n**Nota:** Si revertiste el commit equivocado, usa `git revert <hash-del-revert>` para deshacer el revert. El historial queda intacto y todos pueden hacer pull normalmente.\n\n¿Necesitas revertir múltiples commits o uno solo?",
+  "output_tokens": 619,
+  "thinking_tokens": 308,
+  "input_tokens": 9918,
+  "wall_s": 7.33,
+  "created_at": "2026-10-06T23:04:50.596856+00:00"
+}

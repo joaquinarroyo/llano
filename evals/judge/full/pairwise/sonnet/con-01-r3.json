@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica el concepto, el porqué, la tabla de métodos y el patrón Idempotency-Key con el aviso clave de atomicidad de forma compacta y fácil de leer en una pasada, mientras que B, aunque más completa, añade secciones extra (otras técnicas, lista de beneficios) que diluyen el mensaje principal.",
+  "judge_model": "sonnet"
+}

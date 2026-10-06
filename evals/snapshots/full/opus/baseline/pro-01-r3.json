@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Aquí tienes los pasos completos:\n\n## 1. Comprueba si ya tienes claves\n\n```bash\nls -al ~/.ssh\n```\n\nSi ves `id_ed25519` y `id_ed25519.pub`, ya tienes una clave y puedes saltar al paso 4.\n\n## 2. Genera una nueva clave\n\n```bash\nssh-keygen -t ed25519 -C \"tu_email@ejemplo.com\"\n```\n\n- Pulsa Enter para aceptar la ruta por defecto (`~/.ssh/id_ed25519`).\n- Introduce una passphrase (recomendado).\n\n## 3. Añádela al ssh-agent con el llavero de macOS\n\nArranca el agente:\n\n```bash\neval \"$(ssh-agent -s)\"\n```\n\nCrea o edita `~/.ssh/config`:\n\n```bash\ntouch ~/.ssh/config\nopen -e ~/.ssh/config\n```\n\nAñade esto:\n\n```\nHost github.com\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519\n```\n\nAñade la clave al agente y guarda la passphrase en el llavero:\n\n```bash\nssh-add --apple-use-keychain ~/.ssh/id_ed25519\n```\n\n## 4. Copia la clave pública\n\n```bash\npbcopy < ~/.ssh/id_ed25519.pub\n```\n\n## 5. Añádela a GitHub\n\n1. Ve a **GitHub → Settings → SSH and GPG keys** (https://github.com/settings/keys).\n2. Pulsa **New SSH key**.\n3. Ponle un título (p. ej. \"MacBook personal\"), deja el tipo como **Authentication Key** y pega la clave.\n4. Pulsa **Add SSH key**.\n\n## 6. Prueba la conexión\n\n```bash\nssh -T git@github.com\n```\n\nLa primera vez te pedirá confirmar el fingerprint del host. Escribe `yes`. Si todo va bien verás:\n\n```\nHi tu_usuario! You've successfully authenticated, but GitHub does not provide shell access.\n```\n\n## 7. Usa URLs SSH en tus repos\n\nPara clonar:\n\n```bash\ngit clone git@github.com:usuario/repo.git\n```\n\nPara cambiar un repo existente de HTTPS a SSH:\n\n```bash\ngit remote set-url origin git@github.com:usuario/repo.git\n```\n\n---\n\n**Nota:** la clave privada (`id_ed25519`, sin `.pub`) nunca se comparte ni se sube a ningún sitio. Solo la `.pub` va a GitHub.",
+  "output_tokens": 891,
+  "thinking_tokens": 0,
+  "input_tokens": 1565,
+  "wall_s": 8.81,
+  "created_at": "2026-10-06T23:24:33.185002+00:00"
+}

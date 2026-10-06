@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más concisa y se lee de una vez con tabla y frases cortas, y conserva lo esencial (definiciones, CP/AP, PACELC, críticas, Spanner), mientras que A es más larga y densa aunque algo más completa.",
+  "judge_model": "sonnet"
+}

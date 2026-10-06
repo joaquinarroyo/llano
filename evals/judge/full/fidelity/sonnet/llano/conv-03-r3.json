@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      false,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "El turno 2 no dice que el índice sirva para cliente_id = X; el turno 3 cubre el recorrido inverso con la frase general 'los motores principales', sin nombrar Postgres, y lo conté como cubierto; no encontré afirmaciones técnicas incorrectas.",
+  "judge_model": "sonnet"
+}

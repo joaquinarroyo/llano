@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Qué está pasando\n\nLa API arranca bien, resuelve `db.internal` a `10.0.3.17` y trata de abrir una conexión TCP al puerto 5432. Durante 30 s no recibe respuesta, así que el pool de conexiones falla y el proceso sale con código 1.\n\nLo importante es que el error es `ETIMEDOUT`, no `ECONNREFUSED`:\n\n- **`ECONNREFUSED`** significaría que el host responde pero no hay nada escuchando (Postgres caído o puerto equivocado).\n- **`ETIMEDOUT`** significa que los paquetes se pierden por el camino: firewall, security group, ruta de red, o un host que no existe o está apagado.\n\nNo parece un problema de credenciales ni de código, porque ni siquiera se llega a autenticar.\n\n## Qué revisar primero\n\n**1. Probar la conectividad desde el mismo entorno donde corre el deploy** (el contenedor, pod o instancia, no tu laptop):\n\n```bash\nnc -vz -w 5 10.0.3.17 5432\n# o, si no hay nc:\ntimeout 5 bash -c '</dev/tcp/10.0.3.17/5432' && echo ok || echo fail\n```\n\nSi también hace timeout, el problema es de red y no de la app.\n\n**2. Si hace timeout, revisar en este orden:**\n\n- **Reglas de entrada del DB:** ¿el security group, firewall o `pg_hba`/network policy permite el puerto 5432 desde la IP o subred de donde corre la API? Es la causa más común, sobre todo si este deploy cambió de subred, VPC, cluster o namespace.\n- **¿`10.0.3.17` es la IP correcta?** Compara con la IP actual de la base de datos. Si se recreó o se movió, `db.internal` puede estar apuntando a una IP vieja (registro DNS desactualizado).\n- **¿La instancia de Postgres está arriba?** Comprueba su estado en tu consola de cloud o en el host (`systemctl status postgresql`, o el estado de la instancia RDS).\n- **Rutas y VPC:** que la API y la DB estén en redes que se puedan alcanzar entre sí (peering, route tables, VPN).\n\n**3. Si la prueba de red funciona** (el puerto sí abre), entonces revisa si la DB está saturada (`max_connections` alcanzado) o si hay un proxy/pgbouncer intermedio que se cuelga.\n\n## Una pregunta que acelera el diagnóstico\n\n¿Esta misma versión (2.4.1) funcionaba antes en otro entorno, o cambió algo de infraestructura con este deploy (nueva subred, nuevo cluster, nueva DB)? Si me dices dónde corre (AWS, Kubernetes, Docker Compose…), te doy los comandos exactos para revisar las reglas de red.",
+  "output_tokens": 1291,
+  "thinking_tokens": 308,
+  "input_tokens": 1753,
+  "wall_s": 11.14,
+  "created_at": "2026-10-06T23:09:29.383928+00:00"
+}

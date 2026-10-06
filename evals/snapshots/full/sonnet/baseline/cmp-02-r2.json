@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Recomendación: pnpm.** Para un monorepo nuevo es la opción más sólida hoy.\n\n## Comparación\n\n| | **pnpm** | **npm** | **Yarn** |\n|---|---|---|---|\n| **Workspaces** | Excelentes (`pnpm-workspace.yaml`, protocolo `workspace:*`, filtros potentes con `--filter`) | Funcionales pero básicos (`--workspace`) | Muy buenos (Berry: `workspace:` protocol, constraints, plugins) |\n| **Velocidad** | Muy rápido | El más lento de los tres, aunque ha mejorado | Rápido (Berry con PnP o node_modules) |\n| **Disco** | Store global con hard links; ahorra mucho espacio | Duplica por proyecto | Depende: PnP o cache zero-install ahorran; node_modules clásico no |\n| **Rigor de dependencias** | Estricto: sin \"phantom dependencies\" por defecto | Hoisting plano; accedes a paquetes no declarados | PnP es estricto; modo node_modules es flexible |\n| **Compatibilidad** | Muy buena; algún paquete mal escrito puede requerir `public-hoist-pattern` | La mejor (es el estándar) | PnP rompe herramientas con frecuencia; modo node_modules es seguro |\n| **Complejidad** | Baja | La más baja | Mayor (versiones Classic vs Berry, config, plugins) |\n| **Ecosistema monorepo** | Funciona muy bien con Turborepo, Nx, Changesets | Funciona con todo, con menos ergonomía | Igual, con soporte nativo de `yarn workspaces foreach` |\n\n## Por qué pnpm\n\n- **Evita bugs silenciosos**: al ser estricto, si un paquete importa algo que no declaró en su `package.json`, falla en vez de funcionar por casualidad. En monorepos esto importa mucho.\n- **Filtros**: `pnpm --filter ./apps/web... build` (con dependencias) o `--filter \"...[origin/main]\"` (solo lo cambiado) son muy cómodos en CI.\n- **Catálogos** (`catalog:`): permiten fijar versiones compartidas en un solo lugar del workspace.\n- **Eficiencia**: instalaciones rápidas y menor uso de disco, notable en CI y con muchos paquetes.\n\n## Cuándo elegir otra\n\n- **npm**: equipo pequeño, pocos paquetes, quieres cero herramientas extra. Sirve, pero te quedarás corto al crecer.\n- **Yarn (Berry)**: ya tienes experiencia en el equipo, o quieres PnP/zero-install y las constraints. Mayor curva y más fricción con herramientas.\n\n## Setup mínimo\n\n```bash\ncorepack enable\npnpm init\n```\n\n```yaml\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n```\n\nFija la versión con el campo `packageManager` en el `package.json` raíz para que todo el equipo y el CI usen la misma. Para orquestar tareas, súmale **Turborepo** o **Nx**.\n\nSi me cuentas el tamaño del equipo, qué stack usan y si hay CI específico, te confirmo si hay algo que cambie la recomendación.",
+  "output_tokens": 1150,
+  "thinking_tokens": 0,
+  "input_tokens": 1574,
+  "wall_s": 10.14,
+  "created_at": "2026-10-06T23:10:17.806000+00:00"
+}

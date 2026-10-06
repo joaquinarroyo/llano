@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la estructura, la búsqueda, los rangos, ORDER BY, index-only scan, operadores y costos de forma concisa y con un diagrama claro, mientras que A es correcta pero mucho más extensa, con detalles adicionales (bitmap scan, deduplicación, multicolumna, HOT) que dificultan entenderla en una sola lectura.",
+  "judge_model": "sonnet"
+}

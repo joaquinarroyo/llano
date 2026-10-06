@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "SHA-256 es seguro como función hash **criptográfica**, pero está diseñado para un objetivo distinto al que necesitas con contraseñas.\n\n## El problema: es demasiado rápido\n\nSHA-256 se diseñó para hashear grandes cantidades de datos con la mayor velocidad posible (firmas, integridad de archivos, etc.). Eso es una virtud allí y un defecto aquí:\n\n- Una GPU moderna calcula **miles de millones de hashes SHA-256 por segundo**.\n- Las contraseñas humanas tienen poca entropía, así que un atacante que robe tu base de datos puede probar diccionarios, variaciones y fuerza bruta a ese ritmo.\n- \"Irreversible\" no basta: el atacante no necesita invertir el hash, solo adivinar la contraseña y comparar.\n\n## Otros problemas de usar SHA-256 \"a secas\"\n\n1. **Sin salt**: dos usuarios con la misma contraseña tienen el mismo hash, y se pueden usar **rainbow tables** o tablas precalculadas. Con un salt único por usuario esto se mitiga, pero no resuelve la velocidad.\n2. **Coste fijo y mínimo**: no puedes ajustar cuánto tarda. Con el tiempo el hardware mejora y SHA-256 no se vuelve más lento para compensar.\n3. **Sin resistencia a hardware especializado**: SHA-256 usa poca memoria, así que es ideal para GPUs y ASICs (de hecho, el minado de Bitcoin los usa masivamente).\n\n## Qué usar en su lugar\n\nFunciones diseñadas para ser **deliberadamente lentas** y con parámetros de coste configurables:\n\n| Algoritmo | Característica |\n|---|---|\n| **Argon2id** | Recomendado hoy. Consume memoria y CPU, resiste GPUs/ASICs. |\n| **scrypt** | Memory-hard, buena alternativa. |\n| **bcrypt** | Veterano y muy extendido; limita la entrada a 72 bytes. |\n| **PBKDF2** | Aceptable (cumple normativas como FIPS), pero no es memory-hard; necesita muchas iteraciones. |\n\nEstas funciones incluyen el salt y el factor de coste en el propio resultado, así que no tienes que gestionarlos aparte.\n\n## Ejemplo orientativo (Python)\n\n```python\nfrom argon2 import PasswordHasher\n\nph = PasswordHasher()\nhash = ph.hash(\"mi_contraseña\")   # incluye salt y parámetros\nph.verify(hash, \"mi_contraseña\")  # lanza excepción si no coincide\n```\n\n## Resumen\n\nSHA-256 responde a \"¿estos datos son los mismos?\" de forma rápida. Para contraseñas necesitas responder \"¿cuánto le cuesta a un atacante probar un millón de intentos?\", y ahí la lentitud y el coste de memoria son justo lo que se busca.",
+  "output_tokens": 1024,
+  "thinking_tokens": 0,
+  "input_tokens": 1579,
+  "wall_s": 8.03,
+  "created_at": "2026-10-06T23:13:29.456882+00:00"
+}

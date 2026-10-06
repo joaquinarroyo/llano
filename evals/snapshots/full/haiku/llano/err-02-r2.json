@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Los números de punto flotante en binario (IEEE 754) no pueden representar exactamente 0.9. Por eso `100.0 * 0.9` da `89.99999999999999` en vez de `90.0`.\n\n**Soluciones:**\n\n**1. Redondea el resultado** (rápido, para mostrar):\n```python\ntotal = round(price * (1 - discount), 2)\n```\n\n**2. Usa `Decimal`** (recomendado, para dinero):\n```python\nfrom decimal import Decimal\n\nprice = Decimal(\"100.0\")\ndiscount = Decimal(\"0.1\")\ntotal = price * (1 - discount)\n# Decimal('90.0') exacto\n```\n\n**3. Usa aserciones con tolerancia** (si no puedes cambiar el código):\n```python\nassert total == pytest.approx(90.0)\n```\n\nPara dinero o cálculos que importan, usa `Decimal`. Para UI o gráficos, redondear es suficiente.\n\n¿Dónde está el archivo del test? Puedo cambiar el código para ti.",
+  "output_tokens": 883,
+  "thinking_tokens": 601,
+  "input_tokens": 9978,
+  "wall_s": 9.94,
+  "created_at": "2026-10-06T23:02:12.429843+00:00"
+}

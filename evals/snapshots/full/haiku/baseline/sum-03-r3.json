@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "```markdown\n## [Notification Service] Migración a Amazon SES y reintentos mejorados\n\n### Cambios\n- **Proveedor de email**: Migración de SendGrid a Amazon SES\n- **Plantillas**: Conversión de HTML a MJML para mejor mantenibilidad\n- **Reintentos**: Implementación de backoff exponencial (3 intentos, base 2s)\n- **Removido**: Endpoint `/v1/notify` deprecated\n\n### Testing\n- 132 tests pasando\n- Compatibilidad mantenida con clientes existentes\n\n### ⚠️ Breaking Changes\n- El endpoint `/v1/notify` ha sido eliminado. Usar `/v2/notify` en su lugar.\n```\n\nO si prefieres más compacto:\n\n```markdown\n**Migración de notificaciones a Amazon SES**: Cambio de proveedor de SendGrid, plantillas MJML, reintentos con backoff exponencial (3x, base 2s). Eliminado endpoint `/v1/notify` deprecated. 132 tests pasando.\n```\n\n¿Cuál formato preferís?",
+  "output_tokens": 497,
+  "thinking_tokens": 221,
+  "input_tokens": 3475,
+  "wall_s": 4.96,
+  "created_at": "2026-10-06T23:04:36.439190+00:00"
+}

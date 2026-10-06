@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre ACID/datos relacionales y la recomendación de Postgres, e implica que MongoDB sirve por flexibilidad de esquema, pero no menciona JSONB ni integridad referencial/consultas de reportes (solo 'relaciones bien definidas').",
+  "judge_model": "sonnet"
+}

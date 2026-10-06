@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B comienza con una definición concisa, usa una tabla de analogía clara, da un ejemplo directo y consejos accionables sin saturar, mientras que A es más largo, con más analogías y secciones que dificultan una sola lectura aunque su contenido es válido.",
+  "judge_model": "sonnet"
+}

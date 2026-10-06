@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A muestra el bucle con el código anotado, da primero la solución más limpia (separar el estado) y deja la alternativa del array de dependencias; B es correcta pero añade la variante con JSON.stringify y deja lo más limpio para el final.",
+  "judge_model": "sonnet"
+}

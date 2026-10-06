@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es **conectividad de red** a la base de datos, no código. La app no llega a `db.internal:5432` (que resuelve a `10.0.3.17`).\n\nRevisa **en este orden**:\n\n1. **¿Está PostgreSQL corriendo?** \n   ```\n   ssh db.internal \"ps aux | grep postgres\"\n   ```\n\n2. **¿Escucha en el puerto?**\n   ```\n   ssh db.internal \"netstat -tulpn | grep 5432\"\n   ```\n\n3. **¿Conectividad de red?** Desde donde corre la app:\n   ```\n   nc -zv db.internal 5432\n   telnet 10.0.3.17 5432\n   ```\n\n4. **¿Firewall/Security Group?** Verifica que el puerto 5432 esté abierto entre las redes donde corre la app y donde está la BD.\n\n5. **¿DNS correcto?** \n   ```\n   nslookup db.internal\n   ```\n\n**Tip rápido:** ese timeout de 30s + el error sugiere que la app *sí está llegando a la red* pero nadie contesta en ese puerto. Likely es un firewall rule o el servicio no está corriendo.\n\n¿Cuál es tu infraestructura (Kubernetes, VMs, Fargate)?",
+  "output_tokens": 672,
+  "thinking_tokens": 327,
+  "input_tokens": 3542,
+  "wall_s": 7.91,
+  "created_at": "2026-10-06T22:59:48.572623+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica las dos causas sin repetirlas, da comandos listos para copiar, incluye torchvision/torchaudio y la nota de arm64, mientras que A repite las causas y omite esos detalles.",
+  "judge_model": "sonnet"
+}

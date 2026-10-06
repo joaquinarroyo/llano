@@ -70,6 +70,7 @@ def rows_single(snaps, fid):
         rows.append({
             **{k: s[k] for k in ("model_alias", "arm", "prompt_id", "category", "run", "input_tokens")},
             "visible_tokens": (s["output_tokens"] or 0) - (s["thinking_tokens"] or 0),
+            "output_tokens": s["output_tokens"] or 0, "thinking_tokens": s["thinking_tokens"] or 0,
             **text_metrics(s["text"]),
             "fidelity": sum(f["facts"]) / f["n_facts"] if f else None,
             "incorrect": f["incorrect_claims"] if f else None,
@@ -89,6 +90,7 @@ def rows_turns(snaps, fid):
             rows.append({
                 **{k: s[k] for k in ("model_alias", "arm", "prompt_id", "run")}, "turn": i + 1,
                 "visible_tokens": (t["output_tokens"] or 0) - (t["thinking_tokens"] or 0),
+                "output_tokens": t["output_tokens"] or 0, "thinking_tokens": t["thinking_tokens"] or 0,
                 **text_metrics(t["text"]),
                 "fidelity": sum(kept) / n if kept is not None and n else None,
             })
@@ -106,6 +108,8 @@ def arm_stats(rows):
         "n": len(rows),
         "words_median": st.median(r["words"] for r in rows),
         "visible_tokens_median": st.median(r["visible_tokens"] for r in rows),
+        "output_tokens_median": st.median(r["output_tokens"] for r in rows),
+        "thinking_share": sum(r["thinking_tokens"] for r in rows) / max(sum(r["output_tokens"] for r in rows), 1),
         "per100_mean": st.mean(r["per100"] for r in rows),
         "inflesz_mean": st.mean(r["inflesz"] for r in rows if r["inflesz"] is not None),
         "fidelity_mean": st.mean(fids) if fids else None,
@@ -167,6 +171,7 @@ def summarize(single, turns, pw):
             "inflesz": paired(single, "inflesz", lower_is_better=False),
             "fidelity": paired(single, "fidelity", lower_is_better=False),
             "words": paired(single, "words"),
+            "output_tokens": paired(single, "output_tokens"),
             "preference": preference([p for p in pw if p["kind"] == "single"]),
         }
     if turns:
@@ -201,6 +206,8 @@ def markdown(summary) -> str:
             out += ["", "### Single turn", "", "| | Baseline | Llano |", "|---|---:|---:|",
                     row("Words (median)", lambda a: f"{a['words_median']:.0f}"),
                     row("Visible tokens (median)", lambda a: f"{a['visible_tokens_median']:.0f}"),
+                    row("Output tokens incl. thinking (median)", lambda a: f"{a['output_tokens_median']:.0f}"),
+                    row("Thinking share of output", lambda a: pct(a["thinking_share"], False)),
                     row("Violations / 100 words", lambda a: f"{a['per100_mean']:.2f}"),
                     row("INFLESZ", lambda a: f"{a['inflesz_mean']:.1f}"),
                     row("Key facts kept", lambda a: pct(a["fidelity_mean"], False)),
@@ -216,7 +223,9 @@ def markdown(summary) -> str:
                     f"- **Fidelity:** llano − baseline = {pct(sg['fidelity']['mean_diff'])} "
                     f"[{pct(sg['fidelity']['mean_diff_ci95'][0])}, {pct(sg['fidelity']['mean_diff_ci95'][1])}].",
                     f"- **Words:** {pct(sg['words']['median_ratio'])} "
-                    f"[{pct(sg['words']['median_ratio_ci95'][0])}, {pct(sg['words']['median_ratio_ci95'][1])}]."]
+                    f"[{pct(sg['words']['median_ratio_ci95'][0])}, {pct(sg['words']['median_ratio_ci95'][1])}].",
+                    f"- **Output tokens incl. thinking:** {pct(sg['output_tokens']['median_ratio'])} "
+                    f"[{pct(sg['output_tokens']['median_ratio_ci95'][0])}, {pct(sg['output_tokens']['median_ratio_ci95'][1])}]."]
         if s["conversation"]:
             c, pref = s["conversation"], s["conversation"]["preference"]
             out += ["", "### Conversations", "",

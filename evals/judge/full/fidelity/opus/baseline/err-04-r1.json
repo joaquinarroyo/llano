@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre la incompatibilidad con Python 3.13, el índice de PyTorch y las dos opciones de solución, pero no menciona que pip solo ve las versiones 2.4.0–2.5.0 ni dice explícitamente que el fallo ocurre en el paso RUN pip install.",
+  "judge_model": "sonnet"
+}

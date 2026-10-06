@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más fácil de leer en una sola pasada: tiene recomendación inicial clara, secciones bien separadas, una tabla comparativa y cubre las mismas razones técnicas y consejos prácticos que B, incluido el argumento sobre escalado, sin la densidad de B.",
+  "judge_model": "sonnet"
+}

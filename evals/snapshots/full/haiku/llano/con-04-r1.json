@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Qué es\n\nLa deuda técnica es código rápido pero frágil. El equipo lo escribió para entregar rápido, no para durar. Ahora cuesta más mantenerlo.\n\n## La analogía financiera\n\nEs como pedir dinero prestado. Pagas interés durante años:\n- **Préstamo rápido:** entregar la función en 2 semanas en vez de 4.\n- **Interés:** cada cambio futuro tarda más porque el código es confuso, frágil o repite lógica.\n- **Deuda sin pagar:** si nunca lo mejoras, el interés sigue subiendo. Al final, un cambio simple tarda una semana.\n\n## Costos reales (para negocio)\n\n| Efecto | Ejemplo |\n|---|---|\n| **Desarrollo lento** | Una función que deberían hacer en 3 días ahora tarda 10. |\n| **Más bugs** | El código \"pegado\" rompe cuando cambias una parte. |\n| **Fuga de talento** | Los buenos desarrolladores se aburren y se van. |\n| **Incidentes en producción** | El cambio que parecía seguro causa una caída. |\n\n## Cómo explicarla a un ejecutivo\n\n> \"Entregamos la función A en 2 semanas en vez de 4. Ahora la función B, que depende de A, nos cuesta 1 mes. Y si A falla, el sistema se cae. Necesitamos 3 semanas para arreglarlo bien. ¿Invertimos ahora o esperamos que explote?\"\n\nLas cifras importan: tiempo perdido, riesgo de caída, costo de parar un servicio.\n\n## Cuándo es aceptable\n\n- Validar una idea nueva rápido.\n- Entregar antes de un deadline crítico.\n- **Pero:** acuerda cuándo se arregla. Si no lo arreglas nunca, no era deuda, era mala calidad.",
+  "output_tokens": 930,
+  "thinking_tokens": 428,
+  "input_tokens": 9906,
+  "wall_s": 11.11,
+  "created_at": "2026-10-06T23:01:06.764985+00:00"
+}

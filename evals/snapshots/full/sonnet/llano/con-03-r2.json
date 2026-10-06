@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "SHA-256 es seguro como hash, pero es un mal hash para contraseñas porque es demasiado rápido.\n\n**Qué falla**\n\n- **Velocidad:** SHA-256 se diseñó para procesar datos grandes con rapidez. Una GPU de gama alta calcula del orden de 20 000 millones de hashes por segundo (cifra aproximada).\n- **Contraseñas con poca entropía:** las personas eligen contraseñas predecibles. Un atacante que roba la base de datos prueba diccionarios completos en minutos u horas.\n- **Sin sal, hay más riesgos:** dos usuarios con la misma contraseña tienen el mismo hash. Las tablas precalculadas (rainbow tables) rompen esos hashes al instante.\n- **Hardware especializado:** SHA-256 es barato de acelerar en GPU, FPGA y ASIC.\n\nLa seguridad de un hash de uso general protege contra invertirlo o encontrar colisiones. No protege contra adivinar la entrada cuando el espacio de contraseñas es pequeño.\n\n**Qué usar**\n\nUsa una función diseñada para contraseñas. Es lenta a propósito, lleva sal propia y, en los mejores casos, consume mucha memoria.\n\n| Función | Cuándo usarla |\n|---|---|\n| Argon2id | Primera opción para sistemas nuevos. |\n| scrypt | Alternativa con alto consumo de memoria. |\n| bcrypt | Opción madura y muy extendida. Limita la contraseña a 72 bytes. |\n| PBKDF2 | Solo si necesitas cumplir FIPS. Usa muchas iteraciones. |\n\nAjusta el costo para que cada verificación tarde unas decenas de milisegundos en tu servidor. OWASP publica parámetros mínimos para Argon2id. Verifica la guía vigente antes de fijarlos.\n\n**Atención:** si ya guardas contraseñas con SHA-256, no las borres. Al siguiente login correcto, calcula el hash nuevo con Argon2id y reemplaza el antiguo. Para cuentas inactivas, envuelve el hash viejo: `argon2id(sha256(contraseña))`.",
+  "output_tokens": 1180,
+  "thinking_tokens": 421,
+  "input_tokens": 10062,
+  "wall_s": 9.84,
+  "created_at": "2026-10-06T23:10:45.603789+00:00"
+}

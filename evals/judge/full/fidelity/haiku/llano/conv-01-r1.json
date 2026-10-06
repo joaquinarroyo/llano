@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      false
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 4,
+  "notes": "Errores: TypeORM `dropSchema: false` no tiene relación con las transacciones; `autocommit: true` de Sequelize como opción de conexión es dudoso; el PR atribuye las versiones 8.11/8.12 al ORM cuando son de pg; y afirma sin verificar que el ORM no tiene opción de configuración.",
+  "judge_model": "sonnet"
+}

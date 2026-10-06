@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más claro y fácil de leer de una sola vez (tabla comparativa, pasos numerados, advertencias destacadas) y cubre lo técnico relevante, incluido el aviso sobre refresh concurrente con rotación y el token CSRF en la web; B es más denso, con mucho código y ofrecimientos de implementar en un directorio vacío.",
+  "judge_model": "sonnet"
+}

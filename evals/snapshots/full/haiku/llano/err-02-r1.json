@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es que `0.1` no se representa exactamente en binario. La multiplicación da `89.99999999999999` en lugar de `90.0`.\n\nPara dinero, usa `decimal.Decimal`:\n\n```python\nfrom decimal import Decimal\n\nprice = Decimal('100.0')\ndiscount = Decimal('0.1')\ntotal = price * (1 - discount)  # Decimal('90.0')\n```\n\n**Alternativa rápida** si no quieres cambiar tipos: redondea en el test o en el cálculo:\n\n```python\ntotal = round(price * (1 - discount), 2)  # 90.0\nassert total == 90.0\n```\n\n`Decimal` es mejor para facturas porque evita estos errores sin redondeos. `round()` funciona si la precisión de 2 decimales es suficiente.\n\n¿Cuál prefieres usar?",
+  "output_tokens": 667,
+  "thinking_tokens": 440,
+  "input_tokens": 9978,
+  "wall_s": 7.53,
+  "created_at": "2026-10-06T22:59:56.383015+00:00"
+}

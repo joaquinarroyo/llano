@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica con más claridad y sin perder rigor técnico: usa un ejemplo visual de la guía telefónica, distingue full scan, index scan y skip scan, indica qué ver en EXPLAIN y cubre matices como ordenación mixta y SELECT *, mientras que A es más seco y en un punto dice que PostgreSQL < 18 y SQL Server leen el índice completo sin precisar cuándo conviene.",
+  "judge_model": "sonnet"
+}

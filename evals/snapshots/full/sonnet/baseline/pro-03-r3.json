@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Backup de Postgres de producción y restauración local\n\n## 1. Hacer el backup (desde producción o remoto)\n\nFormato custom (recomendado: comprimido, permite restauración paralela y selectiva):\n\n```bash\npg_dump -h HOST_PROD -p 5432 -U usuario -d nombre_db \\\n  -Fc --no-owner --no-acl \\\n  -f backup.dump\n```\n\nPara bases grandes, el formato directory permite dump paralelo:\n\n```bash\npg_dump -h HOST_PROD -U usuario -d nombre_db -Fd -j 4 --no-owner --no-acl -f backup_dir\n```\n\nNotas:\n- `pg_dump` toma un snapshot consistente sin bloquear escrituras, así que es seguro en producción. Aun así, conviene correrlo en horas de poca carga o contra una réplica de lectura.\n- Usa una versión de `pg_dump` igual o mayor a la del servidor.\n- Si ejecutas el dump desde tu máquina, la contraseña se pasa con `PGPASSWORD` o `~/.pgpass`, no en la línea de comandos.\n- Si la base tiene datos sensibles (PII), piensa si realmente los necesitas en local o si debes anonimizarlos.\n\n## 2. Transferir el archivo (si lo generaste en el servidor)\n\n```bash\nscp usuario@servidor:/ruta/backup.dump .\n```\n\n## 3. Restaurar en local\n\nCrea la base vacía y restaura:\n\n```bash\ncreatedb nombre_db_local\npg_restore -d nombre_db_local --no-owner --no-acl -j 4 backup.dump\n```\n\nSi el dump incluye roles que no existen en local y obtienes errores de permisos, `--no-owner --no-acl` suele resolverlo. Si necesitas recrear la base desde cero:\n\n```bash\npg_restore -d postgres --clean --if-exists --create backup.dump\n```\n\nSi hiciste el dump en SQL plano (`-Fp`), se restaura con:\n\n```bash\npsql -d nombre_db_local -f backup.sql\n```\n\n## 4. Verificar\n\n```bash\npsql -d nombre_db_local -c '\\dt'\npsql -d nombre_db_local -c 'SELECT count(*) FROM tu_tabla;'\n```\n\n## Alternativa: un solo paso sin archivo intermedio\n\n```bash\ncreatedb nombre_db_local\npg_dump -h HOST_PROD -U usuario -d nombre_db -Fc --no-owner --no-acl \\\n  | pg_restore -d nombre_db_local --no-owner --no-acl\n```\n\n## Consejos\n\n- **Extensiones:** si producción usa extensiones (PostGIS, pgcrypto, etc.), instálalas en local antes de restaurar.\n- **Versiones:** restaurar en una versión de Postgres igual o más nueva que la de origen funciona bien; al revés puede fallar.\n- **Docker:** si no quieres instalar Postgres, `docker run -d -e POSTGRES_PASSWORD=pass -p 5432:5432 postgres:<versión>` y apunta `pg_restore` a `-h localhost -U postgres`.\n- **Backups físicos/PITR:** para recuperación ante desastres usa `pg_basebackup` + WAL archiving (o las herramientas de tu proveedor), no `pg_dump`.\n\nSi me dices tu proveedor (RDS, Cloud SQL, Supabase, self-hosted) y el tamaño aproximado de la base, te ajusto los comandos.",
+  "output_tokens": 1263,
+  "thinking_tokens": 49,
+  "input_tokens": 1573,
+  "wall_s": 10.05,
+  "created_at": "2026-10-06T23:12:52.982395+00:00"
+}

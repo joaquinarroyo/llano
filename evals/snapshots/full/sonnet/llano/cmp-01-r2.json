@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa Postgres. Para facturación es la opción más segura.\n\n**Por qué Postgres**\n\n- **Transacciones ACID:** una factura, sus líneas y el asiento contable se guardan juntos o no se guardan. En MongoDB esto es posible, pero es más limitado y más fácil de usar mal.\n- **Integridad de datos:** claves foráneas, restricciones `CHECK` y tipos `NUMERIC` exactos evitan errores de redondeo y facturas huérfanas. Nunca uses `float` para dinero.\n- **Datos relacionales:** clientes, productos, impuestos, facturas y pagos se relacionan entre sí. Los `JOIN` y los reportes (ingresos por mes, cartera vencida) son simples en SQL.\n- **Auditoría y cumplimiento:** los contadores y auditores trabajan con SQL. Es fácil exportar y consultar.\n- **Flexibilidad cuando la necesitas:** `JSONB` guarda datos variables, como metadatos de un proveedor de pagos, sin cambiar de motor.\n- **Multi-tenant:** Row-Level Security aísla los datos de cada cliente en el SaaS.\n\n**Cuándo elegir MongoDB**\n\n- Los documentos no tienen una estructura estable.\n- Necesitas escalar escrituras de forma horizontal desde el primer día.\n\nNinguno de los dos casos aplica a un SaaS de facturación nuevo. Postgres maneja bien millones de facturas en un solo servidor.\n\n**Atención:** esto no depende de tu equipo. Si el equipo ya domina MongoDB y no conoce SQL, el costo de aprendizaje es real. Aun así, recomiendo Postgres por el riesgo de errores en dinero.\n\nSi me das el stack y el volumen esperado, puedo sugerir un esquema inicial de tablas.",
+  "output_tokens": 673,
+  "thinking_tokens": 30,
+  "input_tokens": 10063,
+  "wall_s": 6.29,
+  "created_at": "2026-10-06T23:10:13.305643+00:00"
+}

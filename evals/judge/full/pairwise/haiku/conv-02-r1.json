@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da cuidados concretos y accionables en el último turno (CORS, HTTPS, secure storage nativo en lugar de AsyncStorage, refresh tokens, separación de endpoints), mientras que A recomienda AsyncStorage, que no es seguro para tokens, y da menos detalle; aunque B titubea al sugerir un sistema único tras la decisión del usuario, su contenido técnico es más correcto y completo.",
+  "judge_model": "sonnet"
+}

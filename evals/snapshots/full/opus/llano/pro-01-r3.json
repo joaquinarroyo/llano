@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Necesitas 6 pasos: generar la clave, guardarla en el agente, agregarla a GitHub y verificar la conexión.\n\n## Pasos\n\n**1. Verifica si ya tienes claves.**\n\n```sh\nls -al ~/.ssh\n```\n\nSi ves `id_ed25519` e `id_ed25519.pub`, ya tienes una clave. Puedes usarla y pasar al paso 3.\n\n**2. Genera una clave nueva.**\n\n**Peligro:** si ya existe `~/.ssh/id_ed25519`, no respondas \"y\" cuando `ssh-keygen` pregunte si quieres sobrescribirla. Pierdes la clave anterior y el acceso que daba.\n\n```sh\nssh-keygen -t ed25519 -C \"tu_correo@ejemplo.com\"\n```\n\n- Presiona Enter para aceptar la ruta por defecto (`~/.ssh/id_ed25519`).\n- Escribe una passphrase. macOS la guarda en el llavero en el paso 4, así que no la escribes cada vez.\n\n**3. Configura SSH para usar el llavero de macOS.**\n\nAbre o crea `~/.ssh/config`:\n\n```sh\ntouch ~/.ssh/config\nopen -e ~/.ssh/config\n```\n\nAgrega este bloque:\n\n```\nHost github.com\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519\n```\n\n**4. Agrega la clave al agente y al llavero.**\n\n```sh\neval \"$(ssh-agent -s)\"\nssh-add --apple-use-keychain ~/.ssh/id_ed25519\n```\n\n**5. Agrega la clave pública a GitHub.**\n\nCopia la clave pública al portapapeles:\n\n```sh\npbcopy < ~/.ssh/id_ed25519.pub\n```\n\n**Atención:** copia solo el archivo `.pub`. El archivo sin extensión es la clave privada y no debe salir de tu computadora.\n\nEn GitHub, ve a **Settings → SSH and GPG keys → New SSH key**. Escribe un título (por ejemplo, \"MacBook trabajo\"), pega la clave y guarda.\n\n**6. Verifica la conexión.**\n\n```sh\nssh -T git@github.com\n```\n\nLa primera vez, SSH pregunta si confías en el host. Escribe `yes`. Si todo funciona, GitHub responde:\n\n```\nHi <tu_usuario>! You've successfully authenticated, but GitHub does not provide shell access.\n```\n\n## Después\n\nUsa URLs SSH para clonar: `git@github.com:usuario/repo.git`. Si un repo ya usa HTTPS, cambia su URL:\n\n```sh\ngit remote set-url origin git@github.com:usuario/repo.git\n```",
+  "output_tokens": 1086,
+  "thinking_tokens": 132,
+  "input_tokens": 10048,
+  "wall_s": 10.92,
+  "created_at": "2026-10-06T23:24:35.296260+00:00"
+}

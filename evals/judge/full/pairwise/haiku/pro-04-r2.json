@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da un orden claro por fases (revocar, revisar logs de uso indebido, rotar, limpiar historial), incluye la revisión de actividad sospechosa, mientras que B tiene afirmaciones confusas o erróneas (\"lo único irreversible que no puedes revertir\", GitHub \"notifica a servicios\") y revoca después de generar la nueva sin revisar logs de abuso; el comando sed de A es defectuoso pero B es más impreciso en conjunto.",
+  "judge_model": "sonnet"
+}

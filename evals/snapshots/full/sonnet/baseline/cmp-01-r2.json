@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Postgres.** Para un SaaS de facturación es la opción más segura.\n\n**Por qué Postgres**\n- **Transacciones ACID sólidas:** crear una factura, sus líneas, impuestos y el asiento de pago tiene que ser atómico. Con Postgres es lo normal, y MongoDB soporta transacciones multi-documento pero con más fricción y costo.\n- **Datos relacionales por naturaleza:** clientes, planes, suscripciones, facturas, líneas, impuestos y pagos tienen relaciones claras. Las claves foráneas y constraints (`CHECK`, `UNIQUE`, `NOT NULL`) evitan datos inconsistentes a nivel de base de datos.\n- **Precisión numérica:** `NUMERIC` exacto para dinero. En Mongo existe `Decimal128`, pero es más fácil equivocarse con los tipos en el driver.\n- **Reportes y auditoría:** joins, agregaciones, window functions y CTEs facilitan conciliaciones, MRR, aging de cuentas por cobrar, etc.\n- **Flexibilidad cuando la necesitas:** `JSONB` cubre los campos variables (metadatos, payloads de pasarelas de pago, configuración por cliente) sin renunciar al modelo relacional.\n- **Multi-tenancy:** `tenant_id` + Row Level Security te da aislamiento por cliente sin infraestructura extra.\n- **Ecosistema:** migraciones maduras, extensiones, réplicas, PITR, y opciones gestionadas (RDS, Cloud SQL, Neon, Supabase).\n\n**Cuándo MongoDB tendría sentido**\n- Si el dominio fuera sobre todo documentos heterogéneos sin relaciones fuertes, o necesitaras sharding horizontal masivo desde el día uno. Ninguna de las dos cosas suele aplicar a facturación.\n\n**Recomendaciones prácticas**\n- Guarda montos en la unidad mínima (centavos) como `BIGINT` o usa `NUMERIC(19,4)`, junto con la moneda.\n- Haz las facturas emitidas inmutables (correcciones mediante notas de crédito) y mantén una tabla de auditoría/eventos append-only.\n- Usa claves de idempotencia para pagos y webhooks.\n- Si en el futuro necesitas búsqueda o analítica pesada, añade Elasticsearch/OpenSearch o un warehouse al lado, sin cambiar tu base transaccional.\n\nSi me cuentas más (volumen esperado, país/normativa fiscal, si hay facturación electrónica), puedo ayudarte a esbozar el esquema inicial.",
+  "output_tokens": 985,
+  "thinking_tokens": 54,
+  "input_tokens": 1580,
+  "wall_s": 8.2,
+  "created_at": "2026-10-06T23:10:13.496656+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos de forma explícita y no contiene afirmaciones técnicas claramente incorrectas; solo omite que Yarn 4.10+ tiene catalogs.",
+  "judge_model": "sonnet"
+}

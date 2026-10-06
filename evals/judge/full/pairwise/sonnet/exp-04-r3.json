@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica con claridad qué es CORS y por qué ocurre, incluye el mensaje de error típico, aclara que la petición sí llega al servidor, cubre más frameworks (Django, Flask) y detalla las credenciales con Allow-Credentials, con una estructura fácil de leer.",
+  "judge_model": "sonnet"
+}

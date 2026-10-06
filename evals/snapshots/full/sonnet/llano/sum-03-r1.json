@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "```markdown\n## Servicio de notificaciones\n\n### Cambios\n- El envío de emails usa Amazon SES en vez de SendGrid.\n- Las plantillas de email están en MJML en vez de HTML.\n- El envío reintenta hasta 3 veces con backoff exponencial (base 2 s).\n\n### Eliminado\n- **Breaking:** se borró el endpoint `/v1/notify`. Ya no tenía uso.\n```\n\nAtención: antes de publicar, verifica que el despliegue tenga las credenciales de SES. Además, quita las de SendGrid si ya no se usan. Agregué la marca **Breaking** porque borrar un endpoint rompe a cualquier cliente que aún lo llame. Quítala si prefieres no mostrarla.",
+  "output_tokens": 613,
+  "thinking_tokens": 352,
+  "input_tokens": 10161,
+  "wall_s": 5.92,
+  "created_at": "2026-10-06T23:07:04.807284+00:00"
+}

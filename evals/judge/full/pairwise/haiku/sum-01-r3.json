@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B está mejor estructurada y lista para pegar en la descripción del PR, con cambios principales y archivos bien separados. A explica el flujo con claridad, pero inventa un 'ID de generación' que no aparece en el diff.",
+  "judge_model": "sonnet"
+}

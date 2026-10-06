@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Para configurar SSH en macOS generas un par de claves, las cargas en el agente y registras la clave pública en GitHub.\n\n1. Revisa si ya tienes claves.\n\n   ```bash\n   ls -al ~/.ssh\n   ```\n\n   Si existe `id_ed25519` y `id_ed25519.pub`, puedes usarlas y saltar al paso 3.\n\n2. Genera una clave nueva.\n\n   ```bash\n   ssh-keygen -t ed25519 -C \"tu_correo@example.com\"\n   ```\n\n   Presiona Enter para aceptar la ruta por defecto. Define una passphrase.\n\n3. Crea o edita `~/.ssh/config`.\n\n   ```\n   Host github.com\n     AddKeysToAgent yes\n     UseKeychain yes\n     IdentityFile ~/.ssh/id_ed25519\n   ```\n\n4. Inicia el agente y agrega la clave. Esto guarda la passphrase en el llavero de macOS.\n\n   ```bash\n   eval \"$(ssh-agent -s)\"\n   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n   ```\n\n5. Copia la clave pública.\n\n   **Peligro:** copia solo el archivo `.pub`. La clave privada (`id_ed25519`, sin extensión) nunca se comparte.\n\n   ```bash\n   pbcopy < ~/.ssh/id_ed25519.pub\n   ```\n\n6. Registra la clave en GitHub.\n   1. Abre **Settings → SSH and GPG keys → New SSH key**.\n   2. Escribe un título, por ejemplo \"MacBook personal\".\n   3. Elige el tipo **Authentication Key**.\n   4. Pega la clave y presiona **Add SSH key**.\n\n7. Prueba la conexión.\n\n   ```bash\n   ssh -T git@github.com\n   ```\n\n   La primera vez, SSH pide confirmar la huella del servidor. Compárala con las huellas que GitHub publica en su documentación antes de escribir `yes`. Si todo funciona, verás `Hi <usuario>! You've successfully authenticated`.\n\n8. Usa la URL SSH en tus repositorios.\n\n   ```bash\n   git clone git@github.com:<usuario>/<repo>.git\n   git remote set-url origin git@github.com:<usuario>/<repo>.git\n   ```\n\n   El primer comando clona un repositorio nuevo. El segundo cambia un repositorio que ya tienes con URL HTTPS.\n\nSi `ssh -T` responde `Permission denied (publickey)`, ejecuta `ssh-add -l`. Ese comando muestra si el agente tiene la clave cargada.",
+  "output_tokens": 1488,
+  "thinking_tokens": 580,
+  "input_tokens": 10050,
+  "wall_s": 11.42,
+  "created_at": "2026-10-06T23:09:58.830631+00:00"
+}

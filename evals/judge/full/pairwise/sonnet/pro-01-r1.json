@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más directa y se lee de una vez: resumen inicial, pasos numerosos y sin desvíos, con el aviso de seguridad sobre la clave privada, mientras que B añade secciones extra (identidad de Git, problemas comunes, puerto 443) y una oferta final que no corresponde, y además tiene un salto de paso confuso (paso 3 en lugar de 4).",
+  "judge_model": "sonnet"
+}

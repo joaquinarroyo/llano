@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la estructura y una búsqueda paso a paso con un ejemplo concreto, en frases cortas y fáciles de seguir, y cubre lo esencial (niveles, rangos, orden, index-only scan, límites, índices compuestos, funciones sobre la columna), mientras que A es más extenso y denso, con tablas, muchas secciones y detalles secundarios que dificultan la lectura en una sola pasada.",
+  "judge_model": "sonnet"
+}

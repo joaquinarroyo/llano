@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "Ambas recomiendan Postgres con la misma justificación, pero A es más concreta (menciona impuestos, líneas, dinero real), explica mejor el tradeoff (pensar el esquema antes vs. flexibilidad) y su pregunta final ofrece ejemplos útiles (volumen, consultas, experiencia del equipo).",
+  "judge_model": "sonnet"
+}

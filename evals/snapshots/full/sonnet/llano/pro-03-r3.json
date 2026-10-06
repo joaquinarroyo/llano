@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en producción y `pg_restore` en tu máquina. El formato custom (`-Fc`) comprime el archivo y permite restaurar de forma selectiva.\n\n**Atención:** `pg_dump` solo lee, pero consume I/O y CPU en producción. Si es posible, hazlo desde una réplica o en un horario de baja carga.\n\n**1. Haz el backup**\n\n```bash\npg_dump -h PROD_HOST -p 5432 -U PROD_USER -d PROD_DB \\\n  -Fc --no-owner --no-privileges \\\n  -f backup.dump\n```\n\n- `-Fc` genera el formato custom comprimido.\n- `--no-owner --no-privileges` evita errores por roles que no existen en tu máquina.\n- `pg_dump` pide la contraseña. Para evitarlo, define `PGPASSWORD` o usa `~/.pgpass`.\n- La versión de `pg_dump` debe ser igual o mayor que la del servidor. Verifícala con `pg_dump --version`.\n\n**2. Crea la base local**\n\n```bash\ncreatedb -h localhost -U postgres mi_base_local\n```\n\n**3. Restaura**\n\n```bash\npg_restore -h localhost -U postgres -d mi_base_local \\\n  --no-owner --no-privileges -j 4 backup.dump\n```\n\n- `-j 4` restaura con 4 procesos en paralelo.\n- Si la base ya existe y tiene datos, agrega `--clean --if-exists`.\n- Si la restauración muestra errores por extensiones (por ejemplo `postgis`), instálalas en tu Postgres local y repite.\n\n**4. Verifica**\n\n```bash\npsql -h localhost -U postgres -d mi_base_local -c '\\dt'\n```\n\nCompara también el conteo de filas de algunas tablas clave con producción.\n\n**Peligro:** el backup contiene datos reales, posiblemente datos personales. No lo subas a un repositorio ni a un servicio externo. Bórralo cuando termines. Si trabajas con datos sensibles, anonimízalos después de restaurar.\n\n**Variante para bases grandes:** si no quieres guardar el archivo en disco, canaliza el dump directo a la restauración con formato plano:\n\n```bash\npg_dump -h PROD_HOST -U PROD_USER -d PROD_DB --no-owner --no-privileges \\\n  | psql -h localhost -U postgres -d mi_base_local\n```\n\nEsta variante no se puede paralelizar y no se reanuda si falla a la mitad.",
+  "output_tokens": 1021,
+  "thinking_tokens": 155,
+  "input_tokens": 10056,
+  "wall_s": 8.23,
+  "created_at": "2026-10-06T23:12:52.120018+00:00"
+}

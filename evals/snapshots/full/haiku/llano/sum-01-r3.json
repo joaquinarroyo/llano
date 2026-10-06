@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Aquí va la descripción del PR en llano:\n\n---\n\n**Descripción**\n\nAgrega rotación de refresh tokens y detección de reutilización.\n\nCuando el cliente usa un refresh token para obtener uno nuevo, el antiguo se invalida. Si el cliente intenta usar el token viejo (robo o copia), la solicitud falla.\n\nLos cambios:\n\n- `src/auth/tokens.ts`: lógica de rotación y validación.\n- `src/auth/middleware.ts`: verifica si el token se reutilizó.\n- `tests/auth/tokens.test.ts`: 96 líneas de tests para reutilización.\n- `package.json`: jsonwebtoken 9.0.0 → 9.0.2.\n\nFlujo: el cliente envía un refresh token. El servidor devuelve uno nuevo e invalida el viejo. Los tokens nuevos tienen un ID de generación para detectar reutilización.\n\n---\n\nSi necesitas más detalle (por ejemplo, el comportamiento exacto ante reutilización), dímelo.",
+  "output_tokens": 592,
+  "thinking_tokens": 329,
+  "input_tokens": 10067,
+  "wall_s": 6.91,
+  "created_at": "2026-10-06T23:04:33.435683+00:00"
+}

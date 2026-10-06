@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Describe bien el bucle y la solución con handler o dependencias primitivas, pero no menciona que React corta con el error de profundidad máxima ni que la forma funcional sola no basta; además afirma que incluir filters.page causaría el mismo bucle infinito, cuando en realidad impediría paginar al resetear page a 1 en cada cambio.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Postgres.** Los datos de facturación son estructurados y necesitan integridad transaccional (no puedes perder dinero ni permitir inconsistencias entre facturas e intentos de pago).\n\nMongoDB gana en flexibilidad de esquema, pero eso aquí es un lujo que no necesitas. El trade-off: Postgres te da garantías ACID y auditoría sólida, MongoDB te daría más libertad si el esquema cambia mucho. Para facturación, elige Postgres.",
+  "output_tokens": 462,
+  "thinking_tokens": 335,
+  "input_tokens": 9906,
+  "wall_s": 5.8,
+  "created_at": "2026-10-06T23:05:04.526122+00:00"
+}

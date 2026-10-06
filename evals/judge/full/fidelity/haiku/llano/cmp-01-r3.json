@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre ACID/datos estructurados, recomienda Postgres y menciona que MongoDB conviene con esquema cambiante; no menciona JSONB ni integridad referencial/reportes SQL.",
+  "judge_model": "sonnet"
+}

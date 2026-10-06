@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica estructura, búsqueda, rendimiento, operadores soportados y costos de forma compacta y fácil de seguir en una sola lectura, sin omitir lo esencial, mientras que B es más completo pero mucho más largo y añade temas tangenciales (bitmap scan, deduplicación, MVCC, skip scan) que dispersan la explicación.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "La respuesta describe una espera fija de 2 s en lugar de backoff exponencial, e inventa que el endpoint estaba deprecado hace 6 meses.",
+  "judge_model": "sonnet"
+}

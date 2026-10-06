@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "### Changed\n- **Servicio de notificaciones:** migré SendGrid → Amazon SES.\n- Plantillas de email: HTML → MJML.\n- Reintentos con backoff exponencial (3 intentos, espera base 2 s).\n\n### Removed\n- Endpoint `/v1/notify` (deprecado).\n\n**Status:** 132 tests pasan.",
+  "output_tokens": 864,
+  "thinking_tokens": 768,
+  "input_tokens": 9981,
+  "wall_s": 9.75,
+  "created_at": "2026-10-06T23:02:30.820147+00:00"
+}

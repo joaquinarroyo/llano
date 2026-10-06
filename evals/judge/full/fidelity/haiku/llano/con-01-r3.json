@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "No menciona DELETE ni afirma que POST no es idempotente, e incorrectamente sugiere que PUT necesita un ID de idempotencia (PUT ya es idempotente por definición).",
+  "judge_model": "sonnet"
+}

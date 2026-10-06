@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "`git rebase` mueve tus commits a una nueva base. Toma los commits de tu rama, los quita y los vuelve a aplicar uno por uno encima de otra rama. `git merge` no mueve nada. Crea un commit nuevo que une las dos historias.\n\n## Punto de partida\n\nLas dos ramas salen del commit `B`. `main` avanzó con `D` y `E`. Tu rama `feature` tiene `C1` y `C2`.\n\n```\n        C1──C2          feature\n       /\nA──B──D──E              main\n```\n\n## Con `git merge main` (desde `feature`)\n\nGit crea un commit de merge `M` con dos padres. Los commits originales no cambian.\n\n```\n        C1──C2──M       feature\n       /       /\nA──B──D──E────┘         main\n```\n\n## Con `git rebase main` (desde `feature`)\n\nGit aplica `C1` y `C2` otra vez encima de `E`. El resultado son commits nuevos (`C1'`, `C2'`) con hashes nuevos. La historia queda lineal.\n\n```\nA──B──D──E──C1'──C2'    feature\n         ▲\n         main\n```\n\n## Diferencias\n\n| Aspecto | `merge` | `rebase` |\n|---|---|---|\n| Historia | Conserva las ramas tal como ocurrieron | Queda lineal |\n| Commits existentes | No cambian | Se reescriben (hashes nuevos) |\n| Commit extra | Sí, el commit de merge | No |\n| Conflictos | Los resuelves una vez | Los puedes resolver una vez por cada commit aplicado |\n| Seguro en ramas compartidas | Sí | No |\n\n## Cuándo usar cada uno\n\n- **`rebase`:** para actualizar tu rama local con los cambios de `main` antes de abrir un PR. También para limpiar commits con `git rebase -i`.\n- **`merge`:** para integrar una rama en `main`, o en cualquier rama que otras personas ya descargaron.\n\n**Peligro:** no hagas rebase de commits que ya publicaste en una rama compartida. El rebase cambia los hashes. Las copias de otras personas quedan con una historia distinta, y después de `git push --force` pueden perder trabajo. Si necesitas forzar el push en tu propia rama, usa `git push --force-with-lease`.\n\nSi un rebase sale mal, ejecuta `git rebase --abort` durante el proceso. Si ya terminó, `git reflog` muestra el hash anterior y puedes volver con `git reset --hard <hash>`.",
+  "output_tokens": 900,
+  "thinking_tokens": 38,
+  "input_tokens": 10050,
+  "wall_s": 9.65,
+  "created_at": "2026-10-06T23:14:52.198629+00:00"
+}

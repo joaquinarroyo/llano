@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Usa sesiones si es una web tradicional. Usa JWT si es una SPA o mobile app.\n\n**Sesiones:** Django las configura por defecto. El servidor guarda el estado de cada usuario en memoria o base de datos. Simple, seguro, bueno para apps que sirven HTML. El tradeoff: no escala bien si tienes muchos servidores.\n\n**JWT:** El cliente guarda un token firmado. El servidor no necesita estado. Bueno para SPAs, mobile apps y APIs. El tradeoff: más complejo de configurar, tienes que manejar la expiración y la revocación.\n\n¿Tu app sirve HTML desde Django o es una SPA con API separada?",
+      "output_tokens": 471,
+      "thinking_tokens": 301,
+      "input_tokens": 9904
+    },
+    {
+      "text": "Entonces usa JWT.\n\nLas sesiones con cookies no funcionan bien en React Native. JWT es mejor porque el cliente móvil guarda el token y lo envía en cada solicitud sin depender de cookies.\n\n**Setup en Django:**\n- Instala `djangorestframework-simplejwt`\n- Configura los endpoints para login (devuelve el token) y refresh\n- Protege tus vistas con `@permission_classes([IsAuthenticated])`\n\n**En React Native:**\n- Guarda el token en `AsyncStorage`\n- Envíalo en el header `Authorization: Bearer <token>` en cada solicitud\n- Cuando expire, usa el refresh token para pedir uno nuevo\n\n¿Quieres que te muestre cómo configurar Django con JWT?",
+      "output_tokens": 384,
+      "thinking_tokens": 198,
+      "input_tokens": 10434
+    },
+    {
+      "text": "Advertencia: mantener dos mecanismos de autenticación es más complejo y propenso a errores. Mejor usa JWT para ambos. Django lo soporta y es más simple que sesiones + tokens.\n\nSi insistes en sesiones + tokens:\n\n**Librería:** `djangorestframework-simplejwt`\n\n**Cuidados:**\n\n1. **Secret seguro.** Genera una clave larga y aleatoria en `SECRET_KEY`. Nunca la commits.\n\n2. **Tokens cortos.** Expiran en 5-15 minutos. Usa refresh tokens (válidos 7-30 días) para pedir nuevos.\n\n3. **Verificar la firma.** Django verifica automáticamente. No confíes en los claims del token.\n\n4. **HTTPS obligatorio.** Los tokens en el header `Authorization` se transmiten en texto. Sin HTTPS, alguien los roba.\n\n5. **CORS correcto.** Configura `django-cors-headers` para permitir solo tu mobile app y web.\n\n6. **Revocar tokens.** JWT no se puede revocar hasta que expire. Si necesitas logout inmediato en mobile, mantén una blacklist en caché (Redis).\n\n7. **Almacenar en mobile.** React Native: `AsyncStorage` está bien. No uses localStorage (no existe en mobile).\n\n¿Quieres el setup concreto de Django o la integración en React Native?",
+      "output_tokens": 665,
+      "thinking_tokens": 312,
+      "input_tokens": 10893
+    }
+  ],
+  "created_at": "2026-10-06T23:03:36.968689+00:00"
+}

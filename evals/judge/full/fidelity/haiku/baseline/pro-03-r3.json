@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre pg_dump -Fc, pg_restore/psql y createdb (aunque lo marca como opcional), pero no menciona la compatibilidad de versiones de las herramientas ni el cuidado de datos sensibles.",
+  "judge_model": "sonnet"
+}

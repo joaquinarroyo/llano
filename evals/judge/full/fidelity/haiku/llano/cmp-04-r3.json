@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "No menciona workflows/tareas encadenadas de Celery; afirma sin base que Celery se necesita para deadletter queues (RQ tiene FailedJobRegistry y Celery no trae DLQ nativa) y un límite arbitrario de 'ideal < 100 workers' para RQ.",
+  "judge_model": "sonnet"
+}

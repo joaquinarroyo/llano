@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da la regla en la primera línea, una tabla comparativa compacta y una lista de decisión de tres pasos, cubriendo lo esencial (dirección, reconexión, límite de 6 conexiones, escalado, binario) de forma más rápida de leer, mientras que B es más largo y repite información.",
+  "judge_model": "sonnet"
+}

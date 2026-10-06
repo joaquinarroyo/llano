@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da la misma recomendación con una tabla más completa (velocidad, seguridad de supply chain), ejemplos de filtros concretos y un setup mínimo con la advertencia de que pnpm no orquesta tareas, mientras que B omite la velocidad y es menos útil en el setup.",
+  "judge_model": "sonnet"
+}

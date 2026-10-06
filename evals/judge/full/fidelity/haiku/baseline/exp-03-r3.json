@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Cubre estructura, O(log n) y uso en rango/orden; menciona el costo en escrituras pero no el espacio en disco, ni que el planificador puede ignorar el índice cuando se lee gran parte de la tabla; errores: '~20 búsquedas' (con B-tree de alto fanout son ~3-4 niveles, no saltos binarios) y LIKE con prefijo sin aclarar que requiere collation C u operator class text_pattern_ops.",
+  "judge_model": "sonnet"
+}

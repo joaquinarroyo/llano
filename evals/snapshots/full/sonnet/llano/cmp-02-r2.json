@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa **pnpm**. Para un monorepo nuevo es la opción con mejor equilibrio entre estrictez, velocidad y soporte de workspaces.\n\n| | npm | Yarn (4, Berry) | pnpm |\n|---|---|---|---|\n| Workspaces | Sí, desde npm 7 | Sí, con `yarn workspaces foreach` | Sí, con `pnpm-workspace.yaml` y `--filter` |\n| Instalación | Copia los paquetes en cada `node_modules` | Por defecto usa Plug'n'Play, sin `node_modules` | Un almacén global y enlaces simbólicos |\n| Dependencias fantasma | Permite importar paquetes que no declaraste | Las bloquea con Plug'n'Play | Las bloquea por defecto |\n| Referencias internas | Versión o ruta | Protocolo `workspace:` | Protocolo `workspace:` |\n| Configuración | Ninguna | Más: `.yarnrc.yml`, a veces parches para herramientas | Poca |\n| Instalación previa | Viene con Node | Requiere Corepack o instalarlo | Requiere Corepack o instalarlo |\n\nUna dependencia fantasma es un paquete que importas sin declararlo en tu `package.json`. Funciona hoy porque otro paquete lo instaló. Se rompe cuando ese otro paquete cambia.\n\n## Cuándo elegir cada uno\n\n- **pnpm:** es el valor por defecto para un monorepo nuevo. Ahorra espacio en disco y detecta dependencias no declaradas. Su comando `--filter` permite ejecutar scripts solo en los paquetes afectados.\n- **npm:** elígelo si quieres cero herramientas extra y el monorepo es pequeño. Los workspaces de npm son más básicos y la instalación es más lenta.\n- **Yarn:** elígelo si necesitas Plug'n'Play o `zero-installs`. Algunas herramientas no son compatibles con Plug'n'Play. Evita Yarn Classic (1.x): está en mantenimiento y no recibe funciones nuevas.\n\nNo medí tiempos de instalación en tu proyecto. La velocidad depende del tamaño del monorepo y de la caché.\n\n## Siguiente paso\n\nUn gestor de paquetes no orquesta tareas. Para compilar y probar solo lo que cambió, agrega Turborepo o Nx encima de pnpm.\n\nConfiguración mínima:\n\n```\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n```\n\nSi me dices qué lenguaje y qué herramientas usa el equipo, te recomiendo también el orquestador.",
+  "output_tokens": 1443,
+  "thinking_tokens": 513,
+  "input_tokens": 10057,
+  "wall_s": 11.93,
+  "created_at": "2026-10-06T23:10:20.248511+00:00"
+}

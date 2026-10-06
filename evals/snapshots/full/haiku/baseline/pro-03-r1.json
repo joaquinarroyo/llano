@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Backup y restauración de PostgreSQL\n\n## Hacer el backup desde producción\n\n```bash\n# Opción 1: Dump en formato SQL (texto plano)\npg_dump -h <host> -U <usuario> -d <nombre_bd> > backup.sql\n\n# Opción 2: Dump en formato binario (más compacto)\npg_dump -h <host> -U <usuario> -d <nombre_bd> -Fc > backup.dump\n```\n\nCon contraseña interactiva, agrega `-W`. Para evitarla, usa una [`.pgpass`](https://www.postgresql.org/docs/current/libpq-pgpass.html).\n\n## Restaurar en tu máquina local\n\n```bash\n# Primero, crea la base de datos localmente\ncreatedb -U <usuario_local> <nombre_bd>\n\n# Restaura desde el backup\n# Si es SQL:\npsql -U <usuario_local> -d <nombre_bd> < backup.sql\n\n# Si es formato binario:\npg_restore -U <usuario_local> -d <nombre_bd> backup.dump\n```\n\n## Tips de producción\n\n- **Formato binario**: Usa `-Fc` en producción para backups más pequeños y paralelos: `pg_dump -Fc -j 4 ...`\n- **Con datos grandes**: Considera `--jobs` para restauración más rápida: `pg_restore -j 4 ...`\n- **Excluir datos**: Si solo necesitas esquema: `pg_dump -s ...`\n- **Transferencia remota**: `pg_dump ... | gzip > backup.sql.gz` + transferencia SSH\n- **Verificar**: Antes de restaurar, comprueba que el dump se creó correctamente\n\n¿Necesitas ayuda con algún paso específico o tienes una situación particular en producción?",
+  "output_tokens": 611,
+  "thinking_tokens": 153,
+  "input_tokens": 3402,
+  "wall_s": 6.86,
+  "created_at": "2026-10-06T23:00:26.348333+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica el teorema, desmiente el 'elige 2 de 3', da una tabla CP/AP y presenta PACELC con una conclusión práctica clara en menos texto, mientras que B, aunque más completa, es más densa y larga para una sola lectura.",
+  "judge_model": "sonnet"
+}

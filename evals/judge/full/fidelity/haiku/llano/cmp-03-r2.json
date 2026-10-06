@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "No menciona la reconexión automática de SSE ni que corra sobre HTTP (se acepta lo implícito); la tabla dice que IE 10 no soporta WebSocket, pero sí lo soporta (IE 9 y anteriores no).",
+  "judge_model": "sonnet"
+}

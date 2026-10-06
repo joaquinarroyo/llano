@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "SHA-256 es un **hash criptográfico seguro**, pero no está diseñado para proteger contraseñas. Aquí están las razones principales:\n\n## Velocidad excesiva\nSHA-256 es muy rápido por diseño (millones de hashes por segundo). Un atacante puede hacer ataques de fuerza bruta a escala masiva. En cambio, los algoritmos para contraseñas deben ser **lentos intencionalmente**.\n\n## Sin sal (salt) incorporada\nSHA-256 no incluye un valor aleatorio. Esto significa:\n- Dos usuarios con la misma contraseña tendrán el **mismo hash**\n- Permiten ataques de **rainbow tables** (tablas precomputadas)\n- Los algoritmos modernos incluyen salt único por contraseña\n\n## Sin iteración (stretching)\nLos algoritmos modernos aplican el hash cientos de miles de veces. Esto es computacionalmente costoso, ralentizando ataques de fuerza bruta. SHA-256 se aplica una sola vez.\n\n## No adaptable\nSHA-256 tiene una velocidad fija. A medida que el hardware mejora, se vuelve más vulnerable. Los algoritmos modernos pueden aumentar la cantidad de iteraciones.\n\n## Algoritmos correctos para contraseñas\n- **Argon2** (mejor opción actual)\n- **bcrypt** (probado y confiable)\n- **scrypt** (resistente a ataques de GPU)\n- **PBKDF2** (alternativa aceptable con suficientes iteraciones)\n\n**Resumen**: SHA-256 es seguro para otros propósitos (verificar integridad de archivos, blockchain), pero para contraseñas necesitas un algoritmo diseñado específicamente para ser costoso computacionalmente.",
+  "output_tokens": 876,
+  "thinking_tokens": 436,
+  "input_tokens": 3402,
+  "wall_s": 9.12,
+  "created_at": "2026-10-06T23:05:28.603635+00:00"
+}

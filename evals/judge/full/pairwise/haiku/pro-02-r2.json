@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B da los pasos seguros de forma clara y correcta, incluye cómo identificar el hash y cubre múltiples commits, mientras que A contiene un error (llama rebase a force-with-lease y afirma que 'el revert es reversible' sin matices) y añade ruido como el tip de vim.",
+  "judge_model": "sonnet"
+}

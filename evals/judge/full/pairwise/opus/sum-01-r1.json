@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B entrega una descripción de PR concisa y lista para pegar, con los hashes de commit, y marca con precisión los dos puntos inciertos (middleware y alcance de la invalidación), mientras que A es más largo, repite información en las secciones Cambios y Commits e inventa un apartado 'Cómo probar' que no se puede deducir de los datos.",
+  "judge_model": "sonnet"
+}

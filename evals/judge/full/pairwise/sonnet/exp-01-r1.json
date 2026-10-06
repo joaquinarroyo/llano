@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica el modelo central (un hilo, event loop, libuv, fases principales, microtasks, bloqueo por CPU) de forma compacta y fácil de leer en una sola pasada, mientras que B, aunque más completa, es mucho más larga y densa para una primera lectura.",
+  "judge_model": "sonnet"
+}

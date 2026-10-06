@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más corta y directa, está lista para pegar en un bloque markdown y cubre los cuatro commits y los archivos sin inventar detalles, mientras que A repite los archivos en una sección aparte y afirma que se invalida el token vigente, algo que los commits no dicen.",
+  "judge_model": "sonnet"
+}

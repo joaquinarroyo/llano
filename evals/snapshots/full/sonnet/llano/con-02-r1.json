@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "El teorema CAP dice que un sistema distribuido con datos replicados no puede garantizar a la vez consistencia, disponibilidad y tolerancia a particiones. Sigue siendo útil, pero solo como punto de partida.\n\n## Qué dice\n\nEric Brewer lo planteó como conjetura en 2000. Seth Gilbert y Nancy Lynch lo demostraron en 2002. Las tres propiedades significan esto:\n\n| Propiedad | Significado exacto |\n|---|---|\n| Consistencia (C) | Linealizabilidad. Toda lectura ve la escritura más reciente. |\n| Disponibilidad (A) | Todo nodo que funciona responde a cada solicitud. |\n| Tolerancia a particiones (P) | El sistema sigue operando aunque la red pierda mensajes entre nodos. |\n\nLas particiones de red ocurren en la práctica. Por eso no puedes renunciar a P. La elección real es esta: durante una partición, el sistema elige entre C y A.\n\n- **CP:** el sistema rechaza o retrasa solicitudes para no devolver datos desactualizados. Ejemplos: etcd, ZooKeeper.\n- **AP:** el sistema responde siempre, pero puede devolver datos viejos. Ejemplos: Cassandra y DynamoDB con lecturas eventuales.\n\nSin partición, puedes tener C y A a la vez.\n\n## Si sigue siendo relevante\n\nSí, como modelo mental. Explica por qué no existe un sistema que nunca falle y siempre sea correcto. Pero tiene límites:\n\n1. **Solo describe el caso de la partición.** Ignora la latencia, que afecta a tu sistema todos los días. El modelo PACELC (Daniel Abadi, 2012) lo completa: si hay partición, elige entre A y C. Si no la hay, elige entre latencia y consistencia.\n2. **Las definiciones son estrechas.** La \"C\" de CAP no es la \"C\" de ACID. La \"A\" no es \"99.99 % de uptime\".\n3. **Las etiquetas CP y AP simplifican demasiado.** Muchas bases de datos son configurables por operación. Cassandra, por ejemplo, permite elegir el nivel de consistencia en cada consulta. Martin Kleppmann publicó una crítica conocida con el título \"Please stop calling databases CP or AP\".\n4. **Hay modelos intermedios.** Existen consistencia causal, lecturas de sesión y consistencia eventual acotada. CAP no los describe.\n\nPara decidir con CAP, hazte esta pregunta: ¿qué pasa en mi negocio si un usuario ve un dato viejo, y qué pasa si recibe un error? La respuesta guía la elección. Para el detalle fino, usa PACELC y los modelos de consistencia.",
+  "output_tokens": 1403,
+  "thinking_tokens": 434,
+  "input_tokens": 10049,
+  "wall_s": 12.18,
+  "created_at": "2026-10-06T23:07:56.787050+00:00"
+}

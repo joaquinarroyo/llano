@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B da la misma recomendación y tabla comparativa, y además añade un ejemplo concreto de código con django-rq, precisa mejor la alternativa django.tasks (backends intercambiables, migración sin reescribir tareas) y cierra con una pregunta útil, sin volverse más difícil de leer.",
+  "judge_model": "sonnet"
+}

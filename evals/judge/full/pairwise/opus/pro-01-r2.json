@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B sigue un orden lógico y limpio (el salto 'al paso 3' es correcto), agrupa la configuración del agente y llavero en un solo paso, y añade solución de problemas comunes; A tiene un salto erróneo ('saltar al paso 4' se salta el agregado al agente) y su orden es más confuso.",
+  "judge_model": "sonnet"
+}

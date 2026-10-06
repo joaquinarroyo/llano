@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica la causa con un ejemplo concreto, avisa que los literales exactos darían 90.0, ordena las opciones de menor a mayor esfuerzo, muestra una función `Decimal` completa con su test y cierra con una recomendación clara.",
+  "judge_model": "sonnet"
+}

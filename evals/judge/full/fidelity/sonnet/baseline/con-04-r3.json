@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos: definición como atajo con costo futuro, intereses, deuda consciente aceptable, cuantificar y planificar pago, y traducción a velocidad/riesgo/costo; no hay afirmaciones técnicamente incorrectas.",
+  "judge_model": "sonnet"
+}

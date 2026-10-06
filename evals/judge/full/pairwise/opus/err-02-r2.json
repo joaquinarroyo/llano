@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A advierte correctamente que con price=100.0 y discount=0.1 Python da 90.0, así que el error viene de otro valor, y B afirma sin comprobarlo que esos valores producen 89.99999999999999; ambas dan las mismas soluciones (approx y Decimal).",
+  "judge_model": "sonnet"
+}

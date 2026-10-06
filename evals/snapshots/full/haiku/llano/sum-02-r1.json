@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Incidente: latencia del checkout — resuelto**\n\n**Cronología**\n• 09:12: latencia p95 subió de 300 ms a 4 s\n• 09:20: detectamos la causa — un job de reindexado de Elasticsearch saturó el cluster\n• 09:31: pausamos el job\n• 09:35: latencia volvió a 300 ms\n\n**Impacto**\n• 212 usuarios abandonaron el checkout\n• Sin pérdida de pedidos\n\n**Acciones**\n• Reprogramar el job a las 03:00\n• Alerta: CPU del cluster ≥ 80 %",
+  "output_tokens": 2147,
+  "thinking_tokens": 1980,
+  "input_tokens": 10036,
+  "wall_s": 20.46,
+  "created_at": "2026-10-06T23:00:24.231087+00:00"
+}

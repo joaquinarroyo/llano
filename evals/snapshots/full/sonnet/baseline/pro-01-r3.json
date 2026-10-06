@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Configurar una clave SSH para GitHub en macOS\n\n## 1. Comprobar si ya tienes una clave\n\n```bash\nls -al ~/.ssh\n```\n\nSi ves `id_ed25519` y `id_ed25519.pub`, ya tienes una y puedes saltar al paso 3. Si no existe la carpeta o está vacía, continúa.\n\n## 2. Generar la clave\n\n```bash\nssh-keygen -t ed25519 -C \"tu_correo@ejemplo.com\"\n```\n\n- Presiona Enter para aceptar la ruta por defecto (`~/.ssh/id_ed25519`).\n- Define una **passphrase** (recomendado). macOS la guardará en el llavero para que no la escribas cada vez.\n\n## 3. Agregar la clave al ssh-agent y al llavero\n\nAsegúrate de que exista el archivo de configuración y añádele esto:\n\n```bash\ntouch ~/.ssh/config\nopen -e ~/.ssh/config\n```\n\nContenido:\n\n```\nHost github.com\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519\n```\n\nLuego añade la clave al agente:\n\n```bash\nssh-add --apple-use-keychain ~/.ssh/id_ed25519\n```\n\n(En versiones antiguas de macOS era `ssh-add -K`.)\n\n## 4. Copiar la clave pública\n\n```bash\npbcopy < ~/.ssh/id_ed25519.pub\n```\n\nEsto copia la clave pública al portapapeles. **Nunca compartas** el archivo sin `.pub`, que es la clave privada.\n\n## 5. Agregarla a GitHub\n\n1. Ve a **GitHub → Settings → SSH and GPG keys** (https://github.com/settings/keys).\n2. Haz clic en **New SSH key**.\n3. Ponle un título (por ejemplo, \"MacBook personal\"), deja el tipo en *Authentication Key* y pega la clave.\n4. Guarda con **Add SSH key**.\n\n## 6. Probar la conexión\n\n```bash\nssh -T git@github.com\n```\n\nLa primera vez te preguntará si confías en el host; verifica que la huella coincida con las [publicadas por GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) y responde `yes`. Deberías ver:\n\n```\nHi usuario! You've successfully authenticated, but GitHub does not provide shell access.\n```\n\n## 7. Usar SSH en tus repositorios\n\nClona con la URL SSH:\n\n```bash\ngit clone git@github.com:usuario/repo.git\n```\n\nSi ya tienes un repo clonado por HTTPS, cámbialo:\n\n```bash\ngit remote set-url origin git@github.com:usuario/repo.git\n```\n\n## Problemas comunes\n\n- **`Permission denied (publickey)`**: comprueba con `ssh-add -l` que la clave esté cargada y que hayas pegado el archivo `.pub` correcto en GitHub.\n- **Pide la passphrase en cada uso**: revisa que `UseKeychain yes` y `AddKeysToAgent yes` estén en `~/.ssh/config`.\n- **Varias cuentas de GitHub**: usa claves distintas y define un `Host` alias para cada una en `~/.ssh/config`.\n\nSi quieres, puedo ayudarte a ejecutar los comandos o a configurar varias cuentas.",
+  "output_tokens": 1194,
+  "thinking_tokens": 0,
+  "input_tokens": 1567,
+  "wall_s": 8.07,
+  "created_at": "2026-10-06T23:12:42.935096+00:00"
+}

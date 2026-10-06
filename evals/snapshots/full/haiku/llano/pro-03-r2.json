@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa `pg_dump` para exportar la base de datos en producción y luego `psql` o `pg_restore` para importarla localmente.\n\n## Paso 1: Exportar la base de datos\n\nConéctate al servidor de producción y ejecuta:\n\n```bash\npg_dump --host=<host> --user=<usuario> --no-password <nombre_bd> > backup.sql\n```\n\nSi la base es grande, comprime el archivo:\n\n```bash\npg_dump --host=<host> --user=<usuario> --no-password <nombre_bd> | gzip > backup.sql.gz\n```\n\n## Paso 2: Descargar el backup\n\nDesde tu máquina local, usa `scp`:\n\n```bash\nscp <usuario_servidor>@<host>:~/backup.sql.gz .\n```\n\n## Paso 3: Crear la base de datos local\n\n```bash\ncreatedb -U postgres <nombre_bd_local>\n```\n\n## Paso 4: Restaurar\n\nSi es un dump SQL:\n\n```bash\npsql -U postgres -d <nombre_bd_local> < backup.sql\n```\n\nSi es comprimido:\n\n```bash\ngunzip -c backup.sql.gz | psql -U postgres -d <nombre_bd_local>\n```\n\n## Detalles importantes\n\n- **Atención:** verifica que tienes permisos en el servidor y que las credenciales de la base no son secretas en el dump. Usa `pg_dump --no-owner --no-acl` si trabajas con roles diferentes.\n- Reemplaza `<host>`, `<usuario>` y `<nombre_bd>` con los valores reales.\n- Si el servidor pide contraseña, usa `PGPASSWORD=<contraseña>` antes del comando, o configura `~/.pgpass`.",
+  "output_tokens": 766,
+  "thinking_tokens": 315,
+  "input_tokens": 9908,
+  "wall_s": 8.38,
+  "created_at": "2026-10-06T23:02:43.072192+00:00"
+}

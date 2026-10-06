@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más compacta y se entiende de un vistazo gracias a la tabla comparativa, las secciones breves y la regla de decisión final, e incluye lo técnico esencial (reconexión, límite de 6 conexiones, headers en el handshake, bus de mensajes), mientras que B repite información en varias secciones y es más larga.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B entrega la descripción en un bloque markdown listo para copiar, más concisa, y señala las mismas dudas clave (alcance de la invalidación y cambio en middleware) con explicación clara y sin perder información técnica.",
+  "judge_model": "sonnet"
+}

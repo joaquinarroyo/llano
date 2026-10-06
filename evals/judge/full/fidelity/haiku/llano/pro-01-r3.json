@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre generar, ssh-add, copiar la clave pública a GitHub y ssh -T; solo menciona clonar 'con SSH' sin mostrar la URL git@github.com:..., y recomendar dejar la passphrase vacía es mala práctica pero no un error técnico.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Cubre revocar, nueva clave y logs, pero no dice que borrar la clave del código no basta por la historia de git, ni que la clave sigue comprometida tras limpiar; además el comando filter-branch reemplaza la clave vieja por la nueva en toda la historia (filtrando la nueva) y la verificación en GitHub es dudosa.",
+  "judge_model": "sonnet"
+}

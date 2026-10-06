@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "En una rama compartida, lo seguro es **`git revert`**: crea un commit nuevo que deshace los cambios, sin reescribir el historial. Evita `git reset` + `push --force` en `main`, porque obliga a todo el equipo a reconciliar sus copias locales.\n\n## Pasos\n\n1. **Actualiza tu copia local**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -n 20\n   ```\n\n3. **Revisa lo que vas a deshacer**\n   ```bash\n   git show <hash>\n   ```\n\n4. **Revierte**\n   ```bash\n   git revert <hash>\n   ```\n   Se abrirá el editor con un mensaje por defecto (`Revert \"...\"`). Añade el motivo si quieres.\n\n   - Si el commit es un **merge**, necesitas indicar el padre: `git revert -m 1 <hash>`.\n   - Si son **varios commits**: `git revert <viejo>^..<nuevo>` (crea un revert por cada uno), o `git revert -n ...` para dejarlos todos en un solo commit.\n\n5. **Verifica antes de subir**: compila y ejecuta los tests. Si hay conflictos, resuélvelos, luego `git add` y `git revert --continue`.\n\n6. **Sube el cambio**\n   ```bash\n   git push origin main\n   ```\n   Si `main` está protegida, hazlo mediante una rama y un PR:\n   ```bash\n   git checkout -b revert-<descripcion>\n   git push -u origin revert-<descripcion>\n   ```\n\n7. **Avisa al equipo** para que hagan `git pull`. No necesitan hacer nada especial, porque el historial solo avanza.\n\n## Cosas a tener en cuenta\n\n- **Si el commit incluía migraciones de base de datos, despliegues o cambios de configuración**, el revert de código no los deshace. Hay que gestionarlos aparte.\n- **Si luego quieres volver a introducir el cambio**, no puedes simplemente hacer merge de la rama original: Git considera que ya está aplicado. Tendrás que revertir el revert (`git revert <hash-del-revert>`) o cherry-pick de los commits originales.\n- **Si el commit contiene un secreto** (contraseña, token, clave), el revert no basta: queda en el historial. Rota la credencial de inmediato y, solo entonces, valora reescribir el historial coordinándolo con el equipo.\n\nSi me dices el hash o la situación concreta (merge, varios commits, rama protegida), te doy los comandos exactos. Ten en cuenta que el directorio actual no es un repositorio git, así que no puedo ejecutarlos desde aquí sin saber en qué repo trabajas.",
+  "output_tokens": 1008,
+  "thinking_tokens": 58,
+  "input_tokens": 1587,
+  "wall_s": 8.07,
+  "created_at": "2026-10-06T23:12:43.884958+00:00"
+}

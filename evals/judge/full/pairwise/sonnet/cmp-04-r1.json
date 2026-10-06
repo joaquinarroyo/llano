@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más corta y se lee de una pasada, con resumen inicial, tabla clara y recomendación final, y conserva las diferencias técnicas clave; A aporta más detalle (transacciones, idempotencia, fiabilidad de Redis) pero es más larga y densa para una sola lectura.",
+  "judge_model": "sonnet"
+}

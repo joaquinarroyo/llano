@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica la causa y da tres soluciones claras con una recomendación coherente (Decimal para dinero), mientras que B incluye llamadas a herramientas fallidas que ensucian la lectura y se contradice al llamar a Decimal la mejor opción pero decir que round() es lo más común.",
+  "judge_model": "sonnet"
+}

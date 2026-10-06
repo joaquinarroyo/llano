@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 1,
+  "notes": "Todos los hechos clave aparecen en cada turno; solo el diagrama del turno 3 es incoherente, porque dice que el recorrido hacia atrás empieza en 2026-09-28 y no en la última entrada del cliente (2026-10-01).",
+  "judge_model": "sonnet"
+}

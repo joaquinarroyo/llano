@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es igual de completo y más fácil de leer de una vez: incluye la duración total (23 min), numera las acciones y añade una advertencia útil, aunque agrega una recomendación no pedida y 'alguien lo programó' suena algo informal.",
+  "judge_model": "sonnet"
+}

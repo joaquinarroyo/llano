@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es una lista numerada lineal y concisa que conserva toda la información técnica clave (advertencia de clave privada, ssh-agent, llavero, verificación de fingerprint, cambio de remote y solución de Permission denied), mientras que A repite contenido y contiene un error al decir que el archivo sin .pub es lo que se copia/comparte de forma confusa y mezcla pasos extra.",
+  "judge_model": "sonnet"
+}

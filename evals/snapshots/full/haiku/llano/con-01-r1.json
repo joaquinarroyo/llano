@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación idempotente produce el mismo resultado siempre, incluso si la ejecutas múltiples veces. En una API, significa que enviar la misma solicitud dos o tres veces tiene el mismo efecto que enviarla una sola vez.\n\n**Importa porque:**\n\n- **Redes no son confiables.** Si el cliente no recibe respuesta, no sabe si la solicitud llegó al servidor o si el servidor respondió pero se perdió la respuesta. Puede reintentar sin riesgo.\n- **Evita datos duplicados.** Sin idempotencia, un reintento podría crear dos registros en vez de uno.\n- **Mejor experiencia.** El usuario puede hacer clic dos veces en un botón sin consecuencias.\n\n**Ejemplos:**\n\n- **GET:** idempotente. Leer los mismos datos 10 veces devuelve lo mismo.\n- **POST de pago con ID único:** idempotente. Si incluyes `idempotency_key=abc123`, el servidor rechaza el cobro duplicado.\n- **DELETE:** idempotente. Borrar un recurso que ya no existe es seguro (devuelve 404).\n- **POST sin ID único:** no idempotente. Dos POST crean dos registros.\n\nPara hacer una API idempotente, el cliente envía un identificador único en cada solicitud (header como `Idempotency-Key`). El servidor lo guarda y rechaza duplicados dentro de una ventana de tiempo (ejemplo: 24 horas).",
+  "output_tokens": 698,
+  "thinking_tokens": 322,
+  "input_tokens": 9900,
+  "wall_s": 8.56,
+  "created_at": "2026-10-06T23:00:52.790612+00:00"
+}

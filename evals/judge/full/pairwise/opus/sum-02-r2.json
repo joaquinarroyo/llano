@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A es más compacto y se lee de un vistazo, con impacto y causa destacados al inicio, y conserva toda la información técnica; B añade una nota extra sobre responsables que no se pidió y agrega ruido.",
+  "judge_model": "sonnet"
+}

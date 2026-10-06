@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "El comando filter-branch es defectuoso (grep fallido aborta el filtro, no usa --all) y aconseja escribir la clave nueva en la historia pública; la respuesta no dice que actualizar la clave nueva donde se usa, que borrarla del código no basta ni que la clave sigue comprometida tras limpiar.",
+  "judge_model": "sonnet"
+}

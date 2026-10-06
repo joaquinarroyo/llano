@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre ACID/relacional y recomienda Postgres, pero omite JSONB, cuándo conviene MongoDB y las consultas de reportes (solo menciona integridad referencial); afirma que MongoDB sacrifica consistencia, lo cual es una simplificación obsoleta porque soporta transacciones ACID multidocumento desde la 4.0.",
+  "judge_model": "sonnet"
+}

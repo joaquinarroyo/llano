@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A cubre de forma más completa y correcta qué métodos HTTP son idempotentes (GET, PUT, DELETE) y por qué POST no, y explica las claves de idempotencia con el header estándar, mientras que B afirma incorrectamente que PUT necesita ID único y omite DELETE, aunque su ejemplo de transferencia es muy claro.",
+  "judge_model": "sonnet"
+}

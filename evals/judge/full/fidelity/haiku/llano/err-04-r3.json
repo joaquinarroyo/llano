@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    false,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 3,
+  "notes": "La respuesta menciona el índice de PyTorch para +cu118 y ofrece subir la versión de torch, pero no explica la causa (Python 3.13), ni las versiones 2.4.0–2.5.0 vistas por pip, ni el paso RUN como ubicación del fallo; además afirma que 2.1.0 no existe/no está disponible por ser antigua, que --index-url con cu118 funcionará con torch 2.1.0 en Python 3.13 y que 2.5.0 sin sufijo es solo CPU.",
+  "judge_model": "sonnet"
+}

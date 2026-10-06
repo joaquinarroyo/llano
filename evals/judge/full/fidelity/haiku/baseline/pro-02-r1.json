@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre revert, evitar reset y force push, git log y push normal, pero no menciona -m para revertir merge commits.",
+  "judge_model": "sonnet"
+}

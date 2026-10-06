@@ -1,0 +1,19 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos (rotación, invalidación ante reuso, tests, bump 9.0.0→9.0.2, archivos tokens.ts y middleware.ts) sin afirmaciones técnicamente incorrectas; los detalles inferidos están señalados como tentativos.",
+  "judge_model": "sonnet"
+}

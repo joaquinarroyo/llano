@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Genera una clave ed25519, guárdala en el llavero de macOS y agrega la clave pública a tu cuenta de GitHub. Estos son los pasos:\n\n1. **Verifica si ya tienes claves.**\n   ```zsh\n   ls -al ~/.ssh\n   ```\n   Si ves `id_ed25519` y `id_ed25519.pub`, ya tienes una clave. Puedes usarla y saltar al paso 4.\n\n2. **Genera una clave nueva.**\n\n   **Peligro:** si ya existe `~/.ssh/id_ed25519`, `ssh-keygen` pregunta si quieres sobrescribirla. Responde `n`. Si la sobrescribes, pierdes el acceso de esa clave a otros servidores.\n   ```zsh\n   ssh-keygen -t ed25519 -C \"tu_email@ejemplo.com\"\n   ```\n   Pulsa Enter para aceptar la ruta por defecto. Escribe una passphrase. El llavero de macOS la recuerda, así que no la tienes que escribir cada vez.\n\n3. **Inicia el agente SSH.**\n   ```zsh\n   eval \"$(ssh-agent -s)\"\n   ```\n\n4. **Configura SSH para usar el llavero.** Crea o abre `~/.ssh/config`:\n   ```zsh\n   touch ~/.ssh/config\n   open -e ~/.ssh/config\n   ```\n   Agrega este bloque:\n   ```\n   Host github.com\n     AddKeysToAgent yes\n     UseKeychain yes\n     IdentityFile ~/.ssh/id_ed25519\n   ```\n\n5. **Agrega la clave al agente y al llavero.**\n   ```zsh\n   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n   ```\n\n6. **Copia la clave pública.**\n   ```zsh\n   pbcopy < ~/.ssh/id_ed25519.pub\n   ```\n   **Peligro:** copia solo el archivo `.pub`. Nunca compartas `id_ed25519` (sin extensión). Es tu clave privada.\n\n7. **Agrega la clave en GitHub.** Ve a **Settings → SSH and GPG keys → New SSH key**. Escribe un título (por ejemplo, \"MacBook trabajo\"). Deja el tipo en **Authentication Key**. Pega la clave y guarda.\n\n8. **Verifica la conexión.**\n   ```zsh\n   ssh -T git@github.com\n   ```\n   La primera vez, SSH muestra un fingerprint y pide confirmación. Compáralo con los fingerprints que publica GitHub en su documentación (\"GitHub's SSH key fingerprints\"). Si coinciden, escribe `yes`. El resultado correcto es: `Hi <usuario>! You've successfully authenticated...`\n\n9. **Usa URLs SSH en tus repos.** Para clonar:\n   ```zsh\n   git clone git@github.com:usuario/repo.git\n   ```\n   Si un repo existente usa HTTPS, cambia el remoto:\n   ```zsh\n   git remote set-url origin git@github.com:usuario/repo.git\n   ```\n\n**Atención:** si `ssh -T` responde `Permission denied (publickey)`, ejecuta `ssh -vT git@github.com`. Busca en la salida qué archivo de clave intenta usar SSH.",
+  "output_tokens": 1563,
+  "thinking_tokens": 404,
+  "input_tokens": 10046,
+  "wall_s": 13.77,
+  "created_at": "2026-10-06T23:16:00.479918+00:00"
+}

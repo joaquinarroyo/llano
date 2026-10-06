@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B muestra el mensaje de error típico, aclara que el bloqueo lo hace el navegador (por eso curl funciona) y que la solución va en el servidor, e incluye más stacks (Django, Flask) y un ejemplo concreto de proxy en Vite, todo con estructura clara.",
+  "judge_model": "sonnet"
+}

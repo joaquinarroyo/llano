@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre la conexión fallida, el timeout de 30 s (no credenciales) y las revisiones de red/firewall/base activa, pero no menciona el pool de conexiones como causa de la salida con código 1 ni la versión v2.4.1.",
+  "judge_model": "sonnet"
+}

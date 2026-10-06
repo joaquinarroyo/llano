@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Una operación es idempotente si ejecutarla varias veces deja el sistema en el mismo estado que ejecutarla una vez. El resultado final no cambia aunque el cliente repita la solicitud.\n\n## Por qué importa\n\nLas redes fallan. Si el cliente envía una solicitud y no recibe respuesta, no sabe si el servidor la procesó. La única opción segura es reintentar.\n\n- Si la operación es idempotente, el reintento no causa daño.\n- Si no lo es, el reintento puede duplicar un cobro, un pedido o un correo.\n\n## Métodos HTTP\n\n| Método | ¿Idempotente? | Nota |\n|---|---|---|\n| GET | Sí | Solo lee. |\n| PUT | Sí | Reemplaza el recurso con el mismo contenido. |\n| DELETE | Sí | El estado final es el mismo. La respuesta puede cambiar de `204` a `404`. |\n| POST | No | Cada llamada suele crear un recurso nuevo. |\n| PATCH | Depende | `{\"nombre\": \"Ana\"}` es idempotente. `{\"saldo\": \"+10\"}` no lo es. |\n\n## Cómo hacer idempotente un POST\n\nUsa una clave de idempotencia. El cliente genera un identificador único (por ejemplo, un UUID) y lo envía en un header.\n\n```\nPOST /pagos\nIdempotency-Key: 7c1e9a52-3f4b-4d1a-9b0e-2a6f8d3c5e10\n```\n\nEl servidor sigue estos pasos:\n\n1. Busca la clave en su almacenamiento.\n2. Si no existe, procesa la solicitud y guarda la clave junto con la respuesta.\n3. Si ya existe, devuelve la respuesta guardada sin procesar otra vez.\n\nAtención: guarda la clave y ejecuta la operación de forma atómica. Si dos solicitudes con la misma clave llegan a la vez, solo una debe ejecutarse. Una restricción `UNIQUE` en la base de datos lo resuelve.\n\nDefine también cuánto tiempo conservas las claves. Stripe, por ejemplo, las conserva 24 horas.",
+  "output_tokens": 1010,
+  "thinking_tokens": 271,
+  "input_tokens": 10043,
+  "wall_s": 8.29,
+  "created_at": "2026-10-06T23:07:48.835807+00:00"
+}

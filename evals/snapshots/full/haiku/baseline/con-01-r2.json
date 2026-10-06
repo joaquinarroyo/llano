@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Idempotencia en APIs\n\n**Definición:** Una operación es idempotente cuando ejecutarla múltiples veces produce el mismo resultado que ejecutarla una sola vez. El estado final no cambia sin importar cuántas veces se repita.\n\n### Por qué importa\n\n1. **Confiabilidad en redes**: Si una solicitud se pierde o el cliente no recibe respuesta, puede reintentar sin miedo a efectos secundarios duplicados. Por ejemplo, transferir dinero dos veces por accidente.\n\n2. **Mejor experiencia de usuario**: Los clientes pueden reintentiar automáticamente sin que el servidor cree duplicados.\n\n3. **Arquitectura robusta**: Facilita construir sistemas resilientes donde los reintentos son seguros.\n\n### Ejemplos\n\n**Idempotente (seguro reintentar):**\n- `GET /users/123` → siempre devuelve los mismos datos\n- `PUT /users/123` → actualizar un recurso a un estado específico (idempotente si se usa correctamente)\n- `DELETE /users/123` → borrar dos veces es equivalente a borrar una vez\n\n**NO idempotente (peligroso reintentar):**\n- `POST /transfer` → transferir dinero crea una transacción nueva cada vez\n- `POST /orders` → crear una orden crea duplicados\n- `PATCH /users/123` → aplicar un parche dos veces puede duplicar cambios\n\n### Buena práctica\n\nPara operaciones críticas (pagos, órdenes), usa **claves de idempotencia** — el cliente envía un ID único para cada operación. Si llega dos veces con el mismo ID, el servidor ejecuta solo una vez.\n\n```http\nPOST /transfer\nIdempotency-Key: uuid-12345\nBody: { \"amount\": 100, \"to\": \"account-456\" }\n```",
+  "output_tokens": 587,
+  "thinking_tokens": 121,
+  "input_tokens": 3394,
+  "wall_s": 6.85,
+  "created_at": "2026-10-06T23:02:59.973489+00:00"
+}

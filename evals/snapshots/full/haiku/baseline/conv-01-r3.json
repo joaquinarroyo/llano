@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empezaría por estos pasos:\n\n**1. Identificar la dependencia culpable:**\n```bash\n# Ver qué se actualizó\ngit diff package-lock.json  # o yarn.lock\n\n# O revertir la actualización completa para confirmar\nnpm ci --package-lock-only  # volver a versión anterior\n```\nSi la latencia vuelve a 120ms, es definitivo que fue la actualización.\n\n**2. Perfilar bajo carga:**\n```bash\nnode --prof app.js\n# Genera tráfico de prueba\nnode --prof-process isolate-*.log > profile.txt\n```\n\n**3. Busca regressions conocidas:**\n- Busca en GitHub Issues de las dependencias actualizadas (suelen reportar problemas de perf)\n- Revisa `CHANGELOG.md` de versiones intermedias\n\n**Enfoque rápido:** Si puedes identificar qué se actualizó y el salto es drástico (900ms es mucho), probablemente sea una librería crítica como express, fastify, body-parser o database client. Intenta revertir solo esas primero antes de hacer profiling completo.\n\n¿Puedes compartir qué dependencias se actualizaron y con qué versiones? Eso ayuda a estrechar más.",
+      "output_tokens": 617,
+      "thinking_tokens": 293,
+      "input_tokens": 3426
+    },
+    {
+      "text": "Listo, encontraste la causa. Los BEGIN/COMMIT extras en PostgreSQL son muy costosos (escritura a WAL por cada una).\n\n**Opciones (en orden de facilidad):**\n\n1. **Revertir el ORM a 8.11** (si no hay bugs críticos que arregle)\n   ```bash\n   npm install orm-name@8.11\n   ```\n   Tradeoff: No obtienes fixes de seguridad/bugs de la 8.12.\n\n2. **Buscar flag de configuración en el ORM** \n   - Revisa docs/changelog de la 8.12 para ver si hay `autoTransaction: false` o similar\n   - Algunos ORMs tienen opciones para control granular de transacciones\n\n3. **Agrupar queries en una transacción única**\n   ```javascript\n   // En lugar de 14 queries sueltas:\n   await client.query('BEGIN');\n   // ... tus 14 queries\n   await client.query('COMMIT');\n   ```\n   Tradeoff: Requiere cambios de código, pero es lo más correcto si tus queries son relacionadas.\n\n**Recomendación:** Mira el changelog de pg 8.12 y del ORM. Si el cambio fue intencional por algún motivo de seguridad/data integrity, la opción 3 es la mejor. Si fue un bug, espera un 8.13 o usa la 8.11 por ahora.\n\n¿Qué ORM es? Puedo ayudarte a revisar si hay config para esto.",
+      "output_tokens": 623,
+      "thinking_tokens": 234,
+      "input_tokens": 4151
+    },
+    {
+      "text": "```\nRevert ORM to v8.11 due to performance regression\n\n## Problem\nORM v8.12 introduced automatic transactions for each query, causing:\n- 14 queries per request × 2 (BEGIN/COMMIT) = 28 extra transactions\n- p95 latency increased from 120ms to 900ms\n\n## Solution\nPinned ORM to v8.11. p95 latency restored to 130ms.\n\n## Next Steps\n- Monitor for security/bug fixes in v8.12+\n- Consider upgrading ORM version when fix is available\n- Evaluate implementing explicit transaction batching for related queries\n```\n\nO más breve si prefieres:\n\n```\nFix: pin ORM to v8.11 to resolve performance regression\n\nv8.12 introduced automatic transactions per query, increasing p95 latency from 120ms to 900ms. Reverting restores performance to 130ms p95.\n```",
+      "output_tokens": 416,
+      "thinking_tokens": 194,
+      "input_tokens": 4851
+    }
+  ],
+  "created_at": "2026-10-06T23:05:46.039688+00:00"
+}

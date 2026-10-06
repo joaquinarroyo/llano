@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      false
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 3,
+  "notes": "Afirmaciones incorrectas: (1) ~20-50 ms por BEGIN/COMMIT es una estimación poco realista; (2) se atribuye al ORM la versión 8.11/8.12, que en realidad es de pg; (3) el PR invierte la dirección del p95 al decir 'de 130 a 900 ms'.",
+  "judge_model": "sonnet"
+}

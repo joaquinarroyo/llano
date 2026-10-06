@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "El teorema CAP dice que un sistema distribuido no puede garantizar a la vez consistencia y disponibilidad cuando hay una partición de red. Eric Brewer lo propuso en 2000. Seth Gilbert y Nancy Lynch lo demostraron en 2002.\n\n## Los tres términos\n\n- **Consistencia (C):** toda lectura devuelve la última escritura (linealizabilidad).\n- **Disponibilidad (A):** todo nodo que funciona responde cada solicitud.\n- **Tolerancia a particiones (P):** el sistema sigue operando aunque la red pierda mensajes entre nodos.\n\n## Error común\n\n\"Elige 2 de 3\" es engañoso. Las particiones de red ocurren en cualquier sistema distribuido, así que P no es opcional. La elección real es esta: durante una partición, ¿el sistema rechaza solicitudes (C) o responde con datos posiblemente viejos (A)?\n\n| Elección | Comportamiento en una partición | Ejemplos |\n|---|---|---|\n| CP | Rechaza escrituras o lecturas en el lado sin quórum | etcd, ZooKeeper, HBase |\n| AP | Responde en todos los nodos y reconcilia después | Cassandra, DynamoDB (lecturas eventuales) |\n\nVarios sistemas permiten configurar el punto de equilibrio por operación. Cassandra, por ejemplo, lo hace con niveles de consistencia.\n\n## ¿Sigue siendo relevante?\n\nSí, pero como marco mínimo, no como guía completa. Tiene dos límites:\n\n1. Solo describe el caso de una partición. Esa situación es rara.\n2. Ignora la latencia, que es el costo diario.\n\nEl modelo **PACELC** (Daniel Abadi, 2012) corrige esto. Si hay partición (P), eliges entre A y C. Si no la hay (E, *else*), eliges entre latencia (L) y consistencia (C). Por eso se usa más para comparar bases de datos hoy.\n\nUsa CAP para razonar sobre fallos. Usa PACELC para decidir entre bases de datos.",
+  "output_tokens": 1119,
+  "thinking_tokens": 387,
+  "input_tokens": 10049,
+  "wall_s": 9.71,
+  "created_at": "2026-10-06T23:13:28.928206+00:00"
+}

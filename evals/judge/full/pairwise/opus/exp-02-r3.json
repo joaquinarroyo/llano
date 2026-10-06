@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A responde el «qué hace exactamente» con pasos numerados del rebase y diagramas claros de antes y después, y añade `--force-with-lease`, `rebase -i` y el flujo combinado; B es más compacto y añade la recuperación con reflog, pero explica menos el mecanismo.",
+  "judge_model": "sonnet"
+}

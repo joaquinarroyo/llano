@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más directo y fácil de leer en una sola pasada, sin perder información técnica clave: da criterios claros de decisión, incluye la advertencia de atomicidad y el aviso staging/producción, mientras que A es más largo, tiene un paso confuso sobre descartar `pg` y una mención fuera de lugar al directorio.",
+  "judge_model": "sonnet"
+}

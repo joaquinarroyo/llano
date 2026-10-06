@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Ana propuso migrar la app mobile de REST a GraphQL para reducir las 7 requests que hoy se hacen por pantalla. Luis objetó que GraphQL complica el caching HTTP y que el equipo no tiene experiencia con la tecnología; Ana sugirió resolver el caching con persisted queries. Marta planteó una alternativa: un endpoint BFF (Backend for Frontend) agregado en REST, que consolida las requests sin cambiar de stack. Luis apoyó esta opción por implicar menos riesgo, y el equipo acordó probar el BFF en la pantalla de inicio y medir los resultados antes de decidir los próximos pasos.",
+  "output_tokens": 276,
+  "thinking_tokens": 44,
+  "input_tokens": 1745,
+  "wall_s": 4.45,
+  "created_at": "2026-10-06T23:15:47.747159+00:00"
+}

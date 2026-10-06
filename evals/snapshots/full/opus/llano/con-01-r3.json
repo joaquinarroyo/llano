@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Una operación es **idempotente** si ejecutarla una vez o varias veces produce el mismo estado final en el servidor. La respuesta puede cambiar (por ejemplo, `201` la primera vez y `200` después), pero el efecto no se repite.\n\n## Por qué importa\n\nLas redes fallan. Un cliente envía una solicitud y no recibe respuesta por un timeout. El cliente no sabe si el servidor procesó la solicitud o no. Lo seguro es reintentar, pero solo si la operación es idempotente.\n\nSi la operación no es idempotente, un reintento puede duplicar el efecto:\n\n- Cobrar dos veces la misma compra.\n- Crear dos pedidos iguales.\n- Enviar dos veces el mismo correo.\n\n## Métodos HTTP\n\n| Método | ¿Idempotente? | Ejemplo |\n|---|---|---|\n| `GET` | Sí | Leer un usuario no cambia nada. |\n| `PUT` | Sí | `PUT /users/7 {\"email\": \"a@b.com\"}` deja el mismo valor siempre. |\n| `DELETE` | Sí | Después del primer borrado, el recurso ya no existe. Repetir no cambia el estado. |\n| `POST` | No, por defecto | Cada `POST /orders` crea un pedido nuevo. |\n| `PATCH` | Depende | `{\"saldo\": 100}` sí lo es. `{\"saldo\": \"+10\"}` no. |\n\nLa especificación HTTP (RFC 9110) define estas garantías. Pero el servidor tiene que cumplirlas. Un `PUT` mal implementado puede no ser idempotente.\n\n## Cómo hacer idempotente un `POST`\n\nLa técnica más común es la **clave de idempotencia**. El cliente genera un ID único (por ejemplo, un UUID) y lo envía en un header, como `Idempotency-Key`. El servidor guarda la clave junto con la respuesta. Si la misma clave llega otra vez, el servidor devuelve la respuesta guardada y no ejecuta la operación de nuevo.\n\nEl diagrama muestra un reintento después de un timeout:\n\n```\nCliente                       Servidor                    Base de datos\n   │──POST /pagos (key=abc)──▶│                                │\n   │                          │──¿existe key=abc? No──────────▶│\n   │                          │──crea pago, guarda key=abc────▶│\n   │   ✗ timeout (respuesta perdida)                           │\n   │                          │                                │\n   │──POST /pagos (key=abc)──▶│                                │\n   │   (reintento)            │──¿existe key=abc? Sí──────────▶│\n   │◀──200 + pago original────│   (no cobra otra vez)          │\n```\n\nStripe, por ejemplo, usa este mecanismo en su API de pagos.\n\n**Atención:** el servidor tiene que verificar la clave y guardar el resultado en una sola transacción, o con un lock. Si no, dos solicitudes simultáneas con la misma clave pueden pasar las dos la verificación y ejecutar la operación dos veces.",
+  "output_tokens": 1113,
+  "thinking_tokens": 60,
+  "input_tokens": 10041,
+  "wall_s": 11.64,
+  "created_at": "2026-10-06T23:25:23.331904+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "En el turno 1 solo dice que el índice es 'menos eficiente' para la segunda columna, y en el turno 2 no menciona el escaneo completo; el resto de hechos se cubre y no hay errores técnicos claros.",
+  "judge_model": "sonnet"
+}

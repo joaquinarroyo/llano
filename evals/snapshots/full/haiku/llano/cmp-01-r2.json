@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Postgres.** La facturación exige transacciones ACID fuertes, integridad referencial (cliente → facturas → líneas) y auditoría inmutable. Postgres lo garantiza. MongoDB agrega flexibilidad que no necesitas, y complica las garantías que la regulación de facturas requiere.\n\nEl tradeoff: Postgres obliga a definir el esquema ahora. MongoDB es más flexible si el modelo de datos cambia mucho. En facturación casi nunca cambia.\n\n¿Hay algo del modelo de datos que aún es incierto?",
+  "output_tokens": 487,
+  "thinking_tokens": 346,
+  "input_tokens": 9906,
+  "wall_s": 6.35,
+  "created_at": "2026-10-06T23:02:49.423456+00:00"
+}

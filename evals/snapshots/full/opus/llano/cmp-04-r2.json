@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "**Recomendación:** si solo necesitas ejecutar funciones fuera del request (enviar correos, generar PDFs, llamar APIs), usa RQ. Elige Celery si necesitas flujos de tareas complejos, otro broker que no sea Redis o un volumen alto.\n\n| Aspecto | Celery | RQ (con `django-rq`) |\n|---|---|---|\n| Broker | RabbitMQ, Redis, SQS y otros | Solo Redis |\n| Configuración | Muchas opciones. Hay que aprender serialización, routing y pools | Pocas opciones. Una tarea es una función Python normal |\n| Flujos de tareas | Canvas: `chain`, `group`, `chord` | Solo dependencias simples con `depends_on` |\n| Tareas periódicas | `celery beat`, integrado | Necesita `rq-scheduler` o el scheduler de `django-rq` |\n| Reintentos | `autoretry_for`, backoff exponencial, `rate_limit` | `Retry(max=3, interval=[...])`. No tiene rate limit |\n| Modelo de ejecución | Pool de procesos (prefork) o green threads (gevent/eventlet) | Un `fork` por cada job |\n| Rendimiento | Mejor para muchas tareas cortas | El `fork` por job agrega overhead. Aísla mejor las fugas de memoria |\n| Windows | No es compatible oficialmente | No funciona sin WSL, porque usa `fork` |\n| Monitoreo | Flower | Panel en el admin de Django (`django-rq`) o `rq-dashboard` |\n| Depuración | Más difícil, por las capas de abstracción | Más fácil. Puedes ver los jobs directo en Redis |\n\n## Cuándo elegir cada uno\n\n**RQ** conviene si:\n- Ya usas Redis.\n- Tienes menos de unos cientos de tareas por minuto.\n- El equipo es pequeño y no quiere mantener mucha infraestructura.\n\n**Celery** conviene si:\n- Necesitas encadenar tareas o esperar a que un grupo termine (`chord`).\n- Necesitas rate limits por tarea o routing a colas distintas según el tipo de tarea.\n- Procesas miles de tareas cortas por minuto.\n- Quieres RabbitMQ para tener garantías de entrega más fuertes que Redis.\n\n## Una tercera opción\n\nDjango 6.0 agregó el framework `django.tasks`. Define una interfaz estándar para encolar tareas, pero no incluye un backend de producción. Necesitas un backend externo, por ejemplo `django-tasks`. Si empiezas un proyecto nuevo en Django 6, revisa si un backend existente cubre tu caso. Así puedes cambiar de backend después sin reescribir las tareas.\n\n**Atención:** migrar de RQ a Celery después es posible, pero cuesta trabajo. Las tareas son funciones, pero los reintentos, la programación y el monitoreo cambian. Si ya sabes que vas a necesitar flujos complejos, empieza con Celery.",
+  "output_tokens": 1591,
+  "thinking_tokens": 530,
+  "input_tokens": 10067,
+  "wall_s": 16.45,
+  "created_at": "2026-10-06T23:20:31.143121+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Se produce un bucle infinito:\n\n1. El efecto depende de `filters`.\n2. Dentro del efecto haces `setFilters({ ...filters, page: 1 })`, que crea un **objeto nuevo** en cada ejecución.\n3. React compara por referencia (`Object.is`), así que ve un `filters` distinto aunque el contenido sea idéntico.\n4. Se vuelve a renderizar, el efecto se dispara de nuevo, y así sucesivamente hasta el límite de profundidad.\n\n## Cómo arreglarlo\n\n**Opción 1 (la más recomendada): no uses un efecto, resetea la página donde cambian los filtros.**\n\n```jsx\nconst updateFilters = (changes) => {\n  setFilters(prev => ({ ...prev, ...changes, page: 1 }));\n};\n\n// uso\n<input onChange={e => updateFilters({ search: e.target.value })} />\n```\n\nSi el cambio de filtros viene de una acción del usuario, esto es más simple y evita renders extra. Para cambiar de página usarías `setFilters(prev => ({ ...prev, page: n }))`.\n\n**Opción 2: si necesitas el efecto, depende solo de los campos que disparan el reseteo, y usa la forma funcional.**\n\n```jsx\nuseEffect(() => {\n  setFilters(prev => (prev.page === 1 ? prev : { ...prev, page: 1 }));\n}, [filters.search, filters.category]); // solo los filtros, no page ni el objeto entero\n```\n\n- Devolver `prev` cuando no hay cambio hace que React salte el re-render.\n- No incluyas `page` en las dependencias, o cada cambio de página lo reseteará a 1.\n\n**Opción 3: separa `page` del resto de filtros.**\n\n```jsx\nconst [filters, setFilters] = useState({ search: '', category: '' });\nconst [page, setPage] = useState(1);\n\nuseEffect(() => { setPage(1); }, [filters]);\n```\n\nAsí el efecto ya no modifica lo que observa.\n\nLa regla general: un efecto no debería actualizar el mismo estado del que depende, a menos que la actualización sea condicional y estable (que acabe sin producir un valor nuevo).",
+  "output_tokens": 866,
+  "thinking_tokens": 115,
+  "input_tokens": 1684,
+  "wall_s": 7.37,
+  "created_at": "2026-10-06T23:09:36.754487+00:00"
+}

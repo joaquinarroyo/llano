@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B muestra el formato binario con pg_restore, la compresión, el túnel SSH y las advertencias de seguridad en bloques de código claros y fáciles de escanear, mientras que A solo cubre SQL plano con gzip, no muestra pg_restore pese a mencionarlo, y tiene una advertencia confusa sobre credenciales.",
+  "judge_model": "sonnet"
+}

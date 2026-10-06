@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da la recomendación al inicio, explica con claridad por qué pnpm (enlaces, caché, aislamiento), matiza cuándo usar yarn o npm y termina con un paso concreto (`pnpm-workspace.yaml`), mientras que A contiene afirmaciones dudosas (yarn 'en mantenimiento', cifras imprecisas) y mezcla más términos en inglés.",
+  "judge_model": "sonnet"
+}

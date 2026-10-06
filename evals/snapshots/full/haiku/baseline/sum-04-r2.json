@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El equipo discutió cómo optimizar el rendimiento de la app mobile que actualmente hace 7 requests por pantalla: Ana propuso migrar a GraphQL, Luis expresó preocupaciones sobre caching HTTP y falta de experiencia (que Ana intentó resolver con persisted queries), mientras que Marta sugirió una alternativa menos disruptiva: un endpoint BFF en REST que agregara los datos sin cambiar el stack actual. Luis respaldó la opción BFF por menor riesgo, y el equipo decidió probar este enfoque en la pantalla de inicio para validar resultados antes de comprometerse.",
+  "output_tokens": 303,
+  "thinking_tokens": 153,
+  "input_tokens": 3519,
+  "wall_s": 3.79,
+  "created_at": "2026-10-06T23:02:26.702087+00:00"
+}

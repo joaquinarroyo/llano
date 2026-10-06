@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B sigue el orden cronológico de la discusión (propuesta, objeción, contrapropuesta, acuerdo), lo que se entiende mejor en una sola lectura, e incluye todos los datos técnicos relevantes; A empieza por la conclusión y luego retrocede, lo que resulta menos fluido.",
+  "judge_model": "sonnet"
+}

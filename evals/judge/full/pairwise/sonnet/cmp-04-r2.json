@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B ofrece una recomendación inicial clara, tabla más completa y consejos prácticos útiles (idempotencia, IDs en vez de objetos ORM, transaction.on_commit) sin perder información relevante, mientras que A es correcta pero más limitada y deja un aviso vago sobre django.tasks.",
+  "judge_model": "sonnet"
+}

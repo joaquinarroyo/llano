@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Qué está pasando\n\nLa app resolvió `db.internal` a `10.0.3.17` (el DNS funciona), pero al abrir el socket TCP al puerto 5432 nadie respondió en 30 s, y la app se cerró con código 1.\n\nLa clave es que el error es `ETIMEDOUT` y no `ECONNREFUSED`:\n\n- **`ECONNREFUSED`**: llegó al host, pero Postgres no escucha o lo rechazó.\n- **`ETIMEDOUT`**: los paquetes se pierden por el camino. Casi siempre es un problema de red: firewall, security group, ruta o un host que no existe o está caído.\n\nPor lo tanto, probablemente no es un problema de credenciales ni de código.\n\n## Qué revisar primero\n\n**1. Probar la conectividad desde donde corre el deploy** (el contenedor, pod o instancia, no tu laptop):\n\n```bash\nnc -zv -w 5 db.internal 5432\n# o\npg_isready -h db.internal -p 5432\n```\n\nSi también hace timeout, confirma que es un problema de red. Si conecta, el problema es específico de cómo arranca la app (variables de entorno, red del contenedor).\n\n**2. Si falla, por orden de probabilidad:**\n\n1. **Security group / firewall**: ¿la regla de entrada del 5432 en la DB permite la IP o el security group de donde corre el deploy? Es la causa más común, sobre todo si cambió el destino del deploy (nueva subnet, nuevo cluster, nuevo entorno).\n2. **Red / VPC**: ¿el deploy está en la misma VPC (o con peering/VPN) que `10.0.3.17`? ¿Hay ruta y las network ACLs lo permiten?\n3. **La DB en sí**: ¿la instancia está arriba? ¿`10.0.3.17` sigue siendo su IP? Si la DB se recreó o se reinició, `db.internal` podría apuntar a una IP vieja.\n4. **Límite de conexiones o carga**: menos probable con un timeout de conexión, pero revisa que la DB no esté saturada.\n\n**3. Qué cambió:** si antes funcionaba, mira qué es distinto en esta versión (v2.4.1) o en este deploy: variable `DB_HOST`, red del servicio, región, reglas de red o migración de la DB.\n\nSi me dices dónde despliegas (Kubernetes, ECS, EC2, Docker Compose…) y si este mismo setup funcionaba antes, te indico los comandos concretos para revisar las reglas de red.",
+  "output_tokens": 1217,
+  "thinking_tokens": 337,
+  "input_tokens": 1753,
+  "wall_s": 10.83,
+  "created_at": "2026-10-06T23:12:13.388257+00:00"
+}

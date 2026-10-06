@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empieza por estas tres cosas rápidas:\n\n1. **Confirma que fue la actualización**: Revierte `package-lock.json` (o `yarn.lock`/`pnpm-lock`) a la versión anterior, reinstala y reinicia. Si vuelve a 120ms, es definitivamente las dependencias.\n\n2. **Identifica cuál dependencia**: Usa `npm ls` o `npm outdated` para ver qué se actualizó. Luego revierte dependencias una por una para encontrar la culpable.\n\n3. **Revisa changelogs** de las que pasaron major version o tuvieron cambios en:\n   - Librerías de HTTP/parsing (express, fastify, body-parser, etc.)\n   - Database drivers (si usas)\n   - JSON/serialización\n   - Middleware de autenticación o rate limiting\n\n**Pistas rápidas si todo apunta a una dependencia específica:**\n- ¿Es una que afecta cada request? (middleware, parsing, auth)\n- ¿Cambiaron defaults de performance? (buffer sizes, timeouts, pool connections)\n- ¿Hay nuevas validaciones o checks síncronos?\n\n¿Compartís el `package.json` o cuáles fueron las dependencias que se actualizaron? Así te ayudo a identificar rápido cuál es la sospechosa.",
+      "output_tokens": 581,
+      "thinking_tokens": 240,
+      "input_tokens": 3426
+    },
+    {
+      "text": "Encontraste el problema. El ORM está envolviendo cada query en una transacción implícita (BEGIN/COMMIT), lo cual mata el performance. Con 14 queries = 28 operaciones extra de transacción por request.\n\n**¿Cuál ORM es?** (TypeORM, Sequelize, Prisma, Mikro-ORM, etc.) Porque el fix depende de cuál sea.\n\nMientras tanto, dos estrategias inmediatas:\n\n1. **Revierte solo el ORM** a la versión anterior: Si el cambio fue en el ORM (no en pg), rollback solo eso y mantén pg 8.12. Así aislas el problema.\n\n2. **Si necesitas quedarte con la nueva versión**, busca en los changelogs de la versión 8.12 del ORM algo como:\n   - `autoTransaction`, `implicitTransactions`, `useTransactions` (probablemente está en `true` ahora)\n   - Configuración de \"autocommit\" o \"autoWrapping\"\n   - Breaking changes en cómo maneja queries\n\n**El fix probable:** Desactivar transacciones implícitas en la config del ORM, o si haces queries relacionadas juntas, agruparlas en una sola transacción explícita.\n\n¿Cuál es el ORM?",
+      "output_tokens": 613,
+      "thinking_tokens": 285,
+      "input_tokens": 4115
+    },
+    {
+      "text": "```\nRevert ORM to v8.11 due to performance regression\n\nORM v8.12 introduced implicit transaction wrapping for every query,\ncausing each of our 14 queries per request to be wrapped in BEGIN/COMMIT.\nThis increased p95 latency from 120ms to 900ms.\n\nReverted to v8.11 and confirmed p95 is back to 130ms.\n\nNext steps:\n- Monitor ORM releases for a fix or configuration option to disable implicit transactions\n- Alternatively, investigate if we can explicitly group related queries into single transactions\n```\n\nSi prefieres más corto:\n\n```\nRevert ORM to v8.11: implicit transaction wrapping regression\n\nv8.12 wraps every query in BEGIN/COMMIT, causing 7x latency increase\n(120ms → 900ms p95). Reverted and confirmed stable at 130ms p95.\n```\n\n¿Lo adaptamos o va así?",
+      "output_tokens": 374,
+      "thinking_tokens": 150,
+      "input_tokens": 4805
+    }
+  ],
+  "created_at": "2026-10-06T23:03:29.784922+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Usa pnpm.** Es la mejor opción para monorepo: workspace nativo, dependencias compartidas, y más rápido.\n\n| Criterio | pnpm | npm | yarn |\n|---|---|---|---|\n| **Workspace** | Nativo, muy eficiente | Soporta (lento) | Soporta bien |\n| **Disco** | Muy bajo (enlaces duros) | Alto (duplica paquetes) | Medio |\n| **Velocidad** | Rápido | Lento en monorepo | Medio |\n| **Compatibilidad** | Casi todo (menos algunos antiguos) | Total | Total |\n| **Instalación** | Más lenta (solo primera vez) | Más rápida | Medio |\n\n**Por qué pnpm en monorepo:**\n\n- Las dependencias compartidas se guardan una sola vez en disco. Los paquetes de cada workspace usan enlaces duros. npm duplica todo; yarn a veces.\n- Los hoisting fantasma de npm desaparecen. El árbol de dependencias es siempre correcto.\n- Si un test de workspace A cambia, solo workspace A se reinstala. npm reinstala todo.\n\n**Setup básico:**\n\n```json\n{\n  \"name\": \"monorepo\",\n  \"packageManager\": \"pnpm@latest\"\n}\n```\n\nY un `pnpm-workspace.yaml`:\n\n```yaml\npackages:\n  - 'packages/*'\n  - 'apps/*'\n```\n\nUsa `pnpm install` una sola vez. Después, `pnpm -r` ejecuta comandos en todos los workspace en paralelo.\n\n**Salvedad:** si usas una herramienta que no reconoce pnpm (TypeScript 4.x muy antiguo, algunos builders), yarn es el segundo mejor.",
+  "output_tokens": 843,
+  "thinking_tokens": 396,
+  "input_tokens": 9904,
+  "wall_s": 10.29,
+  "created_at": "2026-10-06T23:05:10.049729+00:00"
+}

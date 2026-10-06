@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre revocar, rotar, revisar logs y limpieza opcional, pero no dice explícitamente que borrar la clave del código no basta porque queda en el historial de git; además el 'revoca primero' inicial contradice el orden de los pasos, aunque no es técnicamente falso.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A empieza con la decisión final y luego da el contexto, así que se entiende de una lectura, mientras que B es más cronológica y cuenta lo mismo con la conclusión al final (A incluye todo lo relevante salvo el matiz de 'medimos antes de decidir', que B menciona de forma más explícita).",
+  "judge_model": "sonnet"
+}

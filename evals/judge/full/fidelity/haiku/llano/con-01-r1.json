@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "No menciona PUT ni afirma que los métodos GET/PUT/DELETE sean idempotentes por definición; además dice que el servidor 'rechaza' duplicados, cuando lo habitual es devolver la respuesta original.",
+  "judge_model": "sonnet"
+}

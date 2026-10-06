@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta cubre simplicidad de RQ, funciones de Celery, tareas simples y programadas/encadenadas, pero no menciona la dificultad de depurar Celery. Es incorrecto decir que RQ usa «un worker por cola», porque un worker puede escuchar varias colas.",
+  "judge_model": "sonnet"
+}

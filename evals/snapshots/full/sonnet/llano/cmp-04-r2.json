@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Resumen:** RQ es más simple de instalar y operar. Celery tiene más funciones. Elige RQ si solo necesitas ejecutar tareas en segundo plano. Elige Celery si necesitas programación periódica, reintentos con espera o flujos de tareas encadenadas.\n\n| Aspecto | Celery | RQ (Redis + RQ) |\n|---|---|---|\n| Brokers | RabbitMQ, Redis, SQS y otros | Solo Redis |\n| Configuración | Más ajustes y más conceptos | Muy poca |\n| Tareas periódicas | `celery beat` (con `django-celery-beat` se administran desde el admin) | Requiere `rq-scheduler` u otra extensión, según la versión |\n| Reintentos | Integrados, con espera configurable | Integrados, más básicos |\n| Flujos de tareas | `chain`, `group`, `chord` | Dependencias simples entre jobs |\n| Colas y enrutamiento | Enrutamiento por tipo de tarea, límites de tasa | Colas con prioridad por nombre |\n| Resultados | Varios backends de resultados | Se guardan en Redis |\n| Monitoreo | Flower | `django-rq` (panel en el admin) o `rq-dashboard` |\n| Aislamiento | Procesos worker de larga vida | Un proceso hijo (fork) por job |\n| Windows | Soporte limitado | No funciona de forma nativa (necesita `fork`) |\n\n**Elige RQ si:**\n- Ya usas Redis o puedes agregarlo.\n- Tus tareas son envío de correos, procesamiento de archivos o llamadas a APIs.\n- Quieres que el equipo entienda todo el sistema en una tarde.\n\n**Elige Celery si:**\n- Necesitas tareas periódicas con administración desde el admin.\n- Necesitas flujos de varias tareas encadenadas.\n- Quieres usar RabbitMQ o SQS.\n- Esperas mucho volumen y necesitas enrutar tareas a workers distintos.\n\n**Atención:** migrar de RQ a Celery después es posible, pero implica reescribir las tareas y la configuración. Si dudas, estima ahora si necesitarás tareas periódicas o flujos encadenados. Si es así, empieza con Celery.\n\nDjango 6.0 incluye un framework de tareas (`django.tasks`) con una API común. No verifiqué qué backends de producción existen hoy, así que revisa la documentación antes de decidir.\n\nSi me dices qué tipo de tareas tienes y cuánto volumen esperas, te doy una recomendación concreta.",
+  "output_tokens": 1475,
+  "thinking_tokens": 573,
+  "input_tokens": 10071,
+  "wall_s": 11.79,
+  "created_at": "2026-10-06T23:10:32.036502+00:00"
+}

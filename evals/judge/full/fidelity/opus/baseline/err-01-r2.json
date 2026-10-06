@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre la conexión fallida, el timeout frente a credenciales, las revisiones de red y menciona v2.4.1, pero no habla del código de salida 1 ni del fallo al crear el pool.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Resumen para el PR\n\n**Implementar rotación de refresh tokens con detección de reutilización**\n\n### Cambios principales:\n- **Rotación de tokens**: Los refresh tokens se rotan automáticamente en cada uso, mejorando la seguridad al reducir la ventana de exposición de tokens comprometidos\n- **Detección de reutilización**: Se invalidan tokens antiguos cuando se intenta reutilizar un refresh token ya consumido, previniendo ataques de token replay\n- **Cobertura de tests**: Se añaden 96 líneas de pruebas para validar la detección de reutilización y el flujo de rotación\n- **Actualización de dependencias**: Se actualiza `jsonwebtoken` de 9.0.0 a 9.0.2 (parche de seguridad)\n\n### Archivos modificados:\n- `src/auth/tokens.ts`: Lógica principal de rotación e invalidación (+84 líneas)\n- `src/auth/middleware.ts`: Integración del nuevo flujo (+12 líneas)\n- `tests/auth/tokens.test.ts`: Suite de tests (+96 líneas)",
+  "output_tokens": 582,
+  "thinking_tokens": 294,
+  "input_tokens": 3561,
+  "wall_s": 5.92,
+  "created_at": "2026-10-06T23:04:30.672535+00:00"
+}

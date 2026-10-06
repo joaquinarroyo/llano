@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A explica la definición, la tabla de métodos, cuatro razones claras de por qué importa y los pasos completos de las claves de idempotencia (422, 409, caducidad), mientras que B es clara pero omite esos detalles y las alternativas.",
+  "judge_model": "sonnet"
+}

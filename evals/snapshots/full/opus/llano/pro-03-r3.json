@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Usa `pg_dump` en formato custom para crear el backup y `pg_restore` para restaurarlo en tu base local.\n\n## 1. Crear el backup\n\n```bash\npg_dump \\\n  --host=prod-db.ejemplo.com \\\n  --port=5432 \\\n  --username=usuario_lectura \\\n  --format=custom \\\n  --no-owner \\\n  --no-privileges \\\n  --file=prod_2026-10-06.dump \\\n  nombre_base\n```\n\n- `--format=custom` comprime el archivo y te permite restaurar tablas sueltas.\n- `--no-owner` y `--no-privileges` evitan errores si tu máquina no tiene los mismos roles que producción.\n- Usa un usuario de solo lectura. `pg_dump` no bloquea escrituras, pero sí agrega carga de lectura.\n\n**Atención:** la versión de `pg_dump` debe ser igual o mayor que la versión del servidor. Verifícalo con `pg_dump --version` y `SELECT version();` en producción.\n\nSi la base es grande, ejecuta el dump en horario de poca carga o contra una réplica de lectura.\n\n## 2. Copiar el archivo a tu máquina\n\nSi ejecutaste `pg_dump` en un servidor remoto, copia el archivo con `scp`:\n\n```bash\nscp usuario@servidor:/ruta/prod_2026-10-06.dump .\n```\n\nSi ejecutaste `pg_dump` desde tu máquina, el archivo ya está en tu directorio actual.\n\n## 3. Crear la base local\n\n```bash\ncreatedb nombre_base_local\n```\n\n**Peligro:** si restauras sobre una base que ya existe y usas `--clean`, `pg_restore` borra los objetos existentes. Verifica el nombre de la base antes de ejecutar el paso 4.\n\n## 4. Restaurar\n\n```bash\npg_restore \\\n  --dbname=nombre_base_local \\\n  --no-owner \\\n  --no-privileges \\\n  --jobs=4 \\\n  prod_2026-10-06.dump\n```\n\n`--jobs=4` restaura con 4 procesos en paralelo. Ajusta el número a los núcleos de tu CPU.\n\n## 5. Verificar\n\n```bash\npsql nombre_base_local -c \"\\dt\"\npsql nombre_base_local -c \"SELECT count(*) FROM una_tabla;\"\n```\n\nCompara el conteo con el de producción.\n\n## Datos sensibles\n\n**Peligro:** un dump de producción contiene datos reales de usuarios (emails, contraseñas hasheadas, datos de pago). Si los copias a tu laptop, puedes violar políticas internas o leyes como el GDPR. Antes de hacerlo, verifica con tu equipo si está permitido.\n\nEstas son las alternativas habituales:\n- Excluir tablas sensibles: `--exclude-table-data=users`.\n- Anonimizar los datos después de restaurar, con un script SQL o una herramienta como `pg_anonymizer`.\n- Usar solo el esquema: `--schema-only`, y cargar datos de prueba.\n\nBorra el archivo `.dump` cuando termines.",
+  "output_tokens": 1172,
+  "thinking_tokens": 109,
+  "input_tokens": 10054,
+  "wall_s": 13.03,
+  "created_at": "2026-10-06T23:24:46.218658+00:00"
+}

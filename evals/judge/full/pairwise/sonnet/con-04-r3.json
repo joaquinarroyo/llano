@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la deuda técnica y la analogía del préstamo de forma concisa y directa, con ejemplo listo para usar y advertencias útiles, sin perder información relevante, mientras que A es más largo y denso con varias secciones que dificultan una sola lectura.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Para una app web Django clásica, **sesiones** son la opción más simple y segura: Django las gestiona automáticamente, funcionan bien con CSRF, y requieren menos configuración. JWT es mejor si necesitas una API stateless, múltiples dominios/apps, o autenticación mobile, pero implica más complejidad en la gestión de tokens y renovación.\n\n¿Tu app es tradicional (servidor + templates Django) o una API que atiende un frontend separado?",
+      "output_tokens": 268,
+      "thinking_tokens": 149,
+      "input_tokens": 3398
+    },
+    {
+      "text": "Entonces **JWT** es la mejor opción. React Native no maneja cookies bien, y con una API compartida necesitas algo stateless que ambas apps consuman igual. La app web puede guardar el JWT en localStorage/sessionStorage y enviarlo en cada request.\n\nEl trade-off: necesitas implementar renovación de tokens (refresh tokens), manejo de expiración, y almacenamiento seguro del token en mobile. Pero es el estándar para este tipo de arquitectura.\n\n¿Quieres que te ayude a implementarlo en Django?",
+      "output_tokens": 347,
+      "thinking_tokens": 215,
+      "input_tokens": 3725
+    },
+    {
+      "text": "Para Django, usa **djangorestframework-simplejwt** — es el estándar, integra bien con DRF y maneja refresh tokens automáticamente.\n\n**Cuidados principales:**\n\n1. **Access token corto** (15-30 min) + **refresh token largo** (7-30 días) — así limitas el daño si se filtra\n2. **HTTPS obligatorio** — sin él, cualquiera intercepta el token\n3. **Almacenamiento en mobile**: en React Native usa **AsyncStorage seguro** o mejor aún una librería como `react-native-keychain` (guarda en el keystore del OS)\n4. **No guardes datos sensibles en el JWT** — es solo encoded, no encrypted\n5. **CORS bien configurado** — solo dominios autorizados\n6. **Logout**: no puedes revocar un JWT válido fácilmente, así que considera guardar tokens revocados en un blacklist (redis es ideal)\n\nLo más importante: trata el refresh token como muy secreto en mobile, y el access token como \"va a filtrarse\".\n\n¿Quieres que te ayude a montar la configuración en Django?",
+      "output_tokens": 521,
+      "thinking_tokens": 234,
+      "input_tokens": 4147
+    }
+  ],
+  "created_at": "2026-10-06T23:03:29.795684+00:00"
+}

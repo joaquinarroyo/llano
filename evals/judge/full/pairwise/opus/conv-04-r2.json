@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B mantiene un tono consistente y escribe frases directas y bien tabuladas, sin perder contenido técnico: añade smoke test con rollback automático y CODEOWNERS, y aclara que las cifras son estimaciones; A mezcla vosotros y voseo y su plan, aunque más corto, es algo menos accionable.",
+  "judge_model": "sonnet"
+}

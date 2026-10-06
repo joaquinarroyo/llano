@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "```markdown\n## Migración del servicio de notificaciones\n\n### Changed\n- Migración de proveedor de email: SendGrid → Amazon SES\n- Plantillas de email convertidas a MJML para mejor mantenibilidad y reutilización\n- Agregado sistema de reintentos automáticos con backoff exponencial (3 intentos, base 2s) para mejorar confiabilidad en fallos transitorios\n\n### Removed\n- Endpoint `/v1/notify` (deprecated)\n\n### Testing\n- Suite de tests completa: 132 tests pasando\n```\n\nSi querés más conciso:\n\n```markdown\n- Migrado envío de notificaciones de SendGrid a Amazon SES\n- Plantillas convertidas a MJML; reintentos automáticos con backoff exponencial (3x, 2s base)\n- Removido endpoint deprecated `/v1/notify`\n```\n\n¿Qué formato usás en tu changelog?",
+  "output_tokens": 627,
+  "thinking_tokens": 394,
+  "input_tokens": 3475,
+  "wall_s": 6.33,
+  "created_at": "2026-10-06T23:02:24.101591+00:00"
+}

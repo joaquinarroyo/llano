@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A está listo para pegar en la descripción del PR, explica el porqué de la rotación y qué hace cada archivo, mientras que B añade una nota innecesaria, usa un lenguaje menos preciso (\"expirado/revocado\") y cuenta líneas de tests en lugar de describir el cambio.",
+  "judge_model": "sonnet"
+}

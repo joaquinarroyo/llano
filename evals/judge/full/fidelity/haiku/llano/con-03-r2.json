@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    false,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Explica que SHA-256 es rápido y recomienda bcrypt/scrypt/argon2, pero no menciona la sal, Argon2id como opción recomendada ni el aumento del costo; además, 100 mil intentos a 14 GH/s tardan unos 7 microsegundos, no 7 milisegundos.",
+  "judge_model": "sonnet"
+}

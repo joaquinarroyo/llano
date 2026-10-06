@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica el concepto y el porqué del bloqueo en pasos numerados, da los headers exactos, más frameworks (incluye Django), proxy para Vite/CRA y una sección de errores comunes (preflight rechazado por auth, 500 sin headers CORS) que ayuda a depurar, mientras que A, aunque clara, es más extensa en el diagrama y cubre menos casos prácticos.",
+  "judge_model": "sonnet"
+}

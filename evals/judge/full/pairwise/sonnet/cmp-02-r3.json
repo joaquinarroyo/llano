@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da la recomendación, una tabla compacta, cuándo elegir otro y qué agregar (Turborepo/Nx) en menos texto y sin perder lo técnico relevante, mientras que A es más largo y repite información entre la tabla y las secciones, aunque incluye un setup útil.",
+  "judge_model": "sonnet"
+}

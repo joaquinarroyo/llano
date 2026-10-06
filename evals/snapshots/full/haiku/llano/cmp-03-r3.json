@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Elige según si necesitas comunicación en los dos sentidos y cuán rápida debe ser.\n\n| Cuándo | Caso |\n|---|---|\n| **Polling** | El cliente pregunta cada 5–30 segundos. Cambios lentos (notificaciones, datos de estado). Fácil de escalar porque el servidor no guarda conexiones. |\n| **SSE** | El servidor envía datos al cliente sin parar (chat en vivo, actualizaciones de bolsa, eventos de sistema). Solo servidor → cliente. Es HTTP, más simple que WebSocket. |\n| **WebSocket** | El cliente y el servidor hablan a la vez sin esperar (juegos multijugador, videollamadas, apps colaborativas en tiempo real). Baja latencia. |\n\n**Tradeoff principal:** polling tarda más pero consume menos, SSE es simple pero unidireccional, WebSocket es rápido pero más complejo de escalar.\n\nComienza con polling. Si la latencia es un problema, cambia a SSE o WebSocket.",
+  "output_tokens": 554,
+  "thinking_tokens": 299,
+  "input_tokens": 9904,
+  "wall_s": 7.08,
+  "created_at": "2026-10-06T23:05:12.523152+00:00"
+}

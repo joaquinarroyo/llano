@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Aquí tienes el resumen para el changelog:\n\n```markdown\n### Servicio de notificaciones\n\n**Cambiado**\n- El envío de emails usa Amazon SES en vez de SendGrid.\n- Las plantillas de email están en MJML en vez de HTML.\n\n**Agregado**\n- Reintentos con backoff exponencial en el envío de emails: 3 intentos, base 2 s.\n\n**Eliminado**\n- Endpoint `/v1/notify`. Ya no tenía uso. Los clientes que aún lo llamen recibirán un error.\n```\n\nAtención: la última línea de \"Eliminado\" asume que el endpoint devuelve un error al llamarlo. Si prefieres marcarlo como cambio incompatible (breaking change), agrega `BREAKING:` al inicio de esa línea.\n\nNo incluí el número de tests (132) porque no es un cambio para los usuarios. Puedo agregarlo si tu changelog lo pide.",
+  "output_tokens": 542,
+  "thinking_tokens": 218,
+  "input_tokens": 10161,
+  "wall_s": 5.42,
+  "created_at": "2026-10-06T23:09:48.733119+00:00"
+}

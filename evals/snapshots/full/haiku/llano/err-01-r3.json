@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El API no alcanza PostgreSQL. La conexión a `10.0.3.17:5432` agota el tiempo después de 30 segundos. Revisa en este orden:\n\n1. **¿Existe `db.internal`?** Ejecuta desde el contenedor o servidor:\n   ```\n   nslookup db.internal\n   ```\n   Si no resuelve, corrige el hostname en tu configuración.\n\n2. **¿Es accesible esa IP?** Intenta conectar:\n   ```\n   nc -zv 10.0.3.17 5432\n   ```\n   Si falla con timeout, hay un firewall bloqueando.\n\n3. **¿PostgreSQL está corriendo?** Accede al host `10.0.3.17` y verifica:\n   ```\n   ps aux | grep postgres\n   ```\n\n4. **¿El puerto es correcto?** Revisa la configuración de PostgreSQL:\n   ```\n   grep \"^port\" /etc/postgresql/postgresql.conf\n   ```\n\n**Apuesta más probable:** regla de firewall entre tu API y PostgreSQL. Pide al equipo de infraestructura que verifique permisos saliente del API hacia `10.0.3.17:5432`.\n\n¿En qué ambiente corre? ¿Local, staging o producción? Eso cambia dónde buscar.",
+  "output_tokens": 698,
+  "thinking_tokens": 358,
+  "input_tokens": 10048,
+  "wall_s": 8.25,
+  "created_at": "2026-10-06T23:04:19.161166+00:00"
+}

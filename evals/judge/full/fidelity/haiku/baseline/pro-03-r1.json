@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre pg_dump -Fc, pg_restore/psql y createdb, pero omite la compatibilidad de versiones y los datos sensibles; afirma erróneamente que pg_dump -Fc -j 4 funciona en paralelo (-j requiere formato directorio -Fd).",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Para revertir un commit ya pusheado a main de forma segura y sin afectar al equipo, la opción correcta es **`git revert`**:\n\n## Pasos seguros:\n\n1. **Identifica el commit** que quieres revertir:\n   ```bash\n   git log --oneline main\n   ```\n\n2. **Crea un nuevo commit que deshace los cambios**:\n   ```bash\n   git revert <hash-del-commit>\n   ```\n   Esto abre un editor para confirmar el mensaje del revert (puedes dejarlo por defecto o personalizarlo).\n\n3. **Pushea el revert**:\n   ```bash\n   git push origin main\n   ```\n\n## Por qué esto es seguro:\n\n- **No reescribe historial**: El commit original sigue ahí, solo se añade uno nuevo que deshace sus cambios\n- **El equipo no tiene problemas**: Otros no necesitan hacer `pull --rebase` ni resolver conflictos extraños\n- **Trazabilidad**: Queda claro qué se deshizo y cuándo\n\n## ⚠️ Evita:\n\n- **`git reset + force push`**: Reescribe el historial y rompe los checkouts del equipo\n- **Editar directamente main**: Siempre trabaja en ramas y haz PR\n\nSi necesitas revertir múltiples commits consecutivos:\n```bash\ngit revert <hash-1>^..<hash-n>\n```\n\n¿Necesitas ayuda identificando el commit específico o tienes dudas sobre los cambios que se van a deshacer?",
+  "output_tokens": 615,
+  "thinking_tokens": 214,
+  "input_tokens": 3412,
+  "wall_s": 6.99,
+  "created_at": "2026-10-06T23:00:22.087156+00:00"
+}

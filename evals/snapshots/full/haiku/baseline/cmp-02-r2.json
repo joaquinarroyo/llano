@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**pnpm** es tu mejor opción para un monorepo nuevo. Es el más eficiente (usa hard links, menor espacio), el más rápido, y tiene el mejor soporte nativo para workspaces. La principal tradeoff es que algunos paquetes legacy pueden tener problemas de compatibilidad, y requiere que entiendas su estructura de `node_modules` más estricta.\n\nComparativa rápida:\n\n| Criterio | pnpm | yarn | npm |\n|----------|------|------|-----|\n| **Monorepos** | Excelente (workspaces nativo) | Bueno (workspaces) | Adecuado (workspaces v7+) |\n| **Velocidad** | Más rápido | Rápido | Más lento |\n| **Espacio disco** | Mínimo (hard links) | Normal | Normal |\n| **Compatibilidad** | 95% (algunos paquetes legacy) | 99% | 100% |\n| **Tendencia** | ↑ (Turborepo, Vercel, Angular) | ↓ (menos usado) | → (estable) |\n\n**Recomendación**: \n- **pnpm** si quieres lo mejor para monorepos y no tienes dependencias muy legacy\n- **yarn** si necesitas máxima compatibilidad pero quieres mejor soporte que npm\n- **npm** solo si requieres máxima compatibilidad garantizada (proyectos corporativos muy conservadores)\n\n¿Tienes dependencias específicas que podrían causar problemas con pnpm, o es un proyecto greenfield?",
+  "output_tokens": 887,
+  "thinking_tokens": 481,
+  "input_tokens": 3398,
+  "wall_s": 9.72,
+  "created_at": "2026-10-06T23:02:53.127183+00:00"
+}

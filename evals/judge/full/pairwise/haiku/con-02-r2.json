@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica con un ejemplo concreto qué se sacrifica en CP frente a AP y aclara que P es obligatorio, mientras que B resulta más vago, atribuye PACELC a Patrick Helland en lugar de Daniel Abadi y tiene un error gramatical (\"consistencia e disponibilidad\").",
+  "judge_model": "sonnet"
+}

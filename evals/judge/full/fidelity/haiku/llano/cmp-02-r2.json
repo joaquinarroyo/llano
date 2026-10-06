@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Cubre todos los hechos (el store global solo se implica con 'una sola copia' y menor disco), pero afirma sin base que npm duplica paquetes en cada workspace (los hoistea) y da cifras de disco inventadas (5-10 GB vs 15-20 GB).",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Event Loop de Node.js (desde la perspectiva de Python)\n\n## La diferencia fundamental\n\nEn **Python síncrono**, el código se ejecuta línea por línea. Si haces una operación lenta (leer archivo, request HTTP), **el programa se bloquea** hasta que termine.\n\nEn **Node.js**, aunque es single-threaded como Python, **no se bloquea**. Usa el event loop para permitir operaciones asincrónicas.\n\n## Cómo funciona el Event Loop\n\n```javascript\n// Python: esto se bloquea\ndata = open(\"archivo.txt\").read()  # ¡Espera aquí!\nprint(data)\nprint(\"Continuando...\")  # No ejecuta hasta que termine la lectura\n\n// Node.js: esto NO se bloquea\nfs.readFile(\"archivo.txt\", (err, data) => {\n  console.log(data);  // Se ejecuta cuando el archivo está listo\n});\nconsole.log(\"Continuando...\");  // ¡Se ejecuta INMEDIATAMENTE!\n```\n\n## Las fases del Event Loop\n\nNode.js ejecuta código en este orden (cada \"vuelta\"):\n\n1. **Timers** - `setTimeout`, `setInterval`\n2. **Pending callbacks** - operaciones de I/O diferidas\n3. **Idle/Prepare** - interno\n4. **Poll** - espera por eventos (archivos, red)\n5. **Check** - `setImmediate`\n6. **Close callbacks** - limpieza\n\n## Comparación con Python\n\n| Concepto | Python | Node.js |\n|----------|--------|---------|\n| Lectura de archivo | `open().read()` bloquea | `fs.readFile(callback)` no bloquea |\n| Espera de I/O | Usa `threading` o `asyncio` | Event loop nativo |\n| Sintaxis moderna | `async/await` | `async/await` (igual) |\n\n## El patrón: Callbacks → Promises → Async/Await\n\n```javascript\n// Nivel 1: Callbacks (Node.js tradicional)\nfs.readFile(\"archivo.txt\", (err, data) => {\n  console.log(data);\n});\n\n// Nivel 2: Promises (más limpio)\nfs.promises.readFile(\"archivo.txt\")\n  .then(data => console.log(data));\n\n// Nivel 3: Async/Await (se parece a Python!)\nasync function leerArchivo() {\n  const data = await fs.promises.readFile(\"archivo.txt\");\n  console.log(data);\n}\n```\n\n## Clave: \"No bloquea, pero ejecuta en orden\"\n\n```javascript\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"2\"), 0);  // Callback futuro\nconsole.log(\"3\");\n\n// Output:\n// 1\n// 3\n// 2  ← Se ejecuta cuando el event loop vuelve a esa fase\n```\n\n**Resumen**: Node.js es single-threaded como Python, pero en lugar de bloquear con I/O, delega operaciones al sistema operativo y continúa ejecutando código. El event loop vuelve periódicamente para procesar resultados. Si dominas `async/await` en Python, en Node.js es prácticamente lo mismo.",
+  "output_tokens": 983,
+  "thinking_tokens": 177,
+  "input_tokens": 3406,
+  "wall_s": 9.99,
+  "created_at": "2026-10-06T23:01:38.907530+00:00"
+}

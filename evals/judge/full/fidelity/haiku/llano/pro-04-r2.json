@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre revocar, rotar y que la clave sigue en la historia de git, pero no menciona revisar los logs del proveedor ni que la clave sigue comprometida aunque se limpie la historia; además afirma sin sentido que revocar es 'lo único irreversible que no puedes revertir'.",
+  "judge_model": "sonnet"
+}

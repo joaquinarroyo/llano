@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Backup de producción y restauración local (Postgres)\n\n## 1. Hacer el backup (desde producción o remoto)\n\nUsa `pg_dump` en formato custom (comprimido y flexible para restaurar):\n\n```bash\npg_dump -h HOST_PROD -p 5432 -U USUARIO -d NOMBRE_DB \\\n  -Fc --no-owner --no-privileges \\\n  -f backup.dump\n```\n\nNotas:\n- `-Fc`: formato custom, permite restauración selectiva y paralela.\n- `--no-owner --no-privileges`: evita errores por roles que no existen en local.\n- La versión de `pg_dump` debe ser igual o mayor a la del servidor. Revisa con `pg_dump --version` y `psql -h HOST_PROD -U USUARIO -c \"select version()\"`.\n- `pg_dump` toma un snapshot consistente sin bloquear escrituras, así que es seguro en producción. Aun así, si la base es grande, ejecútalo en horario de baja carga o contra una réplica de lectura.\n- Para bases grandes, usa formato directorio con paralelismo:\n  ```bash\n  pg_dump -h HOST_PROD -U USUARIO -d NOMBRE_DB -Fd -j 4 -f backup_dir\n  ```\n- Si hay datos sensibles (PII), considera anonimizarlos antes de llevarlos a tu máquina, y transfiere el archivo por un canal seguro.\n\n## 2. Restaurar en local\n\nCrea la base vacía y restaura:\n\n```bash\ncreatedb -h localhost -U postgres nombre_local\npg_restore -h localhost -U postgres -d nombre_local \\\n  --no-owner --no-privileges -j 4 backup.dump\n```\n\nPara formato directorio, apunta `pg_restore` al directorio (`backup_dir`) en lugar del archivo.\n\nSi ya existe y quieres reemplazarla:\n\n```bash\ndropdb -h localhost -U postgres --if-exists nombre_local\ncreatedb -h localhost -U postgres nombre_local\n```\n\n## 3. Alternativa: sin archivo intermedio\n\n```bash\npg_dump -h HOST_PROD -U USUARIO -d NOMBRE_DB -Fc --no-owner \\\n  | pg_restore -h localhost -U postgres -d nombre_local --no-owner\n```\n\n## 4. Verificar\n\n```bash\npsql -h localhost -U postgres -d nombre_local -c \"\\dt\"\npsql -h localhost -U postgres -d nombre_local -c \"select count(*) from tu_tabla;\"\n```\n\n## Problemas comunes\n\n- **Extensiones faltantes** (`postgis`, `pgcrypto`, etc.): instálalas en local (en macOS, `brew install postgis`) antes de restaurar.\n- **Versión local menor que producción**: instala la misma versión mayor (`brew install postgresql@16`, por ejemplo).\n- **Errores de roles**: normalmente se evitan con `--no-owner --no-privileges`.\n- **Contraseña**: usa `PGPASSWORD` o un archivo `~/.pgpass` en vez de escribirla en el comando.\n\nSi me dices la versión de Postgres, el tamaño aproximado de la base y si usas un servicio gestionado (RDS, Cloud SQL, Supabase…), te ajusto los comandos.",
+  "output_tokens": 1152,
+  "thinking_tokens": 0,
+  "input_tokens": 1573,
+  "wall_s": 8.23,
+  "created_at": "2026-10-06T23:07:17.801919+00:00"
+}

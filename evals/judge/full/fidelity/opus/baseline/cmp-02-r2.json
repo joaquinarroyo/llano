@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta cubre el store global de pnpm, su estrictez, los workspaces en los tres y la recomendación de pnpm, pero no dice explícitamente que npm viene con Node (solo 'es el default'). Afirma que Yarn no tiene catálogos nativos, pero Yarn 4.10+ los soporta.",
+  "judge_model": "sonnet"
+}

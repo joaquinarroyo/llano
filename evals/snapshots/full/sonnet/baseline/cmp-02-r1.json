@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Recomendación: **pnpm**\n\nPara un monorepo nuevo, pnpm es la mejor opción por defecto.\n\n## Comparación\n\n| | **pnpm** | **npm** | **Yarn (Berry, v4+)** |\n|---|---|---|---|\n| **Workspaces** | Excelentes (`pnpm-workspace.yaml`, `--filter`) | Básicos (`workspaces` en package.json, `-w`) | Muy buenos (`yarn workspaces foreach`) |\n| **Velocidad / disco** | La mejor: store global con hard links | La más lenta, `node_modules` duplicados | Rápido, y muy rápido con PnP |\n| **Rigor de dependencias** | Estricto: evita *phantom dependencies* | Permisivo (hoisting plano) | Estricto con PnP; flexible con `nodeLinker: node-modules` |\n| **Compatibilidad** | Alta, con alguna rareza puntual | La más alta, viene con Node | Media con PnP; alta con `node-modules` |\n| **Versiones internas** | `workspace:*` | Sin protocolo equivalente | `workspace:*` |\n| **Catálogos de versiones** | Sí (`catalog:`) | No | Limitado |\n| **Filtrado por paquete** | `--filter` potente (`...pkg`, cambios desde git) | Limitado | Decente |\n| **Curva de aprendizaje** | Baja | Ninguna | Media (config y PnP) |\n\n## Por qué pnpm\n\n- **Rigor**: si un paquete usa una dependencia que no declaró, falla en vez de funcionar por casualidad. En un monorepo eso evita muchos errores.\n- **Eficiencia**: instalaciones rápidas y poco espacio en disco, y se nota mucho en CI.\n- **Ergonomía**: `pnpm --filter`, `workspace:*` y `catalog:` (para unificar versiones entre paquetes) resuelven los problemas típicos de un monorepo.\n- **Ecosistema**: Turborepo, Nx, Changesets y la mayoría de las herramientas lo soportan bien.\n\n## Cuándo elegir otro\n\n- **npm**: si quieres cero dependencias de tooling, el monorepo es pequeño (2-3 paquetes) o el equipo no quiere instalar nada extra.\n- **Yarn**: si ya tienes experiencia y flujo con Yarn, o quieres PnP y *zero-installs* y aceptas lidiar con incompatibilidades.\n\n## Setup mínimo\n\n```bash\ncorepack enable\npnpm init\n```\n\n```yaml\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n```\n\nFija la versión con el campo `packageManager` en el `package.json` raíz, para que todo el equipo y el CI usen la misma. Para orquestar tareas (build, test, caché), añade **Turborepo** o **Nx** encima.",
+  "output_tokens": 1079,
+  "thinking_tokens": 62,
+  "input_tokens": 1574,
+  "wall_s": 9.0,
+  "created_at": "2026-10-06T23:07:30.023415+00:00"
+}

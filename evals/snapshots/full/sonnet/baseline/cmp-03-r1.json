@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# WebSocket vs SSE vs polling\n\n**Regla rápida:** empieza por lo más simple que cubra tu caso. Polling → SSE → WebSocket, en ese orden de complejidad.\n\n## Polling\nEl cliente pregunta cada X segundos.\n\n**Úsalo cuando:**\n- Las actualizaciones son poco frecuentes o la latencia de varios segundos es aceptable (estado de un job, un build, un pago).\n- Necesitas máxima simplicidad e infraestructura estándar (cualquier proxy, CDN, caché).\n- Los clientes son pocos o el intervalo es largo.\n\n**Contras:** desperdicia peticiones cuando no hay cambios, y la latencia depende del intervalo.\n\n**Variante:** *long polling*, donde el servidor retiene la petición hasta que haya datos. Es útil como fallback si SSE o WebSocket no están disponibles.\n\n## Server-Sent Events (SSE)\nUn único canal **unidireccional** servidor → cliente sobre HTTP.\n\n**Úsalo cuando:**\n- Solo el servidor envía datos: notificaciones, feeds, dashboards, progreso de tareas, logs en vivo, streaming de respuestas de LLMs.\n- Quieres reconexión automática y `Last-Event-ID` para reanudar sin escribir esa lógica.\n- Quieres que funcione sobre HTTP normal (auth con cookies/headers, middleware, HTTP/2).\n\n**Contras:** solo texto (UTF-8), y es unidireccional (el cliente envía con peticiones HTTP normales). En HTTP/1.1 hay un límite de ~6 conexiones por dominio; con HTTP/2 deja de ser problema. Algunos proxies hacen buffering y hay que configurarlos.\n\n## WebSocket\nCanal **bidireccional** full-duplex, persistente.\n\n**Úsalo cuando:**\n- Ambos lados envían mensajes con frecuencia y baja latencia: chat, juegos multijugador, edición colaborativa, trading, cursores compartidos.\n- Necesitas datos binarios.\n- El volumen de mensajes del cliente al servidor es alto, y no solo ocasional.\n\n**Contras:** es más complejo. Tienes que gestionar reconexión, heartbeats, backpressure, autenticación (los navegadores no permiten headers custom en el handshake) y escalado (conexiones con estado, sticky sessions o un broker tipo Redis pub/sub). Algunos proxies y firewalls corporativos lo bloquean.\n\n## Tabla resumen\n\n| Necesidad | Elección |\n|---|---|\n| Actualizaciones cada ≥10-30 s, simple | Polling |\n| Servidor → cliente en tiempo real | **SSE** |\n| Cliente ↔ servidor, alta frecuencia | **WebSocket** |\n| Binario o latencia mínima en ambos sentidos | WebSocket |\n| Infraestructura restrictiva / legacy | Polling / long polling |\n\n## Error común\nUsar WebSocket para algo que solo es \"servidor empuja datos\". SSE cubre la mayoría de esos casos con mucha menos complejidad operativa.\n\nSi me cuentas tu caso concreto (tipo de datos, frecuencia, número de clientes, stack), te recomiendo una opción y cómo montarla.",
+  "output_tokens": 1189,
+  "thinking_tokens": 36,
+  "input_tokens": 1574,
+  "wall_s": 9.3,
+  "created_at": "2026-10-06T23:07:35.524730+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica de forma más compacta y directa qué pasa (timeout, no rechazo, no credenciales) y da cuatro pasos ordenados con toda la información técnica clave, mientras que A repite ideas y añade una sección de preguntas que hace la lectura más larga sin aportar mucho más.",
+  "judge_model": "sonnet"
+}

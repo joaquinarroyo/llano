@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B cubre lo esencial (definición, por qué importa, tabla de métodos, Idempotency-Key, atomicidad y caducidad) de forma más concisa y fácil de leer en una pasada, mientras que A añade más detalle (validación del cuerpo, HEAD/OPTIONS, matiz sobre respuestas) pero es más denso.",
+  "judge_model": "sonnet"
+}

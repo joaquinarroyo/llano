@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El orden crítico es: **revocar ahora, actualizar después, limpiar el historio**.\n\n1. **Revoca la key comprometida ahora.** No esperes. Ve al panel de la API (AWS, Stripe, GitHub, etc.) y desactívala. Es lo único irreversible que no puedes revertir después.\n\n2. **Genera una key nueva.** La mayoría de proveedores la crean al instante.\n\n3. **Actualiza los secretos en tu infraestructura** (GitHub Secrets, variables de entorno, .env local, gestor de secretos). Despliega el cambio.\n\n4. **Verifica que la app funciona** con la key nueva antes de seguir.\n\n5. **Borra la key del historio de git.** Usa `git filter-branch` o `git filter-repo` para quitar el commit que contiene la key. Haz force-push.\n\n6. **Avisa a los proveedores de seguridad** (GitHub lo detecta automáticamente si haces push a un repo público; ellos notifican a servicios). GitHub también escanea tu historio automático.\n\n7. **Busca si hay más keys expuestas** en el repo. Revisa todos los commits. Herramientas como `truffleHog` encuentran secretos en el historio.\n\n**Peligro:** No basta con eliminar la key del archivo actual. Está en el historio de git. Un atacante con acceso al repo tiene acceso al commit viejo.\n\n¿Sabes qué proveedor usas (AWS, GitHub, Stripe)? Te doy los pasos exactos del paso 5.",
+  "output_tokens": 683,
+  "thinking_tokens": 273,
+  "input_tokens": 9910,
+  "wall_s": 8.77,
+  "created_at": "2026-10-06T23:02:47.442820+00:00"
+}

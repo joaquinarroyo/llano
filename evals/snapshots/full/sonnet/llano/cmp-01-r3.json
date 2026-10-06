@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Usa Postgres.** Un SaaS de facturación necesita transacciones, integridad y datos relacionales. Postgres cubre las tres cosas de forma nativa.\n\n- **Transacciones:** una factura, sus líneas y el asiento contable se guardan juntos o no se guardan. MongoDB admite transacciones multidocumento, pero su modelo no está pensado para ellas.\n- **Integridad:** las claves foráneas y los `CHECK` evitan facturas sin cliente o con totales negativos. En MongoDB, tu código tiene que garantizar eso.\n- **Datos relacionales:** clientes, planes, facturas, impuestos y pagos se relacionan entre sí. Los reportes con `JOIN` y agregaciones son directos en SQL.\n- **Multi-tenant:** Postgres tiene row-level security para aislar los datos de cada cliente.\n- **Campos variables:** `JSONB` guarda metadatos irregulares, como la respuesta de un proveedor de pagos, sin necesitar otra base de datos.\n\nMongoDB conviene cuando los documentos no tienen esquema fijo y casi no hay relaciones. Ese no es el núcleo de una facturación.\n\nAtención: si cobras por uso y recibes millones de eventos al día, ese volumen puede necesitar un almacenamiento aparte. Eso no cambia la base principal.",
+  "output_tokens": 1154,
+  "thinking_tokens": 682,
+  "input_tokens": 10063,
+  "wall_s": 10.19,
+  "created_at": "2026-10-06T23:13:03.169047+00:00"
+}

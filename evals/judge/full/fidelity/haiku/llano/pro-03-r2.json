@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    false,
+    true,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Usa pg_dump en texto plano sin mencionar -Fc, restaura con psql y crea la BD local, pero omite la compatibilidad de versiones y los datos sensibles; además, el scp supone que el dump está en el servidor aunque la redirección lo deja en local, y --no-password contradice el consejo de PGPASSWORD.",
+  "judge_model": "sonnet"
+}

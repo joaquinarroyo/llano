@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más corto y fácil de leer en una sola pasada (pasos lineales, tabla de casos especiales), y conserva lo técnico esencial: git revert, advertencia contra force push, conflictos, merge con -m 1, revertir el revert y avisar al equipo; A añade más detalle (secretos, rama de revert) pero es más denso y largo.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "El teorema CAP dice que un sistema distribuido no puede garantizar a la vez estas tres propiedades si hay una partición de red:\n\n| Letra | Propiedad | Significado |\n|---|---|---|\n| C | Consistency (consistencia) | Toda lectura devuelve la escritura más reciente, o un error. |\n| A | Availability (disponibilidad) | Todo nodo que funciona responde a toda solicitud, sin error. |\n| P | Partition tolerance (tolerancia a particiones) | El sistema sigue funcionando aunque la red pierda mensajes entre nodos. |\n\nEric Brewer lo propuso como conjetura en 2000. Seth Gilbert y Nancy Lynch lo demostraron formalmente en 2002.\n\n## Lo que el teorema dice de verdad\n\nLa versión popular es \"elige 2 de 3\". Esa versión confunde, porque en un sistema distribuido real las particiones de red ocurren. No puedes elegir no tener P. Por eso la elección real es esta: **si hay una partición, el sistema elige entre C y A.**\n\n- **CP:** el sistema rechaza solicitudes o espera hasta tener un quórum. Ejemplos: etcd, ZooKeeper, Spanner.\n- **AP:** el sistema responde con datos que pueden estar desactualizados y reconcilia después. Ejemplos: Cassandra, DynamoDB con lecturas eventualmente consistentes.\n\nSi no hay partición, el sistema puede tener C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\nSí, como límite teórico. Ningún sistema lo puede evitar. Pero como herramienta de diseño tiene tres problemas:\n\n1. **Las definiciones son muy estrictas.** La C de CAP es linealizabilidad, y la A exige respuesta de todos los nodos. Casi ningún sistema real es \"CP puro\" o \"AP puro\" con esas definiciones. Martin Kleppmann publicó en 2015 una crítica sobre esto (\"Please stop calling databases CP or AP\").\n2. **Las particiones son raras.** El teorema no dice nada sobre el comportamiento normal del sistema, que es el 99.9% del tiempo.\n3. **Ignora la latencia.** En la práctica, el costo diario de la consistencia fuerte es la latencia, no la disponibilidad.\n\n**PACELC** (Daniel Abadi, 2010) corrige el tercer problema. Dice: si hay partición (P), elige entre A y C. Si no (Else), elige entre latencia (L) y consistencia (C). Por ejemplo, Spanner es PC/EC: paga latencia para ser consistente siempre. Cassandra con configuración por defecto es PA/EL.\n\nHoy muchas bases de datos permiten elegir el nivel de consistencia por operación. Por eso la pregunta útil ya no es \"¿es CP o AP?\". La pregunta útil es \"¿qué garantía de consistencia da esta operación, y con qué latencia?\".",
+  "output_tokens": 1081,
+  "thinking_tokens": 44,
+  "input_tokens": 10045,
+  "wall_s": 10.9,
+  "created_at": "2026-10-06T23:20:38.953952+00:00"
+}

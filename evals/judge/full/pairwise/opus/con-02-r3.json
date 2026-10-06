@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más directa y fácil de leer en una sola pasada (tabla, definición inicial clara, limitaciones concisas) y conserva la información técnica clave (linearizabilidad, PACELC, Kleppmann, Spanner), mientras que A es más extensa y repetitiva sin aportar mucho más.",
+  "judge_model": "sonnet"
+}

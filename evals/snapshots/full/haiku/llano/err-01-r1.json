@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El timeout en Postgres. La API no pudo conectar en 30 segundos.\n\n**Revisa en este orden:**\n\n1. **¿Postgres está corriendo?** Accede al servidor `db.internal` y verifica que el servicio inició.\n   ```bash\n   ssh db.internal\n   systemctl status postgresql\n   ```\n\n2. **¿El puerto está abierto?** Desde donde corre la API, intenta conectar.\n   ```bash\n   nc -zv db.internal 5432\n   ```\n\n3. **¿El firewall permite el tráfico?** Verifica que la red entre la API (`10.0.3.17` según el log) y Postgres (`db.internal`) no esté bloqueada. Revisa:\n   - Reglas del security group / firewall\n   - Rutas de red\n   - ACL del cluster (si es Kubernetes)\n\n4. **¿DNS resuelve?** Desde la API, verifica que `db.internal` se resuelve correctamente.\n   ```bash\n   nslookup db.internal\n   ```\n\nEl timeout sugiere que el tráfico llega pero no hay respuesta. Es más probable firewall o que Postgres no esté corriendo que un problema de DNS.",
+  "output_tokens": 617,
+  "thinking_tokens": 308,
+  "input_tokens": 10048,
+  "wall_s": 7.35,
+  "created_at": "2026-10-06T22:59:50.737651+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# WebSocket vs SSE vs Polling\n\n**Polling** (cliente pregunta repetidamente)\n- **Cuándo**: Datos que cambian lentamente, baja tolerancia a latencia, requisitos simples\n- **Ventajas**: Fácil, funciona en cualquier navegador/firewall, stateless\n- **Desventajas**: Ineficiente (solicitudes innecesarias), latencia variable\n- **Ejemplo**: Dashboard de estadísticas actualizadas cada 30 segundos\n\n**Server-Sent Events (SSE)** (servidor envía unidireccional)\n- **Cuándo**: Servidor necesita enviar datos al cliente, conexión unidireccional, eventos en tiempo real\n- **Ventajas**: Simple de implementar, reconexión automática, funciona sobre HTTP\n- **Desventajas**: Solo servidor → cliente, requiere nueva conexión si cliente envía mucho\n- **Ejemplo**: Notificaciones, feeds en vivo, logs en tiempo real\n\n**WebSocket** (bidireccional, full-duplex)\n- **Cuándo**: Comunicación bidireccional frecuente, baja latencia, interacción continua\n- **Ventajas**: Muy eficiente, baja latencia, una sola conexión para ambas direcciones\n- **Desventajas**: Más complejo, requiere mantener estado del servidor, posibles problemas con proxies\n- **Ejemplo**: Chat, colaboración en tiempo real, juegos multijugador, traders\n\n**Recomendación rápida**:\n- ¿Cliente solo recibe? → **SSE**\n- ¿Cliente y servidor hablan mucho? → **WebSocket**\n- ¿Datos lentos o infraestructura antigua? → **Polling**\n\n¿Tienes un caso de uso específico en mente?",
+  "output_tokens": 579,
+  "thinking_tokens": 124,
+  "input_tokens": 3398,
+  "wall_s": 5.71,
+  "created_at": "2026-10-06T23:05:10.240999+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "La **deuda técnica** es cuando el equipo toma \"atajos\" en el código para entregar más rápido, asumiendo que los \"pagarán\" después refactorizando o mejorando. Como cualquier deuda financiera, tiene un costo: requiere tiempo y recursos para \"pagarla\" más adelante.\n\n## Cómo explicarlo a negocio:\n\n**La analogía del crédito:**\n- Cuando tomas deuda financiera, obtienes dinero hoy pero pagas intereses. Con deuda técnica es igual: entregas features más rápido hoy, pero pagas \"intereses\" en forma de:\n  - **Mantenimiento más lento**: cambios simples toman más tiempo\n  - **Más bugs**: código mal hecho es frágil\n  - **Equipos menos productivos**: pierden tiempo entendiendo código confuso\n  - **Rotación de personal**: los desarrolladores se frustran\n\n**El dilema:**\n- Pagar deuda técnica = inviertes tiempo/dinero ahora en refactorizar, pero el negocio no ve features nuevas\n- No pagarla = entrgas rápido hoy, pero cada mes es más lento y costoso\n\n**Cuándo es aceptable:**\n- **Sí**: tomar deuda pequeña para lanzar un MVP o ganar a la competencia (si planeas pagarla)\n- **No**: ignorarla indefinidamente o dejar que se acumule sin control\n\n**La clave para hablar con negocio:** \"Necesitamos 2 sprints de refactorización para evitar que nos cueste 3 meses en velocidad perdida el próximo trimestre.\"\n\n¿Hay un contexto específico donde necesitas justificar esto con tu equipo de negocio?",
+  "output_tokens": 619,
+  "thinking_tokens": 178,
+  "input_tokens": 3400,
+  "wall_s": 7.54,
+  "created_at": "2026-10-06T23:01:00.327904+00:00"
+}

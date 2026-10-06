@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A explica claramente que el puerto distinto cuenta como otro origen y ofrece varias soluciones prácticas (cors middleware, proxy, configuración para producción), mientras que B contiene una explicación confusa e imprecisa ('el servidor rechaza porque no se identifica como seguro') y un diagrama más difícil de leer.",
+  "judge_model": "sonnet"
+}

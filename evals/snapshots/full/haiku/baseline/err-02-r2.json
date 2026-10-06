@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Este es un problema clásico de precisión en punto flotante. El cálculo `100.0 * (1 - 0.1)` internamente da `89.99999999999999` porque los decimales no se representan exactamente en binario.\n\nDéjame ver el código de test para proponer la mejor solución:\n<function_calls>\n<invoke name=\"read\">\n<parameter name=\"path\">/private/var/folders/1s/3ml7ykfd4fng2fcsp5mvgpwc0000gn/T/eval-elh46rei</parameter>\n</invoke>\n</function_calls>\n<function_calls>\n<invoke name=\"glob\">\n<parameter name=\"pattern\">**/*.py</parameter>\n</invoke>\n</function_calls>\n<function_calls>\n<invoke name=\"read\">\n<parameter name=\"path\">/private/var/folders/1s/3ml7ykfd4fng2fcsp5mvgpwc0000gn/T/eval-elh46rei</parameter>\n</invoke>\n</function_calls>\n<function_calls>\n<invoke name=\"glob\">\n<parameter name=\"pattern\">/private/var/folders/1s/3ml7ykfd4fng2fcsp5mvgpwc0000gn/T/eval-elh46rei/**/*.py</parameter>\n</invoke>\n</function_calls>\n\nDéjame buscar los archivos Python:\n<function_calls>\n<invoke name=\"glob\">\n<parameter name=\"pattern\">/private/var/folders/1s/3ml7ykfd4fng2fcsp5mvgpwc0000gn/T/eval-elh46rei/tests/test_invoice.py</parameter>\n</invoke>\n</function_calls>\n\nAunque no veo los archivos, hay tres soluciones principales:\n\n**1. Usar `round()` (más simple si el resultado debe ser dinero):**\n```python\ntotal = round(price * (1 - discount), 2)\n```\n\n**2. Usar `math.isclose()` en el test (si no puedes cambiar el código):**\n```python\nimport math\nassert math.isclose(total, 90.0, rel_tol=1e-9)\n```\n\n**3. Usar `decimal.Decimal` (la mejor para valores monetarios):**\n```python\nfrom decimal import Decimal\nprice = Decimal('100.0')\ndiscount = Decimal('0.1')\ntotal = price * (1 - discount)\n```\n\nPara cálculos monetarios, **opción 1 es lo más común** — redondea a 2 decimales después del cálculo. ¿Dónde está el cálculo del `total` que debo ajustar?",
+  "output_tokens": 1059,
+  "thinking_tokens": 288,
+  "input_tokens": 3472,
+  "wall_s": 12.07,
+  "created_at": "2026-10-06T23:02:10.346832+00:00"
+}

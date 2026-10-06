@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Todos los hechos clave aparecen en cada turno; el único punto dudoso es la serialización del turno 1, que se cubre solo de forma indirecta (JSON grande, validación), y no encontré afirmaciones técnicamente incorrectas.",
+  "judge_model": "sonnet"
+}

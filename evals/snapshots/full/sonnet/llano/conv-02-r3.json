@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Usa sesiones. Django las incluye y son la opción más segura para una app web con navegador.\n\n**Por qué sesiones:**\n- `django.contrib.auth` ya maneja login, logout, hash de contraseñas y protección CSRF.\n- Puedes invalidar una sesión en el servidor al instante. Un JWT robado sigue válido hasta que expira.\n- Una cookie con `HttpOnly` no es accesible desde JavaScript. Un JWT guardado en `localStorage` sí lo es.\n\n**Cuándo usar JWT:**\n- Tu API la consumen una app móvil o clientes de terceros que no usan cookies.\n- Varios servicios independientes deben validar la identidad sin consultar una base central.\n\nEn esos casos, usa Django REST Framework con `djangorestframework-simplejwt`. También puedes combinar ambos: sesiones para el sitio y tokens para la API.\n\n**Configuración mínima para sesiones en producción:**\n\n```python\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_HTTPONLY = True\nCSRF_COOKIE_SECURE = True\n```\n\nAtención: `SECURE = True` hace que la cookie solo viaje por HTTPS. En desarrollo local sin HTTPS, déjalo en `False`.\n\n¿Tu frontend es separado (React, app móvil) o Django renderiza las páginas? Con esa respuesta confirmo si las sesiones alcanzan.",
+      "output_tokens": 1008,
+      "thinking_tokens": 507,
+      "input_tokens": 10056
+    },
+    {
+      "text": "Con una app React Native, usa JWT para la app móvil y sesiones para el sitio web. Django REST Framework permite los dos en la misma API.\n\nReact Native no maneja cookies de sesión de forma confiable, y no hay navegador que aplique CSRF. Por eso la app móvil necesita tokens.\n\n**Configuración en `settings.py`:**\n\n```python\nfrom datetime import timedelta\n\nINSTALLED_APPS = [\n    # ...\n    \"rest_framework\",\n    \"rest_framework_simplejwt\",\n    \"rest_framework_simplejwt.token_blacklist\",\n]\n\nREST_FRAMEWORK = {\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework.authentication.SessionAuthentication\",\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ],\n}\n\nSIMPLE_JWT = {\n    \"ACCESS_TOKEN_LIFETIME\": timedelta(minutes=15),\n    \"REFRESH_TOKEN_LIFETIME\": timedelta(days=30),\n    \"ROTATE_REFRESH_TOKENS\": True,\n    \"BLACKLIST_AFTER_ROTATION\": True,\n}\n```\n\n**Por qué esos valores:**\n- El access token dura 15 minutos. Si alguien lo roba, el daño es corto.\n- El refresh token rota en cada uso y el anterior queda en la lista negra. Así puedes revocar el acceso de un dispositivo.\n\n**En la app móvil:**\n- Guarda los tokens en el Keychain (iOS) o Keystore (Android). Usa `expo-secure-store` o `react-native-keychain`.\n- Atención: no uses `AsyncStorage` para tokens. No está cifrado.\n- Al recibir un 401, pide un access token nuevo con el refresh token y repite la solicitud.\n\nSi tu sitio web también es una SPA en React, puedes usar JWT ahí también. Aun así, sesiones con cookie `HttpOnly` siguen siendo más seguras si el frontend y la API comparten dominio. ¿Cómo es tu frontend web?",
+      "output_tokens": 1321,
+      "thinking_tokens": 586,
+      "input_tokens": 11115
+    },
+    {
+      "text": "Usa `djangorestframework-simplejwt`. Es la librería más usada con DRF y ya incluye lista negra de tokens.\n\n**Instalación:**\n\n```bash\npip install djangorestframework-simplejwt\npython manage.py migrate\n```\n\nEl `migrate` crea las tablas de la lista negra (`token_blacklist`).\n\n**URLs:**\n\n```python\nfrom rest_framework_simplejwt.views import (\n    TokenObtainPairView, TokenRefreshView, TokenBlacklistView,\n)\n\nurlpatterns = [\n    path(\"api/token/\", TokenObtainPairView.as_view()),\n    path(\"api/token/refresh/\", TokenRefreshView.as_view()),\n    path(\"api/token/logout/\", TokenBlacklistView.as_view()),\n]\n```\n\n**Cuidados:**\n\n1. **HTTPS siempre.** Un token enviado por HTTP se puede interceptar.\n2. **Protege `SECRET_KEY`.** Simple JWT firma los tokens con ella. Si se filtra, cualquiera puede falsificar tokens. Defínela con una variable de entorno, no en el repositorio.\n3. **No pongas datos sensibles en el payload.** El JWT está firmado, pero no cifrado. Cualquiera puede leerlo.\n4. **Logout real.** En la app móvil, envía el refresh token a `/api/token/logout/` y borra ambos tokens del dispositivo.\n5. **Revoca al cambiar la contraseña.** Pon en la lista negra todos los refresh tokens del usuario:\n\n   ```python\n   from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken\n\n   for t in OutstandingToken.objects.filter(user=user):\n       BlacklistedToken.objects.get_or_create(token=t)\n   ```\n\n6. **Limpia tokens vencidos.** La tabla crece sin límite. Ejecuta `python manage.py flushexpiredtokens` con un cron diario.\n7. **Limita los intentos de login.** Agrega `DEFAULT_THROTTLE_CLASSES` y `DEFAULT_THROTTLE_RATES` en DRF, por ejemplo `5/min` para `/api/token/`.\n8. **Un access token ya emitido no se puede revocar.** Sigue válido hasta que expira. Por eso dura 15 minutos.",
+      "output_tokens": 1372,
+      "thinking_tokens": 556,
+      "input_tokens": 12513
+    }
+  ],
+  "created_at": "2026-10-06T23:14:06.100986+00:00"
+}

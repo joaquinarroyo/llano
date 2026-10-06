@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B es igual de legible y además cubre más información técnica útil (índice por defecto, balanceo, operadores soportados, CREATE INDEX/EXPLAIN, y el costo en escrituras), mientras que A omite el tradeoff y su ejemplo de '3 comparaciones' es inconsistente.",
+  "judge_model": "sonnet"
+}

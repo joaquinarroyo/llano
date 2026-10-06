@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B identifica que Python 3.13 es parte de la causa (torch 2.1.0 no tiene wheels para 3.13), información clave que A omite y que haría fallar su opción 2, aunque B también tiene imprecisiones (3.12 tampoco sirve para torch 2.1.0).",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Aquí está el orden crítico para minimizar el daño:\n\n## Immediato (ahora mismo)\n\n1. **Revoca la clave filtrada** en el panel de control de tu proveedor (AWS, GitHub, etc.). Esto detiene cualquier acceso no autorizado.\n\n2. **Busca si se usó sin autorización**: revisa logs de acceso/auditoría para detectar actividad sospechosa. Si encuentras mal uso, escalalo inmediatamente.\n\n## Corto plazo (próximas horas)\n\n3. **Genera una nueva clave** en el mismo proveedor.\n\n4. **Actualiza todas las referencias**:\n   - Variables de entorno en producción (secrets managers, CI/CD, etc.)\n   - Código que use la clave (reemplaza referencias)\n   - Documentación interna\n\n5. **Limpia el historio de git**:\n   ```bash\n   # Si aún está en commits recientes\n   git filter-branch --tree-filter 'grep -r \"old-key\" . && sed -i \"\" \"s/old-key/new-key/g\" *' -- --all\n   # O usa: git filter-repo (más moderno)\n   ```\n   \n   Luego fuerza push: `git push origin --force-with-lease --all`\n\n6. **Verifica en GitHub**: ve a la sección de secretos detectados del repo para confirmar que GitHub ya no la ve.\n\n## Comunicación\n\n7. **Notifica** a tu equipo de seguridad/devops si aplica.\n\n8. **Considera alertar al proveedor** si hubo actividad maliciosa detectable.\n\n**Lo más importante**: la revocación inmediata limita el daño. El historio de git es importante pero secundario si ya la clave no funciona.\n\n¿Necesitas ayuda específica con alguno de estos pasos o tienes preguntas sobre el proveedor que usas?",
+  "output_tokens": 709,
+  "thinking_tokens": 231,
+  "input_tokens": 3404,
+  "wall_s": 8.1,
+  "created_at": "2026-10-06T23:02:43.401971+00:00"
+}

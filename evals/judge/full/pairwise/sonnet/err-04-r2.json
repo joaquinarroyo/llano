@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A explica las dos causas, da dos opciones con código, recomienda una y avisa de los riesgos, todo de forma más compacta; B añade notas útiles pero tangenciales (NVIDIA toolkit, torchvision) que alargan la lectura.",
+  "judge_model": "sonnet"
+}

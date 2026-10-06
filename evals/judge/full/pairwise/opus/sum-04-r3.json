@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B cuenta la discusión en orden cronológico y fluido, con conectores que muestran cómo se llegó a la decisión, mientras que A empieza por la conclusión y luego enumera los hechos, lo que obliga a reordenar mentalmente; ambas conservan la información técnica clave.",
+  "judge_model": "sonnet"
+}

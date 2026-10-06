@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El `useEffect` crea un ciclo infinito. Cada vez que ejecuta `setFilters`, actualiza `filters`, lo que activa el efecto de nuevo.\n\n**El problema:** `filters` está en la dependency array y el efecto modifica `filters`. Loop sin fin.\n\n**La solución depende de tu intención:**\n\n**Opción A:** Si quieres resetear la página solo cuando cambian *otros* campos (no la página), monitorea solo esos:\n\n```javascript\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }))\n}, [filters.searchTerm, filters.category]) // solo lo que importa\n```\n\n**Opción B:** Si quieres evitar que la página se resetee al cambiar `filters`, usa una ref para saber cuál campo cambió:\n\n```javascript\nconst prevFiltersRef = useRef();\n\nuseEffect(() => {\n  if (prevFiltersRef.current?.page !== filters.page) {\n    prevFiltersRef.current = filters;\n    return; // ignora cambios en page\n  }\n  setFilters(prev => ({ ...prev, page: 1 }))\n  prevFiltersRef.current = filters;\n}, [filters])\n```\n\n**Opción C:** Si es una búsqueda, separa los filtros de la página:\n\n```javascript\nconst [searchTerm, setSearchTerm] = useState('');\nconst [page, setPage] = useState(1);\n\nuseEffect(() => {\n  setPage(1); // reset cuando busca\n}, [searchTerm])\n```\n\n¿Cuál es el flujo: el usuario cambia un filtro y tú quieres volver a página 1?",
+  "output_tokens": 1009,
+  "thinking_tokens": 592,
+  "input_tokens": 9982,
+  "wall_s": 11.36,
+  "created_at": "2026-10-06T23:02:16.297556+00:00"
+}

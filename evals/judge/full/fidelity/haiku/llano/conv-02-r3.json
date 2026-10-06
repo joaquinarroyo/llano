@@ -1,0 +1,37 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      false,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      true,
+      true,
+      false,
+      false,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    5
+  ],
+  "incorrect_claims": 2,
+  "notes": "En los turnos 2 y 3 el asistente recomienda AsyncStorage (sin cifrar) como opción o fallback para guardar tokens en mobile, lo cual es inseguro; además omite la revocación de JWT (turno 1), los refresh tokens de vida corta (turno 2) y la rotación de refresh tokens (turno 3).",
+  "judge_model": "sonnet"
+}

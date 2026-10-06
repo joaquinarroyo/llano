@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica la causa (referencia nueva con Object.is) con un diagrama claro, da la solución recomendada y la alternativa con efecto, de forma más concisa, mientras que A añade una tercera opción y una regla general que alargan sin ser imprescindibles.",
+  "judge_model": "sonnet"
+}

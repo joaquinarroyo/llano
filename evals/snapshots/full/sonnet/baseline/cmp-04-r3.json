@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Recomendación:** si tus necesidades son tareas simples (emails, procesar un archivo, llamar a una API) y ya usas Redis, empieza con RQ (o django-rq). Elige Celery si necesitas programación periódica robusta, enrutamiento complejo, reintentos finos o flujos de tareas encadenadas.\n\n## Diferencias principales\n\n| Aspecto | Celery | Redis + RQ |\n|---|---|---|\n| **Complejidad** | Alta: muchas opciones de configuración, curva de aprendizaje | Baja: API pequeña, se entiende en una tarde |\n| **Brokers** | RabbitMQ, Redis, SQS, etc. | Solo Redis |\n| **Tareas periódicas** | Celery Beat integrado (con `django-celery-beat` puedes gestionarlas desde el admin) | `rq-scheduler` o `django-rq` con scheduler (más básico) |\n| **Reintentos** | Configurables por tarea: backoff, máximo de intentos, `autoretry_for` | Soportados (`Retry`), pero más limitados |\n| **Flujos de tareas** | Chains, groups, chords | Dependencias simples (`depends_on`) |\n| **Enrutamiento/prioridades** | Múltiples colas, routing, rate limits por tarea | Múltiples colas con prioridad por orden |\n| **Resultados** | Backends variados (Redis, DB, etc.) | Se guardan en Redis con TTL |\n| **Modelo de workers** | prefork, gevent, eventlet, threads | Un proceso fork por job (simple, pero más lento por tarea) |\n| **Monitoreo** | Flower, integraciones con Sentry/Prometheus | `rq-dashboard`, admin de `django-rq` |\n| **Windows** | Soporte limitado | RQ no funciona nativamente en Windows (usa fork) |\n| **Depuración** | Más difícil por la cantidad de piezas | Más fácil de seguir y entender |\n\n## Cuándo elegir cada uno\n\n**RQ:**\n- Equipo pequeño o proyecto con pocas tareas en segundo plano.\n- Ya tienes Redis y no quieres añadir otra pieza de infraestructura.\n- Prefieres código fácil de leer y depurar.\n\n**Celery:**\n- Necesitas tareas programadas complejas (crontab, intervalos dinámicos).\n- Alto volumen, rate limiting, o necesitas RabbitMQ por garantías de entrega.\n- Pipelines de tareas (chain/group/chord).\n- Quieres un ecosistema maduro con muchos ejemplos y plugins.\n\n## Consideraciones prácticas\n\n- **Migrar después:** si las tareas son funciones simples que reciben argumentos serializables, pasar de RQ a Celery más adelante es razonable. No te cases con el framework en la lógica de negocio: mantén las funciones de tarea delgadas y que llamen a servicios normales.\n- **Con Django:** usa `transaction.on_commit()` al encolar tareas que dependen de datos recién guardados, sea cual sea la opción.\n- **Idempotencia:** diseña tareas que toleren ejecutarse dos veces. Ambos sistemas pueden reentregar en fallos.\n\nSi me cuentas qué tipo de tareas tienes, el volumen aproximado y si necesitas programación periódica, puedo afinar la recomendación o ayudarte a configurar la opción elegida.",
+  "output_tokens": 1240,
+  "thinking_tokens": 45,
+  "input_tokens": 1588,
+  "wall_s": 10.25,
+  "created_at": "2026-10-06T23:13:16.220320+00:00"
+}

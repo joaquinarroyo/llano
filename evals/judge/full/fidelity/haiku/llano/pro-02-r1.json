@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    false,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Explica bien git revert y el push normal, pero solo descarta reset --hard (no push --force), no menciona git log ni -m para merges, y afirma sin matiz que el equipo no tendrá conflictos.",
+  "judge_model": "sonnet"
+}

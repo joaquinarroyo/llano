@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Todos los hechos clave aparecen en cada turno; no detecté afirmaciones técnicamente incorrectas, aunque el PR del turno 3 presenta como causa la espera por el pool, que solo era una hipótesis sin verificar.",
+  "judge_model": "sonnet"
+}

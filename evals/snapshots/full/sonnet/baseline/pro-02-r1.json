@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Revertir un commit ya pusheado a `main`\n\nUsa **`git revert`**, no `git reset`. `revert` crea un commit nuevo que deshace los cambios, así que no reescribe el historial y no rompe los clones del equipo.\n\n## Pasos\n\n1. **Actualiza tu copia local**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -n 20\n   ```\n\n3. **Revierte**\n   ```bash\n   git revert <hash>\n   ```\n   Se abrirá el editor con el mensaje, que por defecto es `Revert \"mensaje original\"`. Conviene añadir el motivo.\n\n   - **Varios commits:** `git revert <hash_viejo>^..<hash_nuevo>` (crea un revert por commit).\n   - **Merge commit:** hay que indicar el padre a conservar, normalmente `git revert -m 1 <hash>`.\n\n4. **Verifica antes de subir**\n   ```bash\n   git show HEAD        # confirma que el diff es el inverso del original\n   ```\n   Corre los tests o el build.\n\n5. **Súbelo**\n   ```bash\n   git push origin main\n   ```\n   Si `main` está protegido, haz el revert en una rama y abre un PR:\n   ```bash\n   git checkout -b revert-<descripcion>\n   git revert <hash>\n   git push -u origin revert-<descripcion>\n   ```\n\n6. **Avisa al equipo** para que hagan `git pull`, y explica el porqué en el mensaje o el PR.\n\n## Qué evitar\n\n- **`git reset --hard` + `git push --force`** sobre `main`: reescribe el historial compartido, y quienes ya hicieron pull tendrán conflictos o podrían reintroducir el commit por accidente.\n- Si de verdad necesitas borrar el commit del historial (por ejemplo, subiste un secreto), eso es otro caso: coordina con el equipo y **rota la credencial**, porque ya quedó expuesta.\n\n## Si luego quieres volver a aplicar el cambio\n\nUn commit revertido no se puede simplemente volver a mergear desde su rama original, porque Git lo considera ya aplicado. Opciones: hacer `git revert <hash_del_revert>` (revertir el revert) o cherry-pick del commit original a una rama nueva.\n\nSi me dices si hay merge commits o si `main` está protegido, te ajusto los comandos.",
+  "output_tokens": 896,
+  "thinking_tokens": 53,
+  "input_tokens": 1587,
+  "wall_s": 7.45,
+  "created_at": "2026-10-06T23:07:12.262458+00:00"
+}

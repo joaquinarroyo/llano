@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 3,
+  "notes": "Atribuye datos desactualizados a CP y AP, describe mal PACELC (omite el compromiso latencia/consistencia) y etiqueta como CA a Postgres y Cassandra; tampoco dice que la tolerancia a particiones no es opcional.",
+  "judge_model": "sonnet"
+}

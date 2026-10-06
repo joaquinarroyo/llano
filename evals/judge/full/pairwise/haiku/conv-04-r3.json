@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da respuestas claras y bien estructuradas, con un plan de 4 semanas en formato de checklist fácil de presentar al equipo, mientras que B incluye inconsistencias (p. ej. dice que los despliegues 'lentos o frecuentes' justifican replantear, y que Rails corre tests en secuencial) y un plan menos pulido para presentar.",
+  "judge_model": "sonnet"
+}

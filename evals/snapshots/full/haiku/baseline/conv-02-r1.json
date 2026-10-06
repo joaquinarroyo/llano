@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Para una web tradicional con Django y templates, **usa sesiones** — Django las maneja automáticamente, son más simples y seguras por defecto. El tradeoff es que requieren almacenamiento en servidor, pero es eficiente para la mayoría de casos.\n\nConsidera **JWT solo si necesitas** una API stateless para apps móviles o SPA que consume desde múltiples dominios, ya que requiere más configuración y consideraciones de seguridad (expiración, refresh tokens, etc.).\n\n¿Tu app es una web tradicional o una SPA/API móvil?",
+      "output_tokens": 411,
+      "thinking_tokens": 268,
+      "input_tokens": 3398
+    },
+    {
+      "text": "En ese caso, **usa JWT para la API** — las apps mobile no manejan cookies como navegadores, y JWT te da un único endpoint para ambas. \n\nPara la web, puedes mantener sesiones tradicionales con Django (más seguro) o también usar JWT en ambas. El tradeoff: JWT requiere refresh tokens, manejo de expiración y cuidado con almacenamiento en cliente; sesiones web + JWT mobile es más complejo pero más seguro para cada caso.\n\n¿Prefieres un sistema unificado con JWT o mantener sesiones para la web?",
+      "output_tokens": 322,
+      "thinking_tokens": 182,
+      "input_tokens": 3868
+    },
+    {
+      "text": "**Usa `djangorestframework-simplejwt`** — es el estándar en Django, maneja refresh tokens automáticamente y se integra bien con Django REST Framework.\n\nCuidados clave: guarda el token en el cliente de forma segura (en React Native, usa `AsyncStorage` o similar, nunca en localStorage en web ya que es vulnerable a XSS), implementa **refresh tokens** con expiración corta en access tokens, valida siempre la firma del token en servidor, y usa HTTPS obligatoriamente.\n\n¿Quieres que te ayude a implementarlo en tu Django?",
+      "output_tokens": 315,
+      "thinking_tokens": 166,
+      "input_tokens": 4265
+    }
+  ],
+  "created_at": "2026-10-06T23:01:13.421309+00:00"
+}

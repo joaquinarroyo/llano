@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B abre con una respuesta directa, usa una tabla compacta y frases cortas, y conserva lo técnico esencial (linealizabilidad, CP/AP, PACELC, C de CAP distinta de C de ACID, crítica de Kleppmann), mientras que A es más largo y denso sin aportar mucho más.",
+  "judge_model": "sonnet"
+}

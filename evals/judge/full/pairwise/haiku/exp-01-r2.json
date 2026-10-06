@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica el mecanismo de forma coherente (un hilo, delega al sistema, procesa resultados en la cola), con un ejemplo ordenado y su salida comentada, mientras que A es más fragmentado y mezcla Python dentro de un bloque de JavaScript; aunque B omite la fase poll, la explicación central queda más clara en una sola lectura.",
+  "judge_model": "sonnet"
+}

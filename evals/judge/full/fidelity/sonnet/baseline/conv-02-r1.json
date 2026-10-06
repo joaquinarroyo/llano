@@ -1,0 +1,37 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      false,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    5
+  ],
+  "incorrect_claims": 0,
+  "notes": "El turno 3 no menciona de nuevo la expiración corta del token de acceso (remite a la configuración anterior); no encontré afirmaciones técnicamente incorrectas.",
+  "judge_model": "sonnet"
+}

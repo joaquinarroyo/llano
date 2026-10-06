@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Probablemente una dependencia que actualiza comportamiento interno (serialización JSON, middleware, pool de conexiones). Empieza aquí:\n\n1. **¿Qué dependencias se actualizaron?**  \n   Ejecuta `git log --oneline package-lock.json` o `npm list --depth=0 | diff` contra la versión anterior. Busca cambios mayores en `express`, `fastify`, parsers JSON, drivers de base de datos.\n\n2. **Mide dónde está el tiempo.**  \n   Agrega logs de duración en los puntos clave:\n   - Entrada del request\n   - Fin de cada middleware\n   - Query a base de datos\n   - Respuesta enviada\n   \n   Usa `console.time()` o una métrica de tu observabilidad. Con eso verás si el 780 ms extra está en I/O (BD), CPU (serialización) o espera de eventos.\n\n3. **Downgrade prueba.**  \n   Si los logs no clarifican: downgrade la dependencia más sospechosa, reinicia, y verifica p95. Si vuelve a 120 ms, encontraste la causa.\n\n4. **Revisa cambios en la dependencia.**  \n   Lee el CHANGELOG entre las versiones. Busca \"performance\", \"breaking\", \"pool\", \"cache\".\n\nSin acceso al código, el diagnóstico más rápido es medir, no especular. ¿Dónde ves los logs o métricas?",
+      "output_tokens": 661,
+      "thinking_tokens": 293,
+      "input_tokens": 9932
+    },
+    {
+      "text": "Encontraste el culpable. Cada BEGIN/COMMIT suma ~20-50 ms en red + BD. Con 14 queries × 2 operaciones (BEGIN + COMMIT) = 28 roundtrips extras. Eso explica los 780 ms.\n\n**Soluciones (en orden de velocidad):**\n\n1. **Revertir el ORM.**  \n   Más rápido si no hay cambios críticos en esa versión. `npm install nombreORM@8.11` y redeploy.\n\n2. **Buscar opción de config en el ORM.**  \n   Algunos ORMs permiten `autoTransaction: false` o similar. Revisa la documentación de la versión 8.12. Si existe, agrega la flag y testa.\n\n3. **Wrappear queries en una transacción única.**  \n   Si necesitas 8.12 por otras razones, envuelve las 14 queries en una sola transacción explícita (un BEGIN al inicio del request, un COMMIT al final). Eso baja a 2 roundtrips.\n\n¿Cuál es el ORM? Puedo ayudarte a buscar la configuración o escribir el wrapper.",
+      "output_tokens": 488,
+      "thinking_tokens": 188,
+      "input_tokens": 10701
+    },
+    {
+      "text": "```\nperf(orm): revertir a versión anterior por regresión de transacciones\n\nLa versión 8.12 abre BEGIN/COMMIT implícito en cada query.\nCon 14 queries por request, esto suma 28 roundtrips extras a la BD.\n\nImpacto: p95 pasó de 130 ms a 900 ms en 24 h.\nSolución: revertir a 8.11 hasta que el ORM corrija el comportamiento.\n\nVerificación: p95 vuelve a 130 ms. Tests pasan.\n```\n\nSi necesitas detalles adicionales en la descripción (link a issue del ORM, fecha de planeado para actualizar), avísame.",
+      "output_tokens": 458,
+      "thinking_tokens": 277,
+      "input_tokens": 11266
+    }
+  ],
+  "created_at": "2026-10-06T23:03:33.085812+00:00"
+}

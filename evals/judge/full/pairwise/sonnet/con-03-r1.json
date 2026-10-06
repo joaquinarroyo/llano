@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A cubre en pocas líneas lo esencial (velocidad, predictibilidad, falta de sal, poca memoria, qué algoritmos usar y cuándo, y que SHA-256 sí sirve para otros usos), mientras que B repite ideas en varias secciones y añade ejemplo y cierre que alargan la lectura sin aportar mucho más.",
+  "judge_model": "sonnet"
+}

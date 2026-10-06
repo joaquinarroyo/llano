@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Event Loop de Node.js vs Python Síncrono\n\n## La diferencia fundamental\n\nEn **Python síncrono**, el código se ejecuta línea por línea bloqueando:\n```python\n# Python: se espera cada operación\nresultado = requests.get('https://api.ejemplo.com')  # Bloquea aquí\nprocesar(resultado)\n```\n\nEn **Node.js**, el event loop permite que tu aplicación siga ejecutando mientras las operaciones I/O ocurren en segundo plano:\n```javascript\n// Node.js: no bloquea\nfetch('https://api.ejemplo.com')\n  .then(resultado => procesar(resultado))\nconsole.log('Esto se ejecuta inmediatamente')\n```\n\n## Cómo funciona el event loop\n\nNode.js es **single-threaded** pero maneja concurrencia así:\n\n1. **Call stack**: Ejecuta tu código JavaScript sincrónico\n2. **APIs asincrónicas** (como `fetch`, `fs.readFile`): Se delegan a C++ (libuv)\n3. **Event loop**: Revisa si hay callbacks listos para ejecutar\n4. **Task queues**: Colas de macrotasks (timers, I/O) y microtasks (promesas)\n\n```javascript\nconsole.log('1. Inicio')\n\nsetTimeout(() => console.log('3. Timeout'), 0)  // macrotask\n\nPromise.resolve()\n  .then(() => console.log('2. Promesa'))  // microtask\n\nconsole.log('4. Fin')\n\n// Salida: 1, 4, 2, 3\n```\n\n## Orden de ejecución\n\nEl event loop prioriza así:\n\n1. **Call stack**: código sincrónico\n2. **Microtasks**: promesas, `queueMicrotask()`\n3. **Macrotasks**: `setTimeout`, `setInterval`, I/O\n4. Vuelve a empezar\n\n## Comparación Python → Node.js\n\n| Python | Node.js |\n|--------|---------|\n| `requests.get()` (bloquea) | `fetch()` (retorna Promesa) |\n| `asyncio` explícito | Nativo, basado en callbacks |\n| `await` dentro de `async` | `await` o `.then()` |\n| Multi-thread para CPU-bound | Single-thread, delegación a workers |\n\n## El \"truco\" de Node.js\n\nNode.js **nunca espera** operaciones I/O. En su lugar:\n- Registra el callback\n- Continúa ejecutando otra cosa\n- Cuando la operación termina, el event loop ejecuta el callback\n\nEsto permite que 1000 conexiones simultáneas no necesiten 1000 threads.\n\n**La clave**: acepta que el código no se ejecuta linealmente. Usa promesas y async/await para mantener el código legible.",
+  "output_tokens": 907,
+  "thinking_tokens": 202,
+  "input_tokens": 3406,
+  "wall_s": 9.85,
+  "created_at": "2026-10-06T22:59:36.498003+00:00"
+}

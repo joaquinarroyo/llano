@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Postgres.** La facturación tiene transacciones con dinero real, múltiples tablas relacionadas (clientes, facturas, líneas, pagos, impuestos) y necesita garantías ACID que no puedes negociar. El tradeoff: Postgres te obliga a pensar el esquema antes. MongoDB es más flexible para cambios rápidos, pero esa flexibilidad no vale la pena acá si el costo es sacrificar consistencia.\n\n¿Hay algo específico del SaaS que te hace dudar? (volumen, tipos de consulta, equipo que conoce una mejor que la otra).",
+  "output_tokens": 504,
+  "thinking_tokens": 350,
+  "input_tokens": 9906,
+  "wall_s": 7.02,
+  "created_at": "2026-10-06T23:00:37.080113+00:00"
+}

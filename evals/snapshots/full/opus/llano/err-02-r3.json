@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "# Por qué falla\n\nPython usa números de punto flotante binarios (IEEE 754). Estos números no representan exactamente valores decimales como `0.1` o `0.9`. Cada operación redondea el resultado al binario más cercano. Por eso una cuenta que en decimal da `90.0` puede dar `89.99999999999999`. La comparación `==` exige igualdad exacta bit a bit, y falla.\n\n**Atención:** con `price=100.0` y `discount=0.1` literales, `100.0 * (1 - 0.1)` debería dar `90.0` exacto. El redondeo de esos valores cae a favor. Probablemente uno de los valores llega al test desde otra cuenta, por ejemplo una suma de precios o un porcentaje dividido. Para verificarlo, agrega `print(repr(price), repr(discount))` antes del cálculo.\n\n# Cómo arreglarlo\n\nHay dos opciones. La elección depende de qué representa `total`.\n\n**1. Si `total` es dinero, usa `Decimal` en el código.** Es la opción que recomiendo para facturas, porque el error de redondeo también llega a los montos reales:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.10\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# total == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` desde strings, no desde floats. `Decimal(0.1)` copia el error binario del float.\n\n**2. Si el código debe seguir con floats, compara con tolerancia en el test:**\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total_with_discount(100.0, 0.1) == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto una diferencia relativa de `1e-6`.\n\nNo uses `round(total, 2)` en el código como única corrección. Oculta el síntoma en este test, pero el error de redondeo sigue en las sumas de muchas líneas.",
+  "output_tokens": 1495,
+  "thinking_tokens": 777,
+  "input_tokens": 10135,
+  "wall_s": 15.88,
+  "created_at": "2026-10-06T23:22:58.534282+00:00"
+}

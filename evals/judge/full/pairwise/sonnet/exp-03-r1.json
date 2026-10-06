@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica estructura, búsqueda, por qué es rápido, operaciones y costos con un ejemplo numérico concreto y menos densidad, así que se entiende mejor en una sola lectura; A cubre más (INCLUDE, HOT, visibility map) pero es más denso y abarca temas secundarios que dificultan seguir lo esencial.",
+  "judge_model": "sonnet"
+}

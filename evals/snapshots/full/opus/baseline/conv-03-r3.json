@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "conversation",
+  "model": "claude-opus-5-5",
+  "turns": [
+    {
+      "text": "Un **índice compuesto** (o *multicolumna*) es un índice que se crea sobre **dos o más columnas** de una tabla, en lugar de una sola.\n\n## Ejemplo\n\n```sql\nCREATE INDEX idx_cliente_fecha\nON pedidos (cliente_id, fecha);\n```\n\nEste índice ordena las filas primero por `cliente_id` y, dentro de cada cliente, por `fecha`. Funciona como una guía telefónica ordenada por *apellido* y luego por *nombre*.\n\n## La regla clave: el prefijo izquierdo\n\nEl índice solo se aprovecha si la consulta usa las columnas **empezando por la izquierda**:\n\n| Consulta | ¿Usa el índice? |\n|---|---|\n| `WHERE cliente_id = 5` | ✅ Sí |\n| `WHERE cliente_id = 5 AND fecha > '2026-01-01'` | ✅ Sí, de forma óptima |\n| `WHERE fecha > '2026-01-01'` | ❌ No (o de forma muy ineficiente) |\n\nIgual que en la guía telefónica: es fácil buscar a todos los \"García\", pero no a todos los que se llaman \"Ana\" sin importar el apellido.\n\n## Cómo elegir el orden de las columnas\n\n1. **Igualdad primero, rangos después**: pon las columnas filtradas con `=` antes que las filtradas con `>`, `<`, `BETWEEN` o `LIKE 'abc%'`. Después de un rango, las columnas siguientes ya no ayudan a filtrar.\n2. **Según tus consultas reales**: si a veces filtras solo por `cliente_id`, esa columna debe ir primero.\n3. **Selectividad**: a igualdad de condiciones, la columna que más filtra suele ir delante.\n\n## Ventajas adicionales\n\n- **`ORDER BY`**: `WHERE cliente_id = 5 ORDER BY fecha` puede devolver los resultados ya ordenados sin un paso extra de ordenación.\n- **Índice cubriente**: si todas las columnas que pide la consulta están en el índice, la base de datos no necesita leer la tabla:\n  ```sql\n  SELECT fecha FROM pedidos WHERE cliente_id = 5;  -- solo lee el índice\n  ```\n- **Reemplaza índices simples**: un índice en `(a, b)` hace innecesario uno separado en `(a)`.\n\n## Desventajas\n\n- Ocupa más espacio que un índice simple.\n- Hace más lentos los `INSERT`, `UPDATE` y `DELETE`, porque el índice también debe actualizarse.\n- Si el orden de columnas no coincide con tus consultas, puede no servir de nada.\n\n**Consejo práctico:** usa `EXPLAIN` (o `EXPLAIN ANALYZE` en PostgreSQL) para comprobar si tus consultas realmente usan el índice.",
+      "output_tokens": 1023,
+      "thinking_tokens": 17,
+      "input_tokens": 1555
+    },
+    {
+      "text": "**En general, no de forma eficiente.** `fecha` es la segunda columna, y los datos del índice están ordenados primero por `cliente_id`. Las fechas posteriores a `2026-01-01` están repartidas por todo el índice, una vez por cada cliente, así que no hay un tramo contiguo que leer.\n\n## Matices\n\n- **Skip scan**: algunos motores pueden \"saltar\" por cada valor distinto de `cliente_id` y buscar el rango de fechas dentro de cada uno. Lo soportan Oracle, MySQL 8.0.13+ y PostgreSQL 18+. Solo compensa si hay **pocos clientes distintos**. Con miles de clientes, no sirve.\n- **Recorrido completo del índice**: si la consulta solo pide columnas que están en el índice (por ejemplo `SELECT cliente_id, fecha ...`), el motor puede leer todo el índice en vez de la tabla. Es mejor que leer la tabla, pero sigue siendo un recorrido completo.\n\n## Solución\n\nSi esta consulta es frecuente, crea un índice que empiece por `fecha`:\n\n```sql\nCREATE INDEX idx_fecha ON pedidos (fecha);\n```\n\nMantén también `(cliente_id, fecha)` si tienes consultas que filtran por cliente. Cada índice cubre un patrón de consulta distinto.\n\nPara comprobar qué hace tu motor en concreto:\n\n```sql\nEXPLAIN SELECT * FROM pedidos WHERE fecha > '2026-01-01';\n```\n\nSi ves `Seq Scan` / `ALL` / `TABLE ACCESS FULL`, el índice no se está usando.",
+      "output_tokens": 682,
+      "thinking_tokens": 103,
+      "input_tokens": 2649
+    },
+    {
+      "text": "**Sí, es el caso ideal para ese índice.**\n\n1. **Filtro**: `cliente_id = 7` es una igualdad sobre la primera columna, así que el motor salta directamente al tramo de ese cliente.\n2. **Orden**: dentro de ese tramo, las filas ya están ordenadas por `fecha`. No hace falta ordenar.\n3. **`DESC`**: los índices B-tree se pueden recorrer en ambas direcciones, así que el motor empieza por el final del tramo (las fechas más recientes) y va hacia atrás.\n4. **`LIMIT 10`**: se detiene tras leer 10 entradas.\n\nEl resultado es que lee unas pocas páginas del índice, tenga el cliente 10 pedidos o 10 millones. Sin el índice, tendría que buscar todos los pedidos del cliente, ordenarlos y quedarse con los 10 primeros.\n\n## Cómo comprobarlo\n\n```sql\nEXPLAIN SELECT * FROM pedidos\nWHERE cliente_id = 7\nORDER BY fecha DESC\nLIMIT 10;\n```\n\nLo que buscas en el plan:\n\n- **PostgreSQL**: `Index Scan Backward using idx_cliente_fecha`, sin un nodo `Sort`.\n- **MySQL**: `type: ref` con `key: idx_cliente_fecha`, y en `Extra` **no** debe aparecer `Using filesort`. Puede aparecer `Backward index scan`.\n\n## Cuándo deja de ser óptimo\n\n- **`ORDER BY` con varias columnas en direcciones mezcladas**, por ejemplo `ORDER BY fecha DESC, id ASC` con un índice `(cliente_id, fecha, id)`. El recorrido inverso invierte todas las columnas a la vez, así que haría falta un índice declarado como `(cliente_id, fecha DESC, id ASC)`.\n- **Rango en lugar de igualdad**, por ejemplo `WHERE cliente_id IN (7, 8)` o `cliente_id > 7`. Las filas de varios clientes no forman una secuencia única ordenada por fecha, así que normalmente el motor tiene que ordenar (aunque algunos motores combinan los tramos de un `IN` sin ordenar todo).",
+      "output_tokens": 791,
+      "thinking_tokens": 0,
+      "input_tokens": 3401
+    }
+  ],
+  "created_at": "2026-10-06T23:26:37.739124+00:00"
+}

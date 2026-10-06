@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 3,
+  "notes": "Cubre single-thread y delegación de I/O al SO, pero no explica colas con pila vacía, ni microtareas antes de macrotareas, ni el bloqueo por CPU; además hay errores como 'Pending callbacks = I/O diferidas' impreciso, comentario de Python con sintaxis // en bloque de código mezclado, y afirmar que async/await de Python es 'prácticamente lo mismo' (asyncio requiere un event loop explícito y no es nativo).",
+  "judge_model": "sonnet"
+}

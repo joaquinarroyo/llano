@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "El efecto crea un bucle infinito. Cada vez que corre, `setFilters` guarda un objeto nuevo. React compara por referencia, así que `filters` \"cambia\" aunque los valores sean iguales. Eso vuelve a disparar el efecto, y así sin fin.\n\n```\nefecto corre → setFilters({ ...filters }) → objeto nuevo → filters cambió → efecto corre\n```\n\n## Solución recomendada\n\nEvita el efecto. Reinicia `page` en el handler que cambia los filtros:\n\n```js\nfunction handleFilterChange(changes) {\n  setFilters(prev => ({ ...prev, ...changes, page: 1 }));\n}\n```\n\nAsí `page` vuelve a 1 en el mismo momento del cambio. No hay render extra ni dependencias que vigilar.\n\n## Si necesitas el efecto\n\nDepende de los valores concretos, no del objeto completo. Usa también la forma funcional de `setFilters`:\n\n```js\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }));\n}, [filters.query, filters.category]);\n```\n\nCambia la lista por los campos que deben reiniciar la página. No incluyas `filters.page`, porque causaría el mismo bucle.\n\nAtención: este patrón hace un render extra con la página vieja antes de reiniciarla. Puede disparar una petición innecesaria si cargas datos con `filters`.\n\nNo vi el resto del componente. Si `page` también se cambia en otro lugar, revisa que ese código no choque con el reinicio.",
+  "output_tokens": 893,
+  "thinking_tokens": 365,
+  "input_tokens": 10167,
+  "wall_s": 7.68,
+  "created_at": "2026-10-06T23:06:50.747023+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos; la duración de 23 min es correcta y 'vuelve a 300 ms' es una concreción razonable de 'volvió a la normalidad'.",
+  "judge_model": "sonnet"
+}

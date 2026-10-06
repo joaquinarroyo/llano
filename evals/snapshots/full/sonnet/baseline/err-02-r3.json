@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Por qué falla\n\nLos `float` se guardan en binario, y valores como `0.1` no tienen representación exacta. Cada operación arrastra un error minúsculo, del orden de 1e-16, y el resultado puede quedar en `89.99999999999999` en lugar de `90.0`. El test compara con `==`, que exige igualdad exacta bit a bit, y por eso falla.\n\nUna salvedad: no he ejecutado el código, y en un intérprete normal `100.0 * (1 - 0.1)` suele dar justo `90.0`. Si a ti te da `89.99999999999999`, probablemente `discount` no llega como un `0.1` exacto (por ejemplo, viene de un cálculo previo como `10 / 100` con otros pasos intermedios, o de una suma de porcentajes). Vale la pena hacer `print(repr(discount), repr(price))` dentro de la función para confirmarlo. La solución es la misma en cualquier caso.\n\n## Cómo arreglarlo\n\n**1. En el test**, comparar con tolerancia:\n\n```python\nimport pytest\n\nassert total == pytest.approx(90.0)\n```\n\n**2. En el código**, si es dinero, lo correcto es no usar `float`:\n\n```python\nfrom decimal import Decimal\n\ntotal = Decimal(\"100.00\") * (1 - Decimal(\"0.10\"))  # Decimal('90.0000')\n```\n\nCrea los `Decimal` a partir de strings, no de floats (`Decimal(0.1)` arrastra el error binario).\n\n**3. Alternativa sencilla**: redondear a céntimos al calcular el total:\n\n```python\ntotal = round(price * (1 - discount), 2)\n```\n\nMi recomendación: usa `Decimal` (o enteros en céntimos) para los importes en el código, y `pytest.approx` solo si en el test comparas floats que no representan dinero. Si me pasas la función y el test, te preparo el cambio concreto.",
+  "output_tokens": 1247,
+  "thinking_tokens": 598,
+  "input_tokens": 1656,
+  "wall_s": 10.39,
+  "created_at": "2026-10-06T23:12:18.815200+00:00"
+}

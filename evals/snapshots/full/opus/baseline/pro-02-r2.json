@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "En una rama compartida, la forma segura es **`git revert`**, que crea un commit nuevo que deshace los cambios. **No uses `git reset` + `git push --force`**, porque reescribe el historial y rompe los clones de tus compañeros.\n\n## Pasos\n\n**1. Actualiza tu copia local**\n```bash\ngit checkout main\ngit pull origin main\n```\n\n**2. Identifica el commit**\n```bash\ngit log --oneline -n 20\ngit show <hash>   # revisa qué cambió exactamente\n```\n\n**3. Crea una rama para el revert** (recomendado si usáis PRs)\n```bash\ngit checkout -b revert-<hash-corto>\n```\n\n**4. Revierte**\n```bash\ngit revert <hash>\n```\n- Se abre el editor con un mensaje por defecto (\"Revert ...\"). Conviene añadir **por qué** se revierte.\n- Si hay **conflictos** (porque commits posteriores tocaron lo mismo), resuélvelos, luego `git add <archivos>` y `git revert --continue`. Para abortar: `git revert --abort`.\n\n**Casos especiales:**\n- **Commit de merge:** indica qué padre conservar, normalmente el de main:\n  ```bash\n  git revert -m 1 <hash-del-merge>\n  ```\n  Ojo: si luego quieres volver a mergear esa rama, tendrás que **revertir el revert** primero; si no, Git considerará esos cambios ya integrados.\n- **Varios commits consecutivos:**\n  ```bash\n  git revert --no-commit <hash-antiguo>^..<hash-reciente>\n  git commit -m \"Revert: <motivo>\"\n  ```\n\n**5. Verifica antes de publicar**\n```bash\ngit show HEAD        # comprueba el diff del revert\n# compila y ejecuta los tests\n```\n\n**6. Publica**\n- Con PR: `git push -u origin revert-<hash-corto>` y abre la PR hacia main.\n- Directo (si vuestro flujo lo permite): `git checkout main && git merge revert-<hash-corto> && git push origin main`.\n\nSi el push es rechazado porque alguien pusheó entretanto, haz `git pull --rebase origin main` y vuelve a pushear, **nunca** `--force`.\n\n**7. Avisa al equipo** del revert y su motivo, sobre todo si alguien tenía trabajo basado en ese commit.\n\n## Si el commit contenía secretos (claves, contraseñas)\nEl revert **no basta**: el secreto sigue en el historial. Lo primero es **rotar/invalidar la credencial** de inmediato. Limpiar el historial (`git filter-repo`, BFG) requiere force push y coordinación con todo el equipo, así que trátalo como un caso aparte.\n\nSi me dices el hash o el tipo de commit (normal, merge, varios), te doy los comandos exactos.",
+  "output_tokens": 1021,
+  "thinking_tokens": 43,
+  "input_tokens": 1583,
+  "wall_s": 11.28,
+  "created_at": "2026-10-06T23:19:41.994025+00:00"
+}

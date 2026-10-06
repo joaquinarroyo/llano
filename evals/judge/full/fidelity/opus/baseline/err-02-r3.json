@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos (incluye 89.99999999999999 vs 90.0) y no contiene afirmaciones técnicas claramente erróneas; la observación de que 100.0*(1-0.1) da 90.0 es correcta.",
+  "judge_model": "sonnet"
+}

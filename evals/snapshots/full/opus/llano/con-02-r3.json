@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "# Teorema CAP\n\nEl teorema CAP dice que un sistema distribuido no puede garantizar a la vez consistencia y disponibilidad si la red se parte. Eric Brewer lo propuso como conjetura en 2000. Seth Gilbert y Nancy Lynch lo demostraron en 2002.\n\n## Las tres propiedades\n\n| Letra | Propiedad | Significado en la demostración formal |\n|---|---|---|\n| C | Consistencia | Cada lectura devuelve la escritura más reciente. El término técnico es *linearizabilidad*: el sistema se comporta como una sola copia de los datos. |\n| A | Disponibilidad | Cada nodo que no falló responde a cada solicitud, sin error. |\n| P | Tolerancia a particiones | El sistema sigue funcionando aunque la red pierda mensajes entre nodos. |\n\n## La versión correcta\n\nLa frase popular \"elige 2 de 3\" es engañosa. En una red real, las particiones ocurren y no puedes elegir evitarlas. Por eso P no es opcional. La elección real es esta: **si hay una partición, el sistema elige entre C y A.**\n\n- **Prioriza C (CP):** el nodo aislado rechaza solicitudes o espera. Ejemplos: etcd, ZooKeeper.\n- **Prioriza A (AP):** el nodo aislado responde con datos que pueden estar desactualizados. Ejemplos: Cassandra y DynamoDB en sus configuraciones por defecto.\n\nSi no hay partición, el teorema no dice nada. El sistema puede tener C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\nSí, pero como marco mínimo, no como clasificación completa. Tiene tres limitaciones:\n\n1. **Ignora la latencia.** En operación normal, el costo real de la consistencia es el tiempo de espera, no la indisponibilidad. El modelo PACELC (Daniel Abadi, 2010) agrega esto. Si hay partición (P), elige entre A y C. Si no (E), elige entre latencia (L) y consistencia (C).\n2. **Las definiciones son binarias.** Hay muchos niveles intermedios de consistencia: causal, lectura de tus propias escrituras, eventual. CAP solo considera la linearizabilidad. También considera disponibilidad total, no un porcentaje como 99.99 %.\n3. **Muchos sistemas no son ni CP ni AP.** Cassandra, por ejemplo, permite elegir el nivel de consistencia en cada consulta. Martin Kleppmann publicó en 2015 un artículo con este argumento: \"Please stop calling databases CP or AP\".\n\nUn caso que muestra el matiz es Google Spanner. Técnicamente es CP. Pero Google controla su propia red, así que las particiones son muy raras. En la práctica, Spanner ofrece una disponibilidad muy alta. Brewer explicó este caso en 2017.\n\n**Conclusión práctica:** CAP sirve para hacer la pregunta correcta: \"¿qué hace mi sistema cuando un nodo no puede hablar con los otros?\". Para diseñar o comparar bases de datos, PACELC y los modelos de consistencia específicos dan más información.",
+  "output_tokens": 1453,
+  "thinking_tokens": 338,
+  "input_tokens": 10047,
+  "wall_s": 15.29,
+  "created_at": "2026-10-06T23:25:38.625588+00:00"
+}

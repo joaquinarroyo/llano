@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Usa sesiones si tu app es una web tradicional con Django: son más sencillas, seguras por defecto (Django maneja CSRF y las cookies HttpOnly), y no requieren librerías extra. El tradeoff es que necesitas estado compartido en el servidor si escalas a varios servidores (soluciona con Redis).\n\nUsa JWT si construyes una API para múltiples clientes (mobile, SPA externa, terceros) o microservicios: no necesitas estado en el servidor, pero tocarte agregar logica de refresco, almacenamiento seguro en el cliente, y verificación del token.\n\n¿Cuál es tu caso?",
+      "output_tokens": 616,
+      "thinking_tokens": 457,
+      "input_tokens": 9904
+    },
+    {
+      "text": "Entonces usa JWT. React Native no puede usar cookies HttpOnly de forma segura, así que necesitas un token que el cliente almacene y envíe en cada request.\n\nLa app web también puede usar JWT (o mantener sesiones solo para el navegador, pero es más complejo). El tradeoff es que el cliente debe almacenar el token de forma segura: en web, localStorage es vulnerable a XSS, así que usa una cookie con HttpOnly + SameSite; en mobile, usa AsyncStorage con cuidado o Secure Storage.\n\n¿Empezamos con la implementación?",
+      "output_tokens": 429,
+      "thinking_tokens": 288,
+      "input_tokens": 10579
+    },
+    {
+      "text": "Usa `djangorestframework-simplejwt`: es el estándar en Django, maneja refresh tokens y expiración. El tradeoff es que agrega una dependencia, pero te ahorra código.\n\nCuidados principales:\n\n1. **HTTPS obligatorio.** El token viaja en claro en el header `Authorization`.\n2. **Expiración corta.** Access token: 5-15 minutos. Refresh token: 7-30 días. Así limitas el daño si se filtra.\n3. **Almacenamiento seguro en el cliente:**\n   - **Web:** guarda el access token en memoria y el refresh token en HttpOnly + SameSite cookie (no se envía a mobile).\n   - **Mobile:** usa `react-native-secure-storage` (iOS Keychain, Android Keystore). Si no está disponible, AsyncStorage como fallback.\n4. **CORS:** permitir solo tus dominios (`CORS_ALLOWED_ORIGINS`).\n5. **Revocar tokens:** mantén un blacklist en Redis si un usuario cierra sesión o cambia contraseña.\n6. **Usa `djangorestframework`** para proteger los endpoints con `permission_classes = [IsAuthenticated]`.\n\n¿Empiezo con la instalación y la configuración?",
+      "output_tokens": 650,
+      "thinking_tokens": 330,
+      "input_tokens": 11083
+    }
+  ],
+  "created_at": "2026-10-06T23:05:57.655129+00:00"
+}

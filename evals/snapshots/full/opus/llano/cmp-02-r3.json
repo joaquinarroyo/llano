@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Usa **pnpm** en un monorepo nuevo. Es estricto con las dependencias, ocupa menos disco y su soporte de workspaces es el más completo de los tres.\n\n## Comparación\n\n| Aspecto | pnpm | npm | Yarn (v4, Berry) |\n|---|---|---|---|\n| Estructura de `node_modules` | Estricta, con symlinks. Cada paquete ve solo sus dependencias declaradas. | Plana (hoisting). Un paquete puede importar dependencias que no declaró. | Plug'n'Play (PnP) por defecto, sin `node_modules`. También admite `nodeLinker: node-modules`. |\n| Uso de disco | Un store global con hard links. Cada versión de un paquete se guarda una vez en la máquina. | Copia cada dependencia en cada proyecto. | Con PnP, guarda archivos zip en una caché. |\n| Workspaces | `pnpm-workspace.yaml`, protocolo `workspace:`, `--filter`, catalogs para versiones compartidas. | `workspaces` en `package.json`, `-w` para elegir paquete. No admite el protocolo `workspace:`. | Protocolo `workspace:`, `yarn workspaces foreach`, constraints. |\n| Compatibilidad | Alta. A veces una herramienta necesita una dependencia no declarada. Lo resuelves en `.npmrc` o con `packageExtensions`. | La más alta. Viene con Node. | Con PnP, algunas herramientas y editores necesitan configuración extra. |\n| Instalación extra | Sí. | No. | Sí. |\n\n## Por qué pnpm en un monorepo\n\n- **Sin dependencias fantasma.** Con npm, un paquete del monorepo puede funcionar en local porque otro paquete instaló la dependencia. Después falla al publicarlo solo. pnpm detecta ese error al instalar.\n- **Filtros.** `pnpm --filter <paquete>...` ejecuta un comando en un paquete y en sus dependientes.\n- **Catalogs.** Defines la versión de React, TypeScript, etc. una vez en `pnpm-workspace.yaml`. Todos los paquetes la usan.\n- **Herramientas.** Turborepo y Nx funcionan con los tres, y su documentación usa pnpm en muchos ejemplos.\n\n## Cuándo elegir otro\n\n- **npm:** si el monorepo tiene 2 o 3 paquetes y no quieres instalar nada más.\n- **Yarn Berry:** si tu equipo ya lo usa, o si necesitas constraints o zero-installs (dependencias en el repo, sin instalar en CI).\n- **Yarn 1 (classic):** no lo uses en un proyecto nuevo. Solo recibe correcciones de mantenimiento.\n\n**Atención:** fija la versión de pnpm en el campo `packageManager` de `package.json` (por ejemplo, `\"packageManager\": \"pnpm@10.x.x\"`). Si no la fijas, cada desarrollador y el CI pueden usar una versión distinta y generar un lockfile diferente.\n\nNo di cifras de velocidad de instalación porque no las medí. Los resultados cambian según el proyecto y el estado de la caché.",
+  "output_tokens": 1594,
+  "thinking_tokens": 477,
+  "input_tokens": 10055,
+  "wall_s": 16.21,
+  "created_at": "2026-10-06T23:25:05.609792+00:00"
+}

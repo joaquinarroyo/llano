@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "Ambas diagnostican bien las dos causas y dan la misma solución, pero B aclara que añadir el índice no basta con Python 3.13, da una versión concreta para la alternativa y avisa de compatibilidad con torchvision/torchaudio, con encabezados fáciles de escanear.",
+  "judge_model": "sonnet"
+}

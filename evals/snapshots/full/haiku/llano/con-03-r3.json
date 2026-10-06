@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "SHA-256 es demasiado rápido. Una computadora moderna calcula mil millones de hashes por segundo.\n\nUn atacante que roba la base de datos puede probar todas las palabras de un diccionario en minutos. Con SHA-256, no hay defensa: el hash es correcto o no. Eso es todo.\n\nLas contraseñas necesitan una función lenta. bcrypt, scrypt o Argon2 están diseñadas para tardar 100-500 ms en verificar *un* intento. Eso hace inviable probar mil millones.\n\nAdemás, SHA-256 no integra salt ni \"cost factor\". Puedes agregar salt manualmente, pero la función no lo protege. Las funciones modernas lo hacen por defecto.\n\n**Usa bcrypt, scrypt o Argon2.** Son lentas a propósito. SHA-256 es para datos, no para contraseñas.",
+  "output_tokens": 580,
+  "thinking_tokens": 352,
+  "input_tokens": 9908,
+  "wall_s": 7.23,
+  "created_at": "2026-10-06T23:05:27.096446+00:00"
+}

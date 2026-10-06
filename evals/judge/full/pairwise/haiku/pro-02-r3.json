@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da pasos concretos y completos (identificar el hash, revertir, resolver conflictos con `git revert --continue`, push, cómo deshacer un revert equivocado) en un formato directo, mientras que B es más genérico, omite `--continue`, mezcla idiomas ('help') y añade secciones de relleno.",
+  "judge_model": "sonnet"
+}

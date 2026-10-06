@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B da la recomendación y las razones técnicas clave (ACID, integridad, reportes, multi-tenant, JSONB, auditoría, cuándo Mongo) de forma más concisa y fácil de leer en una sola pasada, mientras que A, aunque más completa con recomendaciones prácticas como NUMERIC y notas de crédito, es más larga y densa.",
+  "judge_model": "sonnet"
+}

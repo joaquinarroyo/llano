@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más directa y lineal (pasos numerados, advertencias claras sobre versión, extensiones, datos sensibles y contraseña) y cubre lo esencial sin la dispersión de A, que añade alternativas y secciones extra que diluyen la lectura en una sola pasada.",
+  "judge_model": "sonnet"
+}

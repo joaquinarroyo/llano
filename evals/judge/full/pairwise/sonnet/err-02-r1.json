@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más corto y directo: explica la causa, avisa que el cálculo dado debería dar 90.0, ofrece los dos arreglos clave (Decimal y approx) con la advertencia de crear Decimal desde str, sin perder información técnica relevante, mientras que A añade opciones extra (céntimos, round) que alargan la lectura.",
+  "judge_model": "sonnet"
+}

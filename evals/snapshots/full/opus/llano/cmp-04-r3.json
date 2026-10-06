@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "**Recomendación:** si solo necesitas ejecutar tareas en segundo plano (enviar emails, procesar archivos, llamar APIs) y ya usas Redis, empieza con RQ. Elige Celery si necesitas tareas periódicas complejas, flujos entre tareas o un broker distinto de Redis.\n\n## Comparación\n\n| Aspecto | Celery | RQ |\n|---|---|---|\n| Broker | RabbitMQ, Redis, Amazon SQS y otros | Solo Redis |\n| Configuración | Muchas opciones. Más tiempo para entenderla bien. | Pocas opciones. Funciona en minutos. |\n| Integración con Django | Integración directa, más `django-celery-beat` y `django-celery-results` | `django-rq` |\n| Tareas periódicas | `celery beat`, con horarios tipo cron. Con `django-celery-beat`, los editas desde el admin. | `enqueue_at` / `enqueue_in` para tareas diferidas. Para tareas recurrentes, necesitas `rq-scheduler` u otro paquete. |\n| Flujos entre tareas | Canvas: `chain`, `group`, `chord` | `depends_on` (dependencias simples) |\n| Reintentos | Sí, con backoff configurable | Sí, con `Retry(max=…, interval=…)` |\n| Rate limits y enrutamiento | Por tarea, con colas y prioridades | Colas con orden de prioridad. Sin rate limit nativo. |\n| Modelo de ejecución | Pool de procesos, hilos, gevent o eventlet | Un fork por tarea. Aísla cada tarea, pero agrega costo por tarea. |\n| Monitoreo | Flower | `rq-dashboard` o el admin de `django-rq` |\n| Windows | Sin soporte oficial | No funciona, porque usa `fork()` |\n| Depuración | Más difícil. Hay más piezas y más estados. | Más fácil. El código es corto y legible. |\n\n## Cuándo elegir cada uno\n\n**RQ** es buena opción si:\n- Tienes decenas o cientos de tareas por minuto, no miles por segundo.\n- Las tareas son independientes entre sí.\n- El equipo es pequeño y quiere poco mantenimiento.\n\n**Celery** es buena opción si:\n- Necesitas tareas periódicas que cambian a menudo o se definen desde el admin.\n- Tienes flujos del tipo \"ejecuta 10 tareas en paralelo y después una que junte los resultados\".\n- Tienes muchas tareas cortas. El fork por tarea de RQ agrega costo en ese caso.\n- Necesitas RabbitMQ o SQS, o rate limits por tarea.\n\n## Un dato más: Django 6.0\n\nDjango 6.0 agregó un framework de tareas (`django.tasks`) con una API común para definir y encolar tareas. Django solo incluye backends para desarrollo y tests. Para producción necesitas un backend externo. Si defines tus tareas con esta API, después puedes cambiar de backend con menos trabajo. No verifiqué el estado actual de los backends para RQ y Celery. Revísalo antes de decidir.\n\nSi me dices qué tipo de tareas tienes y cuántas por minuto, puedo darte una recomendación más concreta.",
+  "output_tokens": 1773,
+  "thinking_tokens": 634,
+  "input_tokens": 10069,
+  "wall_s": 18.58,
+  "created_at": "2026-10-06T23:25:24.188894+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre los hechos 1-4 (ciclo, referencia nueva por el spread, corte de React, solución en el handler o con dependencias primitivas), pero nunca dice que la forma funcional de setState no basta si el efecto sigue dependiendo de filters.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B conserva la falta de experiencia de Luis y explica el BFF (Backend For Frontend), mientras que A omite esos detalles y solo gana en brevedad.",
+  "judge_model": "sonnet"
+}

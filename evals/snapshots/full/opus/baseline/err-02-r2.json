@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Por qué falla\n\nEs el comportamiento normal de los números de punto flotante (IEEE 754), no un bug de Python. Valores como `0.1` no tienen representación binaria exacta. Se guardan como la aproximación más cercana, y las operaciones encadenadas acumulan pequeños errores de redondeo. Por eso un cálculo que \"debería\" dar `90.0` puede dar `89.99999999999999`.\n\n**Ojo:** con exactamente `price=100.0` y `discount=0.1`, Python da `90.0`:\n\n```python\n>>> 100.0 * (1 - 0.1)\n90.0\n```\n\nAsí que en el test real alguno de los valores probablemente viene de otro cálculo. Por ejemplo, un precio que es suma de líneas, un descuento calculado o una conversión desde string. Conviene revisarlo, aunque la causa de fondo y la solución son las mismas.\n\n## Cómo arreglarlo\n\n**Opción 1: comparar con tolerancia en el test.** Es lo mínimo y lo correcto si los floats son aceptables en tu dominio:\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert calculate_total(100.0, 0.1) == pytest.approx(90.0)\n```\n\n**Opción 2 (recomendada para dinero): usar `Decimal`.** En facturas no deberías usar `float`, porque los errores acaban apareciendo en totales e impuestos:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef calculate_total(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (1 - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n\n# test\nassert calculate_total(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` desde strings (`Decimal(\"0.1\")`), no desde floats (`Decimal(0.1)`). Si lo haces desde un float, heredas el error.\n\n**Alternativa:** trabajar en céntimos con enteros (`10000` en vez de `100.0`).\n\nSi me dices dónde está el código (`tests/test_invoice.py` y el módulo de facturas), lo reviso y aplico el cambio.",
+  "output_tokens": 1496,
+  "thinking_tokens": 713,
+  "input_tokens": 1652,
+  "wall_s": 15.8,
+  "created_at": "2026-10-06T23:19:09.933015+00:00"
+}

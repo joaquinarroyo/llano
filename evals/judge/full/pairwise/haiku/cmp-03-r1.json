@@ -1,0 +1,11 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A cubre mejor los detalles técnicos relevantes (reconexión automática de SSE, heartbeat de WebSocket, compatibilidad) y es coherente, mientras que B se contradice al decir que el polling es para 5+ minutos y luego da un ejemplo de 30 segundos.",
+  "judge_model": "sonnet"
+}

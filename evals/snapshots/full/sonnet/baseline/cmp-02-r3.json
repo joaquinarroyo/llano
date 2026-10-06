@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-02",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Recomendación: pnpm.** Para un monorepo nuevo es la opción más sólida hoy.\n\n## Comparación\n\n| | **pnpm** | **npm** | **Yarn** (Berry, v4+) |\n|---|---|---|---|\n| **Workspaces** | Excelentes (`pnpm-workspace.yaml`, filtros potentes con `--filter`) | Funcionales pero básicos (`--workspace`) | Muy buenos (`yarn workspaces foreach`) |\n| **Velocidad** | Rápido | El más lento de los tres | Rápido (más con PnP) |\n| **Disco** | Store global con hard links, ahorra mucho | Duplica dependencias por proyecto | Bueno con PnP/cache; con `node_modules` similar a npm |\n| **Rigor de dependencias** | Estricto: evita *phantom dependencies* | Permisivo (hoisting plano) | Estricto con PnP, permisivo con `nodeLinker: node-modules` |\n| **Compatibilidad** | Muy alta | La máxima (viene con Node) | PnP rompe algunos paquetes; requiere ajustes |\n| **Protocolo `workspace:`** | Sí | No (limitado) | Sí |\n| **Ecosistema monorepo** | Turborepo, Nx, Changesets lo soportan de primera | Soportado | Soportado |\n| **Curva de aprendizaje** | Baja | Ninguna | Media (PnP, configuración propia) |\n\n## Por qué pnpm\n\n- **Evita errores silenciosos:** si un paquete importa algo que no declaró en su `package.json`, falla. En un monorepo esto previene muchos bugs.\n- **Eficiencia:** instalaciones rápidas y poco espacio en disco, lo que se nota en CI y con muchos paquetes.\n- **Filtros de workspace:** `pnpm --filter ./apps/web... build` (el paquete y sus dependencias) es muy cómodo.\n- **`workspace:*`:** enlaza paquetes internos de forma explícita y lo reemplaza por la versión real al publicar.\n- **Catalogs:** permiten centralizar versiones compartidas entre paquetes en un solo lugar.\n\n## Cuándo elegir otro\n\n- **npm:** si el equipo valora cero herramientas extra y el monorepo es pequeño (2-3 paquetes). Funciona, pero pierdes rigor y rendimiento.\n- **Yarn:** si ya tienes experiencia en el equipo con Yarn, o quieres Plug'n'Play (zero-installs) y aceptas la fricción de compatibilidad.\n\n## Setup rápido\n\n```bash\ncorepack enable\npnpm init\n```\n\n```yaml\n# pnpm-workspace.yaml\npackages:\n  - \"apps/*\"\n  - \"packages/*\"\n```\n\nComplementa con **Turborepo** (o Nx) para caché de builds y orquestación de tareas, y **Changesets** si vas a publicar paquetes. Fija la versión con el campo `packageManager` en el `package.json` raíz para que todos usen la misma.",
+  "output_tokens": 1122,
+  "thinking_tokens": 57,
+  "input_tokens": 1574,
+  "wall_s": 9.6,
+  "created_at": "2026-10-06T23:13:05.965682+00:00"
+}

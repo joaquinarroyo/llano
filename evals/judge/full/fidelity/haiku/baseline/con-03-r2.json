@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "La respuesta explica la velocidad, las funciones lentas con sal y el costo ajustable, pero no menciona las rainbow tables (solo que la sal evita hashes iguales entre usuarios) ni recomienda Argon2id específicamente; además subestima la velocidad de SHA-256 en GPU (miles de millones/s, no millones).",
+  "judge_model": "sonnet"
+}

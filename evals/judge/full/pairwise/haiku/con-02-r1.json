@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica CAP con claridad y ejemplos correctos (CP, AP, CA) y matiza su relevancia, mientras que A contiene errores técnicos y confusiones (dice que CP o AP responden con datos desactualizados, llama 'CA' a Postgres y Cassandra en condiciones normales, y menciona 'Dynamo' sin precisión), lo que dificulta entenderla bien en una lectura.",
+  "judge_model": "sonnet"
+}

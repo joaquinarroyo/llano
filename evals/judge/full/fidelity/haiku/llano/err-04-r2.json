@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    false,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "Explica correctamente que Python 3.13 no tiene wheels para torch 2.1.0 y da las dos opciones, pero no menciona el índice de PyTorch para +cu118 ni las versiones 2.4.0 a 2.5.0 que ve pip, y no dice que el fallo ocurre en el paso RUN pip install. Afirma que cambiar a python:3.11-slim basta para instalar 2.1.0+cu118 (sin el índice de PyTorch seguiría fallando en PyPI) y que torch==2.5.0 sin sufijo es la versión para CPU (el wheel de PyPI en Linux incluye CUDA).",
+  "judge_model": "sonnet"
+}

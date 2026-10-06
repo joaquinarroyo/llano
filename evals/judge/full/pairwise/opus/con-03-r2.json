@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica de forma directa que el problema es la velocidad y que el atacante adivina en lugar de invertir el hash, cubre sal, algoritmos recomendados y el límite de 72 bytes de bcrypt, y añade un ejemplo de código y un resumen final claros, mientras que A es correcta pero más densa y con más secciones.",
+  "judge_model": "sonnet"
+}

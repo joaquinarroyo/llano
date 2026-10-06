@@ -1,0 +1,37 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      false,
+      false
+    ],
+    [
+      true,
+      true,
+      false,
+      false
+    ],
+    [
+      true,
+      true,
+      false,
+      false,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    5
+  ],
+  "incorrect_claims": 1,
+  "notes": "El turno 3 recomienda AsyncStorage (almacenamiento no cifrado) como opción segura para tokens en React Native, en lugar de Keychain/Keystore; eso es incorrecto.",
+  "judge_model": "sonnet"
+}

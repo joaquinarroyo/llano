@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La API no logra abrir una conexión TCP con Postgres. El nombre `db.internal` sí resuelve a `10.0.3.17`, pero el puerto 5432 no responde en 30 s, y la API sale con código 1.\n\n`ETIMEDOUT` significa que los paquetes se pierden sin respuesta. Si el puerto estuviera cerrado, verías `ECONNREFUSED`. Por eso la causa probable es de red, no de credenciales ni de código.\n\n**Qué revisar, en orden:**\n\n1. Prueba la conexión desde el mismo entorno donde corre el deploy (el contenedor, el pod o el host):\n   ```\n   nc -vz -w 5 db.internal 5432\n   ```\n   Si también expira, el problema es de red y no de la aplicación.\n2. Revisa las reglas de firewall o el security group de la base de datos. Deben permitir el puerto 5432 desde la subred o el grupo de la API. Un cambio reciente aquí es la causa más común.\n3. Verifica que `10.0.3.17` sea la IP actual de la base de datos. Si la instancia se recreó o cambió de IP, el DNS interno puede apuntar a una dirección vieja.\n4. Confirma que la base de datos esté encendida y aceptando conexiones. Mira su estado en el panel de tu proveedor o en sus logs.\n5. Confirma que la API y la base de datos estén en la misma red o VPC, con ruta entre ellas. Un deploy nuevo en otra subred o región produce este error.\n\nSi el paso 1 funciona pero la API sigue fallando, avísame. Entonces revisaríamos la configuración de la API: host, puerto y variables de entorno del deploy.\n\nNo puedo ver tu infraestructura, así que no sé cuál de estas causas aplica. El paso 1 descarta o confirma la red en menos de un minuto.",
+  "output_tokens": 970,
+  "thinking_tokens": 330,
+  "input_tokens": 10236,
+  "wall_s": 8.67,
+  "created_at": "2026-10-06T23:12:13.304067+00:00"
+}

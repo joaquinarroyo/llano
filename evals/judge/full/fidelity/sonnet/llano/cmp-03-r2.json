@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "La respuesta cubre los cinco hechos; la afirmación de que HTTP/2 \"elimina\" el límite de 6 conexiones es una simplificación aceptable (lo amplía mediante multiplexado).",
+  "judge_model": "sonnet"
+}

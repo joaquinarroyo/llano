@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Por qué falla\n\nEs un problema de precisión de los `float`: 0.1 no se puede representar exactamente en binario, y cada operación arrastra un pequeño error de redondeo. Por eso aparece `89.99999999999999` en lugar de `90.0`.\n\nUna salvedad: con exactamente `100.0 * (1 - 0.1)`, CPython debería dar `90.0`. Si te sale `89.999...`, es probable que el cálculo real tenga algún paso más (otra fórmula, un descuento acumulado, valores que vienen de otra operación). Compruébalo con `python -c \"print(100.0 * (1 - 0.1))\"` y revisa qué valores llegan realmente al test. La solución es la misma en cualquier caso.\n\n## Cómo arreglarlo\n\n**1. En el test, compara con tolerancia** (lo más simple si el código es correcto):\n\n```python\nimport pytest\n\nassert total == pytest.approx(90.0)\n```\n\n**2. Si es dinero, usa `Decimal`** en el código:\n\n```python\nfrom decimal import Decimal\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.10\")\ntotal = price * (1 - discount)  # Decimal('90.0000')\n```\n\nCrea los `Decimal` a partir de strings, no de floats (`Decimal(0.1)` conserva el error).\n\n**3. O trabaja en céntimos con enteros:**\n\n```python\nprice_cents = 10000\ntotal_cents = price_cents * (100 - 10) // 100  # 9000\n```\n\n**4. Si solo necesitas redondear al mostrar o guardar:**\n\n```python\ntotal = round(price * (1 - discount), 2)\n```\n\n## Recomendación\n\nPara facturas, usa `Decimal` (opción 2) o enteros en céntimos en el código, porque los errores de float se acumulan y acaban en descuadres. Reserva `pytest.approx` para cálculos científicos o donde la precisión exacta no importe.\n\nSi me pasas `invoice.py` y el test, te lo ajusto directamente.",
+  "output_tokens": 1194,
+  "thinking_tokens": 507,
+  "input_tokens": 1656,
+  "wall_s": 10.31,
+  "created_at": "2026-10-06T23:06:45.861695+00:00"
+}

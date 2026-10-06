@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Celery** es más robusto y completo: soporta múltiples brokers (Redis, RabbitMQ), scheduling avanzado, retry automático, rate limiting, y manejo de tareas complejas. **RQ** es más ligero y simple: setup mínimo, perfectamente suficiente para tareas básicas en segundo plano.\n\nLa diferencia clave es complejidad vs. características. Elige RQ si necesitas cola simple con reintentos básicos; elige Celery si necesitas scheduling periódico (beat), procesamiento distribuido sofisticado o muchos workers. Para la mayoría de proyectos Django medianos, RQ es más pragmático.\n\n¿Qué tipo de tareas necesitas ejecutar?",
+  "output_tokens": 482,
+  "thinking_tokens": 298,
+  "input_tokens": 3409,
+  "wall_s": 5.4,
+  "created_at": "2026-10-06T23:05:15.446422+00:00"
+}

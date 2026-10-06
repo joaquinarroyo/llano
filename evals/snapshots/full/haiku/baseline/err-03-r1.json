@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es una **dependencia circular infinita**:\n\n1. El `useEffect` depende de `filters`\n2. Dentro del effect, haces `setFilters(...)` que actualiza `filters`\n3. Cuando `filters` cambia, el effect se dispara de nuevo\n4. Vuelve a hacer `setFilters(...)` → infinito\n\n**Solución:** depender solo de lo que realmente necesitas, no de todo `filters`. Probablemente quieres resetear la página cuando cambien los **filtros reales** (no la página). Algo como:\n\n```javascript\nconst { page, ...actualFilters } = filters;\n\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }));\n}, [JSON.stringify(actualFilters)]); // o depender de propiedades específicas\n```\n\nO mejor aún, **identificar exactamente qué cambios deben resetear la página** (ej: solo cuando cambia el buscador o categoría):\n\n```javascript\nuseEffect(() => {\n  setFilters(prev => ({ ...prev, page: 1 }));\n}, [filters.search, filters.category]); // depender solo de estos\n```\n\n¿Cuál es el case de uso? ¿Qué cambios en `filters` deberían resetear la página?",
+  "output_tokens": 751,
+  "thinking_tokens": 423,
+  "input_tokens": 3476,
+  "wall_s": 8.37,
+  "created_at": "2026-10-06T22:59:59.106350+00:00"
+}

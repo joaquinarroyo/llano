@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "SHA-256 es seguro como función hash criptográfica (nadie sabe invertirlo ni encontrar colisiones), pero **fue diseñado para ser rápido**, y para contraseñas eso es justo lo que no quieres.\n\n## El problema real: la velocidad\n\nSi alguien roba tu base de datos de hashes, el ataque es offline: prueba candidatos (diccionarios, variaciones, fuerza bruta) hasta que uno produce el mismo hash. No necesita \"romper\" SHA-256, solo calcularlo muchas veces.\n\n- Una GPU moderna calcula **miles de millones de SHA-256 por segundo**.\n- Los ASIC y clústeres de GPU llegan mucho más lejos.\n- Las contraseñas humanas tienen poca entropía, así que la mayoría cae en minutos u horas.\n\n## Otros problemas de SHA-256 \"a secas\"\n\n1. **Sin sal (salt):** dos usuarios con la misma contraseña tienen el mismo hash, y las rainbow tables o los hashes precalculados funcionan directamente.\n2. **Sin coste configurable:** no puedes hacerlo más lento a medida que el hardware mejora.\n3. **Paralelizable y barato en hardware:** usa poca memoria, así que las GPU/ASIC lo atacan de forma muy eficiente.\n4. **Construcciones ingenuas:** `SHA256(password + salt)` evita las rainbow tables, pero sigue siendo rápido de atacar.\n\n## Qué usar en su lugar\n\nFunciones **diseñadas para contraseñas**, que son deliberadamente lentas, incluyen sal automática y (algunas) consumen mucha memoria:\n\n| Algoritmo | Nota |\n|---|---|\n| **Argon2id** | Recomendación actual (OWASP); coste en CPU y memoria |\n| **scrypt** | Memory-hard, buena alternativa |\n| **bcrypt** | Veterano y sólido; límite de 72 bytes de entrada |\n| **PBKDF2-HMAC-SHA256** | Aceptable si necesitas cumplir FIPS; requiere muchas iteraciones (OWASP sugiere 600 000+) |\n\nEjemplo en Python:\n\n```python\nfrom argon2 import PasswordHasher\nph = PasswordHasher()\nhash = ph.hash(\"mi contraseña\")\nph.verify(hash, \"mi contraseña\")\n```\n\n## Resumen\n\nUn hash rápido facilita que el atacante pruebe contraseñas a escala. Para contraseñas quieres un algoritmo lento, con sal y que consuma memoria, para que cada intento le cueste caro al atacante pero siga siendo imperceptible para un login legítimo.",
+  "output_tokens": 982,
+  "thinking_tokens": 45,
+  "input_tokens": 1579,
+  "wall_s": 8.01,
+  "created_at": "2026-10-06T23:10:41.140200+00:00"
+}

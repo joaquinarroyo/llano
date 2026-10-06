@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-03",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Un índice compuesto es un índice sobre dos o más columnas de la misma tabla. La base de datos lo usa para encontrar filas que cumplen condiciones sobre esas columnas, sin leer toda la tabla.\n\n```sql\nCREATE INDEX idx_pedidos_cliente_fecha\nON pedidos (cliente_id, fecha);\n```\n\n## Cómo se ordena\n\nEl índice ordena primero por `cliente_id`. Dentro de cada `cliente_id`, ordena por `fecha`. Por eso el orden de las columnas importa.\n\n## Qué consultas lo usan\n\nCon el índice `(cliente_id, fecha)`:\n\n| Consulta | ¿Usa el índice? |\n|---|---|\n| `WHERE cliente_id = 7` | Sí |\n| `WHERE cliente_id = 7 AND fecha >= '2026-01-01'` | Sí, de forma completa |\n| `WHERE fecha >= '2026-01-01'` | Normalmente no |\n\nEsta regla se llama prefijo izquierdo. El índice sirve para la primera columna, o para la primera y la segunda juntas. Algunos motores, como Oracle con *skip scan*, pueden usarlo sin la primera columna. No lo verifiqué en todos los motores.\n\n## Cómo elegir el orden\n\n1. Pon primero las columnas que filtras con igualdad (`=`).\n2. Pon después la columna de rango (`>`, `<`, `BETWEEN`) o de ordenamiento.\n3. Si dos columnas tienen el mismo uso, pon primero la más selectiva.\n\n## Costo\n\nAtención: cada índice ocupa espacio y hace más lentos `INSERT`, `UPDATE` y `DELETE`. Crea un índice compuesto solo para consultas frecuentes que filtran por varias columnas. Verifica con `EXPLAIN` que el motor lo usa.",
+      "output_tokens": 1124,
+      "thinking_tokens": 472,
+      "input_tokens": 10040
+    },
+    {
+      "text": "Normalmente no. El índice ordena primero por `cliente_id`, así que las filas con `fecha > '2026-01-01'` están repartidas por todo el índice. El motor no puede saltar a un punto de inicio.\n\nQué puede hacer el motor:\n\n- **Recorrer toda la tabla** (*full scan*). Es lo más común.\n- **Recorrer todo el índice** (*index scan*). Pasa si el índice contiene todas las columnas que la consulta necesita. Es más barato que leer la tabla, pero sigue siendo una lectura completa.\n- **Saltar entre valores de `cliente_id`** (*skip scan*). Algunos motores lo hacen, como Oracle. Sirve solo si hay pocos clientes distintos. No lo verifiqué en tu motor.\n\nSi esa consulta es frecuente, tienes dos opciones:\n\n1. Crea un índice solo sobre `fecha`:\n   ```sql\n   CREATE INDEX idx_pedidos_fecha ON pedidos (fecha);\n   ```\n2. Crea un índice compuesto con `fecha` primero, si también filtras por `fecha` y `cliente_id` juntos con rango en `fecha`:\n   ```sql\n   CREATE INDEX idx_pedidos_fecha_cliente ON pedidos (fecha, cliente_id);\n   ```\n\nAtención: si el rango de fechas cubre una parte grande de la tabla, el motor puede ignorar el índice de todas formas. Leer casi toda la tabla en orden es más rápido que saltar por el índice. Ejecuta `EXPLAIN` para ver qué plan elige.",
+      "output_tokens": 595,
+      "thinking_tokens": 34,
+      "input_tokens": 11235
+    },
+    {
+      "text": "Sí, es el caso ideal para tu índice `(cliente_id, fecha)`.\n\nEl índice agrupa todas las filas con `cliente_id = 7` y las ordena por `fecha` dentro del grupo. El motor entra al final de ese grupo y lee hacia atrás. Eso da las filas en orden `fecha DESC` sin ordenar nada. Con `LIMIT 10`, se detiene después de 10 filas.\n\nEl costo no depende de cuántos pedidos tiene el cliente. Lee unas 10 entradas del índice, más 10 lecturas de tabla si necesita otras columnas.\n\nVerifica con `EXPLAIN`. Debes ver un recorrido del índice y no un paso de ordenamiento (`Sort` en PostgreSQL, `Using filesort` en MySQL).\n\nNotas por motor:\n\n- **PostgreSQL, SQLite, MySQL 8+:** leen un índice `ASC` hacia atrás. No necesitas un índice `DESC`.\n- **Si mezclas direcciones**, por ejemplo `ORDER BY cliente_id ASC, fecha DESC`, define el índice con esas direcciones: `(cliente_id ASC, fecha DESC)`.\n- **Si el `ORDER BY` incluye una columna fuera del índice**, el motor ordena de nuevo. Agrégala al índice solo si esta consulta es frecuente.",
+      "output_tokens": 482,
+      "thinking_tokens": 0,
+      "input_tokens": 11900
+    }
+  ],
+  "created_at": "2026-10-06T23:08:44.800024+00:00"
+}

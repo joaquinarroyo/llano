@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A explica la causa del punto flotante, señala que con esos valores exactos el resultado sería 90.0 y da formas concretas de diagnosticar y arreglar (approx, Decimal, round), mientras que B no responde nada: solo llama herramientas sin explicación ni solución.",
+  "judge_model": "sonnet"
+}

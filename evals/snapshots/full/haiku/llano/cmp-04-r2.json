@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Celery** es más poderoso pero complejo. **RQ** es más simple y suficiente para muchos proyectos.\n\n| Aspecto | Celery | RQ |\n|---|---|---|\n| **Aprendizaje** | Pronunciado | Rápido (minutos) |\n| **Configuración** | Extensa | Mínima |\n| **Reintentos** | Automáticos, con backoff | Manual o simple |\n| **Horarios** | Beat (scheduling nativo) | Necesitas celery-beat o externa |\n| **Prioridades** | Sí, routing complejo | Colas múltiples |\n| **Brokers** | RabbitMQ, Redis, otros | Solo Redis |\n| **Debugging** | Más difícil | Más transparente |\n| **Overhead** | Mayor | Menor |\n\n**Elige RQ si:**\n- Tareas sencillas (enviar emails, generar PDFs).\n- Ya usas Redis.\n- Prefieres código simple de mantener.\n\n**Elige Celery si:**\n- Necesitas scheduling complejo.\n- Tareas con reintentos sofisticados.\n- Potencial crecer mucho (muchos workers, miles de tareas/día).\n- Posible cambiar de broker después.\n\nLa mayoría de proyectos medianos funciona bien con RQ. Celery se justifica cuando el sistema es grande o las tareas son críticas y complejas.\n\n¿Qué escala esperas (tareas/día), y qué tipo de tareas son?",
+  "output_tokens": 784,
+  "thinking_tokens": 390,
+  "input_tokens": 9915,
+  "wall_s": 8.61,
+  "created_at": "2026-10-06T23:03:01.718506+00:00"
+}

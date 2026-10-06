@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A da una recomendación coherente y consistente en los tres turnos (sesiones web, knox para móvil), con configuración completa y cuidados claros en una sola lectura, mientras que B recomienda simplejwt en el turno 3 tras advertir en el turno 2 de la revocación diferida y añade más complejidad (blacklist, flushexpiredtokens, refresh concurrente) sin necesidad.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empieza por verificar si las dependencias causaron un memory leak o si una dependencia cambió de versión incompatible. Los síntomas (lentitud sin cambios de código) apuntan a eso.\n\n1. **Revierte las dependencias a la versión anterior.** Ejecuta `npm ci` con el `package-lock.json` del commit anterior. Si vuelve a 120 ms, la culpa es una dependencia.\n\n2. **Si el problema persiste,** el cuello de botella no es las dependencias. Verifica:\n   - Memoria: ¿Crece sin parar? (`node --max-old-space-size=X app.js` y monitorea con `top`).\n   - Base de datos: ¿Las queries tardaron más? Revisa los logs de Postgres/MySQL.\n   - Red: ¿Hay latencia a servicios externos?\n\n3. **Si actualizaste dependencias de produción,** aísla cuál. Cambia una versión a la anterior en `package.json`, ejecuta `npm install`, y mide de nuevo.\n\nEl p95 que sube a 900 ms sin cambios de código suele ser memory leak o una dependencia que hace polling o reconexiones. Ejecuta `node --inspect app.js` y conecta DevTools para mirar el heap si la memoria crece.\n\n¿Tienes acceso a los logs de la aplicación o al `package-lock.json` anterior?",
+      "output_tokens": 732,
+      "thinking_tokens": 372,
+      "input_tokens": 9932
+    },
+    {
+      "text": "Encontraste el problema: cada query en una transacción propia es un BEGIN + COMMIT innecesario. Con 14 queries por request, eso suma casi al doble del tiempo total.\n\n**Quick fix:** revierte el ORM a la versión anterior. Es seguro porque el código no cambió.\n\n**Fix permanente:** depende del ORM. La mayoría tienen una flag para desactivar transacciones automáticas. Por ejemplo:\n\n- **Sequelize:** `transaction: false` en `findAll()`, o desactiva globalmente.\n- **TypeORM:** quita `{ transaction: true }` del constructor o de las queries.\n- **Prisma:** no abre transacciones por defecto, pero si el cliente está configurado con `errorFormat`, verifica la versión.\n- **Knex:** agrega `.transacting(trx)` solo donde necesites transacciones, no en cada query.\n\n¿Cuál es el ORM? Dile qué versión actualiza y le doy la configuración exacta.\n\nMientras tanto: después de revertir y confirmar que vuelve a 120 ms, revisa el changelog del ORM entre versiones para entender qué cambió.",
+      "output_tokens": 554,
+      "thinking_tokens": 260,
+      "input_tokens": 10772
+    },
+    {
+      "text": "```\nperf: revertir ORM a versión anterior\n\nEl ORM abre una transacción BEGIN/COMMIT para cada query automáticamente.\nCon 14 queries por request, eso suma 28 operaciones de transacción\ninnecesarias.\n\nSíntoma: p95 pasó de 120 ms a 900 ms sin cambios de código.\nSolución: revertir a versión anterior.\nResultado: p95 vuelve a 130 ms.\n\nEl changelog de la próxima versión del ORM debe clarificar por qué\ncambió el comportamiento. Analizar si tiene flag para desactivar\ntransacciones automáticas.\n```\n\nReemplaza \"ORM\" y los números de versión. ¿Necesitas que agregue más contexto o que cite issue?",
+      "output_tokens": 673,
+      "thinking_tokens": 469,
+      "input_tokens": 11403
+    }
+  ],
+  "created_at": "2026-10-06T23:05:51.700365+00:00"
+}

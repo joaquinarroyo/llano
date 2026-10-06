@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre velocidad, funciones lentas con sal, rainbow tables y Argon2id; solo menciona 'coste configurable' sin decir que el costo se pueda subir con el tiempo.",
+  "judge_model": "sonnet"
+}

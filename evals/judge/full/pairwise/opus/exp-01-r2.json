@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica el event loop de forma directa y precisa, con componentes, fases, microtareas, el riesgo de bloquear el loop y la comparación con asyncio, sin relleno ni un ejemplo de orden no determinista como el de A.",
+  "judge_model": "sonnet"
+}

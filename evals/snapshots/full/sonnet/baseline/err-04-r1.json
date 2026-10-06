@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Hay dos problemas combinados:\n\n1. **`+cu118` no existe en PyPI.** Las variantes con CUDA se publican solo en el índice de PyTorch (`https://download.pytorch.org/whl/cu118`). Pip está buscando en PyPI, y por eso solo ve 2.4.0, 2.4.1 y 2.5.0.\n2. **torch 2.1.0 no tiene wheels para Python 3.13.** Solo soporta hasta 3.11. Aunque agregues el índice, con `python:3.13-slim` seguirá sin encontrar una versión compatible.\n\n## Solución recomendada (mantener torch 2.1.0)\n\nCambia la imagen base y agrega el índice de PyTorch:\n\n```dockerfile\nFROM python:3.11-slim\n...\nRUN pip install --extra-index-url https://download.pytorch.org/whl/cu118 -r requirements.txt\n```\n\nTambién puedes poner `--extra-index-url https://download.pytorch.org/whl/cu118` como primera línea de `requirements.txt`.\n\n## Alternativa (mantener Python 3.13)\n\nSube torch a una versión con wheels para 3.13 (2.5 o superior) y usa el índice correspondiente. Por ejemplo, `torch==2.7.1+cu118` sigue publicándose para cu118. Hay que revisar que `torchvision`/`torchaudio` y el resto de dependencias sean compatibles con esa versión.\n\n## Nota\n\nPara que la GPU funcione en runtime, el host necesita el NVIDIA Container Toolkit y debes ejecutar el contenedor con `--gpus all`. Las ruedas `cu118` ya traen las librerías CUDA, así que no hace falta una imagen base de NVIDIA.\n\nSi quieres, dime qué opción prefieres y edito el `Dockerfile` y `requirements.txt` por ti.",
+  "output_tokens": 1053,
+  "thinking_tokens": 407,
+  "input_tokens": 1699,
+  "wall_s": 7.91,
+  "created_at": "2026-10-06T23:06:53.774234+00:00"
+}

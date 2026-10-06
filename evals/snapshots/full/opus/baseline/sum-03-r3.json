@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "```markdown\n## [Unreleased]\n\n### Changed\n- El envío de emails pasa de SendGrid a **Amazon SES**.\n- Las plantillas de email se migraron de HTML a **MJML**.\n\n### Added\n- Reintentos automáticos con backoff exponencial para el envío de notificaciones: hasta 3 intentos, con base de 2 s.\n\n### Removed\n- **[BREAKING]** Se eliminó el endpoint `/v1/notify`, que estaba en desuso.\n```\n\nAlgunas notas:\n\n- **`/v1/notify` como breaking change:** aunque nadie lo use, quitar un endpoint público rompe la API para cualquier cliente que siga apuntando ahí. Si estás seguro de que es interno, podés sacar el `[BREAKING]`.\n- **Reintentos:** puse \"hasta 3 intentos\" porque no sé si son 3 en total o 1 original + 3 reintentos. Conviene aclararlo. Lo mismo con la espera: si es 2 s, 4 s, 8 s, podés escribir la secuencia explícita.\n- **Configuración:** si el cambio a SES requiere nuevas variables de entorno o credenciales (región, `AWS_*`, remitente verificado) o deja de usar la API key de SendGrid, convendría agregar una sección para quien despliegue.",
+  "output_tokens": 548,
+  "thinking_tokens": 92,
+  "input_tokens": 1674,
+  "wall_s": 7.27,
+  "created_at": "2026-10-06T23:23:18.084613+00:00"
+}

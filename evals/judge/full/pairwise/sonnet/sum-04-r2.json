@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B sigue el orden cronológico de la discusión, lo que se entiende de una lectura, e incluye la decisión final (probar BFF en la pantalla de inicio y medir), mientras que A empieza por la conclusión y luego retrocede, y agrega una observación que no estaba en el hilo.",
+  "judge_model": "sonnet"
+}

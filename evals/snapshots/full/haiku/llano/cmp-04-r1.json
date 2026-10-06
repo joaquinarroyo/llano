@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa RQ si el proyecto es pequeño o mediano; usa Celery si necesitas escalabilidad o reintentos complejos.\n\n| Factor | RQ | Celery |\n|---|---|---|\n| Instalación | Fácil. Solo Redis + librería Python | Compleja. Requiere broker, backend |\n| Capacidades | Básicas: encolado, workers, reintentos simples | Avanzadas: scheduling, prioridades, groups, chains |\n| Workers | Menos de 10 es cómodo | Optimizado para 10+ en producción |\n| Almacenamiento de estado | Solo Redis | Redis, RabbitMQ, Memcached u otros |\n| Curva de aprendizaje | Baja | Alta |\n| Overhead | Bajo | Moderado a alto |\n| Comunidad | Pequeña, pero activa | Grande, muchos ejemplos |\n\nElige **RQ** si:\n- El proyecto es MVP o startup.\n- Tareas simples: enviar email, generar reportes.\n- Menos de 10 workers.\n- Quieres setup rápido.\n\nElige **Celery** si:\n- Necesitas scheduling (tareas recurrentes).\n- Reintentos exponenciales o políticas complejas.\n- Orquestación de tareas (workflows).\n- Más de 10 workers o crecimiento esperado.\n\nAmbos usan Redis bien. RQ es más directo; Celery da más control si lo necesitas después.",
+  "output_tokens": 892,
+  "thinking_tokens": 512,
+  "input_tokens": 9915,
+  "wall_s": 10.0,
+  "created_at": "2026-10-06T23:00:48.132621+00:00"
+}

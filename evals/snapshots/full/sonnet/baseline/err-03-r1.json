@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Qué pasa\n\nEs un bucle infinito:\n\n1. El efecto depende de `filters`.\n2. Dentro del efecto haces `setFilters({ ...filters, page: 1 })`, que crea un **objeto nuevo** en cada ejecución.\n3. React compara por referencia (`Object.is`), así que ve un `filters` distinto, aunque el contenido sea idéntico.\n4. Eso provoca un re-render, el efecto se vuelve a ejecutar, y vuelta al paso 2.\n\nReact corta el bucle a las 50 actualizaciones anidadas y lanza el warning. Mientras tanto, la app se puede colgar.\n\n## Cómo arreglarlo\n\n**Opción 1: si querías \"resetear la página cuando cambian los filtros\"** (el caso más común). No lo hagas en un efecto, hazlo en el handler que cambia el filtro:\n\n```jsx\nconst updateFilter = (key, value) => {\n  setFilters(prev => ({ ...prev, [key]: value, page: 1 }));\n};\n```\n\nAsí el reset ocurre junto con el cambio, sin render extra ni efecto.\n\n**Opción 2: si de verdad necesitas un efecto**, usa una actualización funcional con guarda para devolver el mismo estado cuando no hay nada que cambiar:\n\n```jsx\nuseEffect(() => {\n  setFilters(prev => (prev.page === 1 ? prev : { ...prev, page: 1 }));\n}, [filters.search, filters.category]); // solo los filtros que deben resetear la página\n```\n\nSi devuelves `prev`, React no re-renderiza. Además, al listar solo las dependencias relevantes, el efecto no se dispara cuando cambia `page`.\n\n**Opción 3: separar el estado.** Si `page` va aparte (`const [page, setPage] = useState(1)`), el efecto solo hace `setPage(1)` cuando cambian los filtros, sin tocar el objeto `filters`.\n\nRecomiendo la **opción 1**: los efectos que solo ajustan estado a partir de otro estado suelen ser señal de que la lógica pertenece al evento que origina el cambio.\n\nSi me pasas el componente completo, te digo cuál encaja mejor.",
+  "output_tokens": 868,
+  "thinking_tokens": 110,
+  "input_tokens": 1684,
+  "wall_s": 7.44,
+  "created_at": "2026-10-06T23:06:49.678280+00:00"
+}

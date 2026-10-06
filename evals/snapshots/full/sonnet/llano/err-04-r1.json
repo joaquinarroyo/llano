@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-04",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Falla por dos causas que se suman.\n\n1. `2.1.0+cu118` no existe en PyPI. Ese build vive en el índice de PyTorch (`https://download.pytorch.org/whl/cu118`).\n2. torch 2.1.0 no tiene wheels para Python 3.13. Admite hasta 3.11. Las versiones que lista el error (2.4.0 a 2.5.0) vienen de PyPI.\n\n**Recomendación:** usa Python 3.11 y agrega el índice de PyTorch. Así conservas la versión de torch que ya tienes fijada.\n\n```dockerfile\nFROM python:3.11-slim\n...\nRUN pip install -r requirements.txt \\\n    --extra-index-url https://download.pytorch.org/whl/cu118\n```\n\nTambién puedes poner esta línea al inicio de `requirements.txt`:\n\n```\n--extra-index-url https://download.pytorch.org/whl/cu118\n```\n\n**Alternativa:** si necesitas Python 3.13, sube torch a 2.5.0 o superior y mantén el índice `cu118`. Esto cambia la versión de torch. Prueba tu código con ella antes de desplegar.\n\nNo verifiqué que las demás dependencias de tu `requirements.txt` tengan wheels para 3.11 o 3.13. Si pip falla con otro paquete, envíame el log.",
+  "output_tokens": 1099,
+  "thinking_tokens": 637,
+  "input_tokens": 10182,
+  "wall_s": 9.76,
+  "created_at": "2026-10-06T23:06:59.439956+00:00"
+}

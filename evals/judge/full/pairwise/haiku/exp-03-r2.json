@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B es más clara y completa: explica el acceso logarítmico, las consultas por rango y ORDER BY, y los costos del índice, con ejemplos SQL útiles; A tiene un diagrama confuso y afirma que las hojas contienen las filas, lo cual es incorrecto en Postgres, aunque sí aporta la nota sobre selectividad.",
+  "judge_model": "sonnet"
+}

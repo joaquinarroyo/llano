@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B sigue un flujo lineal y conciso (backup, crear base, restaurar, verificar) con advertencias claras sobre carga en producción y datos sensibles, mientras que A es más largo y disperso, con varias alternativas y consejos que dificultan entenderlo en una sola lectura.",
+  "judge_model": "sonnet"
+}

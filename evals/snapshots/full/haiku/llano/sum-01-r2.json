@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Descripción del PR\n\n**Rotación de tokens de refresco y detección de reutilización**\n\nImplementa rotación de tokens de refresco para evitar que un token comprometido se use indefinidamente. Si un token antiguo se reutiliza, el servidor lo invalida inmediatamente.\n\n### Cambios\n\n- `tokens.ts`: nueva lógica para generar un token de refresco nuevo en cada uso y marcar el anterior como revocado.\n- `middleware.ts`: valida que el token actual no esté revocado antes de procesar la solicitud.\n- Tests: cobertura completa del flujo de rotación y detección de reutilización.\n- Dependencia: jsonwebtoken actualizado a 9.0.2 (correcciones de seguridad).",
+  "output_tokens": 521,
+  "thinking_tokens": 324,
+  "input_tokens": 10067,
+  "wall_s": 6.61,
+  "created_at": "2026-10-06T23:02:22.909954+00:00"
+}

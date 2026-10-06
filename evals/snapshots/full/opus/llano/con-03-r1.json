@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "SHA-256 es seguro para su propósito, pero ese propósito no es guardar contraseñas. SHA-256 está diseñado para ser **rápido**. Para contraseñas, la velocidad ayuda al atacante.\n\n## El problema: la velocidad\n\nSupón que un atacante roba tu base de datos con los hashes. No puede revertir SHA-256, pero puede probar contraseñas candidatas y comparar el resultado.\n\n- Una GPU moderna (por ejemplo, una RTX 4090 con hashcat) calcula unos 20 000 millones de hashes SHA-256 por segundo.\n- Con esa velocidad, el atacante prueba diccionarios de contraseñas filtradas y todas sus variantes en minutos.\n- Las contraseñas humanas son cortas y predecibles. Por eso la mayoría cae rápido.\n\n\"Hash seguro\" significa otra cosa: que no se pueden encontrar colisiones y que no se puede revertir. No protege contra adivinar entradas débiles.\n\n## La sal no alcanza\n\nAgregar una sal (salt) aleatoria por usuario resuelve un solo problema. Impide usar tablas precalculadas (rainbow tables) y obliga a atacar cada hash por separado. Pero cada intento sigue costando lo mismo: casi nada. Si un usuario tiene `verano2024`, el atacante la encuentra igual.\n\n## La solución: funciones lentas a propósito\n\nLas funciones para contraseñas son lentas por diseño y tienen un costo configurable:\n\n| Función | Qué la hace lenta | Recomendación |\n|---|---|---|\n| **Argon2id** | Tiempo + memoria + paralelismo | Primera opción (OWASP) |\n| **scrypt** | Tiempo + memoria | Buena alternativa |\n| **bcrypt** | Tiempo (factor de costo) | Válida. Atención: trunca la contraseña en 72 bytes |\n| **PBKDF2-SHA256** | Muchas iteraciones (OWASP pide 600 000) | Solo si necesitas cumplir FIPS |\n\nEl efecto es grande. Un login legítimo tarda unos 100 ms más, y el usuario no lo nota. El atacante, en cambio, pasa de miles de millones de intentos por segundo a miles o menos por GPU. Argon2id y scrypt además usan mucha memoria. Eso reduce la ventaja de las GPU y del hardware especializado.\n\n## En la práctica\n\n1. Usa la biblioteca de tu lenguaje para Argon2id (por ejemplo, `argon2-cffi` en Python o `argon2` en Node).\n2. Guarda el hash completo que devuelve la biblioteca. Ese texto incluye la sal y los parámetros.\n3. Sube los parámetros de costo con el tiempo, a medida que el hardware mejora.",
+  "output_tokens": 1191,
+  "thinking_tokens": 212,
+  "input_tokens": 10058,
+  "wall_s": 13.16,
+  "created_at": "2026-10-06T23:17:03.581728+00:00"
+}

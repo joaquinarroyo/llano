@@ -1,0 +1,11 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A da el diagnóstico en una frase, explica qué significa ETIMEDOUT y da cuatro pasos ordenados con el comando clave, lo que se entiende en una sola lectura; B es correcta pero más larga, con pasos de menor probabilidad (listen_addresses, pg_hba) que diluyen lo esencial.",
+  "judge_model": "sonnet"
+}

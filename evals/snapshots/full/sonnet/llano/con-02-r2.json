@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**El teorema CAP dice que, cuando la red se parte, un sistema distribuido no puede ser a la vez consistente y disponible.** Eric Brewer lo propuso en 2000. Seth Gilbert y Nancy Lynch lo demostraron en 2002.\n\n## Los tres términos\n\n- **Consistencia (C):** toda lectura devuelve la escritura más reciente. Formalmente es linealizabilidad.\n- **Disponibilidad (A):** todo nodo que funciona responde cada solicitud con una respuesta válida.\n- **Tolerancia a particiones (P):** el sistema sigue funcionando aunque la red pierda mensajes entre nodos.\n\n## Qué significa en la práctica\n\nLa frase \"elige 2 de 3\" confunde. Las particiones de red ocurren en cualquier sistema distribuido, así que P no es opcional. La elección real aparece solo durante una partición:\n\n| Opción | Comportamiento durante la partición | Ejemplos |\n|---|---|---|\n| CP | Rechaza o retrasa solicitudes para no devolver datos viejos. | etcd, ZooKeeper, HBase |\n| AP | Responde siempre, pero puede devolver datos desactualizados. | Cassandra, DynamoDB, CouchDB |\n\nSin partición, puedes tener C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\nSí, como modelo mental. No, como etiqueta para clasificar bases de datos. Tiene tres límites:\n\n1. **Define C y A de forma muy estricta.** Muchos sistemas reales usan garantías intermedias que CAP no describe. Martin Kleppmann publicó esta crítica.\n2. **Ignora la latencia.** Sin partición, igual debes elegir entre respuestas rápidas y respuestas consistentes. El modelo **PACELC** (Daniel Abadi, 2012) agrega esta decisión.\n3. **Muchos sistemas son configurables.** Cassandra cambia de comportamiento según el nivel de quórum de cada consulta. Spanner es CP, pero en la práctica ofrece una disponibilidad muy alta.\n\nUsa CAP para preguntar: \"¿Qué hace mi sistema cuando falla la red?\" Para decidir entre bases de datos, compara sus niveles de consistencia, su latencia y su comportamiento ante fallos.",
+  "output_tokens": 1249,
+  "thinking_tokens": 434,
+  "input_tokens": 10049,
+  "wall_s": 9.96,
+  "created_at": "2026-10-06T23:10:41.994060+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre revert, evitar reset/force y push normal, pero no explica cómo obtener el hash con git log ni menciona -m para merge commits; además llama 'rebase público' a --force-with-lease, lo cual es incorrecto.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A incluye la configuración de ~/.ssh/config con UseKeychain para recordar la passphrase en macOS, detalla mejor los pasos en GitHub (título, campo Key) y explica la passphrase como opcional pero recomendada, mientras que B sugiere dejarla vacía y omite la configuración del Keychain.",
+  "judge_model": "sonnet"
+}

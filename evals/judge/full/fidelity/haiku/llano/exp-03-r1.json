@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    false,
+    true,
+    false,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 6,
+  "notes": "Explica árbol balanceado y uso para igualdad/rangos/ORDER BY, pero no menciona O(log n) explícitamente, ni el costo en escrituras/espacio, ni que el planificador puede ignorar el índice; contiene errores como que un árbol de profundidad 3 cubre ~1 billón de filas, que sin índice se leen 1 millón de bloques, que las hojas contienen filas reales, que el índice es de 2 niveles con rangos a-m/m-z como estructura real, que Postgres crea un B-tree solo por PRIMARY KEY/UNIQUE omitiendo otros matices, y que Index Scan siempre aparece en lugar de Seq Scan.",
+  "judge_model": "sonnet"
+}

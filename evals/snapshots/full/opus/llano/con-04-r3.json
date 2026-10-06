@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La deuda técnica es el costo futuro de un atajo que el equipo toma hoy en el código. El atajo da velocidad ahora. Pero cada cambio posterior en esa parte del sistema tarda más, hasta que el equipo corrige el atajo.\n\n## Cómo se forma\n\n- El equipo entrega rápido y omite tests o diseño para cumplir una fecha.\n- El código envejece: las dependencias quedan desactualizadas y el negocio cambia sus reglas.\n- El equipo no sabía algo al principio y ahora el diseño no encaja con el problema real.\n\nNo toda deuda técnica es un error. A veces tomarla es la decisión correcta, por ejemplo para validar un producto antes que la competencia.\n\n## Cómo explicarla a alguien de negocio\n\n**1. Usa la metáfora financiera.** El nombre viene de ahí y la gente de negocio la entiende de inmediato.\n\n| Finanzas | Software |\n|---|---|\n| Préstamo | Atajo en el código |\n| Capital | Trabajo para corregir el atajo |\n| Intereses | Tiempo extra en cada cambio futuro |\n| Quiebra | El sistema ya no admite cambios a un costo razonable |\n\nUna frase posible: \"Pedimos un préstamo para lanzar en marzo. Ahora pagamos intereses: cada función nueva en el módulo de pagos tarda el doble.\"\n\n**2. Habla de consecuencias, no de código.** A negocio no le importa \"el acoplamiento entre módulos\". Le importa esto:\n\n- Las funciones nuevas tardan más en salir.\n- Aparecen más incidentes en producción.\n- Los desarrolladores nuevos tardan más en ser productivos.\n- Algunos riesgos de seguridad crecen, por ejemplo con dependencias sin actualizar.\n\n**3. Da números.** Si tienes datos, úsalos. Ejemplos:\n\n- \"El 30 % del tiempo del sprint se va en corregir bugs del módulo X.\"\n- \"Agregar un método de pago tomaba 2 semanas en 2024. Ahora toma 5.\"\n- \"Tuvimos 4 incidentes en el último trimestre por la misma causa.\"\n\n**4. Presenta una decisión, no una queja.** Propón opciones con costo y beneficio:\n\n> \"Si dedicamos 3 semanas a reescribir el módulo de pagos, cada nueva integración pasa de 5 semanas a 2. Recuperamos la inversión después de la segunda integración.\"\n\n## Errores comunes al explicarla\n\n- Pedir \"tiempo para limpiar el código\" sin decir qué gana el negocio.\n- Presentar toda la deuda como urgente. Prioriza la deuda en las partes del sistema que más cambian.\n- Culpar a decisiones pasadas. Muchas fueron correctas en su momento.",
+  "output_tokens": 1007,
+  "thinking_tokens": 36,
+  "input_tokens": 10048,
+  "wall_s": 11.76,
+  "created_at": "2026-10-06T23:25:47.857406+00:00"
+}

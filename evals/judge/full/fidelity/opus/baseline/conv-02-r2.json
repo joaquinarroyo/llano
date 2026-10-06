@@ -1,0 +1,37 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      false,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    5
+  ],
+  "incorrect_claims": 0,
+  "notes": "En el turno 3 se menciona la rotación y la blacklist de simplejwt, pero no se dice explícitamente invalidar el refresh token al cerrar sesión; no encontré afirmaciones técnicas incorrectas.",
+  "judge_model": "sonnet"
+}

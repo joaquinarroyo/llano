@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Descripción\n\n**Rotación de refresh tokens**\n\n- Se implementa rotación de refresh tokens: cada vez que se usa un refresh token, se emite uno nuevo y el anterior queda invalidado.\n- Detección de reutilización: si se presenta un refresh token ya invalidado, se rechaza y se invalida el token vigente asociado.\n- Se ajusta el middleware de autenticación (`src/auth/middleware.ts`) para integrarse con el nuevo flujo.\n\n**Tests**\n\n- Nuevos tests en `tests/auth/tokens.test.ts` que cubren la rotación y la detección de reutilización de tokens.\n\n**Dependencias**\n\n- Se actualiza `jsonwebtoken` de 9.0.0 a 9.0.2.\n\n**Archivos principales**\n\n- `src/auth/tokens.ts` (lógica de rotación, ~84 líneas cambiadas)\n- `src/auth/middleware.ts`\n- `tests/auth/tokens.test.ts`\n- `package.json`\n\nNota: armé esto solo a partir de los mensajes de commit y el diffstat, sin ver el código. Por ejemplo, el comportamiento exacto al detectar reutilización (si se invalida toda la familia de tokens o solo el último) es una inferencia del mensaje del commit; si querés, revisá ese punto antes de publicarlo.",
+  "output_tokens": 468,
+  "thinking_tokens": 0,
+  "input_tokens": 1782,
+  "wall_s": 4.0,
+  "created_at": "2026-10-06T23:06:54.751613+00:00"
+}

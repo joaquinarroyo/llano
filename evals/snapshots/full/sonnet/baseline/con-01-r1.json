@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Idempotencia en una API\n\nUna operación es **idempotente** si ejecutarla una vez o varias veces con los mismos parámetros deja el sistema en el mismo estado final. Repetir la petición no produce efectos adicionales.\n\n## Por métodos HTTP\n\n| Método | ¿Idempotente? | Nota |\n|--------|---------------|------|\n| `GET`, `HEAD`, `OPTIONS` | Sí | Además son seguros (no modifican nada) |\n| `PUT` | Sí | Reemplaza el recurso completo: repetirlo da el mismo resultado |\n| `DELETE` | Sí | Borrar algo ya borrado no cambia el estado (puede devolver 404, pero el estado es el mismo) |\n| `POST` | **No** | Cada llamada suele crear un recurso nuevo |\n| `PATCH` | Depende | `{\"estado\": \"activo\"}` sí; `{\"saldo\": \"+10\"}` no |\n\n## Por qué importa\n\nLas redes fallan. Si un cliente envía una petición y no recibe respuesta (timeout, corte de conexión), **no sabe si el servidor la procesó o no**. Lo natural es reintentar, y ahí aparece el riesgo:\n\n- Un `POST /pagos` reintentado puede **cobrar dos veces**.\n- Un `POST /pedidos` duplicado crea **pedidos repetidos**.\n- Colas de mensajes con entrega \"al menos una vez\" pueden entregar la misma petición varias veces.\n\nCon operaciones idempotentes, los reintentos son seguros, lo que simplifica clientes, proxies, balanceadores y sistemas distribuidos.\n\n## Cómo hacer idempotente un `POST`: Idempotency-Key\n\nEl patrón habitual (usado por Stripe, por ejemplo) es que el cliente genere un identificador único por operación y lo envíe en una cabecera:\n\n```http\nPOST /pagos\nIdempotency-Key: 8f14e45f-ceea-4b6a-9c1d-2a7e3b1c9d10\nContent-Type: application/json\n\n{\"monto\": 100, \"moneda\": \"EUR\"}\n```\n\nEl servidor:\n\n1. Busca la clave en un almacén (base de datos, Redis).\n2. Si **no existe**, procesa la petición y guarda la clave junto con la respuesta.\n3. Si **ya existe**, devuelve la respuesta guardada sin volver a ejecutar la operación.\n\n## Detalles a tener en cuenta\n\n- **Concurrencia:** dos peticiones con la misma clave llegando a la vez deben serializarse (restricción única en base de datos o bloqueo).\n- **Caducidad:** las claves se guardan un tiempo limitado (p. ej. 24 h).\n- **Validar el cuerpo:** si llega la misma clave con un cuerpo distinto, lo correcto es rechazarla (por ejemplo, con `422` o `409`).\n- **Idempotente no es \"misma respuesta\":** lo que se garantiza es el mismo efecto en el estado, no necesariamente idéntico código de estado (el primer `DELETE` da 204 y el segundo 404).\n\nSi quieres, te muestro una implementación concreta en el lenguaje o framework que uses.",
+  "output_tokens": 1152,
+  "thinking_tokens": 44,
+  "input_tokens": 1560,
+  "wall_s": 9.44,
+  "created_at": "2026-10-06T23:07:44.969918+00:00"
+}

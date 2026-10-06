@@ -1,0 +1,19 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "Cubre los hechos 1-4 (ciclo, spread nuevo, corte de React, solución con handler o primitivos), pero no dice que la forma funcional de setState sea insuficiente si se sigue dependiendo de filters; solo la usa junto con dependencias primitivas.",
+  "judge_model": "sonnet"
+}

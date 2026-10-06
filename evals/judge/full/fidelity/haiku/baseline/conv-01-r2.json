@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      false,
+      false,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 2,
+  "notes": "El asistente atribuyó las versiones 8.11/8.12 (que son de pg) al ORM, primero en el turno 2 y luego en el mensaje del PR del turno 3, y no mencionó el diff del lockfile ni el profiling en el turno 1.",
+  "judge_model": "sonnet"
+}

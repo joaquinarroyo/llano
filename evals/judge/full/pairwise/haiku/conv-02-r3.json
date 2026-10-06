@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-02",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A respeta la decisión del desarrollador en el turno 3 y da una lista clara y concreta de cuidados (HTTPS, expiraciones, almacenamiento, CORS, revocación), mientras que B cuestiona una decisión ya tomada y ofrece menos detalle técnico útil.",
+  "judge_model": "sonnet"
+}

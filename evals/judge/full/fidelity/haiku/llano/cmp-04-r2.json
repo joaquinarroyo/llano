@@ -1,0 +1,19 @@
+{
+  "prompt_id": "cmp-04",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre todos los hechos (los workflows de Celery solo quedan implícitos), pero afirma que RQ necesita celery-beat para programar tareas, lo cual es incorrecto, ya que celery-beat pertenece a Celery y RQ usa rq-scheduler o su scheduling integrado.",
+  "judge_model": "sonnet"
+}

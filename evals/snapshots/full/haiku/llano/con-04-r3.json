@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "La deuda técnica es código escrito deprisa que funciona ahora pero cuesta más mantener después. Es una deuda porque en algún momento pagarás: tiempo extra en arreglos, bugs que aparecen, cambios que tardan más de lo esperado.\n\n## Cómo lo ves en negocio\n\n**Hoy:** entregas una función rápido. ✓ Bien.\n\n**Después:** cada cambio tarda el doble. Los bugs se multiplican. Necesitas más gente solo para mantener el código. ✗ Caro.\n\nEs como construir una casa con materiales baratos. La obra termina rápido, pero después gastas en reparaciones cada mes.\n\n## Ejemplo concreto\n\nUn equipo programó mal la autenticación (pasó usuarios en la URL). Funcionaba. Pero después:\n- No podían cambiar a sesiones de verdad sin reescribir todo.\n- Cada login exponía datos de seguridad.\n- Un arreglo que hubiera tomado 2 días al principio, tomó 2 semanas.\n\n## Para explicar a negocio\n\n**No digas:** \"El código necesita refactoring.\"\n\n**Di:** \"Hoy tardan una semana en agregar una función nueva. En 3 meses van a tardar dos semanas sin cambiar nada. Podemos invertir 2 semanas ahora en limpiar el código y bajar ese tiempo a 3 días. Después la velocidad no cae.\"\n\nO: \"Cada bug nuevo es más caro de arreglar porque el código es un laberinto. Limpiar eso cuesta X horas ahora, pero nos ahorra Y horas después.\"\n\nEl negocio entiende velocidad y costo. La deuda técnica es eso: pagar intereses.",
+  "output_tokens": 830,
+  "thinking_tokens": 384,
+  "input_tokens": 9906,
+  "wall_s": 10.38,
+  "created_at": "2026-10-06T23:05:37.322381+00:00"
+}

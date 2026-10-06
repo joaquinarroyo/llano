@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más concisa y se lee de una vez: define el concepto, usa una tabla de analogía clara, da pasos concretos y un guion con números ilustrativos, sin perder lo esencial (analogía, matiz de que no siempre es error, pedir una decisión, medir el interés), mientras que A es más larga y repite ideas con muchas secciones.",
+  "judge_model": "sonnet"
+}

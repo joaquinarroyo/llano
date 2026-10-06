@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-03",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    false,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Menciona Argon2 como mejor opción pero no Argon2id específicamente; generalizar que los algoritmos modernos aplican el hash 'cientos de miles de veces' es impreciso (bcrypt usa un costo configurable y Argon2/scrypt son memory-hard).",
+  "judge_model": "sonnet"
+}

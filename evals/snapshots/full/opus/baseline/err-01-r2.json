@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Qué está pasando\n\nLa app **nunca llegó a hablar con Postgres**. El log descarta varias causas:\n\n- **DNS funciona**: `db.internal` resolvió a `10.0.3.17`.\n- **No es un problema de credenciales**: un usuario o contraseña incorrectos darían un error de autenticación inmediato, no un timeout.\n- **No es \"puerto cerrado\"**: si el host respondiera sin nada escuchando, verías `ECONNREFUSED` al instante.\n\n`ETIMEDOUT` tras 30 s significa que el paquete TCP inicial (SYN) salió y **nadie respondió**. Algo en el camino lo está descartando en silencio. Las causas típicas, de más a menos probable:\n\n1. **Firewall, security group o NACL** que no permite tráfico desde la app hacia `10.0.3.17:5432`.\n2. **NetworkPolicy de Kubernetes**, si corres en k8s, que bloquea el egress del pod.\n3. **Red o subred distinta**: la app se desplegó en una VPC o subred sin ruta hacia `10.0.3.0/x` (pasa mucho al cambiar de entorno, cluster o región).\n4. **La DB está caída o la IP cambió** y `db.internal` apunta a una IP vieja (registro DNS obsoleto).\n\n## Qué revisar primero\n\n**1. Prueba la conectividad desde el mismo lugar donde corre la app** (mismo pod, contenedor o host, no desde tu máquina):\n\n```sh\nnc -zv -w 5 10.0.3.17 5432\n# o, si no hay nc:\ntimeout 5 bash -c '</dev/tcp/10.0.3.17/5432' && echo OK || echo FAIL\n```\n\n- Si hace **timeout**, el problema es de red (sigue con el paso 2).\n- Si da **connection refused**, el host es alcanzable pero Postgres no escucha en esa IP. Revisa `listen_addresses` en `postgresql.conf`.\n- Si **conecta**, el problema es intermitente o específico del arranque. Revisa si la DB estaba reiniciándose en ese momento.\n\n**2. Confirma que `10.0.3.17` es realmente la DB actual.** Mira la IP privada de la instancia en tu proveedor (RDS, Cloud SQL, VM…) y compárala con lo que resuelve `db.internal`. Si no coinciden, el DNS está desactualizado.\n\n**3. Revisa las reglas de red:**\n- Security group o firewall de la DB: ¿permite entrada al 5432 desde la subred o el SG de la app?\n- Si es k8s: `kubectl get networkpolicy -n <namespace>`.\n\n**4. Pregúntate qué cambió.** Si este deploy funcionaba antes, compara contra el último deploy exitoso. Fíjate sobre todo en cambios de infraestructura (nuevo cluster, nodo en otra subred, cambio de SG o de VPC), no solo en el código de la `v2.4.1`.\n\nSi me dices dónde corre la app (k8s, ECS, VM…) y dónde está la DB, te ayudo a afinar qué regla revisar.",
+  "output_tokens": 1255,
+  "thinking_tokens": 165,
+  "input_tokens": 1749,
+  "wall_s": 14.81,
+  "created_at": "2026-10-06T23:19:04.057705+00:00"
+}

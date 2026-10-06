@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Changelog: Servicio de notificaciones\n\n### Cambios\n- **Proveedor de email:** se migró el envío de SendGrid a Amazon SES.\n- **Plantillas:** las plantillas HTML se reescribieron en MJML.\n- **Reintentos:** el envío ahora reintenta con backoff exponencial (3 intentos, base de 2 s).\n\n### Eliminado\n- **Breaking:** se eliminó el endpoint `/v1/notify`, que ya no tenía uso.\n\n### Notas de despliegue\n- Hay que configurar las credenciales y la región de AWS SES, y verificar el dominio o remitente en SES. Las variables de SendGrid ya no se usan.\n- Cualquier cliente que todavía llame a `/v1/notify` va a recibir un error. Vale la pena confirmar en los logs que no quede tráfico.\n\n### Testing\n- Los 132 tests pasan.\n\nSi querés, te lo dejo en formato Keep a Changelog (Added/Changed/Removed) o en inglés.",
+  "output_tokens": 420,
+  "thinking_tokens": 66,
+  "input_tokens": 1678,
+  "wall_s": 3.79,
+  "created_at": "2026-10-06T23:12:33.140399+00:00"
+}

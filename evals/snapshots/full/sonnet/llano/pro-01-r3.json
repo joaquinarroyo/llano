@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-01",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Genera una clave `ed25519`, guárdala en el llavero de macOS y agrega la clave pública a GitHub.\n\n**Peligro:** nunca compartas el archivo sin extensión (`id_ed25519`). Es la clave privada. Solo se comparte el archivo `.pub`.\n\n1. Verifica si ya tienes una clave.\n\n   ```sh\n   ls ~/.ssh/id_ed25519.pub\n   ```\n\n   Si el archivo existe, salta al paso 3. **Atención:** si `ssh-keygen` pregunta si quieres sobrescribir, responde `n`. Sobrescribir borra la clave anterior.\n\n2. Genera la clave. Usa tu correo de GitHub.\n\n   ```sh\n   ssh-keygen -t ed25519 -C \"tu_correo@ejemplo.com\"\n   ```\n\n   Presiona Enter para aceptar la ruta por defecto. Escribe una passphrase.\n\n3. Crea o edita `~/.ssh/config` y agrega este bloque.\n\n   ```\n   Host github.com\n     AddKeysToAgent yes\n     UseKeychain yes\n     IdentityFile ~/.ssh/id_ed25519\n   ```\n\n4. Inicia el agente y agrega la clave al llavero.\n\n   ```sh\n   eval \"$(ssh-agent -s)\"\n   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n   ```\n\n5. Copia la clave pública al portapapeles.\n\n   ```sh\n   pbcopy < ~/.ssh/id_ed25519.pub\n   ```\n\n6. Agrégala en GitHub.\n   1. Abre **Settings → SSH and GPG keys → New SSH key**.\n   2. Escribe un título, por ejemplo `MacBook personal`.\n   3. En **Key type** elige `Authentication Key`.\n   4. Pega la clave y presiona **Add SSH key**.\n\n7. Prueba la conexión.\n\n   ```sh\n   ssh -T git@github.com\n   ```\n\n   La primera vez, SSH pide confirmar el fingerprint del servidor. Compáralo con el que GitHub publica en su documentación antes de escribir `yes`. Si todo funciona, verás: `Hi <usuario>! You've successfully authenticated`.\n\n8. Usa la URL SSH en tus repositorios.\n\n   ```sh\n   git clone git@github.com:usuario/repo.git\n   ```\n\n   Para un repositorio que ya clonaste con HTTPS:\n\n   ```sh\n   git remote set-url origin git@github.com:usuario/repo.git\n   ```\n\nSi el paso 7 devuelve `Permission denied (publickey)`, ejecuta `ssh-add -l`. Si la lista no muestra tu clave, repite el paso 4.",
+  "output_tokens": 1592,
+  "thinking_tokens": 646,
+  "input_tokens": 10050,
+  "wall_s": 11.83,
+  "created_at": "2026-10-06T23:12:47.521239+00:00"
+}

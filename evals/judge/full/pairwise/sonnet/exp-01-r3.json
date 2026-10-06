@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica el event loop, las fases, microtareas vs. fases, equivalencia con Python y el riesgo de bloquear el hilo de forma más compacta y fácil de leer en una pasada, con un diagrama útil y sin perder información técnica relevante (incluye la salvedad sobre setTimeout vs setImmediate), mientras que A es mucho más extensa y repite ideas.",
+  "judge_model": "sonnet"
+}

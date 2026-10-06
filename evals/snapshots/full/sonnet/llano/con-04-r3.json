@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**La deuda técnica es el costo futuro de elegir hoy una solución rápida en lugar de la correcta.** El equipo entrega antes, pero el código queda más difícil de cambiar.\n\n## Cómo explicarla a negocio\n\nUsa la analogía de un préstamo. Tiene tres partes:\n\n| Préstamo | Deuda técnica |\n|---|---|\n| Pides dinero prestado | Entregas rápido con atajos |\n| Pagas intereses cada mes | Cada cambio nuevo tarda más y falla más |\n| Si no pagas, los intereses crecen | Si no corriges, el equipo se frena |\n| Pagas el capital para reducir los intereses | Refactorizas para recuperar velocidad |\n\n## Tres ideas que debe llevarse\n\n1. **La deuda no siempre es mala.** Un atajo para llegar a una fecha clave puede ser una buena decisión. Lo malo es no pagarla.\n2. **Los intereses son visibles.** Se notan en fechas que se mueven, errores repetidos y funciones simples que tardan semanas.\n3. **Pagarla es una inversión.** El beneficio es entregar más rápido y con menos incidentes después.\n\n## Ejemplo de frase\n\n> \"Para lanzar en la fecha acordada, tomamos atajos en el módulo de pagos. Hoy cada cambio ahí tarda el doble. Si dedicamos dos semanas a ordenarlo, las funciones siguientes salen más rápido.\"\n\nCambia \"el doble\" y \"dos semanas\" por datos reales de tu equipo. No inventes cifras.\n\n## Qué evitar\n\n- **Jerga:** \"refactorizar\", \"acoplamiento\", \"cobertura de tests\". Di \"ordenar el código\" o \"reducir errores\".\n- **Pedir tiempo sin medida.** Muestra un efecto concreto, como horas perdidas por mes o incidentes repetidos.\n- **Culpar al equipo anterior.** La deuda suele venir de decisiones razonables bajo presión.\n\nSi me das el caso de tu equipo, preparo el argumento con tus datos.",
+  "output_tokens": 908,
+  "thinking_tokens": 187,
+  "input_tokens": 10050,
+  "wall_s": 8.66,
+  "created_at": "2026-10-06T23:13:37.586306+00:00"
+}

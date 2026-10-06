@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "llano",
+  "reason": "A es más lineal y fácil de leer de una vez: define el concepto, explica cómo se forma, da una tabla de metáfora con ejemplos concretos y errores comunes, mientras que B añade más secciones (tipos, opciones, metáforas extra) que lo hacen más denso sin ser imprescindibles.",
+  "judge_model": "sonnet"
+}

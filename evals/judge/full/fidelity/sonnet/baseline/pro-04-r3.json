@@ -1,0 +1,19 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 0,
+  "notes": "No dice explícitamente que borrar la clave del código no basta porque queda en la historia de git; solo lo da a entender al tratar la reescritura del historial como paso aparte, y el resto de los hechos sí se cubre.",
+  "judge_model": "sonnet"
+}

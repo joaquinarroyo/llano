@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A separa impacto, causa, cronología y acciones con encabezados claros y checkboxes, así se escanea de un vistazo y conserva todos los datos técnicos (latencia, duración, 212 usuarios, sin pérdida de pedidos, acciones pendientes).",
+  "judge_model": "sonnet"
+}

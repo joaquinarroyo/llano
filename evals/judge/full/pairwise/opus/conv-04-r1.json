@@ -1,0 +1,11 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B es más conciso y directo, usa un español neutro más cercano al del desarrollador (que usa voseo, no vosotros) y mantiene la información técnica esencial: medición del pipeline, Packwerk con package_todo.yml, punto de decisión y costo.",
+  "judge_model": "sonnet"
+}

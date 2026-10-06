@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Falla porque `float` no representa exactamente los números decimales. Python guarda los `float` en binario (IEEE 754), y `0.1` no tiene una representación binaria exacta. Cada operación redondea un poco, y el resultado final queda en `89.99999999999999` en vez de `90.0`. Después, `==` compara bit a bit y falla.\n\n**Atención:** según mi cálculo, `100.0 * (1 - 0.1)` en CPython da exactamente `90.0`. Intenté verificarlo, pero el comando no mostró la salida. Si tu cálculo da `89.99999999999999`, probablemente los valores reales del test son otros, o el total se calcula en varios pasos. Un ejemplo de varios pasos es una suma de líneas o un descuento calculado aparte. La causa y la solución son las mismas.\n\n## Cómo arreglarlo\n\nHay dos opciones. La correcta depende de si el valor es dinero.\n\n**1. Si es dinero, usa `Decimal` en el código.** Esta es la opción que recomiendo para facturas. `Decimal` hace aritmética decimal exacta y evita el error en el origen.\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.1\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# total == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` desde strings. `Decimal(0.1)` copia el error del `float`.\n\n**2. Si el valor puede ser `float`, compara con tolerancia en el test.**\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total_with_discount(100.0, 0.1) == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto una diferencia relativa de `1e-6`. Esta opción corrige el test, pero el código sigue acumulando errores de redondeo. Esos errores pueden aparecer en otros totales.\n\n| Opción | Cambia | Cuándo usarla |\n|---|---|---|\n| `Decimal` | el código | montos de dinero, facturas, impuestos |\n| `pytest.approx` | el test | cálculos científicos o métricas donde un error de `1e-15` no importa |\n\nUna tercera opción es guardar los montos en centavos como `int`. Funciona bien, pero cambia más código que `Decimal`.",
+  "output_tokens": 1989,
+  "thinking_tokens": 992,
+  "input_tokens": 10135,
+  "wall_s": 20.13,
+  "created_at": "2026-10-06T23:15:38.260848+00:00"
+}

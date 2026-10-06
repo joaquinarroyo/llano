@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-03",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B entrega el changelog listo y añade notas técnicas relevantes (semántica de los 3 intentos, variables de configuración de SES, verificación con logs), mientras que A es claro pero omite esos puntos y deja un placeholder de versión.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-02",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B abre con una definición directa de ambos comandos, sus diagramas son más claros y consistentes (el de rebase de A queda confuso), y añade cómo recuperarse (`rebase --abort`, `reflog`) sin perder la advertencia sobre ramas compartidas ni `--force-with-lease`.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La forma segura en una rama compartida es **`git revert`**, que crea un commit nuevo que deshace los cambios sin reescribir el historial. **No uses `git reset` + `push --force`** en `main`, porque romperías los clones de todo el equipo.\n\n## Pasos\n\n1. **Actualiza tu copia local**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -20\n   git show <sha>        # confirma que es el correcto\n   ```\n\n3. **Revierte**\n   ```bash\n   git revert <sha>\n   ```\n   Se abre el editor con un mensaje por defecto (\"Revert ...\"). Conviene añadir el *motivo* del revert.\n\n   Casos especiales:\n   - **Commit de merge:** `git revert -m 1 <sha>` (el `1` indica conservar el lado de `main` como padre principal).\n   - **Varios commits consecutivos:** `git revert --no-commit <sha_viejo>^..<sha_nuevo>` y luego `git commit`, para hacerlo en un único commit.\n   - **Conflictos:** resuélvelos, `git add <archivos>` y `git revert --continue` (o `git revert --abort` para cancelar).\n\n4. **Verifica antes de pushear**\n   ```bash\n   git show HEAD          # revisa el diff del revert\n   # ejecuta build/tests\n   ```\n\n5. **Publica**\n   - Si `main` está protegida o el equipo usa PRs (lo recomendable), haz el revert en una rama y abre un PR:\n     ```bash\n     git checkout -b revert-<sha-corto>\n     git revert <sha>\n     git push origin revert-<sha-corto>\n     ```\n     GitHub y GitLab también tienen un botón **\"Revert\"** en el PR original que hace exactamente esto.\n   - Si se pushea directo: `git push origin main` (push normal, **sin** `--force`).\n\n6. **Avisa al equipo**, sobre todo si alguien ya basó trabajo en ese commit.\n\n## Detalle importante para más adelante\n\nSi revertiste un **merge** y luego quieres volver a integrar esa rama arreglada, Git considerará que esos commits ya están fusionados y no los traerá de nuevo. En ese caso tendrás que **revertir el revert** (`git revert <sha_del_revert>`) antes de volver a mergear.\n\nSi me dices el SHA o me das acceso al repo, puedo ayudarte a revisar qué cambia exactamente el revert antes de que lo publiques.",
+  "output_tokens": 880,
+  "thinking_tokens": 0,
+  "input_tokens": 1583,
+  "wall_s": 10.18,
+  "created_at": "2026-10-06T23:15:57.932614+00:00"
+}

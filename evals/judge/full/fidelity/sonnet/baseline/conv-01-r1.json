@@ -1,0 +1,36 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "facts_by_turn": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "n_facts_by_turn": [
+    4,
+    4,
+    4
+  ],
+  "incorrect_claims": 0,
+  "notes": "Los tres turnos cubren todos los hechos clave y no encontré afirmaciones técnicamente incorrectas (28 round-trips = 14×2, y las herramientas y opciones citadas existen).",
+  "judge_model": "sonnet"
+}

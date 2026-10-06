@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-04",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica lo esencial (definición, analogía en tabla, ejemplo numérico concreto, consejos y una frase lista para usar) de forma más concisa y fácil de captar en una sola lectura, y aclara que las cifras son hipotéticas, mientras que A es más extensa y densa aunque completa.",
+  "judge_model": "sonnet"
+}

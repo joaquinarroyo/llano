@@ -1,0 +1,19 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 2,
+  "notes": "La respuesta cubre navegador, puerto, header y preflight, pero no menciona curl; el diagrama es erróneo al mostrar que el preflight recibe un Access-Control-Allow-Origin de 'no permitido' y al presentar el preflight como parte de toda petición.",
+  "judge_model": "sonnet"
+}

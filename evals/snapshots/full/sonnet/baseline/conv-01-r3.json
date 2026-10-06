@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza por lo que sí cambió: las dependencias. Mi recomendación, en orden:\n\n**1. Confirma qué cambió exactamente**\n- Compara el lockfile de antes y después (`git diff package-lock.json` o `yarn.lock`/`pnpm-lock.yaml`). Las dependencias transitivas suelen cambiar sin que lo notes, así que no mires solo `package.json`.\n- Revisa también si cambió la versión de Node (imagen Docker base, `.nvmrc`, `engines`). Un `node:lts` sin pin puede haber saltado de versión.\n\n**2. Reproduce y acota con un rollback**\n- Despliega el lockfile anterior en staging (o localmente con `npm ci`) y mide con una carga fija (`autocannon` o `k6`). Si vuelve a 120 ms, confirmaste que es una dependencia.\n- Luego haz bisect: revierte la mitad de las actualizaciones, mide, y repite. Normalmente son 3-4 iteraciones.\n\n**3. Sospechosos habituales**\n- Driver/ORM de base de datos (pool size por defecto, cambios en timeouts o en cómo se preparan las queries).\n- Framework HTTP o middlewares (body parser, compresión, logging, CORS).\n- Logger (pino/winston con transportes síncronos o nivel de log distinto).\n- Clientes HTTP (`undici`/`axios`/`node-fetch`: keep-alive desactivado, cambios en DNS).\n- Librerías de auth/JWT/bcrypt (cambio de rondas o de implementación nativa a JS).\n\n**4. Si no quieres esperar al bisect, perfila en paralelo**\n- `node --cpu-prof` o `clinic flame` bajo carga: si el tiempo está en CPU, el flamegraph te señala la librería.\n- Si la CPU está baja, el problema es de espera (I/O): mira el event loop lag (`perf_hooks.monitorEventLoopDelay`), el tamaño del pool de conexiones y los tiempos de las queries/llamadas externas.\n- Mira si el p95 se degrada en todos los endpoints o solo en algunos. Si es en todos, apunta a middleware/runtime; si es en uno, a una query o cliente concreto.\n\n**5. Descarta causas externas**\nAunque no cambiaron código, confirma que la base de datos, el caché o servicios downstream no empeoraron ayer (latencia de ellos, CPU, conexiones).\n\nSi me pasas el diff del lockfile (o las dependencias que actualizaron) puedo señalarte los candidatos más probables. Si el proyecto está en alguna carpeta accesible, también puedo revisarlo directamente.",
+      "output_tokens": 1043,
+      "thinking_tokens": 109,
+      "input_tokens": 1608
+    },
+    {
+      "text": "Eso explica bien la regresión: pasas de 14 a 42 round trips por request (14 × BEGIN/query/COMMIT). Con ~15-20 ms de latencia a la BD, eso cuadra con el salto de 120 a 900 ms. Además, cada transacción retiene una conexión del pool más tiempo, así que bajo carga se suma espera en el pool.\n\n**Qué haría, en orden:**\n\n1. **Mitigar ya:** fija el ORM a la versión anterior en el lockfile (`npm install <orm>@<versión previa> --save-exact`) y redespliega. Es lo más rápido y reversible.\n\n2. **Mirar si es configurable:** revisa el changelog/issues del ORM. Muchos ORMs que introducen transacciones implícitas ofrecen una opción para desactivarlas (por ejemplo, un flag tipo `implicitTransactions: false` o equivalente). Si existe, es mejor que quedarte congelado en la versión vieja.\n\n3. **Si es intencional y no se puede desactivar:** agrupa las 14 queries de un request en una sola transacción explícita. Eso baja el overhead a un BEGIN y un COMMIT por request. Solo es válido si semánticamente tiene sentido que sean atómicas, y las lecturas largas dentro de una transacción tienen sus propias implicaciones (snapshot, locks).\n\n4. **Aprovechar para revisar las 14 queries:** probablemente haya N+1 o queries combinables con un `JOIN` o `WHERE id = ANY($1)`. Es una mejora independiente del ORM y reduce la latencia aún más que el rollback.\n\n5. **Descartar `pg` 8.12:** es poco probable que sea el culpable, pero para confirmarlo, haz el rollback solo del ORM y mide. Si el p95 vuelve a ~120 ms, `pg` queda descartado.\n\nVerifica también en el APM que el tiempo extra esté en los round trips y no en esperas del pool (`pool.waitingCount` y `pool.totalCount` de `pg`). Si hay espera, aumentar `max` del pool puede amortiguar mientras corriges lo demás.\n\n¿Qué ORM es? Con el nombre puedo decirte si existe el flag para desactivar las transacciones implícitas y en qué versión se introdujo el cambio.",
+      "output_tokens": 935,
+      "thinking_tokens": 132,
+      "input_tokens": 2772
+    },
+    {
+      "text": "Dejé placeholders entre `<>` donde no tengo el dato.\n\n---\n\n**Título:** Fijar `<orm>` a `<versión previa>` para revertir regresión de latencia\n\n**Contexto**\nTras la última actualización de dependencias, el p95 de la API pasó de ~120 ms a ~900 ms sin cambios de código. El diff del lockfile mostró dos cambios: `pg` 8.11 → 8.12 y `<orm>` `<versión previa>` → `<versión nueva>`.\n\n**Causa**\nLa nueva versión de `<orm>` abre una transacción implícita por cada query. En el APM se ve que cada request ejecuta 14 queries, cada una con un `BEGIN` y un `COMMIT` extra: pasamos de 14 a 42 round trips por request, además de mantener las conexiones del pool ocupadas más tiempo.\n\n**Cambio**\n- Se fija `<orm>` a `<versión previa>` (versión exacta, sin `^`/`~`).\n- `pg` queda en 8.12.\n\n**Verificación**\n- Con el pin aplicado, el p95 volvió a ~130 ms.\n- `pg` 8.12 no muestra impacto en latencia con esta configuración.\n\n**Seguimiento (fuera de este PR)**\n- Revisar si `<orm>` permite desactivar las transacciones implícitas (`<flag/opción si existe>`) para poder actualizar sin perder rendimiento.\n- Revisar las 14 queries por request (posibles N+1 o queries combinables).\n- Abrir/enlazar issue upstream si no está reportado: `<link>`.\n\n**Riesgo / rollback**\nBajo. Es solo un cambio de versión en el lockfile; el rollback es revertir el commit.\n\n---\n\nSi me decís el nombre del ORM y las versiones, te lo dejo completo.",
+      "output_tokens": 698,
+      "thinking_tokens": 64,
+      "input_tokens": 3781
+    }
+  ],
+  "created_at": "2026-10-06T23:13:55.342379+00:00"
+}

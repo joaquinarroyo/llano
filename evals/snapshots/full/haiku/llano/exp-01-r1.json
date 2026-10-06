@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El event loop de Node.js ejecuta **una sola cosa a la vez**, pero permite que múltiples operaciones de I/O ocurran en paralelo. En Python síncrono, el programa espera bloqueado. En Node.js, delega el I/O y continúa.\n\n## La diferencia clave\n\n**Python:**\n```python\nresult = requests.get(\"https://api.com\")  # Espera aquí. El programa se detiene.\nprint(result)\n```\n\n**Node.js:**\n```javascript\nfetch(\"https://api.com\").then(result => console.log(result));\nconsole.log(\"Pidiendo datos...\");  // Esto se ejecuta PRIMERO\n```\n\n## Cómo funciona el event loop\n\nEl event loop tiene dos componentes:\n\n1. **Call stack:** ejecuta tu código síncrono línea por línea.\n2. **Task queue (callback queue):** guarda funciones que deben ejecutarse cuando terminen las operaciones de I/O.\n\nEl event loop repite esto:\n- Si hay código síncrono en el stack, ejecútalo.\n- Cuando el stack está vacío, toma una tarea de la queue y ejecútala.\n\n```\n┌─────────────────────────────────────┐\n│  Tu código síncrono                 │\n│  (fetch, setTimeout, etc)           │\n└──────────────┬──────────────────────┘\n               │\n      ┌────────▼────────┐\n      │  Call stack     │\n      │  (ejecuta)      │\n      └────────┬────────┘\n               │ (vacío)\n      ┌────────▼────────┐\n      │  Task queue     │\n      │  (callbacks)    │\n      └─────────────────┘\n```\n\n## Ejemplo comparado\n\n```javascript\nconsole.log(\"Inicio\");\n\nsetTimeout(() => {\n  console.log(\"Timeout: 100ms después\");\n}, 100);\n\nfetch(\"https://api.com\").then(() => {\n  console.log(\"Respuesta recibida\");\n});\n\nconsole.log(\"Fin\");\n```\n\n**Salida:**\n```\nInicio\nFin\nRespuesta recibida (o Timeout)\nTimeout: 100ms después (o Respuesta recibida)\n```\n\nEl `console.log(\"Fin\")` se ejecuta **antes** de los callbacks, aunque `fetch` y `setTimeout` se llamen primero. Node.js registra esas operaciones, no las ejecuta. Después termina el código síncrono y el event loop corre los callbacks en orden.\n\n## En Python harías esto\n\n```python\nimport asyncio\n\nasync def main():\n    print(\"Inicio\")\n    \n    # Esto no bloquea. \"Delega\" la tarea.\n    asyncio.create_task(fetch(\"https://api.com\"))\n    \n    print(\"Fin\")\n    \n    # Corre el event loop (asyncio.run ya lo hace)\n```\n\nPython necesita `async/await` explícito. Node.js es asíncrono por defecto: las APIs de I/O siempre usan callbacks o promesas.",
+  "output_tokens": 1274,
+  "thinking_tokens": 496,
+  "input_tokens": 9912,
+  "wall_s": 14.02,
+  "created_at": "2026-10-06T22:59:40.657310+00:00"
+}

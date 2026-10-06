@@ -1,0 +1,11 @@
+{
+  "prompt_id": "exp-03",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica paso a paso cómo se recorre el árbol y con un cálculo concreto por qué es rápido, en un texto lineal y fácil de leer en una sola pasada, mientras que A es más exhaustiva pero tan densa en subtemas (INCLUDE, deduplicación, pageinspect) que dificulta captar la idea central.",
+  "judge_model": "sonnet"
+}

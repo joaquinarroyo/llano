@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Asume que la key **ya está comprometida**: los bots escanean GitHub en segundos. El orden importa: primero cortar el acceso, luego limpiar.\n\n## 1. Revocar o rotar la key de inmediato\n- Ve al panel del proveedor (AWS, OpenAI, Stripe, etc.) y **genera una nueva key**.\n- **Revoca la antigua.** Si no puedes cortarla de golpe sin tirar producción, haz primero el paso 2 y revócala justo después, en minutos, no en días.\n- Borrar el commit **no** sirve como mitigación: la key ya está en forks, clones, caches y escáneres.\n\n## 2. Desplegar la nueva key\n- Actualízala donde la consuma tu app: gestor de secretos (Vault, AWS Secrets Manager, Doppler…), variables de entorno del CI/CD, servidores, etc.\n- Verifica que todo funciona con la nueva y entonces revoca la vieja si aún no lo hiciste.\n\n## 3. Revisar si se usó\n- Consulta los logs de uso y facturación del proveedor desde la fecha del commit que la filtró.\n- Busca llamadas desde IPs desconocidas, recursos creados (instancias, usuarios IAM), cargos raros.\n- Si hubo abuso, contacta al soporte del proveedor (a veces reembolsan) y evalúa qué datos fueron accesibles.\n\n## 4. Limpiar el repositorio\n- Elimina el secreto del código y cárgalo desde variables de entorno o un gestor de secretos.\n- Añade el archivo (p. ej. `.env`) al `.gitignore`.\n- Opcional, pero recomendable: reescribe el historial con `git filter-repo` o BFG y haz force-push. Avisa al equipo, porque tendrán que volver a clonar. En GitHub, contacta a soporte para purgar las vistas cacheadas de commits.\n- Recuerda que esto es higiene, no seguridad: la rotación del paso 1 es lo que realmente te protege.\n\n## 5. Buscar otros secretos\n- Escanea todo el historial con `gitleaks` o `trufflehog`. Donde hay una filtración suele haber más.\n\n## 6. Prevenir que se repita\n- Activa **GitHub Secret Scanning + Push Protection**.\n- Añade un pre-commit hook con `gitleaks`.\n- Usa keys con el mínimo de permisos y, si el proveedor lo permite, restringidas por IP o dominio.\n\nSi me dices qué proveedor es y dónde la usas, te ayudo con los pasos concretos o a limpiar el repo.",
+  "output_tokens": 958,
+  "thinking_tokens": 52,
+  "input_tokens": 1570,
+  "wall_s": 11.39,
+  "created_at": "2026-10-06T23:16:09.323736+00:00"
+}

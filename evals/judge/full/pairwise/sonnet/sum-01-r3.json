@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "llano_position": "A",
+  "winner": "baseline",
+  "reason": "B explica el propósito (protección ante tokens robados o replays), está estructurada en secciones claras, usa el voseo del desarrollador y aclara qué falta saber del diff, mientras que A es más escueta y describe de forma algo confusa que 'el servidor invalida el refresh token anterior cuando detecta reutilización'.",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,11 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "llano",
+  "reason": "B explica CAP, la lectura correcta (elegir entre C y A ante una partición), las limitaciones y PACELC con frases cortas, una tabla clara y la referencia a Kleppmann, mientras que A es más largo y repite ideas (Spanner 'efectivamente CA', configurabilidad) sin aportar mucho más.",
+  "judge_model": "sonnet"
+}

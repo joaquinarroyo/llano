@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Rotar una API key filtrada: orden recomendado\n\n**Asume que la key ya está comprometida.** Los bots escanean GitHub en minutos, así que la prioridad es invalidarla, no limpiar el repo.\n\n## 1. Revoca la key (primero, ya)\n- Genera una key nueva en el panel del proveedor.\n- Actualiza tus servicios con la nueva (variables de entorno, gestor de secretos, CI/CD).\n- **Revoca la vieja** en cuanto la nueva esté desplegada. Si el abuso es probable (key con acceso a dinero, datos de clientes o infraestructura), revoca primero y asume un breve corte.\n\n## 2. Audita el uso\n- Revisa los logs o el dashboard del proveedor desde el momento del commit: llamadas desconocidas, IPs raras, picos de consumo, recursos creados.\n- Si hay actividad sospechosa, revisa también lo que esa key podía tocar (otros recursos, permisos asociados) y revoca lo que haya creado el atacante.\n- Revisa la facturación y pide un reembolso si hubo cargos fraudulentos.\n\n## 3. Limpia el repo (después de revocar)\n- Elimina la key del código y muévela a variables de entorno o a un gestor de secretos.\n- Reescribir el historial (`git filter-repo` o BFG) es opcional, ya que la key ya está revocada. Si lo haces, requiere force-push y obliga a los colaboradores a re-clonar.\n- Recuerda que **forks, clones y cachés** pueden conservar la key. Reescribir el historial no los borra, y por eso la revocación es lo único que cuenta.\n- Si el proveedor es GitHub-partner (AWS, Stripe, OpenAI, etc.), es posible que ya te haya avisado o revocado la key automáticamente. Revisa tu correo.\n\n## 4. Evita que se repita\n- Añade `.env` y similares al `.gitignore`.\n- Activa **push protection / secret scanning** en GitHub (gratis en repos públicos).\n- Añade un hook pre-commit con `gitleaks` o `trufflehog`.\n- Aplica el mínimo privilegio: keys con permisos acotados, límites de gasto y restricción por IP o por servicio.\n- Planifica rotaciones periódicas.\n\n## 5. Verifica\n- Confirma que la key vieja devuelve error de autenticación.\n- Confirma que tus servicios funcionan con la nueva.\n- Ejecuta `gitleaks detect` sobre el historial para comprobar que no quedan otros secretos.\n\nSi me dices qué proveedor es (AWS, OpenAI, Stripe, etc.), te doy los pasos exactos de revocación y auditoría. Y si quieres, puedo escanear tu código local en busca de otros secretos.",
+  "output_tokens": 1131,
+  "thinking_tokens": 160,
+  "input_tokens": 1574,
+  "wall_s": 10.1,
+  "created_at": "2026-10-06T23:12:56.366015+00:00"
+}

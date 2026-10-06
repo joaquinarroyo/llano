@@ -1,0 +1,11 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "llano_position": "B",
+  "winner": "baseline",
+  "reason": "A pone el impacto y la causa al inicio, con la cronología y las acciones en formato de checklist, de modo que se entiende de una lectura sin perder datos técnicos; B es parecido pero deja el impacto después de la cronología y omite que la latencia era del checkout al inicio del resumen de impacto.",
+  "judge_model": "sonnet"
+}

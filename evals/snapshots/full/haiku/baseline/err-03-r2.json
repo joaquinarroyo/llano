@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-03",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Tienes un **loop infinito**: el efecto dispara cuando `filters` cambia, pero dentro del efecto modificas `filters` con `setFilters()`, lo que causa que se dispare de nuevo.\n\n```\nfilters cambia → efecto se ejecuta → setFilters() → filters cambia → efecto se ejecuta → ...\n```\n\nReact para esto después de ~50 actualizaciones y lanza el warning.\n\n**Solución**: Depende de qué quieres hacer:\n\n**Opción 1** (más probable): Si quieres resetear a página 1 solo cuando cambian *otros campos* (no la página misma):\n\n```javascript\nuseEffect(() => { \n  setFilters(prev => ({ ...prev, page: 1 }))\n}, [filters.search, filters.sortBy]) // Solo las dependencias que importan\n```\n\n**Opción 2**: Si necesitas rastrear cambios específicos sin incluir `page`:\n\n```javascript\nconst { page, ...otherFilters } = filters\n\nuseEffect(() => { \n  setFilters(prev => ({ ...prev, page: 1 }))\n}, [otherFilters.search, otherFilters.sortBy])\n```\n\n**Opción 3** (si tienes lógica compleja): Usa un ref para comparar:\n\n```javascript\nconst prevFiltersRef = useRef()\n\nuseEffect(() => { \n  if (prevFiltersRef.current?.search !== filters.search) {\n    setFilters(prev => ({ ...prev, page: 1 }))\n  }\n  prevFiltersRef.current = filters\n}, [filters])\n```\n\n¿Cuál es el caso de uso? ¿Quieres resetear a página 1 cuando el usuario cambia el filtro de búsqueda/ordenamiento?",
+  "output_tokens": 735,
+  "thinking_tokens": 294,
+  "input_tokens": 3476,
+  "wall_s": 7.62,
+  "created_at": "2026-10-06T23:02:10.976169+00:00"
+}

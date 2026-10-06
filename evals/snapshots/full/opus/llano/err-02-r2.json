@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "El test falla porque `float` no puede representar `0.1` de forma exacta. Python guarda los `float` en binario (IEEE 754), y `0.1` en binario es una fracción periódica. Por eso Python guarda un valor muy cercano a `0.1`, pero no igual. El error pequeño pasa a la multiplicación, y el resultado queda en `89.99999999999999` en vez de `90.0`.\n\nEl código no tiene un bug de lógica. El problema es comparar `float` con `==`.\n\n## Cómo arreglarlo\n\nHay dos opciones. Para facturas, te recomiendo la opción 2.\n\n**Opción 1: comparar con tolerancia en el test.** Sirve si `total` puede seguir como `float`.\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total_with_discount(100.0, 0.1) == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto una diferencia relativa de `1e-6`.\n\n**Opción 2: usar `Decimal` para dinero.** `Decimal` guarda `0.1` de forma exacta. Así el total de la factura no acumula errores de redondeo.\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef total_with_discount(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (1 - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n```\n\n```python\ndef test_total_with_discount():\n    assert total_with_discount(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\n**Atención:** crea los `Decimal` desde un `str` (`Decimal(\"0.1\")`). `Decimal(0.1)` copia el error del `float`.\n\nEl método `quantize` redondea a 2 decimales. Si tu sistema usa otra regla de redondeo, cambia `ROUND_HALF_UP`. Por ejemplo, el redondeo bancario es `ROUND_HALF_EVEN`.\n\n## Cuál elegir\n\n| Opción | Cuándo usarla |\n|---|---|\n| `pytest.approx` | Cálculos científicos o métricas, donde un error de `1e-15` no importa. |\n| `Decimal` | Precios, impuestos, totales de factura. El valor tiene que coincidir al centavo. |\n\nNo ejecuté estos tests. Si eliges `Decimal`, revisa también el código que llama a la función. Ese código tiene que pasar `Decimal` y no `float`.",
+  "output_tokens": 1448,
+  "thinking_tokens": 573,
+  "input_tokens": 10135,
+  "wall_s": 14.92,
+  "created_at": "2026-10-06T23:19:13.876044+00:00"
+}

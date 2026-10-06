@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-04",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Rotar una API key filtrada\n\n**Lo que importa es revocar la key. Borrarla del repo no la protege**, porque bots la escanean en minutos y ya puede estar copiada en forks y cachés.\n\n## Orden\n\n1. **Genera una key nueva** en el panel del proveedor. No revoques todavía si necesitas evitar downtime.\n2. **Despliega la nueva** en todos los sitios donde se usa: variables de entorno, CI/CD, secret manager, `.env` locales, contenedores y servidores.\n3. **Revoca la key vieja** en cuanto la nueva esté funcionando. Si no puedes confirmar el despliegue rápido, revoca igualmente: un poco de downtime es mejor que una key expuesta.\n4. **Audita el uso de la key vieja.** Revisa los logs y la facturación del proveedor desde el momento del commit. Busca llamadas desde IPs o regiones desconocidas, picos de consumo y recursos creados que no reconozcas. Si hubo abuso, repórtalo al proveedor, que suele reembolsar.\n5. **Limpia el repo:**\n   - Quita la key del código y usa una variable de entorno.\n   - Opcionalmente, reescribe el historial con `git filter-repo` o BFG y haz force push. Es solo higiene: la key ya debe estar revocada, y los forks y clones existentes conservan el historial.\n   - Si GitHub aún muestra el commit en caché, pide su eliminación a GitHub Support.\n6. **Revisa qué más se filtró.** Mira si en el mismo commit o en el historial había otros secretos (`.env`, tokens, credenciales de base de datos) y rótalos también.\n7. **Prevención:**\n   - Activa *secret scanning* y *push protection* en GitHub.\n   - Añade un hook de pre-commit con `gitleaks` o `trufflehog`.\n   - Añade `.env` a `.gitignore`.\n   - Si el proveedor lo permite, limita la key por scopes, IP o cuota.\n\nSi quieres, dime qué proveedor es y si tienes el repo local. Puedo buscar con gitleaks o grep otras credenciales en el historial y ayudarte a preparar la limpieza.",
+  "output_tokens": 1082,
+  "thinking_tokens": 316,
+  "input_tokens": 1574,
+  "wall_s": 9.49,
+  "created_at": "2026-10-06T23:10:08.321159+00:00"
+}

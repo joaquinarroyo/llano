@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-04",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Ana propone cambiar a GraphQL porque la app mobile hace 7 requests por pantalla. Luis rechaza por la complejidad del caching HTTP. Marta sugiere un endpoint BFF en REST como alternativa: agrupa las 7 requests en una sin cambiar de stack. El equipo acepta el BFF por menor riesgo. Próximo paso: implementar el BFF en la pantalla de inicio y medir el impacto.",
+  "output_tokens": 412,
+  "thinking_tokens": 304,
+  "input_tokens": 10025,
+  "wall_s": 5.22,
+  "created_at": "2026-10-06T23:00:15.093406+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Este es un problema clásico de precisión de punto flotante. Los números decimales no se representan exactamente en binario, así que `100.0 * (1 - 0.1)` produce `89.99999999999999` en lugar de `90.0`.\n\n**Soluciones (en orden de recomendación):**\n\n1. **Usar `pytest.approx()` (mejor para tests)**\n```python\nfrom pytest import approx\n\nassert total == approx(90.0)\n# o con tolerancia personalizada:\nassert total == approx(90.0, abs=1e-9)\n```\n\n2. **Usar `math.isclose()` (portable)**\n```python\nfrom math import isclose\n\nassert isclose(total, 90.0)\n```\n\n3. **Redondear el resultado (si tiene sentido en tu dominio)**\n```python\ntotal = round(price * (1 - discount), 2)  # Para dinero, 2 decimales\nassert total == 90.0\n```\n\n4. **Usar `Decimal` (si trabajas con dinero)**\n```python\nfrom decimal import Decimal\n\nprice = Decimal('100.0')\ndiscount = Decimal('0.1')\ntotal = price * (1 - discount)\n```\n\n¿Quieres que vea el archivo de test para aplicar la solución directamente?",
+  "output_tokens": 679,
+  "thinking_tokens": 343,
+  "input_tokens": 3472,
+  "wall_s": 6.74,
+  "created_at": "2026-10-06T22:59:55.315645+00:00"
+}

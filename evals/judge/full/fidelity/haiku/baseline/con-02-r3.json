@@ -1,0 +1,19 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "n_facts": 5,
+  "incorrect_claims": 1,
+  "notes": "Cubre los cinco hechos; el error es presentar CAP como 'elegir dos de tres' (P no es opcional, como la propia respuesta admite luego), y llamar 'reciente' a PACELC es una imprecisión menor.",
+  "judge_model": "sonnet"
+}
