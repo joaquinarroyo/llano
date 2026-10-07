@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B muestra el resultado en el intérprete, ofrece `pytest.approx` (idiomático en pytest) y `round()` como alternativas, y recomienda una opción clara; A es más breve pero omite esas opciones útiles y termina preguntando cuál prefiere en lugar de recomendar con firmeza."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica la causa y ofrece dos opciones claras (isclose y Decimal) con el criterio de cuándo usar cada una, mientras que A mezcla tres o cuatro soluciones y recomienda isclose 'para dinero' de forma poco coherente con su propia sugerencia de Decimal, lo que confunde más."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica qué hace el PR en lenguaje de descripción (rotación, detección de reutilización, middleware, tests, dependencia), agrupado y listo para pegar, y aclara que se basa solo en commits y diffstat; A casi repite los mensajes de commit y lista conteos de líneas poco útiles."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega un texto conciso y listo para pegar en la descripción del PR, con cada cambio ligado a su commit y los archivos, sin inventar detalles del código; A agrega interpretaciones no verificadas (p. ej. 'posible robo de token', 'ajustes menores para integrar el nuevo flujo') y redundancia con los commits y notas extra que alargan la lectura."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

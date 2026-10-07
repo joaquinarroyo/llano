@@ -8,37 +8,37 @@
   "judge_model": "sonnet",
   "facts": [
     {
-      "status": "absent",
-      "quote": "",
+      "status": "present",
+      "quote": "`0.1` no tiene representación exacta en binario",
       "verified": true,
-      "score": 0.0
+      "score": 1.0
     },
     {
-      "status": "absent",
-      "quote": "",
+      "status": "present",
+      "quote": "comparar con `==` contra `90.0` es frágil",
       "verified": true,
-      "score": 0.0
+      "score": 1.0
     },
     {
-      "status": "absent",
-      "quote": "",
+      "status": "present",
+      "quote": "assert total == pytest.approx(90.0)",
       "verified": true,
-      "score": 0.0
+      "score": 1.0
     },
     {
-      "status": "absent",
-      "quote": "",
+      "status": "present",
+      "quote": "**Usar `Decimal` en el código** (lo correcto para dinero)",
       "verified": true,
-      "score": 0.0
+      "score": 1.0
     },
     {
-      "status": "absent",
-      "quote": "",
+      "status": "partial",
+      "quote": "miro de dónde sale realmente el `89.99999999999999`",
       "verified": true,
-      "score": 0.0
+      "score": 0.5
     }
   ],
   "incorrect_claims": [],
-  "answer_first": false,
+  "answer_first": true,
   "diagram": "none"
 }

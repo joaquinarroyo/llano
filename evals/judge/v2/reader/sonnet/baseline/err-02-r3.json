@@ -11,19 +11,19 @@
     "B"
   ],
   "answers": [
-    "E",
-    "E",
-    "E"
+    "A",
+    "D",
+    "B"
   ],
   "correct": [
-    false,
-    false,
-    false
-  ],
-  "not_said": [
     true,
     true,
     true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
   ],
   "reader_model": "haiku"
 }

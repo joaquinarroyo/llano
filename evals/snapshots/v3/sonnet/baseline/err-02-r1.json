@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La causa es la aritmética de punto flotante binario: números como `0.1` no tienen representación exacta en `float`, así que los resultados pueden desviarse en el último dígito (`89.99999999999999` en vez de `90.0`).\n\nCon exactamente `100.0 * (1 - 0.1)`, yo esperaría que dé `90.0`, porque el redondeo de `1 - 0.1` cae en `0.9` y `100 * 0.9` también redondea a `90.0`. Compruébalo con `python -c \"print(100.0 * (1 - 0.1))\"`. Si te da `90.0`, el valor real que llega al test es distinto: el descuento podría venir de otro cálculo (por ejemplo `10 * 0.01` o una suma acumulada), o haber más operaciones intermedias como impuestos. Si me pasas la función y el test, lo confirmo.\n\nSea cual sea el origen, estas son las soluciones, de preferida a menos:\n\n**1. Usar `Decimal` en el código (lo correcto para dinero):**\n```python\nfrom decimal import Decimal\n\ntotal = Decimal(\"100.00\") * (1 - Decimal(\"0.10\"))  # Decimal('90.0000')\n```\nConstruye siempre los `Decimal` desde strings, no desde floats (`Decimal(0.1)` arrastra el error).\n\n**2. Redondear a céntimos en el cálculo:**\n```python\ntotal = round(price * (1 - discount), 2)\n```\nEs simple, pero con muchas operaciones encadenadas los errores de redondeo pueden acumularse.\n\n**3. Comparar con tolerancia en el test (si trabajas con floats a propósito):**\n```python\nimport pytest\n\nassert total == pytest.approx(90.0)\n```\n\nPara facturas, recomiendo la opción 1, o trabajar en céntimos enteros. `approx` solo arregla el test, no el hecho de que el valor de la factura sea impreciso.",
+  "output_tokens": 1441,
+  "thinking_tokens": 787,
+  "input_tokens": 1659,
+  "wall_s": 14.26,
+  "created_at": "2026-10-07T00:09:18.420116+00:00"
+}

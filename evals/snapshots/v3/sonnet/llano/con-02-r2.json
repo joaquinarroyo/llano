@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "El teorema CAP dice que un sistema distribuido que replica datos no puede garantizar a la vez consistencia, disponibilidad y tolerancia a particiones. Sigue siendo relevante como base conceptual, pero no basta para elegir una base de datos.\n\n## Las tres propiedades\n\n| Propiedad | Significado en CAP |\n|---|---|\n| **Consistencia (C)** | Toda lectura devuelve la escritura más reciente (linealizabilidad). |\n| **Disponibilidad (A)** | Todo nodo que funciona responde a cada solicitud, sin error ni timeout. |\n| **Tolerancia a particiones (P)** | El sistema sigue funcionando aunque la red pierda mensajes entre nodos. |\n\nEric Brewer lo propuso como conjetura en 2000. Seth Gilbert y Nancy Lynch lo demostraron en 2002.\n\n## Qué significa en la práctica\n\nLas particiones de red ocurren en cualquier sistema real, así que P no es opcional. La elección real es esta: cuando hay una partición, ¿el sistema sacrifica consistencia o disponibilidad?\n\n- **CP:** rechaza o retrasa solicitudes en el lado que no puede confirmar el estado. Evita datos incorrectos, pero algunos clientes reciben error.\n- **AP:** responde siempre, pero puede devolver datos desactualizados y debe reconciliar las diferencias después.\n\nSin partición, el sistema puede ofrecer C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\nSí, con tres límites:\n\n1. **Es binario y estricto.** C significa linealizabilidad y A significa que todo nodo responde. Los sistemas reales usan puntos intermedios, así que las etiquetas \"CP\" y \"AP\" simplifican demasiado. Martin Kleppmann criticó este punto.\n2. **Ignora el caso normal.** Sin partición también hay un compromiso: latencia contra consistencia. El modelo **PACELC** (Daniel Abadi, 2012) lo agrega: si hay partición (P), elige A o C; si no (E, *else*), elige latencia (L) o consistencia (C).\n3. **Muchos sistemas son configurables.** Cassandra y DynamoDB permiten elegir el nivel de consistencia por operación. Spanner mantiene consistencia fuerte y reduce la indisponibilidad con una red privada muy confiable, pero sigue siendo CP.\n\n## Cómo usarlo hoy\n\nÚsalo para preguntar qué pasa con tus datos y tus usuarios durante una falla de red. Después evalúa el sistema con PACELC y con los niveles de consistencia que realmente ofrece, no solo con su etiqueta CAP.",
+  "output_tokens": 1328,
+  "thinking_tokens": 379,
+  "input_tokens": 5207,
+  "wall_s": 10.63,
+  "created_at": "2026-10-07T00:53:56.247037+00:00"
+}

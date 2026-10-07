@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Aquí están los pasos principales para hacer backup y restaurar una base Postgres:\n\n## Hacer el backup (en producción)\n\n```bash\n# Backup en formato custom (comprimido, más flexible para restaurar)\npg_dump -h <host-produccion> -U <usuario> -d <nombre-bd> -Fc > backup.dump\n\n# O en formato SQL (texto plano)\npg_dump -h <host-produccion> -U <usuario> -d <nombre-bd> > backup.sql\n```\n\nSe te pedirá la contraseña. Alternatively, puedes usar una variable de entorno:\n```bash\nPGPASSWORD=<contraseña> pg_dump -h <host-produccion> -U <usuario> -d <nombre-bd> -Fc > backup.dump\n```\n\n## Restaurar localmente\n\n**Opción 1: Si usaste formato custom (.dump)**\n```bash\n# Crear la base de datos primero (opcional si ya existe)\ncreatedb <nombre-bd-local>\n\n# Restaurar\npg_restore -d <nombre-bd-local> backup.dump\n```\n\n**Opción 2: Si usaste formato SQL (.sql)**\n```bash\ncreatedb <nombre-bd-local>\npsql -d <nombre-bd-local> < backup.sql\n```\n\n## Tips útiles\n\n- **Sin contraseña interactiva**: Crea un archivo `~/.pgpass`:\n  ```\n  host:port:database:user:password\n  chmod 600 ~/.pgpass\n  ```\n\n- **Con datos grandes**: Usar `pg_dump -Fc` (formato custom) es mejor porque comprime y permite restauración paralela:\n  ```bash\n  pg_restore -j 4 -d <nombre-bd> backup.dump  # 4 procesos paralelos\n  ```\n\n- **Solo esquema (sin datos)**: \n  ```bash\n  pg_dump -h <host> -U <usuario> -d <nombre-bd> -s > schema.sql\n  ```\n\n¿Necesitas ayuda con algo específico del proceso?",
+  "output_tokens": 624,
+  "thinking_tokens": 120,
+  "input_tokens": 3404,
+  "wall_s": 6.66,
+  "created_at": "2026-10-07T00:06:37.333806+00:00"
+}

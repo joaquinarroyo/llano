@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El teorema CAP dice que un sistema distribuido no puede tener a la vez consistencia, disponibilidad y tolerancia a particiones. Debes elegir dos de las tres.\n\n- **Consistencia:** todos los nodos ven el mismo dato al mismo tiempo.\n- **Disponibilidad:** el sistema responde siempre, aunque sea con datos viejos.\n- **Tolerancia a particiones:** el sistema funciona aunque la red se divida.\n\n## Sigue siendo relevante, pero de otra forma\n\nEl teorema es correcto, pero la gente lo interpretaba mal. En 2012, Eric Brewer aclaró que la mayoría de los sistemas sí pueden tolerar particiones de red (de lo contrario, colapsarían). La verdadera elección es entre **consistencia y disponibilidad cuando falla la red**.\n\nEn la práctica:\n\n- **Bases de datos transaccionales** (PostgreSQL, MySQL): eligen consistencia. Si la red se divide, rechazan escrituras en la partición minoritaria.\n- **Sistemas de caché y NoSQL** (Redis, DynamoDB): eligen disponibilidad. Devuelven datos viejos pero siguen respondiendo.\n- **Algunos sistemas híbridos** (CockroachDB): replican en múltiples regiones y resintonían el balance según la latencia.\n\nEs relevante porque te ayuda a decidir qué base de datos usar y cómo arquitectar tu sistema. Pero no es un dilema binario: es un espectro. Puedes tener consistencia eventual, Paxos, quórums, o replicas de solo lectura, y cada uno es un punto distinto en el triángulo CAP.",
+  "output_tokens": 601,
+  "thinking_tokens": 192,
+  "input_tokens": 6212,
+  "wall_s": 7.49,
+  "created_at": "2026-10-07T00:52:37.325030+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "CORS (Cross-Origin Resource Sharing) es un mecanismo del navegador que decide si una página puede leer respuestas de otro origen. Tu API en `localhost:8000` no le dice al navegador que acepta peticiones de `localhost:3000`, y por eso las bloquea.\n\n## Por qué son orígenes distintos\n\nUn origen es la combinación de protocolo, host y puerto. `http://localhost:3000` y `http://localhost:8000` tienen puertos diferentes, así que el navegador los trata como orígenes distintos. Por defecto, la política del mismo origen impide que el JavaScript de una página lea respuestas de otro origen.\n\n## Cómo funciona\n\n1. Tu frontend envía la petición con la cabecera `Origin: http://localhost:3000`.\n2. Tu API responde. Si la respuesta no incluye `Access-Control-Allow-Origin` con ese origen, el navegador no entrega la respuesta al JavaScript y muestra el error de CORS en la consola.\n3. Si la petición no es \"simple\", el navegador envía antes un preflight: una petición `OPTIONS`. Esto pasa con métodos como `PUT` o `DELETE`, con cabeceras como `Authorization`, o con `Content-Type: application/json`. Si el preflight falla, el navegador no envía la petición real.\n\nEl bloqueo lo hace el navegador, no tu API. Herramientas como `curl` o Postman no lo muestran porque no aplican CORS.\n\n## Cómo solucionarlo\n\nConfigura CORS en la API. La respuesta debe incluir estas cabeceras:\n\n```\nAccess-Control-Allow-Origin: http://localhost:3000\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, Authorization\n```\n\nLa API también debe responder `OPTIONS` con éxito (200 o 204). Normalmente un middleware se encarga de todo esto.\n\nExpress:\n\n```js\nconst cors = require(\"cors\");\napp.use(cors({ origin: \"http://localhost:3000\" }));\n```\n\nFastAPI:\n\n```python\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:3000\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n```\n\n**Atención:** si envías cookies o usas `credentials: \"include\"`, la API debe responder `Access-Control-Allow-Credentials: true` y un origen explícito. En ese caso el navegador rechaza `Access-Control-Allow-Origin: *`.\n\n## Alternativa en desarrollo\n\nPuedes configurar un proxy en el servidor de desarrollo del frontend, por ejemplo en Vite o en Webpack. El navegador llama a `localhost:3000/api/...` y el servidor de desarrollo reenvía la petición a `localhost:8000`. Así el navegador ve un solo origen y no aplica CORS.\n\nSi me dices qué framework usa tu API, te indico la configuración exacta.",
+  "output_tokens": 1466,
+  "thinking_tokens": 398,
+  "input_tokens": 5225,
+  "wall_s": 10.64,
+  "created_at": "2026-10-07T00:52:47.967041+00:00"
+}

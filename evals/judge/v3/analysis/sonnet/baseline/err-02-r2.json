@@ -1,0 +1,44 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "son binarios (IEEE 754) y valores como `0.1` no se pueden representar exactamente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`==` exige igualdad exacta",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "assert total == pytest.approx(90.0)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`Decimal` o enteros para el cálculo de facturas",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "89.99999999999999 == 90.0",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

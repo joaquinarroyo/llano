@@ -1,0 +1,50 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Usa `git revert`. Crea un commit nuevo que deshace los cambios",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "no uses `git reset --hard` seguido de `git push --force` en `main`",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "git log --oneline",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si el commit es un merge, indica el padre que quieres conservar.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "git push origin main",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Git no detecta un cherry-pick de un commit normal como ya aplicado y revertido; simplemente vuelve a aplicar el diff. El problema de 're-aplicar' tras un revert se da al volver a mergear una rama cuyo merge fue revertido, no con cherry-pick.",
+      "quote": "Git lo detecta como ya aplicado y revertido.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

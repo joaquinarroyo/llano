@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Polling:** cada algunos segundos, el cliente pide cambios al servidor. **SSE:** el servidor envía cambios al cliente en cuanto ocurren. **WebSocket:** ambos pueden enviar en cualquier momento.\n\n| Característica | Polling | SSE | WebSocket |\n|---|---|---|---|\n| Dirección | Solo cliente pregunta | Solo servidor envía | Ambos envían |\n| Latencia | Lenta: esperas el intervalo | Rápida: inmediato | Muy rápida: inmediato |\n| Ancho de banda | Alto: muchas peticiones vacías | Bajo: solo cambios | Bajo: solo cambios |\n| Complejidad | Muy simple | Simple | Moderada |\n| Reconexión automática | Sí | No siempre | No |\n| Soporte navegadores | Todos | Modernos | Modernos |\n\n**Usa polling** cuando: los cambios son raros (notificaciones ocasionales), el cliente es muy viejo, o necesitas algo que funcione en cualquier red (incluso con proxies que bloquean WebSocket).\n\n**Usa SSE** cuando: solo el servidor envía datos (dashboard de métricas, noticias en vivo, notificaciones). Es HTTP normal, atraviesa proxies y es mucho más eficiente que polling. El cliente se reconecta solo si falla.\n\n**Usa WebSocket** cuando: ambos necesitan enviar frecuentemente (chat, videojuego, colaboración en tiempo real). La latencia importa y el ancho de banda también. Necesitas manejar reconexiones tú mismo.\n\nLa causa: polling desperdicia recursos porque pregunta aunque nada cambió. SSE es HTTP y funciona como REST. WebSocket abre un canal permanente que ahorra peticiones pero añade complejidad.",
+  "output_tokens": 908,
+  "thinking_tokens": 464,
+  "input_tokens": 6215,
+  "wall_s": 10.71,
+  "created_at": "2026-10-07T00:52:01.357721+00:00"
+}

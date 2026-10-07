@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación es idempotente cuando obtienes el mismo resultado cada vez que la repites, sin efectos secundarios adicionales.\n\nEn una API, la idempotencia significa que hacer la misma solicitud dos veces produce el mismo estado final que hacerla una sola vez. Por ejemplo, un `PUT` que actualiza un registro es idempotente: si envías los mismos datos dos veces, el registro termina en el mismo estado. Pero un `POST` que crea un recurso no lo es: si lo repites, creas dos recursos.\n\n**Por qué importa:**\n\n1. **Redes inestables.** Si la solicitud se pierde, el cliente puede reintentar sin miedo a duplicar datos o crear efectos secundarios indeseados.\n\n2. **Confiabilidad.** El cliente no necesita saber si el servidor recibió la solicitud. Puede enviarla de nuevo y todo seguirá siendo correcto.\n\n3. **Operaciones seguras.** Las APIs bien diseñadas marcan los endpoints idempotentes (GET, PUT, DELETE) como seguros para reintentos automáticos.\n\n**Cómo lograrlo:**\n\n- Usa `PUT` o `PATCH` para actualizaciones (idempotentes).\n- Usa `POST` solo para crear nuevos recursos.\n- Para `POST` idempotente, agrega una clave de idempotencia que el cliente envía. El servidor guarda qué claves ya procesó y devuelve el mismo resultado sin repetir la acción.\n\nUna API sin idempotencia es frágil: un reintenso accidental cobra dos veces, duplica pedidos o borra datos que no debería.",
+  "output_tokens": 727,
+  "thinking_tokens": 319,
+  "input_tokens": 6211,
+  "wall_s": 8.93,
+  "created_at": "2026-10-07T00:52:00.747266+00:00"
+}

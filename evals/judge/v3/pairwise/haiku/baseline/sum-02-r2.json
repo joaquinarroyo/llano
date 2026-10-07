@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B presenta causa raíz, línea de tiempo, impacto y acciones en secciones escaneables y conserva el hito de las 09:20 (detección del job) que A omite, por lo que se entiende mejor de una lectura sin perder información."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A conserva toda la información, incluida la detección a las 09:20, en un formato escaneable con línea de tiempo, causa, impacto y acciones, mientras que B omite el momento de detección y es menos estructurada para un canal de equipo."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

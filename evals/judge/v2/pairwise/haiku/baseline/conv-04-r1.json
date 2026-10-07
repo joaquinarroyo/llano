@@ -7,14 +7,14 @@
   "other": "baseline",
   "orders": [
     {
-      "winner": "llano",
-      "reason": "A entrega en el chat un plan corto, claro y directo, con fases, responsables y criterios de decisión fáciles de leer de una vez; B escribe un archivo con un plan largo (5 fases, tabla, emojis, métricas inventadas) que no se pidió así y obliga a abrirlo, y su respuesta de chat resume en vez de mostrar el plan."
+      "winner": "baseline",
+      "reason": "B es más claro y fácil de leer en una sola pasada, con un plan en checklist, fases y metas concretas. A tiene frases confusas («pierde valor si todos ellos son pequeños», «cambios coordenados», «6 personas trabajando en features + 2 en la optimización») y propone una API interna entre login y facturación, que se acerca a lo que dice evitar. El voseo del usuario no coincide con el vosotros de B, pero esto estorba menos que la ambigüedad de A."
     },
     {
-      "winner": "llano",
-      "reason": "B entrega el plan completo en el chat, corto y directo, listo para presentar; A lo guarda en un archivo y solo resume, con fases solapadas y asignaciones de Dev A–F más difíciles de seguir."
+      "winner": "baseline",
+      "reason": "A da un plan más claro y ordenado (diagnóstico, fases con checklist, meta y plan B) y no tiene las confusiones de B, como «6 personas en features + 2 en optimización» y «facturación llama a login por API interna»; su uso de vosotros desentona con el voseo del desarrollador, pero no impide entenderlo."
     }
   ],
-  "winner": "llano",
+  "winner": "baseline",
   "judge_model": "sonnet"
 }

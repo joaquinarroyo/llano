@@ -1,0 +1,60 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "CORS (Cross-Origin Resource Sharing) es una política del navegador que bloquea peticiones",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "puertos diferentes cuentan como dominios diferentes",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "La API debe responder con `Access-Control-Allow-Origin: http://localhost:3000` para autorizar.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Una página maliciosa en localhost:3000 sería la amenaza; el ejemplo es incoherente, ya que localhost:3000 es la propia página del usuario, no un origen malicioso. Además, afirma que los puertos diferentes son 'dominios diferentes', cuando son orígenes distintos con el mismo dominio.",
+      "quote": "Sin CORS, una página maliciosa en localhost:3000 podría robar datos de tu API.",
+      "verified": true
+    },
+    {
+      "claim": "El navegador no 'rechaza la petición' en general: la petición simple llega al servidor y es la respuesta la que se bloquea. Pero la afirmación de que el navegador bloquea las peticiones es imprecisa en la introducción.",
+      "quote": "es una política del navegador que bloquea peticiones a un dominio diferente al de la página por razones de seguridad.",
+      "verified": true
+    },
+    {
+      "claim": "Los puertos distintos no son dominios diferentes; el dominio (host) es el mismo (localhost), lo que cambia es el origen.",
+      "quote": "puertos diferentes cuentan como dominios diferentes",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más claro y preciso (pasos ordenados, cálculo correcto, PR coherente en un solo bloque), mientras que B comete errores técnicos (\"780 ms de overhead\" y \"900→130\" confusos, \"100% ese cambio\") y ofrece dos borradores de PR que obligan a elegir."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da pasos concretos y ordenados con ejemplos de código y un mensaje de PR en español con dos versiones; B tiene un error aritmético (\"13 operaciones menos (27 menos...)\") en el turno 2 y entrega el PR en inglés, lo que obliga a repreguntar."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

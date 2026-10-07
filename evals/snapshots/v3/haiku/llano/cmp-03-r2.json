@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "| WebSocket | Server-Sent Events | Polling |\n|---|---|---|\n| Bidireccional | Unidireccional (servidor→cliente) | Unidireccional (cliente→servidor) |\n| Latencia baja | Latencia media | Latencia alta |\n| Alto overhead inicial | Bajo overhead | Alto overhead continuo |\n| Eventos frecuentes en ambas direcciones | Eventos frecuentes del servidor | Eventos ocasionales |\n\n**Usa WebSocket** cuando el cliente y el servidor se comunican con frecuencia en ambas direcciones. Ejemplos: chat, juegos multijugador, edición colaborativa en tiempo real. El overhead inicial vale la pena porque ahorras recursos después.\n\n**Usa Server-Sent Events** cuando solo el servidor envía eventos al cliente. Es más simple que WebSocket y consume menos ancho de banda. Ejemplos: notificaciones en vivo, actualizaciones de precio de acciones, feeds de actividad. Funciona sobre HTTP estándar.\n\n**Usa polling** cuando los eventos ocurren con poca frecuencia y la latencia no es crítica. Es lo más simple: el cliente pregunta cada X segundos. Ejemplos: sincronizar cambios en un formulario, verificar si hay mensajes nuevos en un cliente antiguo, actualizar estados cada minuto. No necesitas WebSocket en el servidor.\n\nLa regla: WebSocket es más complejo pero muy eficiente. SSE es el punto medio. Polling es simple pero gasta recursos. Elige según la frecuencia de eventos y quién inicia la comunicación.",
+  "output_tokens": 846,
+  "thinking_tokens": 465,
+  "input_tokens": 6215,
+  "wall_s": 10.02,
+  "created_at": "2026-10-07T00:52:33.466614+00:00"
+}

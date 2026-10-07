@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más conciso y directo en cada turno, con pasos numerados y accionables y un PR listo para usar, mientras que B es más largo, con listas extensas de sospechosos y ofertas de acceso al repo que añaden ruido sin aportar información clave."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer de una vez, conserva los datos técnicos clave (incluida la advertencia sobre aislamiento al agrupar queries) y sus aclaraciones finales son más claras; A es más largo, con ofrecimientos redundantes y una nota final sobre `pg` más confusa."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

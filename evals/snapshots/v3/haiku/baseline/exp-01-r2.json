@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Event Loop de Node.js\n\n**La diferencia fundamental**: Python síncrono bloquea línea por línea. Node.js es **asincrónico por defecto** — el event loop permite que un proceso maneje múltiples operaciones concurrentemente sin threads.\n\n## Cómo funciona\n\nImagina un camarero (el event loop) en un restaurante:\n\n1. **Tomas una orden** (registro una callback)\n2. **La dejas en la cocina** (operación I/O — file, network, timer)\n3. **Atiendes al siguiente cliente** mientras la cocina trabaja\n4. **Cuando está lista** (callback se ejecuta) la entregas\n\n## Las fases del Event Loop\n\n```\ntimers → pending callbacks → idle/prepare → poll → check → close\n```\n\n**1. Timers**: Ejecuta `setTimeout`, `setInterval`  \n**2. Pending callbacks**: Operaciones aplazadas del ciclo anterior  \n**3. Poll**: Espera nuevas operaciones I/O (socket connections, archivos)  \n**4. Check**: Ejecuta `setImmediate`  \n**5. Close**: Cierra callbacks (`socket.on('close')`  \n\nLuego repite.\n\n## Ejemplo comparativo\n\n**Python síncrono** (bloquea):\n```python\n# Esto tarda 2 segundos\nresponse = requests.get('https://api.example.com')  # Bloquea aquí\nprint(\"Listo\")\n```\n\n**Node.js asincrónico** (no bloquea):\n```javascript\nfetch('https://api.example.com')\n  .then(response => console.log(\"Listo\"));\n// El programa continúa inmediatamente, sin esperar\n```\n\n## Regla clave: Single-threaded\n\n- **Un solo thread** ejecuta JavaScript\n- Las operaciones I/O (red, archivos) se delegan al sistema operativo\n- Las callbacks se ejecutan cuando terminen\n\nPor eso Node.js es eficiente para I/O intensivo, pero si haces CPU pesada, bloquea todo.\n\n---\n\n¿Necesitas ver ejemplos más específicos o aclarar algo sobre async/await?",
+  "output_tokens": 713,
+  "thinking_tokens": 177,
+  "input_tokens": 3408,
+  "wall_s": 8.85,
+  "created_at": "2026-10-07T00:05:59.072956+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "En Node.js, el event loop corre un callback por vez mientras espera operaciones I/O sin bloquear. En Python síncrono, todo se detiene hasta que termina.\n\n## La diferencia clave\n\nPython síncrono espera I/O en línea: si lees un archivo, el programa se congela hasta que termina. Node.js registra esa operación, sigue ejecutando otro código, y cuando termina el I/O, enciende el callback.\n\n```javascript\n// Node.js: no bloquea\nfs.readFile('archivo.txt', (err, data) => {\n  console.log(data);\n});\nconsole.log('Esto corre primero');\n```\n\n```python\n# Python: bloquea\ndata = open('archivo.txt').read()  # Se espera aquí\nprint('Esto corre después')\n```\n\n## El event loop, paso a paso\n\nNode.js tiene una cola de tareas. En cada vuelta:\n\n1. Ejecuta un callback de la cola si hay uno pendiente.\n2. Comprueba si hay operaciones I/O finalizadas. Si hay, agrega sus callbacks a la cola.\n3. Si no hay nada, duerme hasta que llegue el siguiente evento.\n4. Vuelve al paso 1.\n\nLas operaciones I/O (leer archivo, query a base de datos, request HTTP) no bloquean porque las maneja el sistema operativo en paralelo, no Node.\n\n## Por qué importa\n\nCon `async/await`, escribes código que se ve síncrono pero funciona como callbacks internamente:\n\n```javascript\nasync function leer() {\n  const data = await fs.promises.readFile('archivo.txt');\n  console.log(data);  // Corre cuando termina la lectura\n}\n```\n\nEl `await` pausa esa función, pero el event loop sigue libre para manejar otros requests. En Python, con `threading` o `asyncio` lo haces explícito y más complicado.\n\n**La línea de fondo:** Node.js usa un modelo de un solo thread con I/O no bloqueante. Python síncrono usa threads o procesos si quieres paralelismo real.",
+  "output_tokens": 775,
+  "thinking_tokens": 242,
+  "input_tokens": 6223,
+  "wall_s": 8.97,
+  "created_at": "2026-10-07T00:52:10.332766+00:00"
+}

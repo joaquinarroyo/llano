@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más conciso y directo en los tres turnos, con una estructura simple y un plan corto y fácil de leer, mientras que B añade mucho más contenido (tablas densas, más medidas, secciones extra) que exige más esfuerzo de lectura y no era necesario para un 'plan corto'."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más conciso y directo en los tres turnos, con un orden de acción claro (empezar por el test de humo) y un plan corto como se pidió, mientras que A es más extenso y denso (tablas, listas largas, plan más pesado) aunque técnicamente completo."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

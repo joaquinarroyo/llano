@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es claro: **timeout de conexión a PostgreSQL**. El contenedor no puede alcanzar `db.internal:5432` (resuelve a `10.0.3.17` pero la conexión se agota en 30 segundos).\n\nRevisa en este orden:\n\n1. **¿PostgreSQL está corriendo?**\n   ```bash\n   # Si es Kubernetes\n   kubectl get pods -l app=postgres\n   kubectl logs <postgres-pod>\n   \n   # Si es Docker Compose\n   docker-compose ps\n   docker logs <postgres-container>\n   ```\n\n2. **¿Hay conectividad de red?**\n   ```bash\n   # Desde el pod/contenedor de la app\n   nc -zv 10.0.3.17 5432\n   # o\n   telnet 10.0.3.17 5432\n   ```\n\n3. **¿Firewall/Security Groups bloquean?**\n   - Si es Kubernetes: revisa NetworkPolicies\n   - Si es AWS: revisa Security Groups (¿permite ingress en puerto 5432?)\n   - Si es VPC: ¿están en la misma red?\n\n4. **¿El nombre DNS resuelve correctamente?**\n   ```bash\n   nslookup db.internal\n   ```\n\n**Mi apuesta:** PostgreSQL no está corriendo o no está healthy. Empieza por verificar que el pod/contenedor de BD esté activo y sin errores en los logs.\n\n¿Qué infraestructura usas (Kubernetes, Docker Compose, otro)?",
+  "output_tokens": 705,
+  "thinking_tokens": 319,
+  "input_tokens": 3544,
+  "wall_s": 6.8,
+  "created_at": "2026-10-07T00:04:55.312927+00:00"
+}

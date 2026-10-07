@@ -1,0 +1,102 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "**Compara el lockfile.**",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "**Mira dónde se va el tiempo.**",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Sospecha primero de los paquetes que tocan I/O: el driver de la base de datos, el cliente HTTP, el ORM y el logger.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Despliega el lockfile anterior en staging.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "La causa más probable es el ORM.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "así que hace 28 viajes extra a la base de datos",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisa el changelog de la versión nueva.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "agrupa las 14 queries en una sola transacción explícita por request",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Fija `<ORM>` en `<versión anterior>` en `package.json`, sin `^` ni `~`.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "La versión nueva del ORM abre una transacción por cada query.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Con el ORM fijado, el p95 volvió a 130 ms en el APM.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisar si la versión nueva tiene una opción para desactivarlas.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": false,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": []
+}

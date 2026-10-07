@@ -1,0 +1,29 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "key": [
+    "B",
+    "D",
+    "D"
+  ],
+  "answers": [
+    "B",
+    "D",
+    "D"
+  ],
+  "correct": [
+    true,
+    true,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

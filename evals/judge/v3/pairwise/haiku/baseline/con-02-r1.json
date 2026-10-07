@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B define cada propiedad (C, A, P), explica que P es inevitable y que la elección real es CP vs AP, y luego responde con claridad la relevancia actual; A omite las definiciones de C, A y P y contiene imprecisiones (dice que PostgreSQL con replicación pierde disponibilidad, y que 'solo puedes garantizar dos' sin aclarar que P no es opcional)."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica por qué CAP perdió peso (particiones raras, PACELC) y da ejemplos concretos (PostgreSQL, DynamoDB), mientras que A es más genérica y solo menciona matices sin explicar el porqué ni dar ejemplos claros de CP/AP."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

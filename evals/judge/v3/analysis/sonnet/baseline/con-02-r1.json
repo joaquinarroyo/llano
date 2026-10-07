@@ -1,0 +1,44 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "P (Partition tolerance, tolerancia a particiones)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Cuando hay una partición, ¿sacrificas consistencia o disponibilidad?",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "así que P no es opcional",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "elige entre latencia (L) o consistencia (C)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Sí, como modelo mental; no tanto como herramienta de clasificación.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": false,
+  "diagram": "none"
+}

@@ -1,0 +1,29 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "key": [
+    "A",
+    "D",
+    "B"
+  ],
+  "answers": [
+    "A",
+    "E",
+    "E"
+  ],
+  "correct": [
+    true,
+    false,
+    false
+  ],
+  "not_said": [
+    false,
+    true,
+    true
+  ],
+  "reader_model": "haiku"
+}

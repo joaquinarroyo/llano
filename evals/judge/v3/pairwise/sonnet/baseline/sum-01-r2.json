@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es concisa, lista para pegar, cubre los cuatro commits y los archivos sin inventar detalles (admite que no sabe qué hace el middleware), mientras que B es más largo, repite los commits y afirma cosas del middleware ('ajustes menores para integrar') que no se pueden deducir."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega una descripción concisa lista para pegar, cubre los cuatro cambios y archivos, y admite honestamente que no sabe qué cambió en middleware.ts; A es más largo, repite los commits y afirma cosas no verificables (p. ej. 'ajustes menores para integrar el nuevo comportamiento', tests de 96 líneas solo de reutilización)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

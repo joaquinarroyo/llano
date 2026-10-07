@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A abre con un resumen causa-efecto, cuantifica la duración (~23 minutos), mantiene cronología e impacto claros y explica el porqué de cada acción pendiente, mientras que B es correcto pero aporta menos contexto."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A abre con impacto y causa, conserva toda la cronología y las acciones pendientes, y se lee de forma directa; B agrega justificaciones y un cálculo de 23 minutos que no están en el original y que mezclan la duración con la cronología."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

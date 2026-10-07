@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Idempotencia en APIs\n\n**Idempotencia** significa que una operación produce el mismo resultado sin importar cuántas veces se ejecute. En una API, una operación idempotente siempre deja el sistema en el mismo estado, incluso si se llama múltiples veces.\n\n## Ejemplos\n\n**Idempotente (seguro repetir):**\n- `GET /usuarios/123` — siempre devuelve el mismo usuario\n- `DELETE /usuarios/123` — elimina el usuario una vez; llamadas posteriores retornan \"no encontrado\"\n- `PUT /usuarios/123` — actualiza con los mismos datos; repetir no cambia nada\n\n**No idempotente (peligroso repetir):**\n- `POST /transferencias` — cada llamada crea una transferencia nueva\n- `POST /ordenes` — cada llamada crea una orden adicional\n\n## Por qué importa\n\n1. **Resiliencia a fallos**: Si la red falla y el cliente reintenta, no duplica datos ni estado\n2. **Reintentos seguros**: El cliente puede reintentar sin miedo a efectos secundarios\n3. **Mejor experiencia**: Menos errores de \"operación duplicada\"\n4. **Sistemas distribuidos**: Crítico cuando hay timeouts o desconexiones\n\n## Buena práctica\n\n- **POST** para crear → no idempotente (genera IDs únicos)\n- **PUT/PATCH** para actualizar → idempotente (mismo payload = mismo resultado)\n- **DELETE** para borrar → idempotente (ya eliminado = mismo estado)\n- **GET** para leer → siempre idempotente\n\nUsa **idempotency keys** en operaciones críticas: el cliente envía un UUID único que el servidor usa para detectar reintentos y evitar duplicados.\n\n¿Necesitas implementar esto en algún código?",
+  "output_tokens": 579,
+  "thinking_tokens": 114,
+  "input_tokens": 3396,
+  "wall_s": 6.27,
+  "created_at": "2026-10-07T00:06:51.372662+00:00"
+}

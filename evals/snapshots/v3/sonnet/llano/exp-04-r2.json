@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "CORS (Cross-Origin Resource Sharing) es un mecanismo del navegador que decide si el JavaScript de una página puede leer respuestas de otro origen. Tu API no lo bloquea: lo bloquea el navegador, porque `localhost:3000` y `localhost:8000` son orígenes distintos.\n\n## Por qué son orígenes distintos\n\nUn origen es la combinación de esquema, host y puerto. Aquí el esquema y el host coinciden, pero el puerto cambia (3000 y 8000). Por eso el navegador aplica la política del mismo origen: el JavaScript de tu frontend no puede leer la respuesta, salvo que la API lo permita.\n\n## Cómo la API da el permiso\n\nLa API responde con la cabecera `Access-Control-Allow-Origin`:\n\n```\nAccess-Control-Allow-Origin: http://localhost:3000\n```\n\nSi la cabecera falta o tiene otro valor, el navegador descarta la respuesta y muestra el error de CORS en la consola. La petición normalmente sí llega al servidor. Lo que se bloquea es la lectura de la respuesta.\n\n## El preflight\n\nAlgunas peticiones envían antes una petición `OPTIONS` (preflight) para preguntar si el servidor las acepta. Ocurre con métodos como `PUT` o `DELETE`, con cabeceras como `Authorization`, y con `Content-Type: application/json`. Si la API no responde bien a ese `OPTIONS`, el navegador no envía la petición real. Una API que devuelve 404 o 405 en `OPTIONS` produce este error con frecuencia.\n\n## Cómo arreglarlo\n\nConfigura CORS en la API. No sé qué framework usas, así que van dos ejemplos.\n\nFastAPI:\n\n```python\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:3000\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n```\n\nExpress:\n\n```js\nconst cors = require(\"cors\");\napp.use(cors({ origin: \"http://localhost:3000\" }));\n```\n\nOtra opción en desarrollo es un proxy en el servidor de desarrollo del frontend, que reenvía `/api` a `localhost:8000`. Así el navegador ve un solo origen y no hay CORS.\n\n**Atención:** si envías cookies o `credentials: \"include\"`, la API debe devolver `Access-Control-Allow-Credentials: true` y un origen explícito. Con `*` el navegador rechaza la respuesta.\n\n**Atención:** en producción, lista solo los orígenes que necesitas. No uses `*` en una API con datos de usuario.",
+  "output_tokens": 1416,
+  "thinking_tokens": 486,
+  "input_tokens": 5225,
+  "wall_s": 10.81,
+  "created_at": "2026-10-07T00:53:29.157759+00:00"
+}

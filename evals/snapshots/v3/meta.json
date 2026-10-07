@@ -1,0 +1,45 @@
+{
+  "run_id": "v3",
+  "claude_cli": "2.1.292",
+  "models": [
+    "haiku",
+    "sonnet"
+  ],
+  "runs": 2,
+  "arms": {
+    "llano": "bfd002dfd4",
+    "baseline": "da39a3ee5e"
+  },
+  "arm_chars": {
+    "llano": 9447
+  },
+  "prompts": 12,
+  "conversations": 2,
+  "structured": [
+    "cmp-03",
+    "err-01",
+    "exp-01",
+    "exp-04",
+    "pro-03",
+    "sum-02"
+  ],
+  "isolation": [
+    "--setting-sources",
+    "project",
+    "--settings",
+    "{\"autoMemoryEnabled\": false}",
+    "--disable-slash-commands",
+    "--strict-mcp-config",
+    "--tools",
+    "",
+    "--no-session-persistence",
+    "CLAUDE_CONFIG_DIR=<empty temp>",
+    "CLAUDE_SECURESTORAGE_CONFIG_DIR=",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY=1",
+    "CLAUDE_CODE_DISABLE_CLAUDE_MDS=1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1",
+    "profile without email or names"
+  ],
+  "started_at": "2026-10-07T00:51:17.891977+00:00",
+  "note": "baseline responses and their analysis/reader verdicts copied from run v2 (runs 1-2); baseline arm unchanged"
+}

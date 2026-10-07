@@ -1,0 +1,50 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Postgres te da ACID, relaciones claras entre clientes y documentos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Postgres. Un SaaS de facturación necesita datos transaccionales confiables",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "puedes guardarlos como JSON en Postgres sin cambiar la base de datos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "MongoDB es más flexible",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "partial",
+      "quote": "los reportes contables se vuelven más complejos",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "MongoDB no ofrece garantías en escrituras múltiples; en realidad soporta transacciones ACID multidocumento desde la versión 4.0, aunque con más costo y limitaciones que Postgres.",
+      "quote": "pierdes garantías sobre escrituras múltiples (dos facturas que compartan un cliente, por ejemplo)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

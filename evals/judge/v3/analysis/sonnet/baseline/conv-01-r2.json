@@ -1,0 +1,102 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revisa el diff del lockfile entre el deploy bueno y el malo",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Mira dónde se va el tiempo",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Driver de DB / ORM:",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "despliega el lockfile anterior en staging o en un canary y compara el p95",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Eso explica bastante bien el salto.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "pasas de 14 a unos 42 round-trips a la DB",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisar el changelog del ORM.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Envolver cada request en una sola transacción explícita",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Se fija `<ORM>` en `<versión anterior>`",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "La nueva versión del ORM abre una transacción implícita por cada query.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Tras el rollback del ORM, el p95 volvió a ~130 ms.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisar el changelog del ORM para ver si la transacción implícita se puede desactivar por configuración y poder actualizar.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": []
+}

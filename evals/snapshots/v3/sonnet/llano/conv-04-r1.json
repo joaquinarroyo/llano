@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "No tiene sentido, salvo que tengan un problema concreto que solo los microservicios resuelvan. Con 6 desarrolladores, el costo operativo supera el beneficio.\n\nLos microservicios resuelven sobre todo un problema de organización: muchos equipos que se bloquean entre sí al desplegar. Con 6 personas ese problema casi no existe. En cambio, el costo sí lo pagan desde el primer día:\n\n- Cada servicio necesita su propio deploy, monitoreo y logs.\n- Las transacciones entre servicios dejan de ser una sola transacción de base de datos.\n- Los cambios en contratos entre servicios exigen versionado y coordinación.\n- Levantar el entorno local se vuelve más lento y más frágil.\n\nMi recomendación es un monolito modular:\n\n1. Define límites claros por dominio dentro de la app Rails.\n2. Haz que se cumplan con [Packwerk](https://github.com/Shopify/packwerk) o con engines.\n3. Extrae un servicio solo cuando un módulo tenga una razón medible: otro perfil de escala, otro ciclo de release o un requisito de aislamiento.\n\nSi el equipo tiene un dolor específico (deploys lentos, tests lentos, código enredado), dímelo. Casi siempre se arregla sin separar servicios.",
+      "output_tokens": 776,
+      "thinking_tokens": 322,
+      "input_tokens": 5233
+    },
+    {
+      "text": "Ninguno de los dos problemas necesita microservicios. Ambos se resuelven dentro del monolito, y más rápido.\n\n**Deploys de 40 minutos.** Primero mide dónde se va el tiempo, porque la causa cambia la solución. Suele ser una de estas:\n\n- **Suite de tests lenta:** ejecútala en paralelo (por ejemplo con `parallel_tests` o la partición de tu CI) y cachea las gemas.\n- **Precompilación de assets o build de Docker:** cachea las capas y los assets entre builds.\n- **Pasos secuenciales que podrían ser paralelos:** separa CI de deploy y no repitas tests en ambos.\n\n**Facturación rompió el login.** Esto indica acoplamiento sin barreras, y un microservicio no lo arregla por sí solo: un contrato mal definido entre servicios rompe igual, pero con más pasos para depurarlo. Lo que sí ayuda:\n\n1. Agrega un test de humo del flujo de login que bloquee el merge si falla.\n2. Declara los módulos (facturación, autenticación) con Packwerk. Así CI falla cuando facturación toca código interno de autenticación.\n3. Pon un rollback rápido o un feature flag en los cambios de facturación.\n\nHaz primero la medición de los 40 minutos, porque suele dar la mejora más grande con menos esfuerzo. ¿Sabes cuánto de ese tiempo corresponde a los tests?",
+      "output_tokens": 716,
+      "thinking_tokens": 212,
+      "input_tokens": 6076
+    },
+    {
+      "text": "# Plan: estabilizar el monolito antes de pensar en microservicios\n\n**Problemas que atacamos**\n- Los deploys tardan 40 minutos.\n- Un cambio en facturación rompió el login la semana pasada.\n\n**Por qué no microservicios ahora:** somos 6 desarrolladores. Los microservicios agregarían deploy, monitoreo y contratos por servicio, y ninguno de los dos problemas viene de la arquitectura. Vienen de un pipeline lento y de módulos sin límites.\n\n**Fase 1: medir y acelerar el pipeline**\n1. Mide cuánto tarda cada paso: tests, assets, build y deploy.\n2. Ataca primero el paso más lento (tests en paralelo, caché de gemas, caché de assets o de capas de Docker).\n3. Define una meta con el equipo, por ejemplo menos de 15 minutos. El número es una propuesta, no una medición.\n\n**Fase 2: proteger los flujos críticos**\n1. Agrega un test de humo del login que bloquee el merge si falla.\n2. Haz lo mismo con los otros flujos que no pueden caer (por ejemplo, cobro).\n3. Define un rollback rápido y usa feature flags en los cambios de facturación.\n\n**Fase 3: poner límites entre módulos**\n1. Declara los módulos con Packwerk (autenticación, facturación y los demás dominios).\n2. Haz que CI falle cuando un módulo use código interno de otro.\n3. Corrige las violaciones existentes de forma gradual, módulo por módulo.\n\n**Cómo sabremos que funcionó**\n- Tiempo de deploy contra la meta de la fase 1.\n- Número de incidentes entre módulos por mes.\n\n**Decisión pendiente:** cuando termine la fase 3, revisamos si algún módulo justifica un servicio propio. La razón tiene que ser medible: otra escala, otro ciclo de release o un requisito de aislamiento.",
+      "output_tokens": 859,
+      "thinking_tokens": 185,
+      "input_tokens": 6837
+    }
+  ],
+  "created_at": "2026-10-07T00:53:31.970826+00:00"
+}

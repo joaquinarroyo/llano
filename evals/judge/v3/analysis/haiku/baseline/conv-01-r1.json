@@ -1,0 +1,118 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "git diff package-lock.json",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Luego en chrome://inspect para profiling",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "partial",
+          "quote": "packages usados directamente en las rutas críticas",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "Actualiza `package.json` con las versiones previas de 1-2 dependencias clave",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": false,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "**Eso es definitivamente el culpable**",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "28 comandos de transacción que antes no había",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "Busca en docs del ORM algo como `autoTransaction: false` o `transaction: false` en la config",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "**Opción mejor: Agrupar en una transacción por request**",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revert: [ORM] downgrade a versión anterior",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "introdujo transacciones automáticas \npor cada query",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "p95: 900 ms → 130 ms después de revertir",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revertimos a la versión anterior mientras evaluamos si:",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma como certeza que el ORM es la causa antes de confirmarlo con el downgrade; el diagnóstico solo era probable",
+      "quote": "**Eso es definitivamente el culpable**",
+      "verified": true
+    },
+    {
+      "claim": "Afirma sin base que la opción de transacciones automáticas se cambió en el update, y que la solución es un cambio de una línea",
+      "quote": "Esto típicamente se cambió en el update que hiciste",
+      "verified": true
+    },
+    {
+      "claim": "El overhead de ~780 ms no coincide con los números del PR (900 → 130 son 770 ms) y es una cifra inventada por request, derivada de percentiles p95",
+      "quote": "Overhead de transacciones: ~780 ms por request",
+      "verified": true
+    }
+  ]
+}

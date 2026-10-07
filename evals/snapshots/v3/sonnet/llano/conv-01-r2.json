@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza por el diff de dependencias, porque es lo único que cambió. Después mide dónde se va el tiempo.\n\n1. **Compara el lockfile.** Ejecuta `git diff <commit-anterior> -- package-lock.json` (o el lockfile que uses). Busca también cambios en dependencias transitivas: pueden cambiar aunque no toques `package.json`, sobre todo si el deploy usa `npm install` en vez de `npm ci`.\n2. **Revisa la versión de Node.** Verifica que la imagen base o el runtime del deploy no cambiaron con la actualización.\n3. **Revierte el lockfile en staging.** Si el p95 vuelve a 120 ms, la causa está en las dependencias. Si no vuelve, la causa está en otro lado: datos, tráfico o infraestructura.\n4. **Haz bisect por grupos.** Actualiza de nuevo la mitad de los paquetes y mide. Repite hasta encontrar el paquete. Sospecha primero del driver de base de datos o ORM, el cliente HTTP, el logger, el framework y el body parser.\n5. **Si necesitas confirmar la causa sin revertir**, mide el event loop y la CPU:\n   - CPU alta o `monitorEventLoopDelay` (de `perf_hooks`) alto: el código bloquea el event loop. Perfila con `node --cpu-prof` o `clinic flame`.\n   - CPU baja con latencia alta: el proceso espera I/O. Revisa el pool de conexiones, los timeouts, el keep-alive y el DNS.\n\nMira también si solo sube el p95 y el p50 no cambia. Eso suele indicar un pool agotado, un GC más frecuente o un solo endpoint lento, no una lentitud general.\n\nSi me dices qué paquetes se actualizaron, o me das el diff del lockfile, te digo cuáles sospechar primero.",
+      "output_tokens": 1324,
+      "thinking_tokens": 670,
+      "input_tokens": 5249
+    },
+    {
+      "text": "Esa es la causa más probable: cada request pasó de 14 a 42 sentencias (14 `BEGIN`, 14 queries y 14 `COMMIT`), es decir, el triple de viajes a Postgres. Además, cada transacción retiene una conexión del pool más tiempo, y eso explica que suba el p95 más que el p50.\n\n1. **Confirma el efecto en el pool.** Compara las conexiones en uso y el tiempo de espera para obtener una conexión, antes y después del deploy. Si el tiempo de espera subió, el pool se está agotando.\n2. **Busca la opción en el ORM.** Revisa el changelog de esa versión y su documentación de transacciones. Probablemente hay una opción para desactivar la transacción automática por query, pero no la conozco sin saber qué ORM es. Dime cuál es y busco el nombre exacto.\n3. **Si no hay opción, agrupa las queries.** Envuelve las 14 queries de cada request en una sola transacción explícita. Así pagas un `BEGIN` y un `COMMIT` por request, no 14. Atención: esto cambia el aislamiento, porque ahora todas las queries comparten la transacción y un error en una revierte todas.\n4. **Si necesitas arreglarlo ya, fija la versión anterior del ORM** en el lockfile y haz el deploy con `npm ci`. Es el cambio más seguro porque vuelve al comportamiento que medía 120 ms.\n\nAntes de elegir, verifica que el `pg` 8.12 no influye: revierte solo el ORM en staging y mide. Si el p95 vuelve a 120 ms, `pg` no tiene que ver.",
+      "output_tokens": 885,
+      "thinking_tokens": 312,
+      "input_tokens": 6694
+    },
+    {
+      "text": "Reemplaza los valores entre `<>`: no sé qué ORM es ni sus versiones.\n\n```\nfix: fijar <orm> en <versión-anterior> para recuperar la latencia\n\n## Problema\nDesde la actualización de dependencias, el p95 de la API pasó de 120 ms a 900 ms. No hubo cambios de código.\n\n## Causa\nEl diff del lockfile mostró dos cambios: `pg` de 8.11 a 8.12 y <orm> de <versión-anterior> a <versión-nueva>. La nueva versión de <orm> abre una transacción por cada query.\nCada request hace 14 queries. Con el cambio, cada request envía 42 sentencias (14 `BEGIN`, 14 queries y 14 `COMMIT`) en vez de 14. Cada transacción también retiene una conexión del pool más tiempo.\n\n## Cambio\nFija <orm> en <versión-anterior> en `package.json` y en el lockfile. `pg` se mantiene en 8.12.\n\n## Verificación\nDespués de fijar la versión, el p95 volvió a 130 ms.\n\n## Pendiente\n- Revisar si <orm> tiene una opción para desactivar la transacción automática por query, o agrupar las queries de cada request en una sola transacción explícita.\n- Quitar el pin cuando exista una de esas dos soluciones.\n```\n\nAsumí que no revertiste `pg`, porque dijiste que solo fijaste el ORM. Si lo revertiste también, corrige la sección \"Cambio\".",
+      "output_tokens": 937,
+      "thinking_tokens": 417,
+      "input_tokens": 7653
+    }
+  ],
+  "created_at": "2026-10-07T00:54:17.042137+00:00"
+}

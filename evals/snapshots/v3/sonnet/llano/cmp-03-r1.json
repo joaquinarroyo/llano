@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa **SSE** cuando solo el servidor envía datos, **WebSocket** cuando cliente y servidor envían datos en ambos sentidos, y **polling** cuando las actualizaciones son poco frecuentes o la infraestructura no soporta conexiones largas.\n\n| | Polling | SSE | WebSocket |\n|---|---|---|---|\n| Dirección | El cliente pregunta | Servidor → cliente | Ambos sentidos |\n| Protocolo | HTTP normal | HTTP con `text/event-stream` | Protocolo propio (`ws://`, `wss://`) tras un upgrade de HTTP |\n| Reconexión | La haces tú, en cada petición | Automática en el navegador (`EventSource`), con `Last-Event-ID` | La programas tú |\n| Datos | Cualquiera | Solo texto | Texto y binario |\n| Costo en el servidor | Muchas peticiones cortas | Una conexión abierta por cliente | Una conexión abierta por cliente |\n\n## Cuándo usar cada uno\n\n**Polling.** Úsalo si los datos cambian cada minutos o más y un retraso de unos segundos es aceptable. Funciona con cualquier proxy, CDN o firewall, y es fácil de cachear y depurar. El costo es que muchas respuestas llegan vacías.\n\n**Long polling.** Es una variante: el servidor mantiene la petición abierta hasta que hay datos. Úsalo solo como respaldo cuando SSE y WebSocket no estén disponibles.\n\n**SSE.** Úsalo para notificaciones, feeds, progreso de tareas, dashboards en vivo o respuestas de un LLM que llegan token por token. Es más simple que WebSocket porque usa HTTP y reconecta solo. Tiene dos límites: no envía datos del cliente al servidor (para eso usas una petición `POST` aparte) y, con HTTP/1.1, el navegador permite unas 6 conexiones por dominio. HTTP/2 elimina ese límite.\n\n**WebSocket.** Úsalo para chat, juegos, edición colaborativa o cualquier caso con mensajes frecuentes y de baja latencia en ambos sentidos. También lo necesitas si envías datos binarios. Tiene un costo: debes manejar reconexión, heartbeats, autenticación y balanceo de carga (las conexiones son persistentes y con estado).\n\n## Cómo decidir\n\n1. ¿El cliente necesita enviar mensajes frecuentes por el mismo canal? Si sí, WebSocket.\n2. Si no, ¿necesitas que el servidor te avise en segundos? Si sí, SSE.\n3. Si no, ¿las actualizaciones son raras o tu infraestructura bloquea conexiones largas? Polling.\n\nAnte la duda, empieza con SSE o polling. Son más simples de operar, y puedes pasar a WebSocket si aparece una necesidad real de comunicación bidireccional.",
+  "output_tokens": 1078,
+  "thinking_tokens": 58,
+  "input_tokens": 5215,
+  "wall_s": 9.29,
+  "created_at": "2026-10-07T00:53:10.155818+00:00"
+}

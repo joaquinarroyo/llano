@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B muestra de forma clara con ejemplos concretos de endpoints (GET, DELETE, PUT, POST) cuáles son idempotentes, explica el porqué con casos prácticos (timeouts, doble clic) y menciona más técnicas; A tiene un typo ('reintenso') y omite DELETE en los ejemplos aunque lo lista como idempotente, además de presentar PATCH como idempotente, lo cual no está garantizado."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A muestra de forma clara y escaneable qué métodos HTTP son idempotentes (GET, PUT, DELETE vs POST) con ejemplos concretos, explica por qué importa y menciona claves de idempotencia, mientras que B tiene un error de tipeo ('reintenso') y es menos explícita sobre DELETE y GET, además de listar PATCH como idempotente, lo cual no está garantizado."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

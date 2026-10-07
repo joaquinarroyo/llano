@@ -10,26 +10,26 @@ Knowledge floor: the reader answers 0 of 42 questions correctly with no text. 'S
 
 | | baseline | llano |
 |---|---:|---:|
-| Words (median) | 227 | 203 |
+| Words (median) | 222 | 203 |
 | Output tokens incl. thinking (median) | 962 | 946 |
-| Visible tokens (median) | 842 | 649 |
+| Visible tokens (median) | 834 | 649 |
 | Words per kept fact (median) | 49 | 46 |
-| Filler phrases per answer | 0.16 | 0.03 |
-| First sentence answers | 73% | 90% |
-| Self-sufficiency (reader correct) | 91% | 93% |
-| Self-sufficiency, questions not known without text | 91% | 93% |
-| Key facts kept (verified) | 90% | 91% |
+| Filler phrases per answer | 0.18 | 0.03 |
+| First sentence answers | 74% | 90% |
+| Self-sufficiency (reader correct) | 92% | 93% |
+| Self-sufficiency, questions not known without text | 92% | 93% |
+| Key facts kept (verified) | 91% | 91% |
 | Wrong claims per answer (verified) | 0.26 | 0.38 |
-| Rule violations / 100 words | 1.05 | 0.51 |
-| INFLESZ | 68.9 | 76.1 |
-| Thinking share of output | 13% | 35% |
+| Rule violations / 100 words | 1.08 | 0.51 |
+| INFLESZ | 69.0 | 76.1 |
+| Thinking share of output | 14% | 35% |
 | Input tokens (median) | 1698 | 5285 |
 | Answers with a diagram | 4% | 13% |
 | Diagram share of the answer | 11% | 9% |
 | Judge quotes not found in text | 0% | 0% |
 | Diagram verdicts (ok/wrong/redundant) | 1/1/1 | 6/1/7 |
 
-- **Blind preference vs baseline (both orders):** llano 46, tie 21, other 41. Score 52% (ties count half; CI 41–63%). By prompt: 7 llano, 4 other, 1 even, p = 0.5488.
+- **Blind preference vs baseline (both orders):** llano 45, tie 22, other 41. Score 52% (ties count half; CI 40–63%). By prompt: 6 llano, 4 other, 2 even, p = 0.7539.
 
 Paired by prompt, llano vs baseline:
 - Words (median): better in 9, worse in 3, equal in 0 of 12 prompts (p = 0.1460).
@@ -38,9 +38,9 @@ Paired by prompt, llano vs baseline:
 - Words per kept fact (median): better in 8, worse in 4, equal in 0 of 12 prompts (p = 0.3877).
 - Filler phrases per answer: better in 7, worse in 1, equal in 4 of 12 prompts (p = 0.0703).
 - First sentence answers: better in 6, worse in 0, equal in 6 of 12 prompts (p = 0.0312).
-- Self-sufficiency (reader correct): better in 4, worse in 2, equal in 6 of 12 prompts (p = 0.6875).
-- Self-sufficiency, questions not known without text: better in 4, worse in 2, equal in 6 of 12 prompts (p = 0.6875).
-- Key facts kept (verified): better in 3, worse in 8, equal in 1 of 12 prompts (p = 0.2266).
+- Self-sufficiency (reader correct): better in 3, worse in 3, equal in 6 of 12 prompts (p = 1.0000).
+- Self-sufficiency, questions not known without text: better in 3, worse in 3, equal in 6 of 12 prompts (p = 1.0000).
+- Key facts kept (verified): better in 2, worse in 9, equal in 1 of 12 prompts (p = 0.0654).
 - Wrong claims per answer (verified): better in 2, worse in 8, equal in 2 of 12 prompts (p = 0.1094).
 - Rule violations / 100 words: better in 11, worse in 1, equal in 0 of 12 prompts (p = 0.0063).
 - INFLESZ: better in 12, worse in 0, equal in 0 of 12 prompts (p = 0.0005).
@@ -88,13 +88,13 @@ Paired by prompt, llano vs llano_nodiag:
 
 | Turn | Viol./100 baseline | Viol./100 llano | Facts baseline | Facts llano | Words baseline | Words llano |
 |---:|---:|---:|---:|---:|---:|---:|
-| 1 | 1.09 | 0.65 | 94% | 93% | 318 | 286 |
-| 2 | 1.18 | 0.51 | 97% | 95% | 298 | 272 |
-| 3 | 0.40 | 0.29 | 93% | 89% | 198 | 116 |
+| 1 | 1.14 | 0.65 | 92% | 93% | 318 | 286 |
+| 2 | 1.19 | 0.51 | 97% | 95% | 298 | 272 |
+| 3 | 0.34 | 0.29 | 92% | 89% | 170 | 116 |
 
 - Self-sufficiency: baseline 98%, llano 98%.
 - Wrong claims per conversation: baseline 1.06, llano 0.61.
-- **Blind preference, whole conversation (both orders):** llano 16, tie 1, other 1. Score 92% (ties count half; CI 83–100%). By prompt: 2 llano, 0 other, 0 even, p = 0.5000.
+- **Blind preference, whole conversation (both orders):** llano 15, tie 1, other 2. Score 86% (ties count half; CI 83–89%). By prompt: 2 llano, 0 other, 0 even, p = 0.5000.
 
 ## haiku
 
@@ -180,13 +180,13 @@ Paired by prompt, llano vs llano_nodiag:
 
 | Turn | Viol./100 baseline | Viol./100 llano | Facts baseline | Facts llano | Words baseline | Words llano |
 |---:|---:|---:|---:|---:|---:|---:|
-| 1 | 1.75 | 1.19 | 81% | 79% | 135 | 145 |
-| 2 | 0.95 | 0.49 | 92% | 85% | 148 | 152 |
-| 3 | 0.40 | 0.59 | 88% | 85% | 90 | 110 |
+| 1 | 1.93 | 1.19 | 77% | 79% | 135 | 145 |
+| 2 | 0.98 | 0.49 | 90% | 85% | 135 | 152 |
+| 3 | 0.23 | 0.59 | 83% | 85% | 90 | 110 |
 
 - Self-sufficiency: baseline 100%, llano 94%.
 - Wrong claims per conversation: baseline 2.33, llano 1.83.
-- **Blind preference, whole conversation (both orders):** llano 4, tie 1, other 1. Score 75% (ties count half; CI 50–100%). By prompt: 1 llano, 0 other, 1 even, p = 1.0000.
+- **Blind preference, whole conversation (both orders):** llano 3, tie 1, other 2. Score 58% (ties count half; CI 50–67%). By prompt: 1 llano, 0 other, 1 even, p = 1.0000.
 
 ## opus
 
@@ -288,16 +288,16 @@ Paired by prompt, llano vs llano_nodiag:
 |---|---:|---:|
 | Words (median) | 292 | 232 |
 | Output tokens incl. thinking (median) | 1163 | 1220 |
-| Visible tokens (median) | 1064 | 748 |
-| Words per kept fact (median) | 62 | 48 |
-| Filler phrases per answer | 0.14 | 0.00 |
-| First sentence answers | 75% | 89% |
-| Self-sufficiency (reader correct) | 96% | 98% |
-| Self-sufficiency, questions not known without text | 96% | 98% |
-| Key facts kept (verified) | 95% | 98% |
+| Visible tokens (median) | 1006 | 748 |
+| Words per kept fact (median) | 61 | 48 |
+| Filler phrases per answer | 0.19 | 0.00 |
+| First sentence answers | 78% | 89% |
+| Self-sufficiency (reader correct) | 99% | 98% |
+| Self-sufficiency, questions not known without text | 99% | 98% |
+| Key facts kept (verified) | 98% | 98% |
 | Wrong claims per answer (verified) | 0.06 | 0.03 |
-| Rule violations / 100 words | 1.08 | 0.54 |
-| INFLESZ | 72.8 | 77.7 |
+| Rule violations / 100 words | 1.14 | 0.54 |
+| INFLESZ | 73.0 | 77.7 |
 | Thinking share of output | 10% | 38% |
 | Input tokens (median) | 1585 | 5172 |
 | Answers with a diagram | 0% | 14% |
@@ -305,18 +305,18 @@ Paired by prompt, llano vs llano_nodiag:
 | Judge quotes not found in text | 0% | 0% |
 | Diagram verdicts (ok/wrong/redundant) | 0/0/0 | 1/0/4 |
 
-- **Blind preference vs baseline (both orders):** llano 18, tie 8, other 10. Score 61% (ties count half; CI 44–76%). By prompt: 7 llano, 3 other, 2 even, p = 0.3438.
+- **Blind preference vs baseline (both orders):** llano 17, tie 9, other 10. Score 60% (ties count half; CI 43–75%). By prompt: 6 llano, 3 other, 3 even, p = 0.5078.
 
 Paired by prompt, llano vs baseline:
-- Words (median): better in 12, worse in 0, equal in 0 of 12 prompts (p = 0.0005).
+- Words (median): better in 11, worse in 1, equal in 0 of 12 prompts (p = 0.0063).
 - Output tokens incl. thinking (median): better in 3, worse in 9, equal in 0 of 12 prompts (p = 0.1460).
 - Visible tokens (median): better in 12, worse in 0, equal in 0 of 12 prompts (p = 0.0005).
 - Words per kept fact (median): better in 11, worse in 1, equal in 0 of 12 prompts (p = 0.0063).
 - Filler phrases per answer: better in 5, worse in 0, equal in 7 of 12 prompts (p = 0.0625).
-- First sentence answers: better in 3, worse in 1, equal in 8 of 12 prompts (p = 0.6250).
-- Self-sufficiency (reader correct): better in 2, worse in 1, equal in 9 of 12 prompts (p = 1.0000).
-- Self-sufficiency, questions not known without text: better in 2, worse in 1, equal in 9 of 12 prompts (p = 1.0000).
-- Key facts kept (verified): better in 2, worse in 1, equal in 9 of 12 prompts (p = 1.0000).
+- First sentence answers: better in 2, worse in 1, equal in 9 of 12 prompts (p = 1.0000).
+- Self-sufficiency (reader correct): better in 1, worse in 2, equal in 9 of 12 prompts (p = 1.0000).
+- Self-sufficiency, questions not known without text: better in 1, worse in 2, equal in 9 of 12 prompts (p = 1.0000).
+- Key facts kept (verified): better in 1, worse in 2, equal in 9 of 12 prompts (p = 1.0000).
 - Wrong claims per answer (verified): better in 1, worse in 1, equal in 10 of 12 prompts (p = 1.0000).
 - Rule violations / 100 words: better in 11, worse in 1, equal in 0 of 12 prompts (p = 0.0063).
 - INFLESZ: better in 11, worse in 1, equal in 0 of 12 prompts (p = 0.0063).

@@ -1,0 +1,44 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "El bloqueo lo hace el navegador, no tu API.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "tienen puertos diferentes, así que el navegador los trata como orígenes distintos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si la respuesta no incluye `Access-Control-Allow-Origin` con ese origen",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el navegador envía antes un preflight: una petición `OPTIONS`",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Herramientas como `curl` o Postman no lo muestran porque no aplican CORS.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

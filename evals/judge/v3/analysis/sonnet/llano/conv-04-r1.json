@@ -1,0 +1,102 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Con 6 desarrolladores, el costo operativo supera el beneficio.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "No tiene sentido, salvo que tengan un problema concreto que solo los microservicios resuelvan.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Mi recomendación es un monolito modular:",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Cada servicio necesita su propio deploy, monitoreo y logs.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "ejecútala en paralelo (por ejemplo con `parallel_tests` o la partición de tu CI) y cachea las gemas.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Declara los módulos (facturación, autenticación) con Packwerk.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Agrega un test de humo del flujo de login que bloquee el merge si falla.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Ninguno de los dos problemas necesita microservicios.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Mide cuánto tarda cada paso: tests, assets, build y deploy.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Declara los módulos con Packwerk (autenticación, facturación y los demás dominios).",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "Agrega un test de humo del login que bloquee el merge si falla.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "cuando termine la fase 3, revisamos si algún módulo justifica un servicio propio.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": []
+}

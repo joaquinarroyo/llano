@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A usa un español consistente y directo, con explicaciones claras y un plan con salidas y métricas concretas por sprint, mientras que B mezcla formas (vosotros como «Intentad» y «extraed», ustedes, tú) que resultan extrañas para un hablante rioplatense."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A es más fácil de escanear en una sola lectura: usa negritas, pasos numerados y un plan por fases con checklists, y sus preguntas de seguimiento son concretas; su vosotros no le resta comprensión a un hispanohablante, mientras que B incluye en el turno 1 una regla poco clara ('un equipo por servicio') y una sugerencia confusa de dividir por entidades."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

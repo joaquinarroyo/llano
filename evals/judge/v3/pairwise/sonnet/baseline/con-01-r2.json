@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica idempotencia, su importancia, los métodos HTTP y las claves de idempotencia de forma concisa y fácil de leer en una sola pasada, sin omitir lo esencial (TTL, validación del cuerpo), mientras que B añade mucho material extra (concurrencia, atomicidad, alternativas) que alarga la lectura aunque sea correcto."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el concepto, la importancia, la tabla de métodos y las idempotency keys de forma compacta y se entiende en una lectura, mientras que A, aunque más completa (concurrencia, atomicidad), es mucho más larga y densa para una pregunta conceptual."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

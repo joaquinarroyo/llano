@@ -1,0 +1,55 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "(single-threaded) que cicla constantemente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Se delega al sistema operativo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Chequea si hay callbacks listos",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "// 2. PROMESAS (microtasks) - se ejecuta segundo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Node.js no tiene bloqueos; en realidad el código síncrono o el trabajo pesado de CPU sí bloquea el event loop.",
+      "quote": "no hay bloqueos",
+      "verified": true
+    },
+    {
+      "claim": "Node.js usa worker_threads para paralelismo, no Web Workers (que son una API del navegador); además no son tan raros para CPU intensivo.",
+      "quote": "Web Workers (raro)",
+      "verified": true
+    }
+  ],
+  "answer_first": false,
+  "diagram": "none"
+}

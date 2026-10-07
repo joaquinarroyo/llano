@@ -1,0 +1,55 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "cuando el cliente y el servidor se comunican con frecuencia en ambas direcciones",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "cuando solo el servidor envía eventos al cliente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "Es lo más simple: el cliente pregunta cada X segundos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Ejemplos: notificaciones en vivo",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "SSE no consume menos ancho de banda que WebSocket en general; WebSocket tiene menos overhead por mensaje una vez establecida la conexión.",
+      "quote": "consume menos ancho de banda",
+      "verified": true
+    },
+    {
+      "claim": "SSE no tiene latencia notablemente mayor que WebSocket para eventos del servidor; ambos empujan datos por una conexión persistente.",
+      "quote": "Latencia media",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,108 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "partial",
+          "quote": "O revisa `npm ls` para ver qué cambió de versión.",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "partial",
+          "quote": "Logs de errores: ¿hay reintentos, timeouts o garbage collection pausas?",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "partial",
+          "quote": "Conexiones a la base de datos: ¿se mantienen o se cierran todo el tiempo?",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "Empieza revertiendo las dependencias.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Encontraste el culpable.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "BEGIN y COMMIT tienen costo de red. 28 operaciones extra (14 queries × 2)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Lee la documentación. Muchos ORM tienen una opción `autoTransaction: false` o similar.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "**Envolver las 14 queries en una sola transacción**",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revert ORM to previous version: fix p95 latency regression",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "The latest ORM version opens a transaction for each query.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "increased p95 from 120 ms to 900 ms.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "The new ORM version needs auto-transactions disabled or",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Envolver las 14 queries en una sola transacción ahorra 26 operaciones (de 28 extra a 2), no 13 ni 27. Las cifras dadas son incorrectas y contradictorias entre sí.",
+      "quote": "Ganancia: 13 operaciones menos (27 menos que ahora).",
+      "verified": true
+    }
+  ]
+}

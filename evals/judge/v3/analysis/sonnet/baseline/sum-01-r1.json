@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "cada vez que se usa un refresh token se emite uno nuevo y el anterior deja de ser válido.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "si se presenta un refresh token ya rotado, se invalida el token viejo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "que cubren la rotación y la detección de reutilización",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "actualizado de 9.0.0 a 9.0.2",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**Middleware** (`src/auth/middleware.ts`)",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Event loop de Node.js\n\nNode.js es **asincrónico de manera obligatoria**. Python síncrono ejecuta una línea tras otra. Node.js ejecuta líneas rápidas, y cuando necesita esperar (una lectura de archivo, una petición HTTP), pone esa tarea a un lado y continúa.\n\n## La diferencia central\n\nEn Python:\n```python\ndatos = leer_archivo()  # Bloquea hasta leer\nprocesar(datos)         # Espera a que termine leer\n```\n\nLa línea 2 no empieza hasta que la línea 1 termina.\n\nEn Node.js:\n```javascript\nleerArchivo().then(datos => procesar(datos));\nconsole.log(\"Continuamos\");  // Esto se ejecuta casi de inmediato\n```\n\nLa línea 2 se ejecuta **antes** de que termine la lectura, porque la lectura no bloquea.\n\n## Cómo funciona el event loop\n\nNode.js tiene una cola de tareas:\n\n1. **Ejecuta el código sincrónico** de tu archivo de arriba a abajo.\n2. **Pone operaciones lentas en la cola**: archivos, red, timers.\n3. **Vuelve a revisar la cola** cuando el código sincrónico termina.\n4. **Ejecuta los callbacks** de las tareas terminadas.\n5. **Vuelve al paso 3** hasta que no hay nada más.\n\nEjemplo:\n```javascript\nconsole.log(\"1\");           // Se ejecuta ya\n\nsetTimeout(() => {\n  console.log(\"3\");         // Se ejecuta después de 1000 ms\n}, 1000);\n\nconsole.log(\"2\");           // Se ejecuta ya\n\n// Imprime: 1, 2, 3\n```\n\nPrimero imprime 1 y 2 (sincrónico). Luego espera el timer. Cuando se cumple, ejecuta el callback y imprime 3.\n\n## Por qué importa\n\nSi usas operaciones sincrónicas en Node.js, bloqueas **todo el servidor** para todos los usuarios. Una lectura sincrónica de archivo congela el event loop. Por eso en Node.js siempre usas operaciones asincrónicas: `.then()`, `async/await`, callbacks.\n\nEn Python, típicamente tienes un proceso por cliente y puedes permitirte bloquear. Node.js maneja miles de clientes con un solo proceso, así que no puede bloquearse.",
+  "output_tokens": 838,
+  "thinking_tokens": 234,
+  "input_tokens": 6223,
+  "wall_s": 9.88,
+  "created_at": "2026-10-07T00:51:48.234980+00:00"
+}

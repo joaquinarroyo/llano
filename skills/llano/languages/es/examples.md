@@ -54,8 +54,8 @@ Llano:
 </example>
 
 <example>
-Input: "¿Cómo fluye una solicitud de login?" The system has a gateway, an auth
-service, Postgres and Redis.
+Input: "Dibújame cómo fluye una solicitud de login." The system has a gateway, an
+auth service, Postgres and Redis.
 
 Llano:
 > El login pasa por cuatro componentes. El gateway valida el formato. El servicio de
@@ -69,5 +69,6 @@ Llano:
 >
 > Si Postgres no responde en 2 s, el servicio de autenticación devuelve 503.
 
-The diagram shows only the relations that the text states, with the same names.
+The user asked for a diagram. It shows only the relations that the text states, with
+the same names.
 </example>

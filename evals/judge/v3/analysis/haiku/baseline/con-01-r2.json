@@ -1,0 +1,50 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "una operación produce el mismo resultado sin importar cuántas veces se ejecute",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "no idempotente (genera IDs únicos)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si la red falla y el cliente reintenta, no duplica datos ni estado",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el cliente envía un UUID único que el servidor usa para detectar reintentos y evitar duplicados",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "evitar duplicados",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "PATCH no es idempotente por definición; solo lo es si la operación aplicada lo es (por ejemplo, un PATCH que incrementa un contador no lo es).",
+      "quote": "**PUT/PATCH** para actualizar → idempotente (mismo payload = mismo resultado)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

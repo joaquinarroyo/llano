@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da la misma recomendación con una estructura más corta y fácil de leer en una sola pasada, y cubre lo esencial (ACID, relaciones, NUMERIC, reportes, JSONB, multi-tenant, cuándo usar Mongo y el caveat del equipo); B añade consejos útiles pero es más denso y su punto sobre secuencias nativas resulta confuso."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da la misma recomendación clara y añade consejos prácticos accionables (importes en céntimos o NUMERIC, facturas inmutables con notas de crédito, numeración correlativa sin huecos, migraciones) que importan en facturación, mientras que B es algo más breve pero omite esos detalles."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

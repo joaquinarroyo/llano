@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B sigue un orden más natural (definición, tabla, por qué importa, solución), incluye un ejemplo HTTP concreto de la clave de idempotencia, menciona casos de uso como colas, webhooks y reintentos de proxies, y cubre los mismos detalles críticos (atomicidad, validación del cuerpo, expiración, reutilización de la clave) con códigos de error concretos."
+    },
+    {
+      "winner": "llano",
+      "reason": "Ambas cubren definición, tabla de métodos, claves de idempotencia y detalles de atomicidad, caducidad y reutilización de clave; B lo hace de forma más compacta y directa, y añade el punto útil de que la implementación debe respetar el contrato HTTP, sin perder información técnica relevante."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

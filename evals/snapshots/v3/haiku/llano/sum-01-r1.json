@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "- Rota los refresh tokens en cada uso.\n- Invalida el refresh token anterior si alguien lo reutiliza.\n- Agrega tests para la detección de reutilización.\n- Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2.",
+  "output_tokens": 500,
+  "thinking_tokens": 422,
+  "input_tokens": 6378,
+  "wall_s": 4.73,
+  "created_at": "2026-10-07T00:51:48.626466+00:00"
+}

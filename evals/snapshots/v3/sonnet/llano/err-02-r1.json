@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Falla porque los `float` de Python usan binario, y 0.1 no tiene representación exacta en binario. Cada operación arrastra un error de ~1e-16, y `==` compara todos los bits.\n\nHay una duda: con `price=100.0` y `discount=0.1`, `100.0 * (1 - 0.1)` debería dar `90.0` exacto. Hice el cálculo a mano y no lo ejecuté. El resultado `89.99999999999999` sugiere que el código real hace otro cálculo, por ejemplo con un descuento que viene de otra operación (`15 / 150`, `0.3 - 0.2`) o con pasos intermedios. Verifica con `print(repr(discount), repr(1 - discount))`.\n\nHay dos arreglos, según lo que representa el valor:\n\n1. **Dinero en el código:** usa `Decimal` o centavos enteros. Así el error de redondeo no aparece.\n\n   ```python\n   from decimal import Decimal\n\n   total = Decimal(\"100.00\") * (1 - Decimal(\"0.10\"))  # Decimal('90.0000')\n   ```\n\n   Crea los `Decimal` desde strings. `Decimal(0.1)` copia el error del `float`.\n\n2. **Cálculo aproximado (solo el test):** compara con tolerancia.\n\n   ```python\n   import pytest\n\n   assert total == pytest.approx(90.0)\n   ```\n\n   Fuera de pytest, usa `math.isclose(total, 90.0)`.\n\nPara facturas, recomiendo la opción 1. Un `float` en dinero acumula errores en sumas e impuestos, y una tolerancia en el test solo los oculta.",
+  "output_tokens": 1496,
+  "thinking_tokens": 936,
+  "input_tokens": 5297,
+  "wall_s": 12.4,
+  "created_at": "2026-10-07T01:01:25.689157+00:00"
+}

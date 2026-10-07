@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Como solo actualizaron dependencias, los sospechosos principales son:\n\n**1. Identificar qué cambió (rápido)**\n```bash\ngit diff package-lock.json\n# O si usas yarn: git diff yarn.lock\n```\nBusca cambios de versión significativos (major versions) en packages usados directamente en las rutas críticas.\n\n**2. Verificar memoria y CPU mientras corre**\n```bash\nnode --inspect app.js\n# Luego en chrome://inspect para profiling\n```\nBusca memory leaks o garbage collection pausas. Un p95 de 900ms sugiere pauses GC o bloqueos.\n\n**3. Rollback selectivo (el diagnóstico más rápido)**\nActualiza `package.json` con las versiones previas de 1-2 dependencias clave (express, http framework, o cualquier middleware que viste cambiar en el lock), corre `npm install` y testa. Si vuelve a 120ms, encontraste el culpable.\n\n**4. Luego inspecciona ese package específico**\n- Changelog/issues en GitHub\n- Cambios en comportamiento por defecto (timeouts, pooling, async behavior)\n- Breaking changes que no implementaron\n\n¿Qué versión de Node usas y cuál es el framework principal (Express, Fastify, etc)? Con eso puedo ser más específico. También, ¿ves esos 900ms consistentes o es un spike ocasional?",
+      "output_tokens": 575,
+      "thinking_tokens": 210,
+      "input_tokens": 3428
+    },
+    {
+      "text": "Excelente diagnóstico. **Eso es definitivamente el culpable**: 14 queries × 2 (BEGIN + COMMIT) = 28 comandos de transacción que antes no había.\n\n**Para confirmar rápido:**\nDowngrade temporal del ORM a la versión anterior en `package.json`, corre `npm install`, y testa. Si vuelve a ~120ms, es 100% ese cambio.\n\n**Soluciones (en orden de facilidad):**\n\n1. **Opción fácil: Deshabilitar transacciones automáticas** (si el ORM lo permite)\n   - Busca en docs del ORM algo como `autoTransaction: false` o `transaction: false` en la config\n   - Esto típicamente se cambió en el update que hiciste\n\n2. **Opción mejor: Agrupar en una transacción por request**\n   ```javascript\n   // En lugar de que cada query abre su propia transacción:\n   const transaction = await db.transaction();\n   // Ejecuta tus 14 queries aquí\n   await transaction.commit();\n   ```\n\n3. **Opción nuclear: Downgrade** solo si las opciones 1-2 no funcionan\n   ```bash\n   npm install pg@8.11\n   # O el ORM a su versión anterior\n   ```\n\n¿Qué ORM usas? Con el nombre exacto puedo darte la sintaxis específica para deshabilitar las transacciones automáticas. Es casi seguro que está en la config o en opciones de cliente, y es un cambio de una línea.",
+      "output_tokens": 613,
+      "thinking_tokens": 218,
+      "input_tokens": 4111
+    },
+    {
+      "text": "```\nRevert: [ORM] downgrade a versión anterior\n\nEl update a la nueva versión del ORM introdujo transacciones automáticas \npor cada query, causando que cada request abra múltiples BEGIN/COMMIT \ninnecesarios.\n\nCon los cambios actuales (14 queries por request), esto resultó en:\n- p95: 900 ms → 130 ms después de revertir\n- Overhead de transacciones: ~780 ms por request\n\nRevertimos a la versión anterior mientras evaluamos si:\n1. Se puede deshabilitar transacciones automáticas en la nueva versión\n2. Vale la pena agrupar queries en transacciones explícitas\n\nFixes: [issue_number_si_aplica]\n```\n\nO si lo prefieres más corto:\n\n```\nRevert: [ORM] downgrade por regresión de rendimiento\n\nUpdate a nueva versión causó transacciones automáticas por query.\np95 latency: 900ms → 130ms después de revertir.\n\nEvaluaremos soluciones alternativas (deshabilitar auto-transactions o \nagrupar queries) antes de actualizar nuevamente.\n```\n\n¿Cuál te late más o quieres que ajuste algo?",
+      "output_tokens": 458,
+      "thinking_tokens": 147,
+      "input_tokens": 4801
+    }
+  ],
+  "created_at": "2026-10-07T00:05:50.219123+00:00"
+}

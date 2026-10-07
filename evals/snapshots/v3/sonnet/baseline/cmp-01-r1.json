@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Postgres.** Para un SaaS de facturación es la opción clara.\n\n**Por qué:**\n\n- **Transacciones ACID y consistencia fuerte:** facturas, pagos, notas de crédito y numeración correlativa no pueden quedar a medias. En Postgres es lo natural; en Mongo es posible (transacciones multidocumento), pero es más incómodo y menos probado a ese nivel.\n- **Datos muy relacionales:** clientes, productos, impuestos, facturas, líneas, pagos, suscripciones. Claves foráneas, joins y constraints (`CHECK`, `UNIQUE`, exclusiones) te protegen de datos inconsistentes a nivel de base de datos.\n- **Tipos numéricos exactos:** `NUMERIC` para dinero, sin errores de coma flotante. Guarda también la moneda en una columna aparte.\n- **Reportes y contabilidad:** SQL, agregaciones, window functions y vistas materializadas facilitan informes, conciliaciones y exportaciones.\n- **Auditoría y cumplimiento:** triggers, tablas append-only, y row-level security para aislar tenants.\n- **Flexibilidad cuando la necesitas:** `JSONB` cubre campos variables (metadatos, payloads de pasarelas de pago, datos fiscales por país) sin sacrificar el modelo relacional.\n- **Ecosistema:** servicios gestionados maduros (RDS, Cloud SQL, Neon, Supabase), buenas herramientas de migración y mucha gente que lo conoce.\n\n**Cuándo tendría sentido Mongo:** si tus datos fueran principalmente documentos sin relaciones fuertes, con esquema muy cambiante y sin requisitos transaccionales estrictos. No es el caso de facturación.\n\n**Recomendaciones prácticas:**\n\n1. Guarda importes como enteros en la unidad mínima (céntimos) o `NUMERIC(19,4)`, nunca `float`.\n2. Multi-tenancy: columna `tenant_id` en todas las tablas + row-level security.\n3. Facturas emitidas inmutables: corrige con notas de crédito, no con `UPDATE`.\n4. Numeración correlativa con una tabla de secuencias por serie y tenant (no uses `SEQUENCE` nativas si no puedes tolerar huecos).\n5. Usa migraciones versionadas desde el día uno (Flyway, Alembic, Prisma, etc.).\n\nSi me cuentas el stack y los países donde vas a facturar, te ayudo a esbozar el esquema inicial.",
+  "output_tokens": 895,
+  "thinking_tokens": 0,
+  "input_tokens": 1583,
+  "wall_s": 7.69,
+  "created_at": "2026-10-07T00:09:37.020338+00:00"
+}

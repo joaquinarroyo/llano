@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Para revertir un commit ya pusheado a una rama compartida, **usa `git revert`** en lugar de `reset` o `rebase`. Esto es seguro porque crea un nuevo commit en lugar de reescribir el historial.\n\n**Pasos:**\n\n1. **Actualiza main y verifica dónde estás:**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit a revertir:**\n   ```bash\n   git log --oneline -10\n   ```\n\n3. **Revierte el commit:**\n   ```bash\n   git revert <commit-hash>\n   ```\n   Esto abrirá un editor para confirmar el mensaje del commit de revert (por defecto está bien).\n\n4. **Si hay conflictos:**\n   - Resuélvelos manualmente en los archivos\n   - Añade los archivos: `git add .`\n   - Completa el revert: `git revert --continue`\n\n5. **Push del cambio:**\n   ```bash\n   git push origin main\n   ```\n\n**Por qué `git revert` y no `git reset --hard`:**\n- ✅ `revert`: crea un nuevo commit, no reescribe historia, seguro para ramas compartidas\n- ❌ `reset --hard`: reescribe el historial, obliga a los compañeros a hacer rebase, causa conflictos\n\nSi en lugar de revertir todo el commit necesitas deshacer solo ciertos cambios, puedes usar `git revert --no-commit <hash>` para editar qué se revierte antes de confirmar.\n\n¿Necesitas ayuda para ejecutar estos comandos o manejar conflictos específicos?",
+  "output_tokens": 767,
+  "thinking_tokens": 344,
+  "input_tokens": 3414,
+  "wall_s": 8.1,
+  "created_at": "2026-10-07T00:06:33.817405+00:00"
+}

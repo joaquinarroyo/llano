@@ -1,0 +1,55 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "ejecuta tu código JavaScript en un solo hilo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "se delegan al sistema operativo o a libuv, la biblioteca en C que implementa el loop",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si el call stack está vacío, el loop toma el siguiente callback y lo ejecuta.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Por eso una promesa resuelta siempre se ejecuta antes que un `setTimeout(..., 0)`.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el trabajo de CPU bloquea el loop",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Ejecutar el script completo de arriba abajo no \"se llama call stack\"; el call stack es la estructura que lleva el registro de las llamadas a funciones en curso, no el acto de ejecutar el script.",
+      "quote": "Esto se llama call stack.",
+      "verified": true
+    },
+    {
+      "claim": "async/await en Python no es azúcar sintáctico sobre promesas; son corrutinas y no existen promesas en asyncio de la misma forma.",
+      "quote": "`async/await` es azúcar sintáctico sobre promesas, como en Python.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

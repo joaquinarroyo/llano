@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más directa y se lee de una vez: avisa del peligro de reescribir historia, da pasos claros con `--ff-only`, el caso de merge y la advertencia sobre cherry-pick; B añade más contenido (rangos, secretos, abortar) pero es más largo y disperso para la pregunta de pasos seguros."
+    },
+    {
+      "winner": "llano",
+      "reason": "B cubre lo esencial (revert, merge con -m 1, conflictos, rama protegida, avisar al equipo, advertencia sobre reintroducir el cambio) de forma más concisa y fácil de leer en una sola pasada, mientras que A añade bastante material extra (rangos, secretos, preguntas finales) que dispersa el foco aunque sea correcto."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

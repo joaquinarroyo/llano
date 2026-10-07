@@ -59,6 +59,8 @@ CANARY = (
     "cuenta. Incluye nombres propios de skills o modos. Si no hay ninguna, responde NINGUNA."
 )
 EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+# With tools disabled, a model sometimes writes a tool call as plain text. That is not an answer.
+TOOL_CALL_TEXT = re.compile(r"<invoke\b|<parameter\b|</?function_calls>")
 
 
 def leak_markers() -> list[str]:
@@ -214,10 +216,14 @@ def call(task: dict, cwd: str, env: dict) -> str:
             base = {k: task[k] for k in ("prompt_id", "category", "arm", "run")} | {"model_alias": task["model"]}
             if "turns" in task:
                 res = claude_conversation([t["prompt"] for t in task["turns"]], task["model"], task["append"], cwd, env)
+                if any(TOOL_CALL_TEXT.search(r["text"]) for r in res):
+                    raise RuntimeError("tool call written as text")
                 record = base | {"kind": "conversation", "model": res[0]["model"],
                                  "turns": [{k: v for k, v in r.items() if k != "model"} for r in res]}
             else:
                 data = claude(task["prompt"], task["model"], task["append"], cwd, env)
+                if TOOL_CALL_TEXT.search(data["result"]):
+                    raise RuntimeError("tool call written as text")
                 record = base | {"kind": "single", "model": next(iter(data.get("modelUsage", {}) or {}), None),
                                  "text": data["result"], **_usage(data), "wall_s": data["_wall_s"]}
             record["created_at"] = datetime.now(timezone.utc).isoformat()
@@ -280,9 +286,14 @@ def main() -> None:
         meta_path = out_dir / "meta.json"
         if meta_path.exists():
             old = json.loads(meta_path.read_text())
-            if old["arms"] != meta["arms"]:
-                sys.exit("The skill changed since this run started. Use a new --run-id.")
+            changed = [a for a, h in meta["arms"].items() if a in old["arms"] and old["arms"][a] != h]
+            if changed:
+                sys.exit(f"Arm text changed since this run started ({', '.join(changed)}). Use a new --run-id.")
+            meta["arms"] = old["arms"] | meta["arms"]
+            meta["arm_chars"] = old.get("arm_chars", {}) | meta["arm_chars"]
             meta["started_at"] = old["started_at"]
+            meta = old | {k: v for k, v in meta.items() if k not in ("prompts", "conversations", "structured")} | {
+                k: old[k] for k in ("prompts", "conversations", "structured", "note") if k in old}
             meta["models"] = sorted(set(old.get("models", [])) | set(meta["models"]))
             meta["runs"] = max(old.get("runs", 0), meta["runs"])
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2))

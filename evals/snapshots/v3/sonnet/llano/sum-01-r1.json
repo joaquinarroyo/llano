@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Este es el texto para la descripción del PR:\n\n```markdown\n## Cambios\n\n- Rota los refresh tokens en cada uso (`feat(auth)`).\n- Invalida el refresh token anterior si alguien lo reutiliza (`fix(auth)`).\n- Agrega tests para la detección de reutilización de tokens (`test(auth)`).\n- Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2 (`chore`).\n\n## Archivos\n\n- `src/auth/tokens.ts`: 84 líneas cambiadas.\n- `src/auth/middleware.ts`: 12 líneas cambiadas.\n- `tests/auth/tokens.test.ts`: 96 líneas agregadas.\n- `package.json`: 2 líneas cambiadas, por la actualización de `jsonwebtoken`.\n```\n\nEl log no explica el motivo de la rotación ni de la actualización de `jsonwebtoken`. Si lo conoces, agrégalo en una línea al inicio de la descripción.",
+  "output_tokens": 532,
+  "thinking_tokens": 181,
+  "input_tokens": 5423,
+  "wall_s": 4.49,
+  "created_at": "2026-10-07T00:52:57.409429+00:00"
+}

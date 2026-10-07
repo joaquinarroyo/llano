@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da una sola ruta lineal con pasos numerados, advertencias claras (datos sensibles, versión de pg_dump) y verificación, mientras que B dispersa la lectura en muchas alternativas y secciones que obligan a decidir antes de actuar."
+    },
+    {
+      "winner": "llano",
+      "reason": "B sigue una secuencia numerada y lineal, con las advertencias clave (datos sensibles, versión de pg_dump) al inicio, lo que se entiende de una lectura; A cubre más (túnel SSH, pipe, SQL plano) pero se dispersa en muchas alternativas y secciones."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

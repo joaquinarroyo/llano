@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más clara y ordenada: explica los placeholders, indica crear la BD antes de restaurar y sugiere -j para acelerar, mientras que B tiene errores técnicos (un dump -Fc con -Z 9 guardado como .gz es confuso y pg_restore sin crear la BD primero en la opción 2) y relleno innecesario."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directa y clara: usa placeholders explicados, separa bien cada formato con su scp y su restauración, e incluye el consejo útil de `-j 4`; A tiene errores (la opción 3 con `-Z 9` guardada como .gz es confusa, y el orden de crear la BD antes de restaurar aparece como una 'opción') y más relleno."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

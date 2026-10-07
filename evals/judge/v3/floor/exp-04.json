@@ -1,0 +1,25 @@
+{
+  "prompt_id": "exp-04",
+  "kind": "floor",
+  "key": [
+    "A",
+    "C",
+    "C"
+  ],
+  "answers": [
+    "E",
+    "E",
+    "E"
+  ],
+  "correct": [
+    false,
+    false,
+    false
+  ],
+  "not_said": [
+    true,
+    true,
+    true
+  ],
+  "reader_model": "haiku"
+}

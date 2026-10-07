@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B presenta cronología, impacto y acciones en secciones claras y escaneables, y conserva todos los datos del original (incluida la identificación de la causa a las 09:20 y la normalización a las 09:35), mientras que A mezcla la causa con el inicio, dice que la latencia volvió a 300 ms (dato no dado) e inventa un 'umbral' en la alerta."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A presenta cronología, impacto y acciones en secciones claras y completas (incluye la causa en 09:20 y el detalle de la CPU de Elasticsearch), mientras que B comprime la cronología, omite qué se detectó a las 09:20 y añade un 'umbral' no mencionado en el original."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

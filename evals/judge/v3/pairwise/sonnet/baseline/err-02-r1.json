@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "Ambas explican la causa y recomiendan Decimal, pero B da un comando ejecutable para verificar y añade la opción de redondear a céntimos con su advertencia, sin perder claridad."
+    },
+    {
+      "winner": "baseline",
+      "reason": "Ambas explican bien la causa y avisan de que 100.0*(1-0.1) debería dar 90.0, pero A añade la opción práctica de `round(..., 2)` con su limitación, ordena las soluciones de mejor a peor y ofrece revisar la función y el test."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

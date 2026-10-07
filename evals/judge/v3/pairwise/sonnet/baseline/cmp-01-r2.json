@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da la recomendación y las razones clave (relaciones, transacciones, dinero exacto, reportes, jsonb) de forma concisa y fácil de leer en una sola pasada, mientras que B aporta más detalle útil pero es más largo y denso, con secciones extra (multi-tenancy, auditoría, recomendaciones) que no se pedían."
+    },
+    {
+      "winner": "llano",
+      "reason": "B da la recomendación y las razones técnicas clave (relacional, transacciones, numeric, reportes, jsonb, cuándo sí MongoDB) de forma compacta y legible en una sola lectura, mientras A, aunque más completa (multi-tenancy, auditoría, numeración legal, inmutabilidad), es más larga y densa para lo que se preguntó."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,55 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Una operación es idempotente cuando obtienes el mismo resultado cada vez que la repites",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las APIs bien diseñadas marcan los endpoints idempotentes (GET, PUT, DELETE) como seguros para reintentos automáticos.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Si la solicitud se pierde, el cliente puede reintentar sin miedo a duplicar datos o crear efectos secundarios indeseados.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "Para `POST` idempotente, agrega una clave de idempotencia que el cliente envía.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un reintenso accidental cobra dos veces, duplica pedidos o borra datos que no debería.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "PATCH se presenta como idempotente; no lo es por definición (depende de la operación, p. ej. incrementos).",
+      "quote": "Usa `PUT` o `PATCH` para actualizaciones (idempotentes).",
+      "verified": true
+    },
+    {
+      "claim": "Un reintento accidental no hace que se borren datos por falta de idempotencia: DELETE es idempotente, así que borrar datos que no se debería no es consecuencia típica de la falta de idempotencia.",
+      "quote": "un reintenso accidental cobra dos veces, duplica pedidos o borra datos que no debería.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

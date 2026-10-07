@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa Postgres. Un SaaS de facturación necesita integridad transaccional y consultas relacionales, y Postgres las da de forma nativa.\n\n**Por qué conviene Postgres**\n\n- **Transacciones ACID entre varias tablas.** Una factura, sus líneas, los impuestos y el asiento contable se guardan juntos o no se guarda nada. MongoDB también tiene transacciones multidocumento, pero son más costosas y el modelo no está pensado para ellas.\n- **Datos relacionales.** Clientes, productos, facturas, pagos y notas de crédito se relacionan entre sí. Las claves foráneas y las restricciones (`UNIQUE`, `CHECK`) evitan datos inconsistentes, como dos facturas con el mismo número.\n- **Dinero exacto.** El tipo `NUMERIC` evita errores de redondeo. Nunca uses `float` para importes en ninguna de las dos bases.\n- **Reportes y auditoría.** Los cierres mensuales, los informes de impuestos y las conciliaciones son consultas con `JOIN` y agregaciones. SQL las resuelve directamente.\n- **Flexibilidad cuando la necesites.** Si algunos datos varían por cliente (por ejemplo, campos personalizados), la columna `JSONB` los guarda con índices, sin cambiar de base.\n- **Multi-tenant.** Con una columna `tenant_id` y row-level security, Postgres aísla los datos de cada cliente dentro de la misma base.\n\n**Cuándo elegir MongoDB**\n\nSolo si tus datos son documentos sin relaciones fuertes y cambian de forma constante, como un catálogo con esquemas muy distintos o eventos de telemetría. Una facturación normal no encaja en ese caso.\n\n**Atención:** si ya tienes un equipo con experiencia profunda en MongoDB y ninguna en SQL, el costo de aprender pesa. Aun así, para facturación el riesgo de inconsistencias es mayor que ese costo.",
+  "output_tokens": 792,
+  "thinking_tokens": 94,
+  "input_tokens": 5221,
+  "wall_s": 7.81,
+  "created_at": "2026-10-07T00:53:07.174715+00:00"
+}

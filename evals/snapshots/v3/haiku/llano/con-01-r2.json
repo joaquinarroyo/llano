@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación es idempotente si produce el mismo resultado sin importar cuántas veces la ejecutes. Si llamas diez veces al mismo endpoint, el estado final es igual que si lo hubieras llamado una sola vez.\n\n**Por qué importa:**\n\nEn redes inestables, un cliente puede no recibir la respuesta aunque el servidor ejecutó la solicitud. El cliente reintenta, y con idempotencia no genera duplicados. Sin ella, un GET que falla podría crear dos registros, o cobrar dos veces a un usuario.\n\n**Métodos HTTP idempotentes:**\n- GET, HEAD, OPTIONS: no cambian nada, siempre seguros.\n- PUT: reemplaza un recurso completo con los mismos datos.\n- DELETE: borrar dos veces da el mismo resultado (no existe).\n\n**No idempotentes:**\n- POST: crear un registro cada vez que lo llames.\n- PATCH: modificaciones parciales pueden acumularse.\n\n**Ejemplo:**\n\n```\nPUT /usuarios/123 { \"nombre\": \"Ana\" }\n```\nEjecutalo 1 o 100 veces: Ana sigue siendo el nombre. Es idempotente.\n\n```\nPOST /transferencias { \"monto\": 50 }\n```\nEjecutalo dos veces: se transfieren 100. No es idempotente.\n\nPara POST seguro, usa un ID único de solicitud (idempotency key) que el servidor detecta y rechaza si repite. Es el estándar en pagos y APIs críticas.",
+  "output_tokens": 637,
+  "thinking_tokens": 262,
+  "input_tokens": 6211,
+  "wall_s": 8.26,
+  "created_at": "2026-10-07T00:52:36.207453+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# El teorema CAP\n\nFormulado por Eric Brewer (2000) y demostrado formalmente por Gilbert y Lynch (2002). Dice que un sistema de datos distribuido **no puede garantizar simultáneamente** estas tres propiedades cuando hay una partición de red:\n\n- **C (Consistencia):** toda lectura devuelve la escritura más reciente (linealizabilidad), o un error.\n- **A (Disponibilidad):** toda petición a un nodo que funciona recibe una respuesta (no un error ni un timeout).\n- **P (Tolerancia a particiones):** el sistema sigue funcionando aunque la red pierda o retrase mensajes entre nodos.\n\n## La idea clave, mal entendida a menudo\n\nNo es \"elige 2 de 3\". Las particiones **ocurren** en cualquier sistema distribuido real, así que P no es opcional. La elección real es: **cuando hay una partición, ¿sacrificas consistencia o disponibilidad?**\n\n- **CP:** rechaza o bloquea peticiones en el lado minoritario para no devolver datos inconsistentes (ej. ZooKeeper, etcd, HBase, Spanner en la práctica).\n- **AP:** sigue respondiendo con datos posiblemente desactualizados y reconcilia después (ej. Cassandra y DynamoDB con configuración por defecto, Riak).\n\nSin partición, puedes tener C y A a la vez.\n\n## ¿Sigue siendo relevante?\n\n**Sí, como modelo mental básico; no, como herramienta de clasificación de bases de datos.** Sus limitaciones:\n\n1. **Es binario y estrecho.** Sus definiciones de C y A son muy estrictas. Muchos sistemas reales no encajan limpiamente en \"CP\" o \"AP\", y varían según la configuración (niveles de quórum en Cassandra, por ejemplo).\n2. **Ignora la latencia.** Es lo que más importa día a día. **PACELC** (Abadi, 2012) lo completa: si hay Partición, elige entre A y C; *Else* (funcionamiento normal), elige entre **L**atencia y **C**onsistencia. Describe mejor los compromisos reales.\n3. **Solo habla de linealizabilidad.** Hay un espectro de modelos intermedios (consistencia causal, read-your-writes, snapshot isolation, etc.) que ofrecen buenas garantías sin pagar el coste máximo.\n4. **La ingeniería ha reducido el dilema.** Spanner, CockroachDB o Aurora DSQL combinan relojes sincronizados, consenso (Paxos/Raft) y redes privadas muy fiables para que las particiones sean raras y la sacrificada disponibilidad sea mínima en la práctica. No violan CAP, solo hacen que su coste sea poco frecuente.\n\n## Resumen práctico\n\nÚsalo para recordar que **en un sistema distribuido, las particiones obligan a decidir entre rechazar peticiones o aceptar datos potencialmente inconsistentes**. Para diseñar o elegir una base de datos, es más útil preguntarse: ¿qué modelo de consistencia necesito?, ¿qué latencia tolero?, ¿qué pasa con mis usuarios si una región queda aislada? PACELC y los modelos de consistencia responden mejor a eso.",
+  "output_tokens": 1188,
+  "thinking_tokens": 34,
+  "input_tokens": 1569,
+  "wall_s": 9.86,
+  "created_at": "2026-10-07T00:11:35.547471+00:00"
+}

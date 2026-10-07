@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empieza revertiendo las dependencias. Si la latencia vuelve a 120 ms, la culpa es la actualización. Después identifica cuál.\n\n**Paso 1: Confirma que es la actualización**\n\n```bash\nnpm ci  # o yarn install, con package-lock.json original\n```\n\nMide el p95 durante 5 minutos. Si baja a ~120 ms, la actualización rompió algo.\n\n**Paso 2: Identifica cuál dependencia**\n\nActualiza una por una, mide después de cada una. O revisa `npm ls` para ver qué cambió de versión. Busca cambios de versión mayor (esos rompen cosas).\n\n**Paso 3: Mientras investigas, revisa**\n\n- Logs de errores: ¿hay reintentos, timeouts o garbage collection pausas?\n- Uso de memoria: ¿crece sin parar?\n- CPU: ¿sube a 100%?\n- Conexiones a la base de datos: ¿se mantienen o se cierran todo el tiempo?\n\n**Paso 4: Lee el changelog**\n\nCuando encuentres la dependencia culpable, busca el changelog entre la versión anterior y la nueva. Busca palabras como \"performance\", \"breaking\", \"pool\", \"memory\", \"deprecated\".\n\n¿Qué dependencias actualizaste? Si me dices cuáles, puedo ayudarte a revisar los changelogs.",
+      "output_tokens": 704,
+      "thinking_tokens": 341,
+      "input_tokens": 6243
+    },
+    {
+      "text": "Encontraste el culpable. BEGIN y COMMIT tienen costo de red. 28 operaciones extra (14 queries × 2) en lugar de una transacción multiplica la latencia.\n\n**Opciones, de menor a mayor esfuerzo:**\n\n1. **Revertir `pg` a 8.11** — Lo más rápido. Revisa si 8.12 solo cambió eso o si arregla un bug de seguridad que necesitas.\n\n2. **Revertir el ORM** — Igual de rápido si puedes.\n\n3. **Desactivar transacciones automáticas en el ORM** — Lee la documentación. Muchos ORM tienen una opción `autoTransaction: false` o similar.\n\n4. **Envolver las 14 queries en una sola transacción** — Más trabajo. Agrupa todas en un `BEGIN` al inicio del request y `COMMIT` al final. Ganancia: 13 operaciones menos (27 menos que ahora).\n\n**Primero revisa qué cambió en `pg` 8.11 → 8.12** — ¿Arreglaron un bug o solo mejoraron código? Si arreglaron un bug crítico, necesitas la opción 3 o 4.\n\n¿Qué versión del ORM usas? Puedo ayudarte a buscar cómo desactivar las transacciones automáticas.",
+      "output_tokens": 579,
+      "thinking_tokens": 227,
+      "input_tokens": 7055
+    },
+    {
+      "text": "```\nRevert ORM to previous version: fix p95 latency regression\n\nThe latest ORM version opens a transaction for each query.\nThis caused 28 extra BEGIN/COMMIT operations per request\n(14 queries × 2 operations) and increased p95 from 120 ms to 900 ms.\n\nReverting to the previous version restores p95 to ~130 ms.\n\nThe new ORM version needs auto-transactions disabled or\nwe need to batch queries in a single transaction before\nwe upgrade again.\n```\n\nAjusta los nombres del ORM y la versión anterior si quieres ser más específico.",
+      "output_tokens": 408,
+      "thinking_tokens": 258,
+      "input_tokens": 7711
+    }
+  ],
+  "created_at": "2026-10-07T00:52:16.215241+00:00"
+}

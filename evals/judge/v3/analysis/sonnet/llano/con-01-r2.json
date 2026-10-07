@@ -1,0 +1,50 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Una operación es idempotente cuando repetirla con los mismos datos deja el sistema en el mismo estado que ejecutarla una sola vez.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "| `POST` | No | Cada llamada suele crear un recurso nuevo. |",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si el cliente envía una solicitud y no recibe respuesta, no sabe si el servidor la procesó. Reintentar es seguro solo si la operación es idempotente.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El cliente genera un identificador único por intento de operación, por ejemplo un UUID, y lo envía en un header como `Idempotency-Key`.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un reintento puede cobrar dos veces o crear un pedido duplicado",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "La clave de idempotencia debe ser única por operación lógica, no por intento. Si se generara una clave nueva en cada intento, los reintentos tendrían claves distintas y el servidor no podría detectar duplicados.",
+      "quote": "El cliente genera un identificador único por intento de operación",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

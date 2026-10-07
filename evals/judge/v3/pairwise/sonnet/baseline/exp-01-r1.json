@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B está adaptada a quien viene de Python síncrono (voseo, ejemplo A-B-C frente a A-C-B, tabla comparativa) y muestra con código el orden de nextTick, promesas y timers, el efecto de `await` y el bloqueo del loop; A es correcta y clara, pero tiene menos ejemplos concretos."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica con ejemplos concretos (orden A/B/C, nextTick vs promesas, bloqueo del loop) y una tabla comparativa Python↔Node, cubriendo lo mismo que B pero con más claridad para quien viene de Python síncrono; el ejemplo de B omite nextTick pese a mencionarlo."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

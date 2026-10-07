@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Incidente - Checkout: Latencia elevada (09:12-09:35)**\n\nA las 09:12 la latencia p95 del checkout subió de 300 ms a 4 s. Un job de reindexado de Elasticsearch programado por error en horario laboral saturó el cluster. Pausamos el job a las 09:31 y la latencia normalizó a las 09:35 (23 minutos de impacto).\n\nNo hubo pérdida de pedidos, pero 212 usuarios abandonaron el checkout durante el incidente.\n\n**Acciones pendientes:**\n- Mover el job de reindexado a las 03:00\n- Agregar alerta de CPU del cluster de Elasticsearch",
+  "output_tokens": 506,
+  "thinking_tokens": 324,
+  "input_tokens": 6347,
+  "wall_s": 5.29,
+  "created_at": "2026-10-07T00:52:23.445201+00:00"
+}

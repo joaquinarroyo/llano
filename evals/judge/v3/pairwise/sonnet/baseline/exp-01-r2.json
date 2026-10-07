@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica el modelo con una analogía, mapea conceptos de Python a Node en una tabla de equivalencias (asyncio.gather, create_task, etc.), muestra un ejemplo con nextTick/setImmediate y la trampa de bloquear el loop con código de servidor, mientras que A, aunque correcta y concisa, ofrece menos puentes concretos desde Python."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el modelo de forma más directa y ordenada, con un ejemplo determinista y correcto, e incluye el thread pool y las trampas típicas para quien viene de Python (await olvidado, promesas sin catch), mientras que el ejemplo de A mezcla un orden no garantizado (setTimeout vs setImmediate) presentado como salida fija y es más extenso."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

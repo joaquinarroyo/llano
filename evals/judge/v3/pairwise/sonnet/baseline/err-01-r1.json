@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica con claridad qué pasa, distingue ETIMEDOUT de ECONNREFUSED, da comandos concretos con resultados esperables, añade NetworkPolicy/failover y la pregunta de qué cambió desde el último deploy, mientras A es correcta pero menos completa."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica con claridad el diagnóstico (ETIMEDOUT vs ECONNREFUSED, no credenciales), da comandos concretos con cómo interpretarlos, y añade revisar qué cambió desde el último deploy y failover/IP; B es correcto y conciso pero omite esos puntos y su cierre ('si el paso 1 funciona, el problema es de la aplicación') es menos preciso."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

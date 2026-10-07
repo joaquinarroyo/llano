@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica la causa y da la solución más directa para el test (pytest.approx) con alternativas claras, sin errores; B dice 'dos opciones' pero lista tres, y su ejemplo con Decimal('100.0') es menos limpio."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica con el resultado exacto (100.0 * 0.9 = 89.99999999999999) y ofrece soluciones claras con código y una recomendación concreta para facturación, aunque dice 'dos opciones' y lista tres; B es correcto y menciona pytest.approx, pero es más vago en la causa y su afirmación final ('siempre tienen estos errores') es imprecisa."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

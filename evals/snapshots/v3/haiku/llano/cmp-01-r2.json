@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Postgres. La facturación necesita garantías ACID y transacciones: clientes, facturas, ítems y pagos tienen relaciones que requieren integridad referencial y rollback confiable.\n\nLa desventaja es que Postgres escala menos en escritura extrema que MongoDB, pero eso no es un problema real en facturación donde tus datos son estructurados y consistencia es crítica.",
+  "output_tokens": 425,
+  "thinking_tokens": 324,
+  "input_tokens": 6217,
+  "wall_s": 10.5,
+  "created_at": "2026-10-07T00:52:33.189000+00:00"
+}

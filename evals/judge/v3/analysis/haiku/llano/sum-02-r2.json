@@ -1,0 +1,50 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "A las 09:12 la latencia p95 del checkout subió de 300 ms a 4 s.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Un job de reindexado de Elasticsearch programado por error en horario laboral saturó el cluster.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Pausamos el job a las 09:31 y la latencia normalizó a las 09:35",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "No hubo pérdida de pedidos, pero 212 usuarios abandonaron el checkout durante el incidente.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Mover el job de reindexado a las 03:00",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El impacto duró 23 minutos, pero el incidente fue de 09:12 a 09:35, lo cual son 23 minutos; sin embargo, la alerta de CPU se atribuye específicamente a Elasticsearch, lo cual es una inferencia razonable. No hay afirmación incorrecta real en el cálculo.",
+      "quote": "(23 minutos de impacto)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

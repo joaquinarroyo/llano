@@ -1,0 +1,50 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "La API v2.4.1 no se conecta a Postgres en `10.0.3.17:5432`.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Es un timeout, no un error de credenciales: la conexión nunca recibe respuesta.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El pool falla después de 30000 ms y el proceso termina con código 1.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Revisa primero que la base de datos esté levantada y que el security group o firewall permita el puerto 5432 desde el servidor de la API.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "La API v2.4.1 no se conecta",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que hay un mismatch entre el nombre DNS y la IP, pero el log no muestra ninguna discrepancia: db.internal se resolvió a 10.0.3.17 y el error es un timeout de conexión.",
+      "quote": "hay un mismatch entre el nombre DNS y la IP",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

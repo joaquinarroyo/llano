@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es que 0.1 no se representa exactamente en binario. Entonces `100.0 * 0.9` da `89.99999999999999` en lugar de `90.0`.\n\nHay dos formas de arreglarlo:\n\n**Opción 1: Comparar con tolerancia** (más simple)\n\n```python\nimport math\n\nassert math.isclose(total, 90.0)\n```\n\n`isclose()` permite una diferencia pequeña. Sirve para tests donde la precisión exacta no importa.\n\n**Opción 2: Usar `Decimal`** (más robusto)\n\n```python\nfrom decimal import Decimal\n\ntotal = Decimal('100.0') * (Decimal('1') - Decimal('0.1'))\nassert total == Decimal('90.0')\n```\n\n`Decimal` maneja decimales exactos sin errores de redondeo. Es más lento pero necesario si trabajas con dinero o números que deben ser exactos.\n\n¿Cuál prefieres? `isclose()` es suficiente para la mayoría de casos. Usa `Decimal` si es un cálculo de facturas o dinero.",
+  "output_tokens": 568,
+  "thinking_tokens": 278,
+  "input_tokens": 6289,
+  "wall_s": 6.35,
+  "created_at": "2026-10-07T00:51:44.713493+00:00"
+}

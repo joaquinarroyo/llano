@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más conciso y directo en cada turno, con listas cortas y un plan fácil de leer en una sola pasada, mientras que B es más largo y denso (secciones extra, tabla, preguntas) y mezcla voseo/tuteo, aunque conserva buena información técnica."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más conciso y directo en cada turno, con pasos numerados claros, sin perder lo técnico esencial (Packwerk, tests de humo, caché, paralelización, rollback), y marca honestamente que la meta de 15 min es una propuesta; A es más largo y denso, con más secciones y tablas que cuestan más de leer de una vez."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

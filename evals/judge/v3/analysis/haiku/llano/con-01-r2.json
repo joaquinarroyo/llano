@@ -1,0 +1,50 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Una operación es idempotente si produce el mismo resultado sin importar cuántas veces la ejecutes.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "GET, HEAD, OPTIONS: no cambian nada, siempre seguros.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "En redes inestables, un cliente puede no recibir la respuesta aunque el servidor ejecutó la solicitud. El cliente reintenta, y con idempotencia no genera duplicados.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Para POST seguro, usa un ID único de solicitud (idempotency key) que el servidor detecta y rechaza si repite.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Sin ella, un GET que falla podría crear dos registros, o cobrar dos veces a un usuario.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Un GET no crea registros ni cobra; el ejemplo correcto sería un POST que falla y se reintenta. GET es idempotente y seguro.",
+      "quote": "Sin ella, un GET que falla podría crear dos registros, o cobrar dos veces a un usuario.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "La degradación es casi seguro por las dependencias. Empieza aquí:\n\n**1. Identifica qué cambió**\n```bash\nnpm list --depth=0\n```\nCompara con el último commit. Si tienes `package-lock.json` en git, ve qué versiones subieron más.\n\n**2. Revisa el cambio en Node.js o V8**\nAlgunos updates de dependencias traen versiones nuevas de Node. Verifica qué versión tienes ahora:\n```bash\nnode --version\n```\nSi subió de versión, puede ser un cambio en el garbage collector o en optimizaciones.\n\n**3. Busca la culpable** \nRestaura `package-lock.json` al commit anterior, instala y prueba:\n```bash\ngit checkout HEAD~1 package-lock.json\nnpm ci\nnpm start\n```\nSi vuelven los 120 ms, sabes que fue la actualización.\n\n**4. Actualiza una por una**\nVuelve al lock actual. Luego baja cada dependencia principal a su versión anterior y sube de a una hasta encontrar la culpable. Las candidatas más comunes son:\n\n- Cualquier dependencia de parseo (Express, body-parser, busboy)\n- Drivers de base de datos\n- Middleware de logging o tracing\n\n**5. Mira los logs**\n¿El CPU está al 100% o espera I/O? Si es I/O, puede ser que el driver de DB cambiara el pool size. Revisa conexiones abiertas:\n```bash\nlsof -p <PID> | grep ESTAB | wc -l\n```\n\n¿Qué dependencias actualizaste?",
+      "output_tokens": 589,
+      "thinking_tokens": 169,
+      "input_tokens": 6243
+    },
+    {
+      "text": "Ese es el problema. Cada BEGIN + COMMIT suma latencia de red y confirmación en Postgres. Con 14 queries pasas de 14 operaciones a 28.\n\n**Soluciones, en orden:**\n\n**1. Revierte el ORM** (más rápido)\n¿Cuál es? Si es Sequelize, TypeORM, Knex u otro, mira si la versión anterior funciona:\n```bash\nnpm install <orm>@<old-version>\nnpm ci\n```\nPrueba antes de hacer downgrade definitivo.\n\n**2. Agrupa en una transacción** (mejor a largo plazo)\nSi el ORM lo permite, envuelve el request completo en una sola transacción:\n```javascript\n// Pseudocódigo\nawait db.transaction(async (trx) => {\n  const query1 = await trx.query(...);\n  const query2 = await trx.query(...);\n  // Todas las 14 queries aquí\n  // Un solo BEGIN al inicio, un COMMIT al final\n});\n```\n\n**3. Desactiva transacciones automáticas** \nAlgunos ORMs tienen una opción como `autoCommit: true` o `autoTransaction: false`. Busca en el changelog qué cambió entre 8.11 y 8.12.\n\n**¿Cuál es el ORM?** Así te digo exactamente qué opción tienes en la configuración.",
+      "output_tokens": 611,
+      "thinking_tokens": 253,
+      "input_tokens": 6940
+    },
+    {
+      "text": "```\nRevert ORM to previous version due to automatic transaction overhead\n\nThe ORM version introduced automatic BEGIN/COMMIT per query,\ncausing each request to execute 28 transactions instead of 14.\n\n- p95 latency: 900 ms → 130 ms\n- Reverted to previous stable version pending investigation\n```\n\nO más corto para el título:\n```\nRevert ORM: Fix p95 latency regression (900 ms → 130 ms)\n```\n\nEn el body explicas que la nueva versión abre transacción por query. Cuando investigues por qué cambió ese comportamiento, puedes hacer un PR para fijar la configuración o actualizar correctamente.",
+      "output_tokens": 407,
+      "thinking_tokens": 241,
+      "input_tokens": 7628
+    }
+  ],
+  "created_at": "2026-10-07T00:52:52.916085+00:00"
+}

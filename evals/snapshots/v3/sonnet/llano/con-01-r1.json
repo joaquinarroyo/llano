@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Una operación es idempotente cuando ejecutarla una vez o varias veces con la misma entrada deja el sistema en el mismo estado. La respuesta puede variar (por ejemplo, 201 la primera vez y 200 después), pero el efecto en el servidor no cambia.\n\n**Por qué importa**\n\nLas redes fallan. Si un cliente envía una solicitud y no recibe respuesta, no sabe si el servidor la procesó. La única opción segura es reintentar. Sin idempotencia, ese reintento puede cobrar dos veces, crear dos pedidos o enviar dos correos.\n\n**Qué métodos HTTP son idempotentes**\n\n| Método | Idempotente | Por qué |\n|---|---|---|\n| `GET`, `HEAD`, `OPTIONS` | Sí | Solo leen. |\n| `PUT` | Sí | Reemplaza el recurso con el mismo contenido. |\n| `DELETE` | Sí | Después de la primera llamada el recurso ya no existe. |\n| `POST` | No | Cada llamada suele crear un recurso nuevo. |\n| `PATCH` | Depende | `{\"estado\": \"pagado\"}` lo es. `{\"saldo\": \"+10\"}` no. |\n\nEsta tabla es lo que define la especificación HTTP. Tu implementación debe cumplirla: un `PUT` que incrementa un contador rompe el contrato.\n\n**Cómo hacer idempotente un `POST`**\n\nUsa una clave de idempotencia:\n\n1. El cliente genera un identificador único (por ejemplo, un UUID) y lo envía en un header: `Idempotency-Key: 8f3c1a52-...`.\n2. El servidor guarda la clave junto con el resultado de la primera ejecución.\n3. Si llega la misma clave otra vez, el servidor devuelve el resultado guardado y no repite la operación.\n4. Si la misma clave llega con un cuerpo distinto, el servidor rechaza la solicitud (Stripe, por ejemplo, devuelve un error).\n\n**Detalles que fallan con frecuencia**\n\n- **Guardar la clave y ejecutar la operación deben ser atómicos.** Si no, dos reintentos simultáneos pasan la verificación a la vez. Usa una restricción `UNIQUE` en la base de datos.\n- **Las claves necesitan caducidad.** Muchos servicios las conservan entre 24 horas y varios días, para que la tabla no crezca sin límite.\n- **El cliente debe reutilizar la misma clave al reintentar.** Si genera una nueva en cada intento, la protección no sirve.",
+  "output_tokens": 947,
+  "thinking_tokens": 54,
+  "input_tokens": 5201,
+  "wall_s": 7.91,
+  "created_at": "2026-10-07T00:53:13.898148+00:00"
+}

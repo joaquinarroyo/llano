@@ -1,0 +1,50 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "porque crea un nuevo commit en lugar de reescribir el historial",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Force push: destructivo y arriesgado con un equipo.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "git log --oneline | head",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "git push origin main",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que quienes hacen pull reciben el revert siempre sin conflictos, pero pueden surgir conflictos si tienen cambios locales o trabajo que toca las mismas líneas.",
+      "quote": "Los demás hacen `git pull` y reciben el revert sin conflictos.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

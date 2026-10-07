@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Rota los refresh tokens en cada uso (`feat(auth)`).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Invalida el refresh token anterior si alguien lo reutiliza (`fix(auth)`).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Agrega tests para la detección de reutilización (`test(auth)`).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2 (`chore`).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`src/auth/middleware.ts`: 12 líneas cambiadas.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": false,
+  "diagram": "none"
+}

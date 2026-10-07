@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A resume los cuatro commits de forma directa y fiel, lista para pegar en la descripción; B añade información útil por archivo, pero repite ideas, inventa detalles (como '+84 líneas' cuando el diff mezcla altas y bajas) y exagera con 'cobertura completa'."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es directo, listo para pegar en la descripción del PR y refleja con precisión los cambios; A añade relleno, afirma cosas no verificables (\"cobertura completa\", \"revocados\") y mezcla conteos de líneas dudosos (+12 es '12 +++-' no solo adiciones) sin aportar información técnica extra."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

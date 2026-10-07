@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Te muestro los pasos principales para hacer un backup de PostgreSQL de producción y restaurarlo localmente:\n\n## Backup desde producción\n\n```bash\n# Opción 1: Dump en formato SQL (texto)\npg_dump -h produccion-host -U usuario -d nombre_bd > backup.sql\n\n# Opción 2: Dump en formato binario (más comprimido y rápido)\npg_dump -h produccion-host -U usuario -F c -d nombre_bd > backup.dump\n\n# Opción 3: Dump con compresión\npg_dump -h produccion-host -U usuario -F c -Z 9 -d nombre_bd > backup.dump.gz\n```\n\n## Transferir el archivo a tu máquina local\n\n```bash\n# Desde tu máquina local\nscp usuario@produccion-host:/ruta/backup.dump ./backup.dump\n```\n\n## Restaurar localmente\n\n```bash\n# Opción 1: Si es formato SQL\npsql -U tu_usuario -d nombre_bd_local < backup.sql\n\n# Opción 2: Si es formato binario (.dump)\npg_restore -U tu_usuario -d nombre_bd_local backup.dump\n\n# Opción 3: Si necesitas crear la BD primero\ncreatedb -U tu_usuario nombre_bd_local\npg_restore -U tu_usuario -d nombre_bd_local backup.dump\n```\n\n## Consideraciones importantes\n\n- **Credenciales**: Te pedirá la contraseña. Puedes configurar `~/.pgpass` para no escribirla cada vez\n- **Permisos**: Asegúrate de que tu usuario local tenga permisos para crear/escribir en la BD\n- **Tamaño**: Para BDs muy grandes, considera el formato binario con compresión (más rápido)\n- **Seguridad**: El archivo de backup contiene datos sensibles, mantén seguro el acceso al servidor de producción\n\n¿Necesitas ayuda con algún paso específico o tienes dudas sobre credenciales/conexión?",
+  "output_tokens": 678,
+  "thinking_tokens": 172,
+  "input_tokens": 3404,
+  "wall_s": 7.01,
+  "created_at": "2026-10-07T00:05:14.358300+00:00"
+}

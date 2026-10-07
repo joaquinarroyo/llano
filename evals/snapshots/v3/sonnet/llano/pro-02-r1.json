@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `git revert`. Crea un commit nuevo que deshace los cambios y no reescribe el historial, así los demás no tienen que corregir nada en sus copias.\n\n**Peligro:** no uses `git reset --hard` seguido de `git push --force` en `main`. Eso reescribe un historial que el equipo ya descargó. Sus ramas locales divergen y pueden volver a subir el commit que quieres quitar.\n\n1. Actualiza tu copia: `git switch main && git pull --ff-only`.\n2. Busca el hash del commit: `git log --oneline`.\n3. Revierte el commit: `git revert <hash>`. Git abre el editor con un mensaje. Agrega ahí el motivo de la reversión.\n4. Si el commit es un merge, indica la rama padre que se conserva: `git revert -m 1 <hash>`. Normalmente `1` es `main`.\n5. Ejecuta los tests. Un revert puede tener conflictos o romper código que ya dependía del cambio.\n6. Sube el resultado: `git push origin main`.\n7. Avisa al equipo para que hagan `git pull`.\n\n**Atención:** si `main` tiene protección, crea una rama (`git switch -c revert-<hash>`), haz el revert ahí y abre un PR.\n\nPara revertir varios commits seguidos, usa `git revert <viejo>^..<nuevo>`. Git crea un commit de reversión por cada uno.\n\nSi después quieres recuperar el cambio, revierte el commit de reversión con `git revert <hash-del-revert>`. Si lo haces en una rama nueva, también puedes corregir el cambio antes de volver a integrarlo.",
+  "output_tokens": 914,
+  "thinking_tokens": 346,
+  "input_tokens": 5228,
+  "wall_s": 10.81,
+  "created_at": "2026-10-07T00:53:08.220489+00:00"
+}

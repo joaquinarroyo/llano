@@ -1,0 +1,118 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "con 6 desarrolladores terminas gastando la mitad del tiempo en infraestructura, logging distribuido y sincronización entre servicios",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "¿Cuál es el problema real que quieren resolver?",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "modularizar el Rails",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "logging distribuido y sincronización entre servicios",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "paraleliza los tests, separa contextos de negocio dentro del mismo Rails",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "facturación y autenticación en módulos desacoplados con sus propias pruebas",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "el cambio de facturación no debería romper login si hay cobertura",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "la raíz no es arquitectura",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": false,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Mide qué tarda 40 minutos en el deploy (build, tests, infraestructura).",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Extrae facturación en un módulo independiente con su carpeta y sus tests.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Mueve tests lentos a una suite separada (integración).",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "Si después de sprint 3 los deploys siguen lentos, extraes facturación a un servicio.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "La supuesta regla de un equipo por servicio es inventada y contradictoria: con 6 personas no se necesitan 3 o 4 servicios para que el costo valga, y la propia respuesta concluye que microservicios no conviene.",
+      "quote": "La regla aproximada es un equipo por servicio: si tienes 6 personas, necesitas al menos 3 o 4 servicios para que el costo valga.",
+      "verified": true
+    },
+    {
+      "claim": "Afirma sin evidencia que la causa de los 40 minutos no es el tamaño del monolito; no se conoce la causa antes de medir.",
+      "quote": "el deploy tarda 40 minutos por algo en la infraestructura o pipeline, no por el tamaño del monolito",
+      "verified": true
+    },
+    {
+      "claim": "`--parallel-tests` no es una opción de RSpec; la paralelización se hace con la gema parallel_tests (`parallel_rspec`).",
+      "quote": "Ejecuta tests en paralelo (RSpec con `--parallel-tests`).",
+      "verified": true
+    }
+  ]
+}

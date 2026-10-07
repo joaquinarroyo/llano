@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica CORS con el mensaje de error real, aclara que la petición sí llega al servidor, cubre más frameworks, da un ejemplo concreto de proxy en Vite y lista errores comunes (origen exacto, orden del middleware, credenciales con '*'), todo con estructura fácil de escanear."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica el origen, muestra el error real del navegador, aclara que la petición sí llega al servidor, cubre el preflight, da configuraciones para cuatro frameworks, el proxy con código y errores comunes (wildcard con credenciales, orden del middleware, localhost vs 127.0.0.1), con mejor estructura para una sola lectura."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom contra producción y `pg_restore` en tu máquina local. Ese formato comprime el archivo y permite restaurar en paralelo.\n\n**Peligro:** el archivo contiene datos reales de producción, posiblemente personales. Guárdalo solo donde tengas permiso y bórralo cuando termines. Antes de restaurar, verifica que `pg_restore` apunte a tu base local, porque con el host equivocado sobrescribes producción.\n\n**Atención:** la versión de `pg_dump` debe ser igual o mayor que la del servidor. Si es menor, el comando falla. Verifica con `pg_dump --version`.\n\n1. Haz el backup. `pg_dump` toma un snapshot consistente y no bloquea las escrituras.\n\n   ```\n   pg_dump -Fc --no-owner --no-acl -h HOST_PROD -U USUARIO -d NOMBRE_BD -f backup.dump\n   ```\n\n   Define la contraseña con `PGPASSWORD` o en `~/.pgpass`, para que no quede en el historial del shell. Si la base solo es accesible por SSH, abre antes un túnel: `ssh -L 5433:localhost:5432 usuario@servidor`. Luego usa `-h localhost -p 5433`.\n\n2. Crea la base local vacía.\n\n   ```\n   createdb nombre_local\n   ```\n\n3. Restaura el backup. `--no-owner` y `--no-acl` evitan errores por roles de producción que no existen en tu máquina. `-j 4` usa 4 procesos en paralelo.\n\n   ```\n   pg_restore -d nombre_local --no-owner --no-acl -j 4 backup.dump\n   ```\n\n4. Verifica que las tablas existan.\n\n   ```\n   psql -d nombre_local -c '\\dt'\n   ```\n\nSi la base usa extensiones como PostGIS, instálalas antes en tu Postgres local. Si no, `pg_restore` reporta errores en esos objetos.",
+  "output_tokens": 1305,
+  "thinking_tokens": 623,
+  "input_tokens": 5214,
+  "wall_s": 10.77,
+  "created_at": "2026-10-07T00:53:48.564614+00:00"
+}

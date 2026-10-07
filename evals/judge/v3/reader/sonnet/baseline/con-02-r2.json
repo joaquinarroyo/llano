@@ -1,0 +1,29 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "key": [
+    "C",
+    "C",
+    "C"
+  ],
+  "answers": [
+    "C",
+    "C",
+    "C"
+  ],
+  "correct": [
+    true,
+    true,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B incluye el manejo de conflictos durante el revert (`git add` y `git revert --continue`) y una comparación clara entre revert y reset --hard, mientras que A omite los conflictos y su indicación de `:wq` es menos general."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A cubre además el caso de conflictos durante el revert (resolver, git add, git revert --continue) y explica claramente por qué revert es mejor que reset --hard, con pasos bien estructurados; B es más corto pero omite el manejo de conflictos."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

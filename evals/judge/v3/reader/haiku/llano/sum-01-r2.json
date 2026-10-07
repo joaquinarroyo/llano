@@ -1,0 +1,29 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "key": [
+    "B",
+    "D",
+    "A"
+  ],
+  "answers": [
+    "B",
+    "D",
+    "E"
+  ],
+  "correct": [
+    true,
+    true,
+    false
+  ],
+  "not_said": [
+    false,
+    false,
+    true
+  ],
+  "reader_model": "haiku"
+}
