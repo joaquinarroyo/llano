@@ -1,0 +1,25 @@
+{
+  "prompt_id": "conv-01",
+  "kind": "floor",
+  "key": [
+    "B",
+    "D",
+    "D"
+  ],
+  "answers": [
+    "E",
+    "E",
+    "E"
+  ],
+  "correct": [
+    false,
+    false,
+    false
+  ],
+  "not_said": [
+    true,
+    true,
+    true
+  ],
+  "reader_model": "haiku"
+}

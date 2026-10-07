@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica el modelo con menos relleno, ubica bien microtareas, fases y el pool de hilos, y advierte que async no paraleliza CPU; A es más extensa (tabla de equivalencias, diagrama) y tiene una imprecisión al decir que 'nextTick' va antes de promesas sin aclarar que ambas se vacían tras cada callback, además de afirmar que 'el loop revisa las colas cuando la pila está vacía' de forma más simplificada."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica primero el modelo simple (pila, libuv, cola, loop) con un diagrama, luego el orden de ejecución y las fases, y añade una tabla de equivalencias con asyncio que ayuda a quien viene de Python; A es correcta y más compacta, pero mezcla microtareas y fases en una sola lista y es menos gradual."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

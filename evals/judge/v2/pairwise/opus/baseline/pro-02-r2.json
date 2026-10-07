@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A presenta pasos numerados, claros y en orden lógico, con el peligro destacado al inicio, una tabla de casos especiales y la advertencia de re-aplicar; B cubre lo mismo pero mezcla casos especiales dentro del paso 3 y añade una oferta irrelevante sobre el directorio de trabajo que distrae."
+    },
+    {
+      "winner": "llano",
+      "reason": "B cubre lo mismo (revert, evitar reset+force, conflictos, merges, varios commits, rama protegida, revertir el revert, avisar al equipo) con una advertencia clara al inicio y una tabla de casos especiales fácil de ubicar, y no incluye el comentario irrelevante sobre que el directorio no es un repositorio git que aparece en A."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

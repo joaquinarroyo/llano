@@ -1,0 +1,50 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Falla porque 0.1 no se representa exactamente en binario.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "la solución es comparar con tolerancia en el test",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "En pytest, usa `approx()`",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "usa `decimal.Decimal`",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "los errores de redondeo dan 89.99999999999999 en lugar de 90.0",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Presenta la exactitud decimal como algo raro en precios, cuando para dinero Decimal o enteros en centavos es la práctica recomendada.",
+      "quote": "Si necesitas exactitud decimal (raro en precios pero posible)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

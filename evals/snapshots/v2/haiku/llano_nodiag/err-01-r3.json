@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "La API v2.4.1 no se conecta a Postgres en `10.0.3.17:5432`. El pool falla después de 30000 ms y el proceso termina con código 1.\n\nEs un timeout, no un error de credenciales: la conexión nunca recibe respuesta. Revisa primero que la base esté levantada y que el security group permita el puerto 5432 desde la API.\n\n**Qué revisar en orden:**\n\n1. **Postgres está corriendo.** Conéctate al servidor y verifica que el proceso de Postgres esté activo. Revisa los logs de la BD si existen.\n\n2. **El security group permite el tráfico.** Desde donde corre la API, debe poder llegar al puerto 5432 de `10.0.3.17`. En AWS, verifica las rules de entrada del security group. Si usas un firewall o iptables, comprueba que el puerto 5432 esté abierto.\n\n3. **La conectividad existe.** Desde el servidor de la API, prueba:\n   ```\n   telnet 10.0.3.17 5432\n   ```\n   o\n   ```\n   nc -zv 10.0.3.17 5432\n   ```\n   Si ambos fallan con timeout, hay un problema de red antes de llegar a Postgres.\n\n4. **El nombre resuelve correctamente.** `db.internal` resuelve a `10.0.3.17`, así que el DNS funciona. Pero verifica que esa IP sea la correcta en tu entorno.\n\n¿Qué infraestructura usas? (AWS, Kubernetes, otra). Eso me ayuda a darte pasos más específicos.",
+  "output_tokens": 898,
+  "thinking_tokens": 471,
+  "input_tokens": 6040,
+  "wall_s": 9.74,
+  "created_at": "2026-10-07T00:07:41.421563+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica el modelo con más exactitud (fases del event loop, delegación al SO, microtareas antes del siguiente ciclo), mientras que A afirma cosas erróneas, como que omitir `await` bloquea todo y que Node es 'asíncrono por defecto', lo que confundiría a quien viene de Python."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A explica correctamente las fases del event loop y las microtareas, con ejemplos exactos; B afirma erróneamente que omitir `await` \"bloquea todo\" (en realidad solo devuelve una Promesa pendiente), un error conceptual grave para quien viene de Python."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

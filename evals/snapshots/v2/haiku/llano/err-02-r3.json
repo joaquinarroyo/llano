@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Es un problema de precisión en punto flotante. El número 0.1 no se representa exactamente en binario, así que `100.0 * (1 - 0.1)` no da 90.0 exacto, sino 89.99999999999999.\n\nPara arreglarlo, necesito ver el código. ¿Puedes mostrar el archivo `tests/test_invoice.py` y el código que calcula el total?\n\nMientras tanto, las opciones más comunes son:\n\n1. **Redondear el resultado** en el código: `round(total, 2)` antes de devolverlo.\n2. **Usar `decimal.Decimal`** en lugar de `float` para dinero.\n3. **Cambiar el test** a: `assert abs(total - 90.0) < 0.001` para permitir pequeños errores.\n\n¿Cuál prefieres? La opción 1 (redondear) es la más rápida si no necesitas precisión exacta.",
+  "output_tokens": 614,
+  "thinking_tokens": 362,
+  "input_tokens": 6244,
+  "wall_s": 6.98,
+  "created_at": "2026-10-07T00:07:41.635079+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B da comandos concretos y ejecutables (`nc -zv`, `telnet`) para probar la conectividad desde la máquina de la API, mientras que A solo sugiere conectar manualmente sin comando; además, B afirma sin respaldo en el log que DNS funciona, pero el log solo muestra la IP resuelta, lo cual es una inferencia razonable, y A pide verificar la resolución, algo menos accionable."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "Da comandos concretos (`nc -zv`, `telnet`) para probar la conectividad desde la máquina de la API y aclara que DNS ya resolvió, así que el desarrollador puede actuar sin repreguntar; B es más vago al pedir conectar \"manualmente\" desde otra máquina."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

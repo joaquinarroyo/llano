@@ -1,0 +1,44 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": false,
+  "diagram": "none"
+}

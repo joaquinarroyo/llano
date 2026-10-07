@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica la causa y da soluciones concretas con código listo para copiar (pytest.approx, isclose, Decimal, round) y una recomendación clara, mientras que A pide ver el código sin necesidad y solo describe las opciones."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica la causa y da soluciones concretas con código listo para usar (pytest.approx, math.isclose, Decimal, round) junto con una recomendación clara según el caso, mientras que B pide ver el código antes de poder ayudar y ofrece opciones menos detalladas."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

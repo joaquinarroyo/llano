@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B presenta una cronología escaneable con cada hora (incluida la detección a las 09:20, que A omite), el impacto y las acciones en formato de checklist, sin perder información técnica."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A presenta la cronología con cada hora (incluida la detección a las 09:20) y separa impacto y acciones en secciones escaneables, mientras que B omite la detección a las 09:20 y condensa todo en un párrafo."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

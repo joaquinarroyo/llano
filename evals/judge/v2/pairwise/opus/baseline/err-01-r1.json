@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica la causa (ETIMEDOUT, no DNS ni credenciales), da cinco pasos ordenados y accionables y se entiende de una sola lectura, mientras que B añade extras útiles pero es más largo y cierra pidiendo más contexto."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica con claridad el significado de ETIMEDOUT frente a ECONNREFUSED y a un error de credenciales, da comandos concretos y un orden de revisión accionable, y cubre casos que B omite (NetworkPolicy, NACLs stateless, conexión intermitente); B es más breve, pero su paso de listen_addresses no encaja con un timeout y su paso 3 es vago."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

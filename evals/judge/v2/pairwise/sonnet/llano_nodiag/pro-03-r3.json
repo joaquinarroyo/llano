@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B está organizada en secciones claras con los comandos listos, explica cada flag, cubre la opción por SSH, extensiones y anonimización, y añade una advertencia útil sobre `-h`; A es sólida pero su paso 2 mezcla `-Fc` con `-j`/`-Fd` de forma confusa, ya que `-j` en pg_dump exige formato directorio."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A separa backup, restauración y verificación con comandos autocontenidos, explica cada flag y cubre el caso de solo SSH, las extensiones y los datos sensibles; B es igual de ordenada pero su variante `-j 4 -Fd` se agrega a un comando que ya lleva `-Fc` y puede confundir."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

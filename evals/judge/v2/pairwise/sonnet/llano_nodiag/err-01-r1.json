@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A distingue ETIMEDOUT de ECONNREFUSED y de errores de autenticación, y pone primero la prueba de conexión desde el mismo entorno de la API, que es lo más útil para acotar el problema; B ordena peor los pasos (deja la prueba al final) y afirma sin base que el pool pudo resolver db.internal a esa IP y que los errores de credenciales llegarían de inmediato."
+    },
+    {
+      "winner": "llano",
+      "reason": "B pone primero la prueba de conexión desde el mismo entorno de la API, distingue ETIMEDOUT de ECONNREFUSED y de errores de autenticación, y es más preciso; A sugiere que un servidor sin escuchar causa timeout, lo cual normalmente da ECONNREFUSED, y deja la prueba diagnóstica para el final."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

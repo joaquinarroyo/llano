@@ -1,0 +1,118 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Los microservicios añaden complejidad operacional (CI/CD, observabilidad, networking) y de coordinación que consume mucho tiempo en equipos pequeños",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "antes de migrar, revisen si el problema real es escalabilidad",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "modularizar el Rails (Zeitwerk, domain-driven design)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "complejidad operacional (CI/CD, observabilidad, networking)",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "CI/CD eficiente**: caché, parallelización",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "separar facturación de auth con bounded contexts (DDD)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Tests insuficientes entre áreas",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "no se resuelven con microservicios",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Auditoría rápida: ¿cuánto tarda cada paso del deploy?",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Separar facturación de auth en bounded contexts claros",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Tests de integración entre facturación ↔ auth (catch early)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que con tests rápidos, desacoplamiento y CI el riesgo desaparece por completo; es una promesa exagerada, el riesgo solo se reduce.",
+      "quote": "pueden desplegar en 5-10 minutos y el riesgo desaparece",
+      "verified": true
+    },
+    {
+      "claim": "Recomienda correr solo los tests del área modificada, lo que omitiría los tests de auth cuando cambia facturación, justo el escenario que causó la rotura del login.",
+      "quote": "solo correr tests que impacta el cambio (cambios en `/billing` no corren tests de `/auth`)",
+      "verified": true
+    },
+    {
+      "claim": "Pasar de 40 min a 5-10 min es una mejora de 4x a 8x, no de 8x.",
+      "quote": "Deploys en 5-10min (8x más rápido)",
+      "verified": true
+    }
+  ]
+}

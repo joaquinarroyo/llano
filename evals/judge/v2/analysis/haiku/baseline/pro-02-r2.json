@@ -1,0 +1,44 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "crea un nuevo commit en lugar de reescribir el historial",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "reescribe el historial, obliga a los compañeros a hacer rebase",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "git log --oneline -10",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "git push origin main",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

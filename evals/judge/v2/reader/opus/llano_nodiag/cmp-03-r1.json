@@ -1,0 +1,29 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano_nodiag",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "key": [
+    "A",
+    "B",
+    "C"
+  ],
+  "answers": [
+    "A",
+    "B",
+    "E"
+  ],
+  "correct": [
+    true,
+    true,
+    false
+  ],
+  "not_said": [
+    false,
+    false,
+    true
+  ],
+  "reader_model": "haiku"
+}

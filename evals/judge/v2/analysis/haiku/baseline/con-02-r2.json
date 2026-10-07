@@ -1,0 +1,60 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "**Consistency (Consistencia)**: todos los nodos ven los mismos datos al mismo tiempo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "las particiones de red son inevitables, así que eliges entre **CP** (sacrificas disponibilidad) o **AP** (sacrificas consistencia fuerte)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "En la práctica, las particiones de red son inevitables",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "**PACELC** (extensión que incluye latencia como factor)",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "CAP sigue siendo relevante como marco mental",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "CAP dice que solo se pueden garantizar dos de tres propiedades simultáneamente, como si se pudiera elegir cualquier par; en realidad la partición no es opcional, y la restricción solo aplica durante una partición. Además la respuesta lo contradice después.",
+      "quote": "solo puedes garantizar simultáneamente dos de estas tres propiedades",
+      "verified": true
+    },
+    {
+      "claim": "Quorum-based no 'balancea las tres' propiedades; no evita el compromiso de CAP, solo ajusta el equilibrio entre consistencia y disponibilidad/latencia.",
+      "quote": "**Quorum-based** (balancean las tres)",
+      "verified": true
+    },
+    {
+      "claim": "CAP no es 'binario' en el sentido de ignorar grados de consistencia es una crítica común, pero decir que el teorema 'no menciona latencia' como limitación es correcto; sin embargo, afirmar que eventual consistency es 'AP con consistencia eventual' es tautológico y vago, no incorrecto. La atribución 'Brewer, 2000' es correcta (conjetura), aunque el teorema fue demostrado formalmente en 2002 por Gilbert y Lynch.",
+      "quote": "El **teorema CAP** (Brewer, 2000) establece",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

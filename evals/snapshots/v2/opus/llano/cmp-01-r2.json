@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Postgres. Un SaaS de facturación maneja dinero, y el dinero necesita transacciones ACID, relaciones estrictas y consultas que agregan datos. Postgres resuelve esas tres cosas de forma nativa.\n\n## Por qué Postgres encaja mejor\n\n- **Transacciones.** Emitir una factura toca varias tablas a la vez: factura, líneas, saldo del cliente y numeración. Postgres garantiza que se guarda todo o nada. MongoDB también tiene transacciones multi-documento desde la 4.0, pero son más lentas y el modelo no está pensado para ellas.\n- **Integridad.** Las foreign keys, `CHECK` y `UNIQUE` impiden datos inválidos en la base, no solo en el código. Por ejemplo, una factura sin cliente o un número de factura duplicado. En facturación, un número duplicado puede ser un problema legal o fiscal.\n- **Datos relacionales.** Clientes, planes, suscripciones, facturas, pagos, impuestos y notas de crédito se relacionan entre sí. Un modelo de documentos te obliga a duplicar datos o a hacer joins en la aplicación.\n- **Reportes.** Ingresos por mes, MRR y cuentas por cobrar son consultas SQL con `GROUP BY` y joins. En MongoDB necesitas pipelines de agregación, que son más difíciles de escribir y de mantener.\n- **Precisión.** El tipo `numeric` guarda montos sin errores de redondeo. MongoDB tiene `Decimal128`, pero tienes que usarlo de forma explícita en todo el código.\n\n## Cuándo MongoDB tendría sentido\n\nMongoDB conviene cuando los datos no tienen un esquema fijo y casi no hay relaciones. Un ejemplo son los logs o los catálogos con atributos muy variables. Si necesitas algo así en el SaaS, Postgres lo cubre con columnas `jsonb`. Por ejemplo, puedes guardar metadatos de cada factura o campos fiscales que cambian según el país.\n\n| Necesidad | Postgres | MongoDB |\n|---|---|---|\n| Transacciones en varias entidades | Nativo | Posible, con más costo |\n| Integridad referencial | Sí (foreign keys) | No, la valida la aplicación |\n| Reportes y agregaciones | SQL | Aggregation pipeline |\n| Datos flexibles | `jsonb` | Nativo |\n| Montos exactos | `numeric` | `Decimal128` |\n\n## Recomendaciones para empezar\n\n1. Guarda los montos como `numeric(19,4)` o como enteros en centavos. No uses `float`.\n2. Haz que las facturas emitidas sean inmutables. Para corregirlas, emite notas de crédito.\n3. Usa una secuencia o una tabla con lock para la numeración correlativa. Así evitas huecos y duplicados.\n4. Elige un servicio administrado, como RDS, Cloud SQL, Neon o Supabase, para tener backups y point-in-time recovery desde el primer día.",
+  "output_tokens": 1110,
+  "thinking_tokens": 42,
+  "input_tokens": 5165,
+  "wall_s": 12.06,
+  "created_at": "2026-10-07T00:19:16.731844+00:00"
+}

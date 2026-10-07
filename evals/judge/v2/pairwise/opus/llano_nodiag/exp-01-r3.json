@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B es más fácil de seguir en una sola lectura para alguien que viene de Python: ejemplo con salida numerada, caso concreto de bloqueo en un servidor y tabla de equivalencias Python/Node, con la misma información técnica clave que A, aunque la equivalencia `loop.call_soon` ↔ `setImmediate` es imprecisa."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el mismo contenido técnico con menos errores: marca en la salida del ejemplo que timeout/immediate pueden invertirse, explica el orden paso a paso, añade un diagrama del flujo de I/O y menciona UV_THREADPOOL_SIZE. A presenta el orden timeout/immediate como fijo en su ejemplo numerado y lo contradice después, y su tabla de equivalencias tiene correspondencias dudosas, como loop.call_soon con setImmediate."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

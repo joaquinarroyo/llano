@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## 1. Hacer el dump en producción\n\nUsa el formato *custom* (`-Fc`): es comprimido y permite restaurar de forma selectiva.\n\n```bash\npg_dump \\\n  -h prod-host.example.com -p 5432 \\\n  -U usuario_lectura \\\n  -d nombre_db \\\n  -Fc --no-owner --no-acl \\\n  -f prod_$(date +%Y%m%d).dump\n```\n\n- `--no-owner --no-acl`: evita errores en local si no existen los mismos roles.\n- `pg_dump` no bloquea escrituras, pero sí consume I/O. Si tienes una **réplica de lectura**, apunta a ella en lugar del primario.\n- Para bases grandes, el dump en paralelo es más rápido. Requiere formato directorio:\n  ```bash\n  pg_dump -h ... -U ... -d nombre_db -Fd -j 4 --no-owner --no-acl -f prod_dump_dir\n  ```\n- Para no escribir la contraseña en la terminal, usa `~/.pgpass` o la variable `PGPASSWORD`.\n\n## 2. Restaurar en local\n\n```bash\n# Crear la base local (si ya existe, bórrala antes con dropdb)\ncreatedb -h localhost -U postgres nombre_db_local\n\n# Restaurar\npg_restore \\\n  -h localhost -U postgres \\\n  -d nombre_db_local \\\n  --no-owner --no-acl \\\n  -j 4 \\\n  prod_20261006.dump\n```\n\nCon `-j 4` la restauración se hace en paralelo. Si la base ya existe y quieres reemplazar su contenido, añade `--clean --if-exists`.\n\n## 3. Puntos a tener en cuenta\n\n- **Versiones:** `pg_dump` debe ser de una versión **igual o mayor** que el servidor de producción. Compruébalo con `pg_dump --version` frente a `SELECT version();`. En Mac: `brew install postgresql@17` (o la versión que corresponda).\n- **Extensiones:** si producción usa PostGIS, pgvector, etc., deben estar instaladas en tu Postgres local.\n- **Datos sensibles:** un dump de producción contiene datos reales de usuarios. Cífralo o bórralo cuando termines, no lo subas a repos ni a la nube, y valora anonimizar los datos. También puedes excluir tablas pesadas o sensibles con `--exclude-table-data=logs`.\n- **Solo esquema:** si no necesitas los datos, usa `pg_dump --schema-only`.\n- **Cuidado con el host:** revisa bien el `-h` antes de ejecutar `pg_restore --clean` o `dropdb`, para no lanzarlo nunca contra producción.\n\n### Alternativa en un solo paso (sin archivo intermedio)\n\n```bash\npg_dump -h prod-host -U usuario -d nombre_db -Fc --no-owner --no-acl \\\n  | pg_restore -h localhost -U postgres -d nombre_db_local --no-owner --no-acl\n```\n\nCon esta opción no puedes usar `-j`, pero no queda ningún archivo con datos de producción en tu disco.\n\nSi me dices si usas RDS, Docker en local u otro entorno, te ajusto los comandos.",
+  "output_tokens": 1195,
+  "thinking_tokens": 73,
+  "input_tokens": 1571,
+  "wall_s": 12.52,
+  "created_at": "2026-10-07T00:15:35.433094+00:00"
+}

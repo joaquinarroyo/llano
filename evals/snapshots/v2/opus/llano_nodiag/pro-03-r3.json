@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Usa `pg_dump` con formato custom en producción y `pg_restore` en tu máquina. El formato custom (`-Fc`) comprime el archivo y te deja restaurar tablas sueltas.\n\n**Atención:** `pg_dump` genera carga de lectura en el servidor. En una base grande, ejecútalo en horario de poco tráfico o contra una réplica de lectura.\n\n**Peligro:** el dump contiene datos reales de producción, como emails, contraseñas hasheadas y tokens. Guárdalo cifrado, no lo subas a un repositorio y bórralo cuando termines. Si la política de tu empresa lo exige, anonimiza los datos antes de usarlos en local.\n\n## 1. Verifica las versiones\n\n```bash\npsql \"$PROD_URL\" -c \"SELECT version();\"\npg_dump --version\npg_restore --version\n```\n\nTu `pg_dump` local debe tener la misma versión mayor que el servidor o una más nueva. Un `pg_dump` más viejo falla con `server version mismatch`.\n\n## 2. Haz el backup\n\n```bash\npg_dump \"postgresql://usuario@host-prod:5432/mi_base\" \\\n  -Fc --no-owner --no-acl \\\n  -f prod_2026-10-06.dump\n```\n\n- `-Fc`: formato custom, comprimido.\n- `--no-owner` y `--no-acl`: omiten los dueños y permisos de producción. Así evitas errores porque esos roles no existen en tu máquina.\n\nPara no escribir la contraseña en el comando, usa `~/.pgpass` o la variable `PGPASSWORD`.\n\n## 3. Crea la base local\n\n```bash\ncreatedb mi_base_local\n```\n\n## 4. Restaura\n\n```bash\npg_restore -d mi_base_local --no-owner --no-acl -j 4 prod_2026-10-06.dump\n```\n\n`-j 4` restaura con 4 procesos en paralelo. Ajusta el número a los núcleos de tu computadora.\n\nSi `pg_restore` muestra errores sobre extensiones como `postgis` o `pg_stat_statements`, instala esas extensiones en tu Postgres local y repite la restauración.\n\n## 5. Verifica\n\n```bash\npsql mi_base_local -c \"\\dt\"\npsql mi_base_local -c \"SELECT count(*) FROM una_tabla;\"\n```\n\nCompara algunos conteos con producción para confirmar que la restauración está completa.\n\n## Variantes útiles\n\n| Necesidad | Opción |\n|---|---|\n| Solo el esquema, sin datos | `pg_dump -s` |\n| Excluir los datos de una tabla grande | `--exclude-table-data=logs` |\n| Restaurar una sola tabla | `pg_restore -t usuarios ...` |\n| Reemplazar una base local existente | `pg_restore --clean --if-exists ...` |\n\nSi tu producción está en un servicio administrado (RDS, Cloud SQL, Supabase), el procedimiento es el mismo. Solo necesitas acceso de red al host, por ejemplo con un túnel SSH o un bastion.",
+  "output_tokens": 1118,
+  "thinking_tokens": 58,
+  "input_tokens": 4804,
+  "wall_s": 11.41,
+  "created_at": "2026-10-07T00:23:25.199576+00:00"
+}

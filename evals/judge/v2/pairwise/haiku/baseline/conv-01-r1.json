@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B es más directo y consistente en español, con pasos claros y un mensaje de PR en el idioma del desarrollador, mientras que A mezcla idiomas, incluye comandos poco útiles (git log en node_modules) y sugerencias confusas."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A es más directo y enfocado en cada turno, y entrega un mensaje de PR en español con una versión corta. B incluye sugerencias genéricas poco útiles (joi, lodash), un comando erróneo (`git log node_modules`) y mezcla idiomas (\"plus\", PR en inglés)."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

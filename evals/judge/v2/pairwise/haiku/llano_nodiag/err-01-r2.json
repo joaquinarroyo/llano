@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da comandos y pasos concretos de verificación (conexión manual, nslookup, listen_addresses, subnets) que permiten actuar de inmediato, mientras B es más breve pero menos accionable y termina con preguntas en vez de cómo comprobar cada punto."
+    },
+    {
+      "winner": "llano",
+      "reason": "B da pasos accionables concretos (conectar manualmente, nslookup, revisar listen_addresses en postgresql.conf) y cubre la causa común de que Postgres no escuche en esa IP, mientras que A es más genérica y termina con preguntas en vez de comandos verificables."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

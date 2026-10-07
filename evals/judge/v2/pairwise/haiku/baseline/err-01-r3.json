@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica claramente que es un timeout de red (no de credenciales) y da pasos de verificación ordenados y accionables sin asumir Kubernetes, mientras que B asume kubectl y sugiere revisar credenciales, que no aplica a un ETIMEDOUT."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica de entrada que es un timeout y no un error de credenciales, y da una lista de comprobaciones más precisa (IP concreta, security group, DNS, rutas) sin asumir Kubernetes, mientras que A incluye credenciales (que no encajan con un ETIMEDOUT) y asume kubectl."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

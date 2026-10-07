@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B está pensada para quien viene de Python: usa voseo como el usuario, agrega una analogía y una tabla de equivalencias con asyncio, y cubre más (stack, libuv, fases) y las soluciones al bloqueo; A es más compacta pero deja fuera esa traducción de conceptos."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el modelo central (un hilo, delegación de I/O, cola de callbacks, fases, microtareas, await, bloqueo del loop) de forma compacta y sin perder nada esencial, mientras que A, aunque más completa, es mucho más larga y con material extra (tabla de equivalencias, ejemplo con orden no garantizado) que dificulta entenderla en una sola lectura."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

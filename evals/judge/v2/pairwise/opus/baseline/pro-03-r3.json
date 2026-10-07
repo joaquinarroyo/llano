@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A sigue un flujo lineal y claro (dump, verificar versiones, crear base, restaurar, verificar), con advertencias bien ubicadas y cubre extensiones y comprobación de resultados; B aporta extras útiles (túnel SSH, Docker) pero es más disperso y no cubre extensiones ni verifica conteos."
+    },
+    {
+      "winner": "llano",
+      "reason": "B sigue un orden lineal claro (dump, versiones, crear base, restaurar, verificar) con advertencias bien señaladas, incluye puntos técnicos clave como el error de versión en pg_restore, las extensiones y la comparación de conteos, mientras que A es más extensa y dispersa en opciones (macOS, Docker, túnel SSH)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,108 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Con 6 desarrolladores, el costo es alto: más complejidad operacional",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "¿Hay un problema específico del monolito que los detiene hoy",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        },
+        {
+          "status": "partial",
+          "quote": "más complejidad operacional, comunicación distribuida, testing más difícil, y overhead en DevOps",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Paraleliza tests (Rails permite esto fácil)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Mejor separación de concerns dentro del monolito (módulos, namespaces)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Tests de integración que capturen eso",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Esos son problemas reales, pero **no requieren microservicios**.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "**Perfilar deploys**: Medir tiempo por etapa (tests, build, deploy)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        },
+        {
+          "status": "present",
+          "quote": "**Tests de integración críticos**: Especialmente facturación + login",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Si después de esto los deploys siguen siendo un bottleneck O el monolito crece más, ahí reconsideran microservicios",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "rails_best_practices es un analizador estático de código y no sirve para identificar qué etapa del deploy o de los tests tarda más.",
+      "quote": "Identifica qué tarda más (rails_best_practices, profile)",
+      "verified": true
+    }
+  ]
+}

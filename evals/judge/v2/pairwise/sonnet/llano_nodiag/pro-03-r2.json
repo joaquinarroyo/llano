@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B cubre lo mismo que A (versión de pg_dump, riesgo de datos, réplica) y añade extensiones, túnel SSH y manejo de contraseña, aunque A tiene la advertencia útil sobre --clean y el pipe directo."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A es más completa y fácil de seguir en una sola lectura: verifica versiones con comandos, cubre extensiones, túnel SSH y alternativa en formato plano, y mantiene los pasos limpios; B es clara y añade una advertencia útil sobre --clean, pero omite extensiones y acceso por SSH."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

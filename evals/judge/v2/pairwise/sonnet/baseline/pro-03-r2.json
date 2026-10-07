@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da una secuencia lineal de pasos con advertencias puntuales (datos sensibles, versión de pg_dump, riesgo de --clean apuntando a producción) y cubre lo esencial sin desviarse, mientras que B, aunque completa, añade secciones extra (brew, scp, SQL plano) que diluyen la lectura única."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directa y se lee de corrido en pasos numerados, con advertencias puntuales (datos sensibles, versión de pg_dump, riesgo de --clean apuntando a producción) y cubre lo esencial incluido el pipe sin archivo, mientras que A, aunque completa, es más extensa y dispersa con secciones extra (SQL plano, brew, scp) que diluyen el camino principal."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

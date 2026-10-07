@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Aquí está el resumen para el equipo:\n\n---\n\n**Incidente: Degradación de latencia en checkout - 09:12 a 09:35**\n\n**Línea de tiempo:**\n- 09:12 — Latencia p95 en checkout pasó de 300 ms a 4 segundos\n- 09:20 — Root cause identificada: job de reindexado de Elasticsearch programado en horario laboral saturando el cluster\n- 09:31 — Job pausado manualmente\n- 09:35 — Latencia normalizada\n\n**Impacto:**\n- 212 usuarios abandonaron el checkout\n- Sin pérdida de pedidos\n- ~23 minutos de degradación total\n\n**Acciones pendientes:**\n- [ ] Reprogramar job de reindexado a las 03:00\n- [ ] Agregar alerta de CPU del cluster de Elasticsearch\n\n---\n\nSi querés, puedo ajustar el tono o agregar más detalles (como enlace a postmortem, DRI asignado, etc.).",
+  "output_tokens": 470,
+  "thinking_tokens": 208,
+  "input_tokens": 3532,
+  "wall_s": 4.81,
+  "created_at": "2026-10-07T00:07:46.443907+00:00"
+}

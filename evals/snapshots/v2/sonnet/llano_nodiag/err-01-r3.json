@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La API v2.4.1 no logra abrir una conexión TCP con Postgres en `10.0.3.17:5432`. Después de 30000 ms (de 14:02:12 a 14:02:42) el pool de conexiones se rinde y el proceso termina con código 1.\n\n`ETIMEDOUT` significa que el servidor nunca respondió. No es un error de usuario o contraseña, porque esos errores aparecen después de que la conexión se establece. El problema está en la red o en que la base no está disponible.\n\nRevisa en este orden:\n\n1. **Alcance de red.** Desde el mismo host o contenedor de la API, ejecuta `nc -zv 10.0.3.17 5432`. Si también hace timeout, el problema no es de la aplicación.\n2. **Firewall.** Verifica que el security group o firewall de la base permita el puerto 5432 desde la IP o el grupo de la API. Esta es la causa más común de un timeout.\n3. **DNS.** Ejecuta `nslookup db.internal` desde la API. Si no devuelve `10.0.3.17`, el nombre apunta a una IP vieja, por ejemplo si reemplazaron la instancia de la base.\n4. **Estado de la base.** Confirma que la instancia está corriendo y aceptando conexiones en ese puerto.\n5. **Cambios recientes.** Revisa si cambió la red, la subred o la configuración entre el último deploy que funcionó y este.\n\nNo puedo ver tu infraestructura, así que no sé cuál de estas causas es la real. Si el paso 1 falla, dime qué devuelve `nc` y el paso 3, y reduzco las opciones.",
+  "output_tokens": 979,
+  "thinking_tokens": 415,
+  "input_tokens": 4989,
+  "wall_s": 8.7,
+  "created_at": "2026-10-07T00:12:34.702697+00:00"
+}

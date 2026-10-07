@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Postgres. Un SaaS de facturación maneja datos relacionales y dinero, y Postgres resuelve bien los dos casos.\n\n**Por qué Postgres encaja mejor:**\n\n- **Los datos son relacionales.** Clientes, facturas, líneas de factura, impuestos, pagos y notas de crédito se relacionan entre sí. Las foreign keys y los JOIN expresan esas relaciones de forma directa.\n- **El dinero necesita transacciones ACID.** Emitir una factura, registrar el pago y actualizar el saldo deben confirmarse juntos o no confirmarse. Postgres lo garantiza en cualquier combinación de tablas. MongoDB tiene transacciones multi-documento, pero el modelo no está pensado para usarlas en cada operación.\n- **La integridad la verifica la base.** Con `NOT NULL`, `UNIQUE`, `CHECK` y foreign keys, la base rechaza una factura sin cliente o un número de factura repetido. En MongoDB esa validación queda en tu código.\n- **El dinero tiene un tipo exacto.** `numeric` guarda importes sin errores de redondeo. MongoDB tiene `Decimal128`, pero muchos drivers y ORMs lo manejan peor.\n- **Los reportes son SQL.** Facturación mensual, deuda por cliente, impuestos por período: son agregaciones con JOIN que SQL escribe en pocas líneas. Los contadores y las herramientas de BI también hablan SQL.\n- **La auditoría es más simple.** Las facturas emitidas no se modifican. Puedes hacerlas inmutables con permisos o triggers, y llevar un historial con tablas de auditoría.\n\n**Lo que MongoDB haría mejor, y cómo lo cubre Postgres:**\n\n| Necesidad | Solución en Postgres |\n|---|---|\n| Campos flexibles por cliente o por país | Columnas `jsonb` con índices GIN |\n| Guardar el PDF o el XML fiscal tal como se emitió | `jsonb` o `text`, o un bucket de objetos con la referencia en la tabla |\n| Escalar escrituras a gran volumen | Particionado por fecha o por tenant. Citus si necesitas sharding |\n\n**Para el multi-tenant**, empieza con una base compartida y una columna `tenant_id` en cada tabla. Agrega Row-Level Security (`CREATE POLICY`) para que un tenant no lea datos de otro aunque el código tenga un error.\n\nMongoDB solo convendría si los documentos no tuvieran relaciones y la estructura cambiara mucho. Una facturación no tiene esas características.",
+  "output_tokens": 947,
+  "thinking_tokens": 28,
+  "input_tokens": 5165,
+  "wall_s": 11.05,
+  "created_at": "2026-10-07T00:23:36.247474+00:00"
+}

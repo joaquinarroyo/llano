@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# WebSocket vs SSE vs Polling\n\n**Polling:** El cliente pregunta repetidamente al servidor. Úsalo cuando los datos cambian infrecuentemente o la latencia no es crítica. Es simple de implementar pero ineficiente (mucho tráfico innecesario).\n\n**Server-Sent Events (SSE):** El servidor empuja datos al cliente por una conexión HTTP persistente, unidireccional. Ideal para notificaciones en tiempo real donde solo el servidor envía datos (actualizaciones de noticias, mensajes de admin, alertas). Más eficiente que polling, compatible con HTTP/1.1.\n\n**WebSocket:** Conexión bidireccional persistente. Úsalo cuando necesites comunicación en tiempo real en ambas direcciones (chat, colaboración en vivo, juegos, mercados financieros). Mayor overhead inicial pero muy eficiente para intercambios frecuentes.\n\n## Resumen rápido:\n\n| Caso | Solución |\n|------|----------|\n| Datos cambian raramente | **Polling** |\n| Server → Client, notificaciones | **SSE** |\n| Bidireccional, tiempo real intenso | **WebSocket** |\n\n**Pro tip:** SSE + Polling híbrido funciona bien: SSE para notificaciones urgentes, polling ocasional para sincronizar estado.",
+  "output_tokens": 456,
+  "thinking_tokens": 129,
+  "input_tokens": 3400,
+  "wall_s": 5.48,
+  "created_at": "2026-10-07T00:08:06.959711+00:00"
+}

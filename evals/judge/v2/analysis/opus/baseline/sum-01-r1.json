@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Implementa rotación de refresh tokens: cada vez que se usa un refresh token se emite uno nuevo y el anterior queda invalidado.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "lógica de rotación de refresh tokens e invalidación del token anterior al detectar reuso.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "nuevos tests que cubren la rotación y la detección de reuso de tokens.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "actualización de `jsonwebtoken` de `9.0.0` a `9.0.2` (patch).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**`src/auth/middleware.ts`**: ajustes en el middleware para integrar el nuevo flujo de rotación.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": false,
+  "diagram": "none"
+}

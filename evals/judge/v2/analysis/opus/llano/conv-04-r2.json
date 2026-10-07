@@ -1,0 +1,102 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Con 6 desarrolladores, los microservicios suelen agregar más costo que beneficio.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Define el problema concreto.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Pasa a un monolito modular.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Cada servicio necesita su propio deploy, monitoreo, logs, alertas y pipeline de CI.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Paralelizar con `parallel_tests` o repartir en varios workers de CI con Knapsack",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Marca los límites con Packwerk.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Un test de sistema que haga login completo tiene que correr en cada pull request.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Ninguno de los dos problemas necesita microservicios.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Medir el tiempo de cada etapa del pipeline de deploy.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Crear los paquetes de facturación y de autenticación.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Agregar un test de sistema que haga login completo y correrlo en cada pull request.",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "En febrero de 2027 revisamos los resultados.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": []
+}

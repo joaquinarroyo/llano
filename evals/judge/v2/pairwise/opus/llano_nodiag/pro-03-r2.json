@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B sigue un flujo lineal claro de cinco pasos, incluye la verificación final de la restauración y advierte sobre el riesgo de dropdb contra producción, mientras que A omite la verificación y trata la exclusión de tablas y la anonimización de forma más dispersa."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A sigue un orden lógico (versiones, dump, base local, restore, verificación) con comandos completos y concisos, y añade una verificación final del resultado; B es igual de correcto pero deja la versión local y la exclusión de tablas más dispersas y no incluye cómo verificar la restauración."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

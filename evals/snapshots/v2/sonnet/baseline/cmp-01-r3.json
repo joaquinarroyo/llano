@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "**Postgres.** Para un SaaS de facturación es la opción clara.\n\n**Por qué:**\n\n- **Transacciones ACID y constraints**: facturas, líneas, pagos y asientos contables deben ser consistentes. Con Postgres tienes transacciones multi-tabla, claves foráneas, `CHECK` y `UNIQUE` (por ejemplo, numeración correlativa de facturas sin huecos ni duplicados) garantizados por la base de datos, no por tu código.\n- **Datos relacionales por naturaleza**: clientes, productos, impuestos, facturas, líneas, pagos, suscripciones. Son relaciones claras, y los joins y agregados (informes, conciliaciones, MRR) son lo cotidiano.\n- **Tipos numéricos exactos**: `NUMERIC` para dinero, sin errores de coma flotante.\n- **Flexibilidad cuando la necesitas**: `JSONB` cubre metadatos variables, payloads de pasarelas de pago o campos personalizados por cliente, con índices incluidos.\n- **Multi-tenancy**: `tenant_id` + Row Level Security te da aislamiento entre clientes a nivel de base de datos.\n- **Auditoría y cumplimiento**: más fácil demostrar integridad, y el ecosistema (extensiones, herramientas de backup/PITR, réplicas) está muy maduro.\n\n**Cuándo pensarías en MongoDB:** esquemas muy cambiantes, documentos sin relaciones fuertes, o volúmenes de escritura que exijan sharding horizontal desde el día uno. Nada de eso describe un sistema de facturación al inicio.\n\n**Recomendación práctica:**\n- Postgres gestionado (RDS, Cloud SQL, Neon, Supabase…) para no operar la base tú mismo.\n- Guarda importes en `NUMERIC` (o enteros en céntimos) junto con la moneda.\n- Haz las facturas emitidas inmutables (correcciones mediante notas de crédito) y registra cambios en una tabla de auditoría.\n- Si más adelante necesitas búsqueda o analítica pesada, añade un sistema específico al lado en vez de cambiar la base principal.\n\nSi me cuentas el stack (lenguaje/ORM) y el país de operación (afecta a requisitos de facturación electrónica), te ayudo a esbozar el esquema inicial.",
+  "output_tokens": 829,
+  "thinking_tokens": 0,
+  "input_tokens": 1583,
+  "wall_s": 7.59,
+  "created_at": "2026-10-07T00:12:58.004652+00:00"
+}

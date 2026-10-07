@@ -1,0 +1,44 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "La prueba falla porque `float` guarda los números en binario, y 0.1 no tiene representación exacta en binario.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Por eso `==` falla aunque la diferencia sea de 1e-14.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`pytest.approx` acepta por defecto una diferencia relativa de 1e-6.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Una factura maneja dinero, y el dinero necesita valores exactos en centavos.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el resultado puede quedar en `89.99999999999999` en lugar de `90.0`",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

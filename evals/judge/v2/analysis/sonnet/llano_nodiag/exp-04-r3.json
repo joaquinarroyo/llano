@@ -1,0 +1,44 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "El bloqueo ocurre en el navegador, por eso `curl` y Postman funcionan sin problema.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Aquí el puerto cambia (3000 y 8000), así que la política de mismo origen (same-origin policy) trata la API como ajena.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si la respuesta no trae `Access-Control-Allow-Origin` con tu origen, el navegador no deja que tu código lea la respuesta",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el navegador envía antes una petición `OPTIONS` llamada preflight.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "por eso `curl` y Postman funcionan sin problema.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

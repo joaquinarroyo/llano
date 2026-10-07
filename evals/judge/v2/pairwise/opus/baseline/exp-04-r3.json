@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica el origen, el bloqueo y las soluciones de forma más compacta y añade errores comunes útiles (preflight con 401/404, localhost vs 127.0.0.1, 500 que aparece como CORS), mientras A es más largo y omite esos casos."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica de forma directa qué es CORS, por qué son orígenes distintos y cómo arreglarlo, e incluye errores comunes útiles (preflight fallando por middleware de autenticación, 500 sin cabeceras, localhost vs 127.0.0.1), mientras que B es más largo, repite ideas y omite esos casos de depuración."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

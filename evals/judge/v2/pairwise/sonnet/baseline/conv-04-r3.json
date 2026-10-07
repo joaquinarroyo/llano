@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más claro y directo en cada turno: usa tablas y pasos concisos, evita ofrecer revisar un repositorio inexistente y entrega un plan corto y fácil de presentar, mientras que B es más denso, con más secciones (riesgos, decisión, objetivos) y ofertas redundantes."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer en una sola pasada: frases más cortas, tabla útil de etapa/arreglo, explica por qué los microservicios no ayudarían en este caso y entrega un plan corto sin perder información técnica, mientras que A es más denso, repite ideas y ofrece revisar un repositorio que no encontró."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

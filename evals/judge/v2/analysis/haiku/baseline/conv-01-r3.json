@@ -1,0 +1,118 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "git diff package-lock.json",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Usa `clinic.js` o `autocannon` para profiling: identifica qué función es lenta",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Enfócate en las que afectan rendimiento: frameworks (Express, Fastify), drivers de BD, parsers, middleware.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Rollback a versiones previas en `package.json`",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": false,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Encontraste el culpable: transacciones innecesarias.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "14 × (BEGIN + COMMIT) por request es un overhead brutal en latencia",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisa el CHANGELOG de la versión 8.12 del ORM",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Opción 2**: Si realmente necesitas transacciones, agrúpalas",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Reverted to previous version until we can evaluate the new behavior",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "introduced automatic transaction wrapping for each query",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "p95 latency: 900ms → 130ms",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "until we can evaluate the new behavior or",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Atribuye la versión 8.12 al ORM, pero 8.12 es la versión de pg; la versión del ORM es desconocida.",
+      "quote": "Revisa el CHANGELOG de la versión 8.12 del ORM",
+      "verified": true
+    },
+    {
+      "claim": "Atribuye la versión 8.12 al ORM en el mensaje del PR, cuando 8.12 es la versión de pg.",
+      "quote": "The ORM 8.12 introduced automatic transaction wrapping for each query",
+      "verified": true
+    },
+    {
+      "claim": "Atribuye las auto-transacciones a la versión 8.12, que es la de pg y no la del ORM.",
+      "quote": "Auto-transactions introduced in 8.12 caused 14x overhead per request",
+      "verified": true
+    }
+  ]
+}

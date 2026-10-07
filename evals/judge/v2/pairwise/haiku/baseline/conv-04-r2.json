@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica con más precisión la causa de cada problema (tests lentos, estado compartido entre facturación y login) y su plan tiene pasos, responsables y entregables concretos; sus fallos de redacción (\"revisáis\", \"extractos API\") molestan menos que el error técnico de B (rails_best_practices como herramienta de profiling) y su mezcla de inglés."
+    },
+    {
+      "winner": "llano",
+      "reason": "B mantiene un español consistente, con un plan concreto por semanas, responsables y entregables, mientras que A mezcla voseo, tuteo e inglés ('Objective', 'regressions') y deja el plan más genérico."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

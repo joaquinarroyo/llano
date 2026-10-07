@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "es una política de seguridad del navegador",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "tienen el mismo dominio pero puertos diferentes",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Access-Control-Allow-Origin: http://localhost:3000",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "if (req.method === 'OPTIONS') res.sendStatus(200);",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El navegador no rechaza la petición por desconfianza: en peticiones simples la envía y bloquea el acceso a la respuesta, y en las que requieren preflight bloquea la petición real si el preflight falla. No se trata de que el navegador evalúe si el servidor es de confianza.",
+      "quote": "El navegador no sabe si `localhost:8000` es un servidor de confianza, así que rechaza la petición.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

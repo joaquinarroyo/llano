@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A cubre definición, ejemplo concreto de DELETE, por qué importa, tabla de métodos, pasos de la clave de idempotencia, expiración y atomicidad de forma compacta y directa; B añade más detalle (concurrencia, ejemplo HTTP) pero es más largo y repite ideas, lo que dificulta una lectura única."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el concepto, el porqué y la solución con claves de idempotencia de forma compacta y directa, incluyendo lo esencial (respuesta vs. estado, validación de payload, expiración, transacción), mientras que A añade mucho material extra (concurrencia, diseño alternativo, resumen) que alarga la lectura sin ser necesario para entender la pregunta."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da pasos claros y ordenados y un mensaje de PR coherente con lo que hizo el desarrollador, mientras que B mezcla las versiones de pg con las del ORM (\"ORM 8.12 → 8.11\") y escribe \"+86% latency\", lo que confunde."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A es más directo y fácil de seguir: da pasos ordenados, una recomendación clara en el turno 2 y un PR corto con dos opciones; B mezcla causas (atribuye a pg el cambio del ORM), lista ORMs genéricos sin saber cuál usa el desarrollador y entrega el PR duplicado en dos idiomas."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

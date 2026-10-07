@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A usa un español neutro y consistente, con explicaciones directas y un plan con fechas concretas, mientras que B mezcla español de España (vosotros, costes) con voseo rioplatense y resulta más denso y menos natural para un desarrollador que usa voseo."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer de una vez, mantiene un registro de español consistente y entrega un plan corto con fechas concretas, sin perder lo técnico esencial (Packwerk, paralelización, Flipper, caches)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

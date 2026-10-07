@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica el flujo del event loop con pasos claros, contrasta bien con Python síncrono e incluye la limitación clave de las tareas CPU-intensivas, mientras que A tiene imprecisiones (afirma que Python necesita threads o async/await sin matizar, mezcla callbacks y promesas, y omite la limitación de CPU)."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A explica el flujo del event loop en pasos claros, usa una comparación Python/Node directa y aclara que el loop no ayuda con tareas CPU-intensivas, mientras que B contiene imprecisiones (dice que Python síncrono necesita threads o async/await como si fuera una desventaja, afirma que Node 'no tiene threads' y menciona el navegador) y omite la limitación de CPU."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

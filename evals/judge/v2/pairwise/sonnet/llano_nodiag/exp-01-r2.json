@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "Ambas son claras y correctas, pero B está más adaptada a quien viene de Python: incluye la tabla de equivalencias con asyncio, el matiz de CommonJS en el orden de ejecución y el paralelo con time.sleep bloqueando el loop, aunque el etiquetado del ejemplo es algo confuso."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el modelo mental paso a paso (pide I/O, callback, cola, loop) con un diagrama, cubre las 4 fases y cómo funciona await, y advierte del bloqueo por CPU, mientras que A es más una lista de piezas y tablas con más densidad y menos hilo conductor para alguien de Python síncrono."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

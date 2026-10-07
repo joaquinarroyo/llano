@@ -1,0 +1,44 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Una facturación necesita transacciones ACID, integridad entre tablas y consultas de agregación, y Postgres da las tres cosas de forma nativa.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Usa Postgres.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Una columna `JSONB` guarda datos variables, como metadatos de un proveedor de pagos, sin perder el resto de las ventajas.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Documentos con estructura muy variable",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las claves foráneas y las restricciones (`UNIQUE`, `CHECK`) impiden datos inconsistentes, como una factura sin cliente o dos facturas con el mismo número.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

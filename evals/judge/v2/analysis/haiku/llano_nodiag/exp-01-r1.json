@@ -1,0 +1,70 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js es single-threaded pero maneja múltiples operaciones sin bloquear",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Node.js delega a libuv (una biblioteca C), que lo maneja fuera del thread principal.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Tu callback entra en la cola del event loop.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El orden de salida 'c, a, b' es muy improbable: el timer de 100 ms casi siempre termina después de las lecturas de archivo. Además, llamar 'paralelas' a las operaciones y aclarar 'concurrencia, no paralelismo' es contradictorio.",
+      "quote": "// Las tres operaciones ocurren en paralelo (concurrencia, no paralelismo)",
+      "verified": true
+    },
+    {
+      "claim": "Afirma que en Python cada conexión es un thread nuevo, ignorando asyncio y otros modelos no basados en threads.",
+      "quote": "En Python, cada conexión es un thread nuevo (1-2 MB de RAM).",
+      "verified": true
+    },
+    {
+      "claim": "Dice que en Node.js 'todos los threads usan el mismo thread principal', lo cual no tiene sentido: Node ejecuta JS en un solo hilo y no hay varios threads de JS compartiéndolo.",
+      "quote": "Node.js es más eficiente porque todos los threads usan el mismo thread principal y el event loop distribuye el trabajo.",
+      "verified": true
+    },
+    {
+      "claim": "async/await es azúcar sintáctico sobre Promises, no sobre el event loop. El título es impreciso.",
+      "quote": "## async/await es azúcar del event loop",
+      "verified": true
+    },
+    {
+      "claim": "Cada fase no siempre ejecuta hasta vaciar su cola: libuv impone límites, por ejemplo en la fase de poll.",
+      "quote": "Cada fase ejecuta hasta vaciar su cola, luego pasa a la siguiente.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

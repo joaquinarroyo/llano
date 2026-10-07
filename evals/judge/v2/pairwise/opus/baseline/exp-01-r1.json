@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B construye el modelo mental paso a paso desde Python síncrono (pseudocódigo del loop, analogía del mozo, comparación con asyncio y tabla resumen), por lo que se entiende mejor en una sola lectura, mientras que A es más técnica y densa (libuv, thread pool, detalles de fases y orden timeout/immediate) y resulta más difícil de asimilar de una vez."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A es más fácil de leer en una sola pasada para alguien de Python síncrono: usa una analogía, pseudo-código del loop, comparación con asyncio y tabla resumen, y cubre las fases, las microtasks y el bloqueo del loop; B es técnicamente más preciso (thread pool, epoll, orden timeout/immediate) pero más denso."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

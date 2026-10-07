@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Idempotencia en APIs\n\n**Idempotencia** significa que ejecutar la misma operación múltiples veces produce el mismo resultado que ejecutarla una sola vez, sin efectos secundarios adicionales.\n\n### Ejemplos\n\n**Idempotente** ✓\n```\nPUT /usuarios/123 { nombre: \"Juan\" }\n```\nLlamar esto 10 veces deja al usuario con nombre \"Juan\" — siempre el mismo estado final.\n\n**No idempotente** ✗\n```\nPOST /cuentas/123/transferencias { monto: 100 }\n```\nLlamar esto 3 veces transfiere 300 — cada llamada produce un efecto nuevo.\n\n### Por qué importa\n\n1. **Resiliencia**: Si una petición falla y reintentamos, no creamos duplicados o estados inconsistentes. Crítico en redes no confiables.\n\n2. **Coincurrencia**: Si múltiples clientes envían la misma petición simultáneamente, el resultado final es correcto.\n\n3. **Recuperación**: Los clientes pueden reintentar sin preocupación de efectos no deseados.\n\n### Métodos HTTP\n\n- **Idempotentes**: GET, PUT, DELETE, HEAD, OPTIONS — llamarlos repetidamente es seguro\n- **No idempotentes**: POST, PATCH — cada llamada generalmente hace algo nuevo\n\n### En la práctica\n\nPara operaciones como crear pagos o transferencias (no idempotentes inherentemente), usas un **ID de idempotencia**:\n\n```\nPOST /pagos\nIdempotency-Key: \"pago-cliente-2024-001\"\n{ monto: 100 }\n```\n\nEl servidor procesa esto una sola vez y cachea el resultado. Si llega otra petición con la misma clave, devuelve el resultado anterior sin duplicar la acción.",
+  "output_tokens": 615,
+  "thinking_tokens": 150,
+  "input_tokens": 3396,
+  "wall_s": 7.05,
+  "created_at": "2026-10-07T00:08:11.769303+00:00"
+}

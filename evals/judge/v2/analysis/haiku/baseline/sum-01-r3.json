@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "**Rotación de tokens de refresco**: Implementa rotación automática de refresh tokens en cada uso para mejorar la seguridad",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Invalida tokens antiguos cuando se detecta intento de reutilización",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Añade 96 líneas de tests para validar la detección de reutilización y el flujo de rotación",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Bumps jsonwebtoken de 9.0.0 a 9.0.2",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`src/auth/middleware.ts`: Integración del nuevo sistema de rotación",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

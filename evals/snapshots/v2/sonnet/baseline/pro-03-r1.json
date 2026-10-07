@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Backup de Postgres de producción y restauración local\n\n## 1. Hacer el backup (desde tu máquina o un bastión)\n\nUsa `pg_dump` en formato custom (`-Fc`): comprime y permite restauración paralela y selectiva.\n\n```bash\npg_dump \\\n  -h HOST_PROD -p 5432 -U USUARIO -d NOMBRE_DB \\\n  -Fc --no-owner --no-privileges \\\n  -f backup.dump\n```\n\n- `--no-owner --no-privileges` evita errores por roles que no existen en local.\n- La contraseña se pide por prompt, o usa `PGPASSWORD` / `~/.pgpass`. Evita ponerla en la línea de comandos.\n- Usa una versión de `pg_dump` igual o mayor que la del servidor (`pg_dump --version`).\n- Para bases grandes, puedes usar `-j 4 -Fd -f carpeta_dump` (formato directorio, dump paralelo).\n- `pg_dump` hace un snapshot consistente sin bloquear escrituras, pero consume I/O. Si es posible, hazlo contra una réplica de lectura.\n\n## 2. Restaurar en local\n\n```bash\ncreatedb mi_db_local\npg_restore -h localhost -U postgres -d mi_db_local \\\n  --no-owner --no-privileges -j 4 backup.dump\n```\n\nSi el dump tiene extensiones (PostGIS, etc.), instálalas antes en local.\n\nPara limpiar y recrear una base existente:\n\n```bash\npg_restore -d mi_db_local --clean --if-exists --no-owner backup.dump\n```\n\n## Alternativa: formato SQL plano\n\n```bash\npg_dump -h HOST_PROD -U USUARIO -d NOMBRE_DB --no-owner > backup.sql\npsql -h localhost -U postgres -d mi_db_local -f backup.sql\n```\n\nEs más simple pero más lento y sin restauración paralela.\n\n## Alternativa: tubería directa (sin archivo intermedio)\n\n```bash\npg_dump -h HOST_PROD -U USUARIO -d NOMBRE_DB -Fc \\\n  | pg_restore -h localhost -U postgres -d mi_db_local --no-owner\n```\n\n## Precauciones importantes\n\n- **Datos sensibles:** un dump de producción suele incluir datos personales. Considera anonimizarlos después de restaurar, o excluir tablas con `--exclude-table-data=tabla`. Revisa también las normativas que apliquen (GDPR, etc.).\n- **Efectos secundarios:** en local, desactiva emails, webhooks, jobs y claves de APIs externas que puedan estar guardadas en la base.\n- **Acceso:** si producción solo es accesible por red privada, usa un túnel SSH:\n  ```bash\n  ssh -L 5433:HOST_PROD:5432 usuario@bastion\n  pg_dump -h localhost -p 5433 ...\n  ```\n- **Verificación:** tras restaurar, compara conteos de filas en algunas tablas clave:\n  ```bash\n  psql -d mi_db_local -c \"SELECT count(*) FROM tu_tabla;\"\n  ```\n\nSi me dices dónde corre producción (RDS, Cloud SQL, Docker, servidor propio) y el tamaño aproximado, te ajusto los comandos.",
+  "output_tokens": 1196,
+  "thinking_tokens": 43,
+  "input_tokens": 1576,
+  "wall_s": 9.77,
+  "created_at": "2026-10-07T00:09:29.777757+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La API v2.4.1 no logra conectarse a Postgres en `10.0.3.17:5432`. Después de 30000 ms el pool de conexiones se rinde y el proceso termina con código 1.\n\n## Qué dice el log\n\n- **El DNS funciona.** El nombre `db.internal` se resolvió a `10.0.3.17`. El problema está después de la resolución del nombre.\n- **Es un timeout, no un rechazo.** `ETIMEDOUT` significa que la API envió el pedido de conexión y nunca recibió respuesta. Si la base estuviera arriba pero sin escuchar en ese puerto, verías `ECONNREFUSED`.\n- **No es un problema de credenciales.** La conexión TCP no llegó a abrirse, así que Postgres nunca vio usuario ni contraseña.\n\nUn timeout casi siempre indica que algo en la red descarta los paquetes, o que no hay nada vivo en esa IP.\n\n## Qué revisar, en orden\n\n1. **Verifica que la base esté levantada.** Revisa el estado de la instancia o del contenedor de Postgres. También verifica que su IP actual sea `10.0.3.17`. Si la base se recreó, la IP pudo cambiar y el DNS puede tener un registro viejo.\n2. **Prueba la conexión desde el mismo lugar donde corre la API.** Usa el mismo host, pod o contenedor:\n   ```\n   nc -zv -w 5 10.0.3.17 5432\n   ```\n   Si también da timeout, el problema es de red y no de la aplicación.\n3. **Revisa el security group o firewall de la base.** Debe permitir tráfico entrante TCP en el puerto 5432 desde la IP o subred de la API. Esta es la causa más común de este síntoma.\n4. **Revisa el ruteo entre redes.** Verifica que la API y la base estén en la misma VPC o subred, o que exista una ruta entre ellas: peering, tablas de ruteo, NACLs.\n5. **Revisa la configuración de Postgres.** Esto aplica solo si los pasos anteriores están bien. `listen_addresses` debe incluir la interfaz de red, no solo `localhost`. Si Postgres solo escuchara en `localhost`, lo normal sería un rechazo y no un timeout, por eso este paso va último.\n\nUna pregunta útil: ¿cambió algo desde el último deploy que funcionó? Por ejemplo, la infraestructura, la subred donde corre la API o la versión anterior a v2.4.1. Si la API ahora corre en otra subred, el paso 3 es el más probable.",
+  "output_tokens": 959,
+  "thinking_tokens": 63,
+  "input_tokens": 4984,
+  "wall_s": 10.27,
+  "created_at": "2026-10-07T00:18:14.432134+00:00"
+}

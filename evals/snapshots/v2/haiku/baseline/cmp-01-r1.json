@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Para un SaaS de facturación, **PostgreSQL es la mejor opción**. Los datos son altamente estructurados y relacionales (clientes, facturas, ítems, pagos, auditoría), necesitas ACID guarantees para transacciones financieras, y PostgreSQL excele en reportes y consultas complejas que requieren compliance.\n\nEl trade-off principal es flexibilidad vs robustez: MongoDB te da más flexibilidad de esquema, pero sacrificas garantías de integridad transaccional y auditoría que son críticas en finanzas. Con PostgreSQL defines el esquema upfront, pero es más seguro y predecible.\n\n¿Hay algo específico del proyecto que te hace considerar MongoDB?",
+  "output_tokens": 442,
+  "thinking_tokens": 266,
+  "input_tokens": 3402,
+  "wall_s": 5.18,
+  "created_at": "2026-10-07T00:05:19.539216+00:00"
+}

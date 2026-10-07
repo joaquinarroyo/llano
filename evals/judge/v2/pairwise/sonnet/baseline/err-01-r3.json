@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica con claridad la diferencia entre ETIMEDOUT y ECONNREFUSED, ordena las revisiones por probabilidad e incluye detalles útiles (NetworkPolicy, listen_addresses, qué cambió en el deploy) en una estructura fácil de leer."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica con claridad la diferencia ETIMEDOUT vs ECONNREFUSED en una lista fácil de leer, prioriza las causas por probabilidad y añade la pista de qué cambió en el deploy; B es correcto y conciso pero ofrece menos contexto diagnóstico."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

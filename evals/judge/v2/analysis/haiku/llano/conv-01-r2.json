@@ -1,0 +1,118 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Compara `package-lock.json` de antes y después.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "captura un heap snapshot o usa `clinic.js` para ver dónde se gasta el tiempo",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        },
+        {
+          "status": "present",
+          "quote": "revierte las dependencias a la versión anterior y verifica si el p95 baja",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "que ahora envuelve cada query en BEGIN/COMMIT",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Con 14 queries por request, son 28 roundtrips de red extra.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "busca un flag como `transaction: false` o `autoTransaction: false` en la configuración",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "present",
+          "quote": "agrupa esas 14 queries en una o dos transacciones explícitas",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revertir el ORM a la versión anterior restaura el p95 a 130 ms.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "pg 8.12 cambió el comportamiento: el ORM ahora envuelve cada query en",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revertir el ORM a la versión anterior restaura el p95 a 130 ms.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Flag de configuración del ORM para desactivar transacciones por query",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Atribuye el cambio de comportamiento a pg 8.12 (el driver), cuando el desarrollador indicó que fue el ORM el que empezó a abrir una transacción por query. Además recomienda revertir pg en lugar del ORM.",
+      "quote": "pg 8.12 cambió el comportamiento del ORM, que ahora envuelve cada query en BEGIN/COMMIT",
+      "verified": true
+    },
+    {
+      "claim": "--expose-gc solo expone la función global gc(); no sirve para diagnosticar el GC (para eso se usa --trace-gc).",
+      "quote": "Mira `--expose-gc` si sospechas GC forzado.",
+      "verified": true
+    },
+    {
+      "claim": "Repite en el mensaje del PR que pg 8.12 causó el comportamiento, y es inconsistente con el título, que fija el ORM.",
+      "quote": "pg 8.12 introduced a behavior change that caused the ORM to wrap every query",
+      "verified": true
+    }
+  ]
+}

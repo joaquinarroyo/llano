@@ -1,0 +1,108 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revisa `package-lock.json` o `yarn.lock` del último deploy. Anota todas las versiones nuevas.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        },
+        {
+          "status": "present",
+          "quote": "Busca en los changelogs de las dependencias principales (express, http frameworks, parsers, base de datos) cambios de comportamiento o performance.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "absent",
+          "quote": "",
+          "verified": true,
+          "score": 0.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Encontraste el problema. Cada BEGIN + COMMIT suma latencia de red.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Con 14 queries son 28 roundtrips extra innecesarios.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "¿leyendo el changelog encuentras si el comportamiento de transacciones cambió?",
+          "verified": true,
+          "score": 0.5
+        },
+        {
+          "status": "partial",
+          "quote": "desactiva transacciones automáticas o agrupa las 14 queries en una sola transacción explícita",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Fijamos el ORM a la versión anterior.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "La versión nueva del ORM abre una transacción BEGIN/COMMIT por cada query.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "El p95 bajó de 900 ms a 130 ms al revertir.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Próximo: actualizar el ORM cuando solucione el comportamiento de transacciones",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Revertir pg a 8.11 no resuelve el problema: la causa es la transacción por query del ORM, no pg. Aun así el asistente lo presenta como solución inmediata que saca la API del problema.",
+      "quote": "Vuelve `pg` a 8.11 mientras arreglas el ORM. Es temporal pero saca la API del piso ahora.",
+      "verified": true
+    }
+  ]
+}

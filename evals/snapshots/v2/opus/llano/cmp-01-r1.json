@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Postgres. Un SaaS de facturación maneja datos relacionales y necesita transacciones fuertes, y Postgres da las dos cosas por defecto.\n\nLas razones concretas:\n\n| Necesidad de facturación | Postgres | MongoDB |\n|---|---|---|\n| Relaciones (cliente → suscripción → factura → líneas → pagos) | Foreign keys y joins nativos | Referencias manuales o documentos embebidos que se duplican |\n| Transacciones ACID entre varias tablas (crear factura + registrar pago + actualizar saldo) | Nativas desde siempre | Existen desde 4.0, pero son más costosas y menos usadas en la práctica |\n| Montos exactos | Tipo `numeric` sin error de redondeo | `Decimal128` existe, pero los drivers y el código suelen caer en `double` por error |\n| Integridad (no facturar a un cliente borrado, números de factura únicos y correlativos) | Constraints `UNIQUE`, `CHECK`, `FOREIGN KEY` en la base | La validación queda en tu código |\n| Reportes (ingresos por mes, MRR, morosidad) | SQL con agregaciones, window functions | Aggregation pipeline, más verboso para este tipo de consulta |\n| Auditoría y requisitos fiscales | Esquema estricto, fácil de auditar | Esquema flexible, más fácil que haya documentos inconsistentes |\n\nLos datos flexibles tampoco son un argumento para MongoDB. Postgres tiene `jsonb` con índices, así que puedes guardar metadatos variables (campos fiscales por país, configuración por cliente) sin perder lo anterior.\n\nMongoDB conviene cuando los datos son documentos independientes sin relaciones fuertes, o cuando necesitas sharding horizontal masivo desde el día uno. Un SaaS de facturación nuevo no tiene ninguna de esas dos condiciones.\n\nAtención: el riesgo real en facturación es otro. Usa `numeric` (o enteros en centavos) para montos, nunca `float`. Guarda los montos y los impuestos de cada factura emitida en la propia factura, para que un cambio de precios no altere facturas pasadas.",
+  "output_tokens": 764,
+  "thinking_tokens": 0,
+  "input_tokens": 5165,
+  "wall_s": 9.18,
+  "created_at": "2026-10-07T00:15:50.703361+00:00"
+}

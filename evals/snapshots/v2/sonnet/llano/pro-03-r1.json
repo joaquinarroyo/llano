@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom en producción y `pg_restore` en tu máquina. Este formato comprime el archivo y permite restaurar en paralelo.\n\n**Peligro:** el backup contiene datos reales de producción, posiblemente datos personales. Verifica que tienes permiso para copiarlos a tu máquina. Si no, anonimízalos o usa un subconjunto.\n\n**Atención:** la versión de `pg_dump` debe ser igual o mayor que la del servidor. Verifícala con `pg_dump --version` y `psql -h HOST -U USER -d DBNAME -c \"select version()\"`.\n\n## Backup\n\n1. Crea el dump. Usa un usuario de solo lectura y, si existe, una réplica, para no cargar el primario:\n\n   ```bash\n   pg_dump -h HOST -U USER -d DBNAME -Fc -f backup.dump\n   ```\n\n   `pg_dump` toma una copia consistente y no bloquea las escrituras, pero sí consume I/O y CPU.\n\n2. Si la base está detrás de un servidor SSH, genera el dump allá y cópialo:\n\n   ```bash\n   scp usuario@servidor:/ruta/backup.dump .\n   ```\n\n## Restauración local\n\n1. Crea la base vacía:\n\n   ```bash\n   createdb mydb_local\n   ```\n\n2. Restaura:\n\n   ```bash\n   pg_restore -d mydb_local --no-owner --no-privileges -j 4 backup.dump\n   ```\n\n   `--no-owner` y `--no-privileges` evitan errores por roles de producción que no existen en tu máquina. `-j 4` usa 4 procesos en paralelo.\n\n3. Verifica:\n\n   ```bash\n   psql -d mydb_local -c \"\\dt\"\n   ```\n\n## Notas\n\n- Si ves errores de extensiones, instálalas en tu Postgres local (por ejemplo `postgis`) y repite el restore en una base nueva.\n- `pg_dump` no incluye roles ni tablespaces. Si los necesitas, usa `pg_dumpall --globals-only`.\n- **Atención:** no uses `--clean` ni `--create` con `pg_restore` sin confirmar que `-h` y `-d` apuntan a tu máquina. Con un host equivocado borrarías objetos de producción.\n- Para una base pequeña puedes hacerlo en un paso, sin archivo intermedio:\n\n  ```bash\n  pg_dump -h HOST -U USER -d DBNAME | psql -d mydb_local\n  ```",
+  "output_tokens": 1357,
+  "thinking_tokens": 497,
+  "input_tokens": 5163,
+  "wall_s": 10.92,
+  "created_at": "2026-10-07T00:09:32.594144+00:00"
+}

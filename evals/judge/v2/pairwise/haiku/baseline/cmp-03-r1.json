@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B es más preciso y completo (menciona reconexión automática de SSE, límite de conexiones del navegador, ventajas/desventajas por opción y matriz de casos), mientras que A contiene un error técnico (SSE no usa HTTP en ambas direcciones y presenta polling como solución por incompatibilidad con WebSocket, algo poco realista) y omite desventajas clave."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A separa claramente cada opción con cuándo/ventajas/desventajas y una matriz de casos, mientras que B contiene un error técnico (dice que SSE usa HTTP en ambas direcciones, cuando es solo servidor→cliente) y omite ventajas como la reconexión automática y el límite de conexiones."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

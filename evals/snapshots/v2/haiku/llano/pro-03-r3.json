@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa `pg_dump` para hacer backup de producción y `pg_restore` para restaurarlo en local. Este método exporta los datos en un formato portátil.\n\n## Backup desde producción\n\n```bash\npg_dump -h <host-produccion> -U <usuario> -d <base-datos> -Fc -f backup.dump\n```\n\nReemplaza:\n- `<host-produccion>`: IP o dominio del servidor Postgres\n- `<usuario>`: usuario de base de datos\n- `<base-datos>`: nombre de la base\n\nLa flag `-Fc` guarda en formato binario comprimido, más pequeño y rápido de restaurar que SQL de texto.\n\n## Transferir el backup\n\nCopia el archivo `backup.dump` a tu máquina local, por ejemplo con `scp`:\n\n```bash\nscp usuario@<host-produccion>:/ruta/backup.dump .\n```\n\n## Restaurar en local\n\nPrimero crea la base en tu Postgres local (si no existe):\n\n```bash\ncreatedb -U postgres <base-datos>\n```\n\nLuego restaura el backup:\n\n```bash\npg_restore -U postgres -d <base-datos> -v backup.dump\n```\n\nLa flag `-v` muestra el progreso.\n\n## Alternativas\n\n- Si necesitas backup sin parar Postgres, usa `pg_basebackup` (copia física completa, más lenta pero replica la instancia).\n- Si el backup es pequeño, puedes usarplain SQL con `pg_dump -Fp | gzip`, pero restaurar tarda más.\n\nEl método `pg_dump` es el estándar porque funciona entre versiones diferentes de Postgres (siempre que local no sea más vieja que producción).",
+  "output_tokens": 701,
+  "thinking_tokens": 277,
+  "input_tokens": 6174,
+  "wall_s": 8.41,
+  "created_at": "2026-10-07T00:08:01.476196+00:00"
+}

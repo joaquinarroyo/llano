@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**CORS** (Cross-Origin Resource Sharing) es una política de seguridad del navegador que controla qué servidores pueden acceder a datos desde una página web.\n\nEl navegador te bloquea porque **`localhost:3000` y `localhost:8000` son orígenes distintos**: tienen el mismo dominio pero puertos diferentes. El navegador no sabe si `localhost:8000` es un servidor de confianza, así que rechaza la petición.\n\nEsto es una protección contra ataques: un sitio malicioso no puede leer datos sensibles (tokens, cookies) de otra página que abres en otra pestaña.\n\n## Solución: activa CORS en tu API\n\nAgrega estos encabezados en las respuestas de `localhost:8000`:\n\n```\nAccess-Control-Allow-Origin: http://localhost:3000\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, Authorization\nAccess-Control-Allow-Credentials: true\n```\n\n**Con Node.js/Express:**\n\n```javascript\napp.use((req, res, next) => {\n  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');\n  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');\n  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');\n  res.header('Access-Control-Allow-Credentials', 'true');\n  if (req.method === 'OPTIONS') res.sendStatus(200);\n  else next();\n});\n```\n\nO usa el middleware `cors`:\n\n```javascript\nconst cors = require('cors');\napp.use(cors({ origin: 'http://localhost:3000', credentials: true }));\n```\n\n**Importante en producción:** no uses `Access-Control-Allow-Origin: *` con `credentials: true`. Especifica los orígenes permitidos.",
+  "output_tokens": 685,
+  "thinking_tokens": 209,
+  "input_tokens": 6182,
+  "wall_s": 6.97,
+  "created_at": "2026-10-07T00:06:14.511388+00:00"
+}

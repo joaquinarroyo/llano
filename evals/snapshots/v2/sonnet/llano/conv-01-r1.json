@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza por la lista de dependencias que cambiaron. Si el código es el mismo, la causa casi seguro está ahí, o en la versión de Node si la imagen se reconstruyó.\n\n1. **Compara los lockfiles.** Ejecuta `git diff <commit-anterior> -- package-lock.json` (o `yarn.lock` / `pnpm-lock.yaml`). Mira también las dependencias transitivas, porque un paquete que no tocaste pudo subir de versión. Verifica además que `node --version` sea el mismo que antes del deploy.\n\n2. **Confirma que el cambio causa la lentitud.** Despliega en staging el lockfile anterior y mide el p95. Si vuelve a 120 ms, la causa son las dependencias. Si no vuelve, busca fuera de ellas: la base de datos, la red o el volumen de tráfico.\n\n3. **Reduce el conjunto.** Revierte la mitad de los paquetes actualizados y mide de nuevo. Repite hasta encontrar el paquete culpable. Para 10 paquetes bastan unas 4 rondas.\n\n4. **Si no puedes revertir, mide dónde se va el tiempo.**\n   - Mide el retraso del event loop con `perf_hooks.monitorEventLoopDelay()`. Si es alto, el proceso consume CPU. Si es bajo, espera I/O.\n   - Para CPU, ejecuta `node --cpu-prof app.js` y abre el perfil en Chrome DevTools.\n   - Para I/O, mide el tiempo de las consultas a la base y de las llamadas HTTP salientes.\n\n5. **Revisa primero estos sospechosos,** porque cambian su comportamiento entre versiones:\n   - El driver de la base de datos o el ORM (`pg`, `mysql2`, `prisma`): tamaño del pool y timeouts por defecto.\n   - El cliente HTTP (`axios`, `undici`, `node-fetch`): keep-alive y reutilización de conexiones.\n   - El logger (`pino`, `winston`): formato y escritura síncrona.\n   - El agente de APM o de tracing.\n   - La validación y el parseo del body (`zod`, `ajv`, `body-parser`).\n\nAntes de empezar, mira si la lentitud afecta a todas las rutas o solo a algunas. Si son todas, apunta a algo global como el logger, el pool o el agente de APM. Si son algunas, apunta a la biblioteca que usan esas rutas.\n\nNo puedo ver tu proyecto, así que la lista de sospechosos es una hipótesis basada en casos comunes. Si me pasas el diff del lockfile, te digo cuáles de los cambios son más probables.",
+      "output_tokens": 1498,
+      "thinking_tokens": 570,
+      "input_tokens": 5198
+    },
+    {
+      "text": "La causa más probable es el ORM. Cada request pasó de 14 round trips a 42, porque cada query ahora suma un `BEGIN` y un `COMMIT`. Son 28 viajes extra a la base, y eso explica el salto del p95 de 120 ms a 900 ms.\n\nLos números cuadran: 780 ms de aumento entre 28 round trips son unos 28 ms por viaje. Es un valor alto para un viaje a la base. Por eso las transacciones probablemente también retienen la conexión del pool más tiempo, y los requests esperan una conexión libre. Para confirmarlo, mira en el APM el tiempo de espera del pool.\n\n1. **Fija el ORM en la versión anterior** y deja `pg` en 8.12. Despliega en staging y mide el p95. Si baja a ~120 ms, el ORM es la causa y `pg` es inocente. Esta también es la solución más rápida para producción.\n2. **Busca en el changelog del ORM** una opción para desactivar las transacciones implícitas por query. Si existe, actualiza el ORM con esa opción activada.\n3. **Reduce las queries por request.** Catorce queries por request es mucho en cualquier versión. Agrupa las lecturas con un `JOIN` o con `WHERE id = ANY($1)`. Así, aunque el ORM vuelva a cambiar, el costo por request seguirá siendo bajo.\n\nSi el ORM no tiene esa opción, abre un issue en su repositorio con tu traza del APM, porque este cambio parece un cambio de comportamiento no documentado. Si me dices cuál ORM es, reviso con tu código dónde se configura.",
+      "output_tokens": 943,
+      "thinking_tokens": 376,
+      "input_tokens": 6817
+    },
+    {
+      "text": "Reemplaza los valores entre `<...>`, porque no sé qué ORM es ni sus versiones.\n\n```\nfix: fijar <ORM> en <versión anterior> para recuperar la latencia\n\nDespués de actualizar dependencias, el p95 de la API subió de 120 ms a\n900 ms sin cambios de código.\n\nCausa: la versión <versión nueva> de <ORM> abre una transacción por cada\nquery. Cada request hace 14 queries, así que agrega 14 BEGIN y 14 COMMIT.\nPasa de 14 a 42 round trips a la base. El APM confirma los BEGIN y COMMIT\nextra en cada query.\n\nCambios:\n- Fija <ORM> en <versión anterior> en package.json y el lockfile.\n- Mantiene pg en 8.12. No es la causa: con solo el ORM fijado, el p95\n  volvió a 130 ms en <staging/producción>.\n\nPendiente:\n- Revisar el changelog de <ORM> por una opción que desactive las\n  transacciones implícitas antes de volver a actualizar.\n- Reducir las 14 queries por request con JOIN o `WHERE id = ANY($1)`.\n```\n\nSi ya abriste un issue en el repositorio del ORM, agrega el enlace en \"Pendiente\".",
+      "output_tokens": 717,
+      "thinking_tokens": 275,
+      "input_tokens": 7834
+    }
+  ],
+  "created_at": "2026-10-07T00:10:16.988009+00:00"
+}

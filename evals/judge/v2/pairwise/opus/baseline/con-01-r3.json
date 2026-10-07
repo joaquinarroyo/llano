@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica la idempotencia, el escenario de doble cobro paso a paso y la clave de idempotencia con los casos clave del servidor (en curso con 409, cuerpo distinto con 422), y cierra con un resumen claro, mientras que A omite esos casos."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A define el concepto con claridad y cubre más información técnica útil (HEAD/OPTIONS, casos de clave en curso con 409, cuerpo distinto con 422, expiración, atomicidad) con un resumen final, mientras B es claro pero omite esos casos de borde de las claves de idempotencia."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

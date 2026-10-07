@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más claro y directo en cada turno: usa tablas y pasos ordenados con menos densidad, da un orden de acción simple y un plan final fácil de presentar, mientras que B es más denso, con jerga y listas largas (aunque incluye detalles útiles como el postmortem y Flipper)."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer en una sola pasada: frases cortas, tabla simple de señales, orden claro (esta semana / este mes / después) y un plan de equipo compacto, sin perder información técnica relevante; A es más denso, con más ítems y tablas anidadas."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

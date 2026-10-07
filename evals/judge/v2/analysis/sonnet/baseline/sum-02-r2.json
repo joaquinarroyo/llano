@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "la latencia p95 del checkout subió de 300 ms a 4 s entre las 09:12 y las 09:35",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un job de reindexado de Elasticsearch, programado por error en horario laboral, saturó el cluster.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**09:31:** se pausa el job.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "No se perdieron pedidos, pero 212 usuarios abandonaron el checkout.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Mover el job de reindexado a las 03:00.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

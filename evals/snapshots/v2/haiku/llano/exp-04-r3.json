@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "CORS (Cross-Origin Resource Sharing) es una política de seguridad del navegador que bloquea peticiones de JavaScript desde un origen hacia otro origen distinto.\n\nEl navegador considera `localhost:3000` y `localhost:8000` como orígenes diferentes (el puerto cuenta). Cuando tu código en `localhost:3000` intenta conectar a `localhost:8000`, el navegador intercepta la petición y la bloquea porque la API no dice \"está bien recibir peticiones desde `localhost:3000`\".\n\n**Por qué existe.** Protege a los usuarios de ataques: un sitio malicioso no puede leer datos privados de tu cuenta en otro sitio.\n\n**Cómo solucionarlo.**\n\nAgrega headers CORS en tu API (`localhost:8000`) para permitir peticiones desde `localhost:3000`:\n\n```javascript\n// Node.js / Express\napp.use((req, res, next) => {\n  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');\n  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');\n  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');\n  next();\n});\n```\n\nO usa una biblioteca:\n\n```javascript\nconst cors = require('cors');\napp.use(cors({ origin: 'http://localhost:3000' }));\n```\n\nEn desarrollo puedes permitir cualquier origen (`*`), pero en producción especifica solo los orígenes que confíes.",
+  "output_tokens": 686,
+  "thinking_tokens": 312,
+  "input_tokens": 6182,
+  "wall_s": 7.6,
+  "created_at": "2026-10-07T00:07:28.968127+00:00"
+}

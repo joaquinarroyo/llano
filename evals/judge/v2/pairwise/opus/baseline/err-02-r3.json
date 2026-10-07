@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica la causa y da una función y un test completos y coherentes, con encabezados claros y una recomendación explícita; A aporta detalles extra (tolerancia de approx, advertencia sobre round), pero su ejemplo de test usa `total` sin definir."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica la causa y da las mismas soluciones (approx, Decimal, enteros) con más detalle útil: el umbral por defecto de approx, por qué float falla en facturas y una advertencia contra round(); A tiene mejor estructura y ofrece ayuda, pero omite esos puntos."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

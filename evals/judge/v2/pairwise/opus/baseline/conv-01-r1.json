@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más directo y fácil de leer en una sola pasada: pasos numerados concisos, una tabla de síntomas y un PR claro con marcadores, mientras que B es más largo y disperso (listas extensas de paquetes, opciones por ORM sin saber cuál usa) y mezcla voseo en un contexto neutro."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y ordenado en cada turno, con pasos numerados y la tabla de síntomas, y además avisa que 130 ms queda 10 ms por encima de lo original; A suma comandos dudosos como el grep y 'npx lockfile-diff' y una lista de ORMs que se adivinan, aunque sí respeta el voseo del desarrollador."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

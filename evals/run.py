@@ -283,6 +283,8 @@ def main() -> None:
             if old["arms"] != meta["arms"]:
                 sys.exit("The skill changed since this run started. Use a new --run-id.")
             meta["started_at"] = old["started_at"]
+            meta["models"] = sorted(set(old.get("models", [])) | set(meta["models"]))
+            meta["runs"] = max(old.get("runs", 0), meta["runs"])
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2))
 
         anonymize_session(env, cwd)

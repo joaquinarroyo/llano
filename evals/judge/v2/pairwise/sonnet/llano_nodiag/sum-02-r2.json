@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B incluye la duración total (23 minutos) en el título y en el resumen, lo que da el dato clave de un vistazo, y mantiene las mismas acciones y el impacto con un formato más compacto; A agrega aclaraciones útiles en las acciones pero omite la duración."
+    },
+    {
+      "winner": "llano",
+      "reason": "Ambas contienen la misma información técnica, pero B añade el porqué de cada acción (fuera del horario laboral, detectar saturaciones más rápido) y tiene secciones con encabezados en negrita más fáciles de escanear; A aporta la duración de 23 minutos, aunque eso es menos relevante que el contexto de las acciones."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

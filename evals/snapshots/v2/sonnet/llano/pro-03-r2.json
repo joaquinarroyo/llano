@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom para el backup y `pg_restore` para cargarlo en tu base local.\n\n**Peligro:** el dump contiene datos reales de producción, posiblemente personales. Guárdalo solo en tu máquina, bórralo cuando termines y no lo subas a ningún repositorio ni carpeta compartida.\n\n1. Haz el backup desde producción:\n\n   ```bash\n   pg_dump -Fc -h HOST_PROD -U USUARIO -d NOMBRE_BD -f prod.dump\n   ```\n\n   `-Fc` genera un archivo comprimido que `pg_restore` puede cargar en paralelo.\n\n   **Atención:** `pg_dump` no bloquea las escrituras, pero agrega carga de lectura. Si tienes una réplica, haz el dump desde ella. Tu `pg_dump` local debe tener una versión igual o mayor que la del servidor, porque si es menor falla.\n\n2. Crea la base local vacía:\n\n   ```bash\n   createdb -h localhost NOMBRE_BD_LOCAL\n   ```\n\n3. Restaura el dump:\n\n   ```bash\n   pg_restore -h localhost -d NOMBRE_BD_LOCAL --no-owner --no-acl -j 4 prod.dump\n   ```\n\n   - `--no-owner` y `--no-acl` evitan errores por roles de producción que no existen en tu máquina.\n   - `-j 4` usa 4 procesos en paralelo.\n\n   **Peligro:** verifica que `-h` apunte a `localhost` antes de ejecutar. Si agregas `--clean` y el host es producción, borras sus tablas.\n\n4. Verifica la carga:\n\n   ```bash\n   psql -h localhost -d NOMBRE_BD_LOCAL -c '\\dt'\n   ```\n\n   Compara el conteo de filas de una o dos tablas grandes con producción.\n\nSi quieres repetir la restauración sobre la misma base local, agrega `--clean --if-exists` al paso 3. Si la base es muy grande y no quieres guardar el archivo, puedes encadenar los dos comandos: `pg_dump -Fc ... | pg_restore -d NOMBRE_BD_LOCAL --no-owner --no-acl`. En ese caso no puedes usar `-j`.",
+  "output_tokens": 1305,
+  "thinking_tokens": 520,
+  "input_tokens": 5163,
+  "wall_s": 10.46,
+  "created_at": "2026-10-07T00:11:12.647444+00:00"
+}

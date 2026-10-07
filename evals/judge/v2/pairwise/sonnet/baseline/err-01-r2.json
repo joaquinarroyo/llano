@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica de forma lineal y concisa que es un timeout de red (no credenciales ni DNS), da una lista de revisión priorizada y un solo comando de verificación, mientras que B es más largo, mezcla varias ramas y termina con ofertas que distraen, aunque aporta algo más de detalle técnico."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica de forma más corta y directa qué pasa (timeout de red, no credenciales ni DNS), da una lista corta de qué revisar en orden y un único comando de verificación con qué hacer según el resultado, mientras que A es correcta pero más extensa, con secciones extra y ofrecimientos que dificultan la lectura en una sola pasada."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

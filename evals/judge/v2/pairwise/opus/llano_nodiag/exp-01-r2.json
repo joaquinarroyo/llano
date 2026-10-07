@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica lo mismo que A (libuv, fases, microtasks, bloqueo del loop) y añade cómo funciona async/await y un ejemplo numerado del orden de ejecución, además de una tabla comparativa final con Python, lo que facilita entenderlo de una sola lectura para alguien que viene de Python síncrono."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el event loop con ejemplos paralelos claros en Python y Node, un diagrama de fases y salidas explícitas, y cubre libuv, microtasks y el bloqueo del hilo (con la nota del GIL) de forma más compacta; A agrega async/await y una tabla, pero es más extensa y menos directa."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

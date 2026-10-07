@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js ejecuta tu código JavaScript en un solo hilo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Cuando una operación tarda (red, disco, timers), Node la delega y sigue con otra cosa.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Cuando una operación termina, libuv pone su callback en una cola. El event loop la toma cuando el stack queda vacío.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Hay dos colas más que corren **entre cada callback**, antes de seguir con el loop",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el código lento de CPU frena todo el servidor",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "`loop.call_soon` de asyncio no equivale a `queueMicrotask`: call_soon programa el callback para la siguiente iteración del loop, no como microtarea.",
+      "quote": "| `loop.call_soon` | `setImmediate` / `queueMicrotask` |",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -149,10 +149,12 @@ def quote_ok(quote: str, text: str) -> bool:
 
 
 def parse_json(text: str) -> dict:
-    m = re.search(r"\{.*\}", text, re.S)
-    if not m:
+    """First JSON object in the text. Ignores anything the judge writes after it."""
+    start = text.find("{")
+    if start < 0:
         raise ValueError(f"no JSON in judge output: {text[:200]}")
-    return json.loads(m.group(0))
+    obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    return obj
 
 
 def ask(prompt: str, model: str, cwd: str, env: dict) -> dict:

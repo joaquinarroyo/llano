@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Elige según la dirección de los datos y la frecuencia de los cambios. Si el cliente y el servidor envían mensajes constantemente, usa WebSocket. Si solo envía el servidor, usa SSE. Si los cambios son raros o no puedes mantener conexiones abiertas, usa polling.\n\n| | WebSocket | Server-Sent Events (SSE) | Polling |\n|---|---|---|---|\n| Dirección | Bidireccional | Solo servidor → cliente | El cliente pregunta cada cierto tiempo |\n| Protocolo | Propio, después de un upgrade desde HTTP | HTTP normal | HTTP normal |\n| Datos | Texto y binario | Solo texto | Cualquiera |\n| Reconexión | La programas tú | Automática, con `Last-Event-ID` | No hace falta, cada petición es independiente |\n| Latencia | Muy baja | Baja | Hasta un intervalo completo |\n| Complejidad | Alta | Baja | Muy baja |\n\n## Cuándo usar cada uno\n\n**WebSocket**\n- Chat, juegos multijugador y edición colaborativa, porque el cliente también envía mensajes con frecuencia.\n- Necesitas enviar datos binarios.\n- Necesitas latencia mínima en ambas direcciones.\n\n**SSE**\n- Notificaciones, feeds en vivo, precios, dashboards y barras de progreso, porque el cliente casi no envía datos.\n- Streaming de tokens de un modelo de lenguaje.\n- Quieres que funcione con la infraestructura HTTP existente (proxies, balanceadores, autenticación por cookie o header) y con reconexión automática.\n\n**Polling**\n- Los cambios son poco frecuentes, por ejemplo consultar el estado de un trabajo cada 10 s.\n- El entorno no permite conexiones largas, como algunos proxies o funciones serverless.\n- Quieres la solución más simple y que escale sin estado en el servidor.\n\n## Costos\n\n- **WebSocket:** cada conexión ocupa memoria en el servidor. Para escalar necesitas un mecanismo que reparta los mensajes entre instancias, como Redis pub/sub, y sticky sessions o equivalente.\n- **SSE:** con HTTP/1.1 el navegador limita a 6 conexiones por dominio. HTTP/2 elimina ese problema.\n- **Polling:** la mayoría de las peticiones no traen datos nuevos. Cada petición repite headers y autenticación.\n\n## Regla práctica\n\nEmpieza con SSE si el servidor solo empuja datos, porque es lo más simple que da tiempo real. Pasa a WebSocket cuando el cliente necesite enviar mensajes frecuentes por el mismo canal. Si el cliente solo envía de vez en cuando, SSE más un `POST` normal suele bastar.",
+  "output_tokens": 1213,
+  "thinking_tokens": 230,
+  "input_tokens": 5164,
+  "wall_s": 9.68,
+  "created_at": "2026-10-07T00:13:06.749715+00:00"
+}

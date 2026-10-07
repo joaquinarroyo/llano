@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más directo y fácil de leer en una sola pasada, con un plan corto y concreto (fases con días y resultados esperados) que sirve para presentar al equipo, mientras que B es más largo y recargado (4 fases, emojis, jerga mezclada) y sugiere cosas menos claras como 'APIs internas' y 'cache de datos'."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer en una sola pasada: respuestas más cortas, pasos concretos y un plan en días/semanas listo para presentar, mientras que A es más largo y con más jerga y fases superpuestas, aunque ambos conservan el contenido técnico relevante."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,29 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "key": [
+    "B",
+    "D",
+    "D"
+  ],
+  "answers": [
+    "B",
+    "C",
+    "D"
+  ],
+  "correct": [
+    true,
+    false,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

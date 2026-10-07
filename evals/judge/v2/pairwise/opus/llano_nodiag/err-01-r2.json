@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el timeout, descarta credenciales y DNS, da una lista corta de verificaciones y una única prueba con nc cuyos tres resultados indican qué hacer, y es más fácil de leer de una vez; B es correcta pero más larga y repite ideas, con una pregunta final que invita a repreguntar."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el timeout, da un orden claro de revisión y una prueba con `nc` que distingue los tres resultados posibles (éxito, timeout, rechazo), y es más compacta; A es correcta pero más larga, y su paso 5 resulta menos útil porque Postgres escuchando solo en localhost daría un rechazo, no un timeout."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

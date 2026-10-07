@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "Ambas recomiendan Postgres con el mismo tradeoff, pero A es más directa y precisa (ACID, integridad referencial, auditoría y concurrencia), mientras B añade relleno, un anglicismo con error ('excele') y una repregunta innecesaria."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A enumera las entidades concretas del dominio (clientes, facturas, ítems, pagos, auditoría), explica el trade-off de flexibilidad vs robustez de forma clara y ofrece seguir la conversación, mientras que B es correcta pero más genérica, aunque A mezcla algo de spanglish y un error ('excele')."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

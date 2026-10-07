@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Tu API v2.4.1 no se conecta a Postgres en `10.0.3.17:5432`. El pool falla después de 30000 ms y el proceso termina con código 1.\n\nEs un timeout, no un error de credenciales: la conexión nunca recibe respuesta. Revisa en este orden:\n\n1. **¿La base de datos está levantada?** Conecta manualmente a `10.0.3.17:5432` desde otra máquina en la red.\n2. **¿El security group permite el puerto 5432?** Verifica que el security group de Postgres acepte tráfico entrante en 5432 desde la API.\n3. **¿La IP es correcta?** Confirma que `db.internal` resuelve a `10.0.3.17` en tu entorno de deploy.\n\nEl timeout de 30 segundos indica que hay un problema de red o la máquina no existe. Una contraseña mal configurada habría fallado en milisegundos.",
+  "output_tokens": 619,
+  "thinking_tokens": 363,
+  "input_tokens": 6314,
+  "wall_s": 6.6,
+  "created_at": "2026-10-07T00:04:55.690058+00:00"
+}

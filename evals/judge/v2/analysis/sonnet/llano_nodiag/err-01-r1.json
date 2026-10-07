@@ -1,0 +1,50 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "La API v2.4.1 no logra conectarse a Postgres en `db.internal:5432`, que resuelve a `10.0.3.17:5432`.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "No es un error de credenciales ni de base de datos inexistente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el pool agotó los 30000 ms. Después el proceso terminó con código 1.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El firewall o security group permite el puerto 5432.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "La API v2.4.1 no logra conectarse",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Un servidor que no está escuchando en un host alcanzable normalmente produce ECONNREFUSED inmediato, no un ETIMEDOUT. Un timeout indica que los paquetes se descartan (firewall, ruta) o que el host está caído.",
+      "quote": "Casi siempre es un problema de red o de que el servidor no está escuchando.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

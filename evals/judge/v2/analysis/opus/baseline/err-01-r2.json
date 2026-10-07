@@ -1,0 +1,50 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "La app **no llega a abrir una conexión TCP** con Postgres.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El pool reintentó durante 30 s y la app terminó con código 1.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El pool reintentó durante 30 s y la app terminó con código 1.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**Firewall / Security Groups / NetworkPolicy.** Es la causa más común.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Descarta que el problema esté en la base de datos, pero un timeout también puede deberse a que el host esté apagado o inexistente, como la propia respuesta admite después.",
+      "quote": "No es un problema de credenciales ni de la base de datos en sí",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Un solo thread corre el loop",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Node.js delega el trabajo al sistema operativo o a un pool de threads y sigue ejecutando tu código.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Revisa si hay callbacks listos (una operación terminó).",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que el proceso nunca se bloquea, pero un cálculo pesado de CPU sí bloquea el event loop.",
+      "quote": "pero alterna entre ellas para que el proceso nunca se bloquee",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empezaría por estos pasos en orden:\n\n1. **Revertir dependencias** (lo más probable)\n   ```bash\n   git diff package-lock.json  # ver qué cambió\n   npm ci --legacy-peer-deps  # restaurar versión anterior\n   ```\n   Si la latencia vuelve a 120ms, el culpable está en las dependencias.\n\n2. **Identificar cuál dependencia**\n   - Restaura `package-lock.json` a la versión anterior\n   - Actualiza solo 1-2 dependencias a la vez\n   - Mide p95 después de cada cambio con tu herramienta de monitoreo\n\n3. **Mientras investigas, chequea rápidamente:**\n   - `node --inspect` y abre DevTools → Memory (¿memory leak?)\n   - Logs: ¿hay errores o warnings nuevos?\n   - CPU/memoria del proceso: `top` o `Activity Monitor`\n   - Si usan dependencias con ejecución en tiempo de importación (linters, compiladores), pueden ejecutarse en startup\n\n4. **Si es una dependencia específica:**\n   - Busca issues recientes en el repo (a veces hay degradación de performance reportada)\n   - Considera downgrade temporal mientras esperas un fix\n\n¿Tienes acceso a los logs o métricas de ayer? ¿Es degradación consistente o por picos?",
+      "output_tokens": 572,
+      "thinking_tokens": 221,
+      "input_tokens": 3428
+    },
+    {
+      "text": "Listo, ya identificaste el culpable. Tienes 3 opciones:\n\n**Opción 1: Downgrade inmediato** (más rápido)\n```bash\nnpm install orm-name@version-anterior\nnpm ci\n# redeploy\n```\nRecuperarás los 120ms en minutos.\n\n**Opción 2: Agrupar transacciones** (si necesitas estar en la versión nueva)\nSi tu ORM lo permite, envuelve tus queries en una única transacción:\n```javascript\n// Antes: BEGIN/COMMIT x 14\ndb.transaction(async () => {\n  const user = await db.query('SELECT...');\n  await db.query('INSERT...');\n  // solo 1 BEGIN al inicio, 1 COMMIT al final\n})\n```\n\n**Opción 3: Desactivar transacciones automáticas**\nRevisa la documentación del ORM por algo como:\n- `autocommit: true`\n- `transaction: false`\n- O downgrade hasta que saquen un fix\n\n**Mi recomendación:** downgrade ahora (opción 1), reporta el issue en el ORM si nadie lo mencionó, y después planifica migrar con opciones 2 o esperar que lo arreglen.\n\n¿Sabes si es un bug reportado en el ORM o es comportamiento nuevo intencional? Eso define si es temporal.",
+      "output_tokens": 506,
+      "thinking_tokens": 156,
+      "input_tokens": 4108
+    },
+    {
+      "text": "```\nRevert: ORM a versión anterior (8.12 → 8.11)\n\nLa versión 8.12 abre una transacción BEGIN/COMMIT por cada query,\ncausando 28 transacciones extras por request (14 queries × 2).\n\n- P95 latency: 900ms → 130ms\n- Impacto: -86% en tiempo de respuesta\n\nPendiente: reportar issue en el repositorio del ORM o esperar fix oficial.\n```\n\nO más corto si prefieres:\n\n```\nFix: Downgrade ORM a v8.11\n\nv8.12 introduced automatic transactions per query (+86% latency).\nP95: 900ms → 130ms\n```\n\n¿Cual te late más?",
+      "output_tokens": 270,
+      "thinking_tokens": 81,
+      "input_tokens": 4691
+    }
+  ],
+  "created_at": "2026-10-07T00:07:08.921145+00:00"
+}

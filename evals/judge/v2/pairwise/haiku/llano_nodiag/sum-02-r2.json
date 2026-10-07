@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "La estructura con cronología en viñetas, impacto y acciones separados se escanea de un vistazo en un canal de equipo y conserva todos los datos técnicos, mientras que B los mezcla en prosa más densa."
+    },
+    {
+      "winner": "llano",
+      "reason": "B separa causa, cronología, impacto y acciones en secciones escaneables, así se lee de un vistazo en el canal, y conserva todos los datos técnicos del incidente."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

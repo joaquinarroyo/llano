@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más directo y ordenado en los tres turnos, con pasos numerados y un PR compacto. B añade más secciones y verificaciones tangenciales (pipelining, GC, monitoreo) que hacen más pesada la lectura sin ser esenciales."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer de una vez: pasos numerados concisos, razonamiento claro con números y un mensaje de PR listo para copiar en un bloque de código, sin perder los puntos técnicos clave; A es más denso y añade verificaciones laterales (pipelining, extras) que cargan la lectura."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

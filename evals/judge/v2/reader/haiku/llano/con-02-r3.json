@@ -1,0 +1,29 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "key": [
+    "C",
+    "C",
+    "C"
+  ],
+  "answers": [
+    "C",
+    "E",
+    "D"
+  ],
+  "correct": [
+    true,
+    false,
+    false
+  ],
+  "not_said": [
+    false,
+    true,
+    false
+  ],
+  "reader_model": "haiku"
+}

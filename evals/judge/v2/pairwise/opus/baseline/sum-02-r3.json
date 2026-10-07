@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B presenta impacto, causa, cronología y acciones sin repetir información (A repite la causa y los datos de latencia en varias secciones), con checklist accionable y estado 'resuelto' visible de entrada, sin perder ningún dato técnico."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A pone primero el estado (resuelto), el impacto y la causa, y luego la línea de tiempo y las acciones, así que se entiende en una sola lectura; B tiene la misma información pero la causa queda repartida entre el resumen y la cronología, y el impacto aparece después."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

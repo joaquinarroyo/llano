@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Falla porque 0.1 no se representa exactamente en binario. Cuando multiplicas 100.0 × 0.9, los errores de redondeo dan 89.99999999999999 en lugar de 90.0.\n\nNecesito ver el test para arreglarlo. ¿Puedes compartir el contenido de `tests/test_invoice.py`?\n\nMientras tanto, la solución es comparar con tolerancia en el test. En pytest, usa `approx()`:\n\n```python\nfrom pytest import approx\n\nassert total == approx(90.0)\n```\n\nO con `math.isclose()`:\n\n```python\nimport math\n\nassert math.isclose(total, 90.0)\n```\n\nSi necesitas exactitud decimal (raro en precios pero posible), usa `decimal.Decimal`:\n\n```python\nfrom decimal import Decimal\n\ntotal = Decimal(\"100.0\") * (1 - Decimal(\"0.1\"))\nassert total == Decimal(\"90.0\")\n```",
+  "output_tokens": 843,
+  "thinking_tokens": 595,
+  "input_tokens": 6244,
+  "wall_s": 9.03,
+  "created_at": "2026-10-07T00:06:25.715696+00:00"
+}

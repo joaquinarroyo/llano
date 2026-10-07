@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Elige según la dirección de los datos y la frecuencia de los cambios:\n\n- **WebSocket:** el cliente y el servidor se envían mensajes en los dos sentidos, con baja latencia.\n- **Server-Sent Events (SSE):** solo el servidor envía actualizaciones al cliente.\n- **Polling:** los cambios son poco frecuentes o la infraestructura no admite conexiones abiertas.\n\n| Criterio | WebSocket | SSE | Polling |\n|---|---|---|---|\n| Dirección | Bidireccional | Servidor → cliente | Cliente pregunta |\n| Protocolo | `ws://` / `wss://`, propio sobre TCP | HTTP normal (`text/event-stream`) | HTTP normal |\n| Reconexión | La programas tú | Automática en el navegador, con `Last-Event-ID` | No aplica |\n| Datos binarios | Sí | No, solo texto (UTF-8) | Sí |\n| Proxies y balanceadores | Necesitan soportar el upgrade | Funcionan como HTTP | Funcionan sin cambios |\n| Costo en el servidor | Una conexión abierta por cliente | Una conexión abierta por cliente | Una solicitud por intervalo |\n| Casos típicos | Chat, juegos, edición colaborativa | Notificaciones, feeds, progreso de un job, streaming de respuestas de un LLM | Estado de un pedido, dashboards que cambian cada minuto |\n\n## Cuándo usar cada uno\n\n**WebSocket.** Úsalo si el cliente también envía mensajes frecuentes y la latencia importa. En un chat o un juego, abrir una solicitud HTTP por cada mensaje del cliente agrega demasiada sobrecarga. El costo es mayor: tú manejas la reconexión, los heartbeats y el estado de cada conexión.\n\n**SSE.** Úsalo si el flujo va solo del servidor al cliente. Es más simple que WebSocket porque usa HTTP normal. Por eso funciona con la autenticación, los proxies y los CDN que ya tienes. El cliente puede enviar datos con `fetch` normal cuando lo necesite. Con HTTP/1.1 el navegador limita a 6 conexiones por dominio, y cada pestaña abierta usa una. Con HTTP/2 ese límite deja de ser un problema.\n\n**Polling.** Úsalo si un retraso de varios segundos es aceptable o si hay pocos cambios. Es la opción más fácil de escalar y depurar porque cada solicitud es independiente y no hay conexiones abiertas. Si los cambios son raros pero necesitas verlos rápido, el long polling es un punto medio. Con long polling, el servidor retiene la solicitud hasta que hay un dato nuevo.\n\n## Regla práctica\n\n1. Empieza por polling si el retraso aceptable es de 5 s o más.\n2. Pasa a SSE si necesitas actualizaciones inmediatas del servidor.\n3. Pasa a WebSocket solo si el cliente también envía mensajes frecuentes con baja latencia.",
+  "output_tokens": 1100,
+  "thinking_tokens": 29,
+  "input_tokens": 5159,
+  "wall_s": 11.63,
+  "created_at": "2026-10-07T00:19:28.359805+00:00"
+}

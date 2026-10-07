@@ -1,0 +1,44 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "**Idempotencia** significa que ejecutar una operación múltiples veces produce el mismo resultado que ejecutarla una sola vez.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**DELETE /user/123** - Idempotente.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si la respuesta se pierde pero la solicitud se procesó, el cliente puede reintentar sin efectos secundarios duplicados.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Usar **claves de idempotencia**: El cliente envía un ID único; si llega dos veces con el mismo ID, se procesa una sola vez.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Clicks dobles accidentales o refresco de página no causan duplicados.",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

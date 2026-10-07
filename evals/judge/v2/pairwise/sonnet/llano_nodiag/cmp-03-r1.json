@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da una regla práctica numerada y clara, con tabla comparativa y ventajas/desventajas por opción (incluido long polling y la alternativa SSE + POST), mientras que B es buena pero menos directa en la decisión final y omite el long polling."
+    },
+    {
+      "winner": "llano",
+      "reason": "B cubre lo mismo que A (tabla, criterios, límite de 6 conexiones en HTTP/1.1) y añade las desventajas de cada opción, el long polling y una regla práctica en pasos que se lee de corrido, mientras que A deja los heartbeats y timeouts como notas sueltas."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

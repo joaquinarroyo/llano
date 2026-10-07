@@ -1,0 +1,44 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Latencia p95 del checkout aumentó de 300ms a 4s",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un job de reindexado de Elasticsearch, programado erróneamente en horario laboral, estaba saturando el cluster",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Se pausó el job",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "212 usuarios abandonaron el checkout durante el incidente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Reprogramar job de reindexado a las 03:00",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

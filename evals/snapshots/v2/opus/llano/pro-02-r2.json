@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Usa `git revert`. Este comando crea un commit nuevo que deshace los cambios y no reescribe el historial, así que nadie del equipo pierde trabajo.\n\n**Peligro:** No uses `git reset` seguido de `git push --force` en `main`. Esos comandos reescriben el historial compartido. El equipo tendría conflictos y podría perder commits.\n\n1. Actualiza tu copia local de `main`:\n   ```\n   git switch main\n   git pull\n   ```\n2. Busca el hash del commit que quieres revertir:\n   ```\n   git log --oneline\n   ```\n3. Revisa los cambios de ese commit para confirmar que es el correcto:\n   ```\n   git show <hash>\n   ```\n4. Crea el commit de reversión:\n   ```\n   git revert <hash>\n   ```\n   Git abre el editor con un mensaje por defecto. Agrega el motivo de la reversión y guarda.\n5. Si aparecen conflictos, resuélvelos en los archivos marcados y continúa:\n   ```\n   git add <archivo>\n   git revert --continue\n   ```\n   Si quieres cancelar todo, usa `git revert --abort`.\n6. Ejecuta los tests antes de publicar. La reversión puede romper código que dependía del commit original.\n7. Publica el cambio:\n   ```\n   git push\n   ```\n   Si `main` está protegida, haz el revert en una branch nueva y abre un PR.\n\nCasos especiales:\n\n| Caso | Comando |\n|---|---|\n| Varios commits seguidos | `git revert <más_antiguo>^..<más_reciente>`. Crea un commit por cada uno. |\n| Varios commits en un solo commit de reversión | `git revert --no-commit <más_antiguo>^..<más_reciente>` y después `git commit` |\n| Commit de merge | `git revert -m 1 <hash>`. El `-m 1` conserva el lado de `main`. |\n\n**Atención:** Si después quieres volver a aplicar los cambios revertidos, un nuevo merge de la misma branch no los trae. Git considera que esos commits ya están integrados. Para recuperarlos, revierte el commit de reversión: `git revert <hash_del_revert>`.\n\nAvisa al equipo después del push. Así cada persona hace `git pull` antes de seguir trabajando sobre esos archivos.",
+  "output_tokens": 843,
+  "thinking_tokens": 46,
+  "input_tokens": 5172,
+  "wall_s": 9.53,
+  "created_at": "2026-10-07T00:18:41.855570+00:00"
+}

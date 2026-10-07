@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Como hay un solo hilo, si hacés trabajo de CPU pesado",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un pool de hilos interno (libuv) que hace el trabajo pesado de I/O",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "cuando el stack queda vacío, toma el siguiente callback de la cola y lo ejecuta.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Aunque el timeout es de 0 ms, la promesa (microtask) le gana.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Mientras ese `for` corre, ningún otro request se procesa, ningún timer dispara, nada.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que todo el I/O en Node es asíncrono desde siempre, pero Node tiene APIs de I/O bloqueantes como fs.readFileSync.",
+      "quote": "es asíncrono desde siempre",
+      "verified": true
+    }
+  ],
+  "answer_first": false,
+  "diagram": "correct"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica con más precisión por qué un timeout apunta a red (frente a ECONNREFUSED o error de credenciales), da alternativas al nc, cubre casos como NetworkPolicy y NACLs, y sugiere preguntar qué cambió en el deploy, mientras que A es más corta pero sugiere que Postgres caído produce timeout, lo que normalmente daría 'refused'."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el log, da una lista corta de verificaciones en orden y un `nc` con los tres resultados posibles (succeeded, timed out, refused), así que se entiende y se puede aplicar en una sola lectura sin perder lo técnico importante."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

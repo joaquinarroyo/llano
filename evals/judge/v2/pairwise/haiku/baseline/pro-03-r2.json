@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B presenta backup y restauración de forma directa con placeholders claros y tips útiles (.pgpass, -j, solo esquema), mientras que A mezcla un paso innecesario de scp, tiene una explicación confusa de la contraseña y un consejo incorrecto sobre snapshots que 'bloquean lecturas'; B tiene un pequeño desliz ('Alternatively') pero es más fácil de seguir en una lectura."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica el flujo correcto (pg_dump remoto guarda el archivo localmente, luego createdb y restore) sin pasos confusos; B añade un scp innecesario y contradictorio, y una nota imprecisa sobre bloqueo de lecturas."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

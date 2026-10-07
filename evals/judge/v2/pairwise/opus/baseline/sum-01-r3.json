@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da una descripción de PR directa y sin redundancias que cubre los 4 commits y los 4 archivos, y avisa en una línea que no vio el diff; B repite la misma información en la lista de cambios y en la tabla, y agrega una sección de pruebas inventada."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega una descripción de PR concisa y lista para pegar, con los cambios y archivos clave y una aclaración honesta de que no vio el diff, mientras que A repite la misma información en tres secciones (resumen, cambios, tabla) y añade secciones especulativas como 'Cómo probar', lo que dificulta la lectura rápida."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

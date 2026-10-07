@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da un flujo directo con pg_dump -Fc y pg_restore, explica las flags y la compatibilidad de versiones, mientras que B es más largo y repetitivo, y tiene un error de flujo (el '-W' no es para ingresar contraseña de otro modo, y mezcla pasos de SSH innecesarios), aunque A tiene un pequeño typo ('usarplain') que no afecta la comprensión."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo (un solo flujo con pg_dump -Fc y pg_restore, placeholders claros, explica las flags y menciona la compatibilidad de versiones), mientras que A es más repetitivo y redundante, y su sección 'para bases grandes' mezcla compresión con la transferencia de forma confusa; B tiene un pequeño typo ('usarplain') pero no afecta la comprensión."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

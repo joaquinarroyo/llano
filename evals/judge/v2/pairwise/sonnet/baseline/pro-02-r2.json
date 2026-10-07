@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da los mismos pasos esenciales (revert, merge con -m 1, conflictos, rama protegida, revert del revert) de forma más compacta y con la advertencia de peligro destacada al inicio, mientras que B añade secciones extra y una oferta de seguimiento que alargan la lectura sin ser necesarias."
+    },
+    {
+      "winner": "llano",
+      "reason": "B cubre lo esencial (revert, advertencia sobre force-push, merge con -m 1, conflictos, rama protegida, avisar al equipo, revertir el revert) de forma más concisa y fácil de leer en una sola pasada, mientras que A añade extras (rangos, secretos, repregunta) que alargan sin ser necesarios."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Emitir una factura, asignar su número consecutivo y registrar el asiento contable deben ocurrir juntos o no ocurrir.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Usa Postgres.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las columnas `JSONB` guardan campos variables, como metadatos de un proveedor de pagos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "si tus datos fueran documentos muy variables, sin relaciones fuertes y con mucho volumen de escritura",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las claves foráneas y los `CHECK` evitan facturas sin cliente o totales negativos.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

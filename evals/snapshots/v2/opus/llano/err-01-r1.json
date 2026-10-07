@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La API v2.4.1 no logra conectarse a Postgres. El host `db.internal` resuelve a `10.0.3.17`, pero el puerto 5432 no responde en 30000 ms. Sin el pool de base de datos, el proceso termina con código 1.\n\nEl log descarta dos causas:\n\n- **No es DNS.** El nombre `db.internal` sí se resolvió a `10.0.3.17`.\n- **No son las credenciales.** La conexión TCP nunca se abrió, así que Postgres no llegó a pedir usuario ni contraseña.\n\n`ETIMEDOUT` significa que los paquetes no recibieron ninguna respuesta. Si Postgres estuviera apagado en un host activo, verías `ECONNREFUSED`. Un timeout casi siempre indica que algo en la red descarta el tráfico, o que el host no está activo.\n\nRevisa en este orden:\n\n1. **Verifica que la instancia de Postgres esté levantada** y que su IP siga siendo `10.0.3.17`. Si la recrearon, el registro DNS puede apuntar a una IP vieja.\n2. **Revisa el firewall o el security group de la base.** Debe permitir tráfico entrante TCP 5432 desde la subred o el security group de la API.\n3. **Prueba la conexión desde el mismo lugar donde corre la API** (contenedor, pod o VM):\n   ```\n   nc -vz -w 5 10.0.3.17 5432\n   ```\n   Si también da timeout, el problema es de red. Si conecta, compara la configuración de red del deploy con la de esta prueba.\n4. **Revisa la configuración de Postgres.** En `postgresql.conf`, el valor de `listen_addresses` debe incluir la interfaz de `10.0.3.17` y no solo `localhost`.\n5. **Revisa el ruteo entre redes.** Si la API y la base están en VPC o subredes distintas, verifica el peering, las tablas de rutas y las network ACL.\n\nEl paso 2 es la causa más común de este error, sobre todo después de un cambio de infraestructura o de un deploy en una red nueva.",
+  "output_tokens": 824,
+  "thinking_tokens": 100,
+  "input_tokens": 5338,
+  "wall_s": 9.48,
+  "created_at": "2026-10-07T00:14:59.893614+00:00"
+}

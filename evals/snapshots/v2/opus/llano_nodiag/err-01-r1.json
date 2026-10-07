@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La API v2.4.1 no logra conectarse a Postgres y por eso termina con código 1. El host `db.internal` se resolvió a `10.0.3.17`, pero el puerto `5432` nunca respondió. El pool esperó 30000 ms (de 14:02:12 a 14:02:42) y se rindió.\n\n**Qué descarta el log:**\n\n- **No es DNS.** El nombre `db.internal` se resolvió bien a una IP.\n- **No son credenciales.** El error es `ETIMEDOUT`, así que la conexión TCP nunca se abrió. Con un usuario o una contraseña mal, Postgres respondería con un error de autenticación.\n\n**Qué revisar, en este orden:**\n\n1. **Que Postgres esté levantado** en `10.0.3.17` y escuche en el puerto 5432. Revisa también que `listen_addresses` en `postgresql.conf` no sea solo `localhost`.\n2. **Las reglas de red entre la API y la base.** Un security group, un firewall o una network policy que descarta los paquetes causa justo un timeout. Un rechazo explícito daría `ECONNREFUSED`.\n3. **Que `10.0.3.17` sea la IP correcta.** Si la base cambió de IP y el registro DNS quedó viejo, la API apunta a una máquina que no responde.\n4. **Que la API esté en la red correcta.** Si el deploy corre en otra VPC, otra subnet u otro cluster, puede no tener ruta a `10.0.3.17`.\n\nPara probarlo, ejecuta esto desde el mismo entorno donde corre la API:\n\n```\nnc -vz -w 5 10.0.3.17 5432\n```\n\nSi también da timeout, el problema es de red o de la base, no de la API. Si conecta, compara la configuración de conexión del deploy con la que usas en esa prueba.",
+  "output_tokens": 703,
+  "thinking_tokens": 70,
+  "input_tokens": 4984,
+  "wall_s": 8.13,
+  "created_at": "2026-10-07T00:15:06.893195+00:00"
+}

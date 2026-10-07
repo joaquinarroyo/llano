@@ -1,0 +1,55 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "partial",
+      "quote": "ejecuta todo tu código de forma **síncrona**",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "el event loop las envía al sistema operativo y sigue ejecutando otro código",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Cuando termina la operación, el event loop la trae de vuelta como una tarea pendiente.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "corren en una **cola de microtareas** que se vacía antes de pasar a la siguiente fase del event loop",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "La lectura de archivos no se delega al sistema operativo sino al pool de hilos de libuv; además, en la lista de fases falta la fase poll, que es donde se procesa la mayor parte del I/O.",
+      "quote": "cuando llama a operaciones lentas (como `fetch` o leer un archivo), el event loop las envía al sistema operativo",
+      "verified": true
+    },
+    {
+      "claim": "Cada fase ejecuta su propia cola de callbacks, no todo el código síncrono; además, las microtareas se vacían después de cada callback, no solo al cambiar de fase.",
+      "quote": "En cada fase, el loop ejecuta **todo el código síncrono** hasta que no queda nada.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

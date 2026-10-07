@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "conversation",
+  "model": "claude-opus-5-5",
+  "turns": [
+    {
+      "text": "Empieza por confirmar que la actualización de dependencias causa la lentitud. Si no la causa, buscar el problema en las dependencias te hace perder tiempo.\n\n1. **Vuelve al lockfile anterior en un entorno de prueba.** Restaura `package-lock.json` (o `yarn.lock` / `pnpm-lock.yaml`) del commit anterior, corre `npm ci` y mide el p95 con la misma carga. Si vuelve a ~120 ms, el problema está en las dependencias.\n2. **Lista lo que cambió.** Corre `git diff <commit-anterior> -- package-lock.json`. Revisa también las dependencias transitivas, porque una actualización de minor o patch puede traer cambios grandes en paquetes indirectos.\n3. **Busca primero en los paquetes que más afectan la latencia:**\n   - Driver de base de datos u ORM (`pg`, `mysql2`, `mongoose`, `prisma`). Un cambio en el tamaño del pool o en los timeouts por defecto produce colas.\n   - Cliente HTTP (`axios`, `undici`, `got`). Si se desactivó el keep-alive, cada llamada abre una conexión nueva.\n   - Logger (`pino`, `winston`). Un transport síncrono bloquea el event loop.\n   - Hashing o validación (`bcrypt`, `zod`, `ajv`). Más rondas de costo o una validación sin compilar suman CPU en cada request.\n   - Versión de Node. Revisa si cambió el campo `engines` o la imagen base de Docker.\n4. **Si no encuentras al culpable leyendo, haz una búsqueda binaria.** Revierte la mitad de las actualizaciones y mide. Repite con la mitad que contiene la lentitud.\n5. **Mide dónde se va el tiempo.** Esto te sirve si la búsqueda binaria es lenta:\n   - `node --cpu-prof app.js` genera un perfil de CPU que puedes abrir en Chrome DevTools.\n   - `npx clinic doctor -- node app.js` detecta bloqueo del event loop o espera de I/O.\n   - Si la CPU está baja y la latencia alta, el tiempo se va esperando I/O: la base, un servicio externo o el pool de conexiones.\n\n**Atención:** verifica también que nada más haya cambiado ayer: tráfico, plan de la base de datos, red o un servicio externo. Coincidir en el tiempo con la actualización no prueba la causa, y el paso 1 lo confirma o lo descarta.",
+      "output_tokens": 1206,
+      "thinking_tokens": 325,
+      "input_tokens": 5193
+    },
+    {
+      "text": "El ORM causa la lentitud, no `pg`. Cada request pasa de 14 a 42 viajes a la base: cada query ahora suma un `BEGIN` y un `COMMIT`.\n\nLa cuenta encaja con lo que ves. El p95 subió 780 ms con 28 viajes extra, unos 28 ms por viaje. Eso es más que la latencia de red típica a la base, así que probablemente también hay espera en el pool. Cada transacción retiene su conexión durante 3 viajes, y los requests concurrentes esperan una conexión libre.\n\n1. **Fija el ORM en la versión anterior ahora.** Pon la versión exacta en `package.json`, sin `^` ni `~`. Después corre `npm install` y despliega. Así recuperas el p95 mientras investigas. Puedes dejar `pg` en 8.12.\n2. **Lee el changelog del ORM para esa versión.** Un cambio así suele venir con una opción para desactivarlo. Busca algo como \"implicit transactions\", \"autocommit\" o \"transaction per query\".\n3. **Elige cómo quieres el comportamiento final:**\n   - **Sin transacción implícita.** Desactiva la opción nueva y vuelve al comportamiento anterior: 14 viajes por request.\n   - **Una transacción por request.** Agrupa las 14 queries en una transacción explícita. Son 16 viajes, y el request queda atómico. Esta opción sirve si el request escribe datos que deben quedar consistentes.\n4. **Verifica en el APM después del cambio.** Confirma que desaparecen los `BEGIN`/`COMMIT` por query y que el p95 vuelve a ~120 ms. Si el p95 sigue alto, revisa en el APM el tiempo de espera para obtener una conexión del pool.\n\n**Atención:** antes de desactivar la transacción implícita, revisa si alguna parte del código empezó a depender de ella desde ayer. Revisa sobre todo las escrituras que deben fallar o completarse juntas.\n\nSi me dices qué ORM es y su versión, te busco la opción exacta para desactivarlo.",
+      "output_tokens": 1037,
+      "thinking_tokens": 311,
+      "input_tokens": 6520
+    },
+    {
+      "text": "No sé el nombre del ORM ni sus versiones, así que dejé marcadores `<orm>`, `<versión-anterior>` y `<versión-nueva>`. Reemplázalos antes de abrir el PR.\n\n```markdown\nfix(deps): fijar <orm> en <versión-anterior> para recuperar la latencia\n\n## Problema\n\nDespués de actualizar las dependencias, el p95 de la API subió de 120 ms a 900 ms.\nNo hubo cambios de código.\n\n## Causa\n\n<orm> <versión-nueva> abre una transacción por cada query. El APM muestra que cada\nrequest hace 14 queries, y ahora cada una lleva un `BEGIN` y un `COMMIT` extra. Así,\ncada request pasa de 14 a 42 viajes a la base. Cada transacción también retiene su\nconexión del pool más tiempo, y eso aumenta la espera de los requests concurrentes.\n\nLa actualización de `pg` de 8.11 a 8.12 no causa el problema.\n\n## Cambio\n\n- Fija <orm> en la versión exacta <versión-anterior>, sin `^` ni `~`.\n\n## Resultado\n\nEl p95 volvió a 130 ms.\n\n## Pendiente\n\n- Revisar el changelog de <orm> <versión-nueva> y buscar la opción que desactiva la\n  transacción implícita.\n- Decidir si volvemos a 14 queries sin transacción, o si agrupamos las queries de cada\n  request en una transacción explícita (16 viajes).\n- Después, quitar el pin y actualizar <orm>.\n```\n\nAgregué la línea sobre `pg` porque quien revise el diff del lockfile verá ese cambio y puede sospechar de él. Si también revertiste `pg`, ajusta esa línea.",
+      "output_tokens": 767,
+      "thinking_tokens": 167,
+      "input_tokens": 7631
+    }
+  ],
+  "created_at": "2026-10-07T00:20:32.096700+00:00"
+}

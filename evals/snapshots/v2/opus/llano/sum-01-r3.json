@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Esta descripción cubre los 4 commits y los archivos que cambiaron.\n\n```markdown\n## Cambios\n\n- Rota los refresh tokens en cada uso.\n- Invalida el refresh token anterior si alguien lo reutiliza.\n- Agrega tests para la detección de reutilización de tokens.\n- Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2.\n\n## Archivos\n\n- `src/auth/tokens.ts`: lógica de rotación e invalidación.\n- `src/auth/middleware.ts`: ajustes en el middleware de autenticación.\n- `tests/auth/tokens.test.ts`: tests nuevos (96 líneas).\n- `package.json`: versión de `jsonwebtoken`.\n```\n\nLas descripciones de `tokens.ts` y `middleware.ts` salen de los mensajes de los commits, porque no vi el diff. Si quieres que el texto diga qué cambió exactamente en el middleware, pásame `git diff` de ese archivo.",
+  "output_tokens": 476,
+  "thinking_tokens": 127,
+  "input_tokens": 5367,
+  "wall_s": 5.52,
+  "created_at": "2026-10-07T00:22:47.297979+00:00"
+}

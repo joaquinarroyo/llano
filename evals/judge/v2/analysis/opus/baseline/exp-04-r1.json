@@ -1,0 +1,44 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Quien bloquea es el navegador, no tu servidor.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el puerto es distinto, así que son orígenes distintos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Access-Control-Allow-Origin: http://localhost:3000",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si tu API no responde bien a ese `OPTIONS`, la petición real ni siquiera se envía.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "no aplican CORS",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "CORS (Cross-Origin Resource Sharing) es un mecanismo de seguridad del navegador que controla cuáles sitios pueden hacer peticiones a tu API desde JavaScript.\n\nEl navegador ve `localhost:3000` y `localhost:8000` como dos orígenes distintos porque el puerto es diferente. El origen incluye protocolo, dominio y puerto. Por eso, aunque estén en la misma máquina, son \"diferentes sitios\" para el navegador.\n\nCuando haces una petición de AJAX/fetch desde `localhost:3000` a `localhost:8000`, el navegador primero bloquea la petición (misma-origin policy). Después envía headers `Origin` al servidor. Si tu API no responde con headers `Access-Control-Allow-Origin: http://localhost:3000`, el navegador rechaza la respuesta.\n\n**Para permitir la petición, tu API debe:**\n\nAgregar estos headers en cada respuesta:\n\n```\nAccess-Control-Allow-Origin: http://localhost:3000\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE\nAccess-Control-Allow-Headers: Content-Type\n```\n\n**En Express:**\n\n```javascript\napp.use((req, res, next) => {\n  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');\n  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');\n  res.header('Access-Control-Allow-Headers', 'Content-Type');\n  next();\n});\n```\n\nO usa el paquete `cors`:\n\n```javascript\nconst cors = require('cors');\napp.use(cors({ origin: 'http://localhost:3000' }));\n```\n\n**En desarrollo**, puedes permitir todo (pero nunca en producción):\n\n```javascript\napp.use(cors()); // permite cualquier origen\n```\n\nEl navegador bloquea también para prevenir ataques: un sitio malicioso no puede robar datos de tu API solo porque la visitas en otra pestaña.",
+  "output_tokens": 720,
+  "thinking_tokens": 229,
+  "input_tokens": 5908,
+  "wall_s": 7.97,
+  "created_at": "2026-10-07T00:06:16.685358+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica la causa (representación binaria de float), señala que con esos valores el cálculo da 90.0 exacto y sugiere imprimir los valores reales, y ofrece soluciones concretas (Decimal, pytest.approx, centavos enteros); B es solo una serie de llamadas a herramientas sin respuesta."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica la causa (representación binaria de float), señala que con esos valores el cálculo da 90.0 exacto y sugiere verificarlos, y ofrece arreglos concretos (Decimal o pytest.approx) con recomendación para facturas, mientras que A solo lanza llamadas a herramientas repetidas sin ninguna explicación."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

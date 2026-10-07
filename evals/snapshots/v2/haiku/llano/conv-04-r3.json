@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "No, es arriesgado con 6 desarrolladores. Un monolito es más simple de operar, debuguear y desplegar. Los microservicios ganan velocidad de equipo solo si son equipos grandes con infraestructura DevOps dedicada.\n\nEl tradeoff: microservicios te dan deploys independientes y escalamiento por servicio, pero pierdes visibilidad del sistema completo, añades latencia de red, y necesitas invertir tiempo en observabilidad y deployment. Con 6 personas, ese costo sobrepasa el beneficio.\n\n¿Qué problema del monolito estás tratando de resolver? Si es porque los deploys son lentos o el crecimiento es caótico, hay alternativas más baratas: modularizar el monolito, mejorar los tests, o separar un servicio crítico si es necesario.",
+      "output_tokens": 572,
+      "thinking_tokens": 363,
+      "input_tokens": 6185
+    },
+    {
+      "text": "Esos son problemas reales, pero no de arquitectura: son de testing y deploys. Microservicios no los arreglan, solo los disimulan.\n\nAtaca esto primero, en orden:\n\n1. **Aisla facturación ya.** Un cambio en facturación no debería tocar login. Crea un contexto separado (bounded domain en DDD) con tests que fallen si facturación toca modelos de auth. Rails permite hacer esto sin microservicios: particiones de código, validaciones en los puntos de entrada.\n\n2. **Acelera los deploys.** 40 minutos indica tests lentos o infraestructura lenta. Esto se arregla con paralelización, caché de dependencias, o running tests solo en las rutas afectadas. Muchas veces baja a 8-10 minutos sin cambiar arquitectura.\n\n3. **Agrégales tests a esos cambios.** El bug de facturación-login es un test que falta. Escribe tests de integración que verifiquen que cambios en facturación no rompen auth.\n\nCon 6 personas, en dos sprints tienen eso. Microservicios son una distracción que retrasa la verdadera solución.\n\n¿Quieren atacar primero el acoplamiento de facturación o los deploys lentos?",
+      "output_tokens": 552,
+      "thinking_tokens": 217,
+      "input_tokens": 6830
+    },
+    {
+      "text": "# Plan: Desacoplar y acelerar\n\n**Objetivo:** Arreglar los deploys lentos y evitar que cambios en una parte rompan otra.\n\n## Fase 1 (1-2 semanas)\n- **Día 1-2:** Audita qué hace cada test. Identifica cuáles corren siempre y cuáles son lentos. Paraleliza los que puedas.\n- **Día 3-5:** Crea un test de integración: \"cambios en facturación no deben afectar login\". Ese test falla hoy; arréglalo.\n- **Día 6-10:** Aísla facturación en un módulo separado. Nada de facturación toca `User` o `Session`.\n\n**Resultado esperado:** Deploys en 15-20 minutos. Tests previenen regresiones.\n\n## Fase 2 (2-3 semanas)\n- Revisa qué otros módulos están acoplados (reportes, pagos, notificaciones). Repite el mismo patrón.\n- Documenta las fronteras entre módulos en el código.\n\n**Resultado esperado:** Sistema modular. Cambios seguros.\n\n## Después\nSi aún tienen problemas de escala o necesitan deploys independientes, microservicios tienen sentido. Pero desde aquí ven el costo real.\n\n---\n\n**Para presentar:** Muestra el bug de facturación-login como lo que es: falta de tests y diseño. Esta solución lo arregla en semanas, no meses. Los deploys son un bonus.\n\n¿Quieren que detalle el test de integración o el plan de modularización?",
+      "output_tokens": 542,
+      "thinking_tokens": 122,
+      "input_tokens": 7435
+    }
+  ],
+  "created_at": "2026-10-07T00:08:44.596901+00:00"
+}

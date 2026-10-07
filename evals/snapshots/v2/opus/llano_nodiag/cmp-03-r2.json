@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano_nodiag",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Depende de quién envía los datos y con qué frecuencia cambian:\n\n| Opción | Dirección | Úsala cuando... |\n|---|---|---|\n| WebSocket | Bidireccional | El cliente y el servidor envían mensajes frecuentes en los dos sentidos, con baja latencia. |\n| Server-Sent Events (SSE) | Solo servidor → cliente | El servidor envía actualizaciones continuas y el cliente solo escucha. |\n| Polling | El cliente pregunta cada cierto tiempo | Los datos cambian poco, la latencia no importa o la infraestructura no soporta conexiones largas. |\n\n## WebSocket\n\nÚsalo para chat, juegos multijugador, edición colaborativa o trading. En estos casos el cliente también envía muchos mensajes, y abrir un request HTTP por cada uno costaría demasiado.\n\nEl costo es la complejidad. Tienes que manejar la reconexión, los heartbeats y el estado de cada conexión. Escalar también es más difícil, porque cada servidor mantiene conexiones abiertas y necesitas sticky sessions o un bus de mensajes (por ejemplo, Redis pub/sub) entre instancias.\n\n## Server-Sent Events\n\nÚsalo para notificaciones, feeds en vivo, progreso de un job o streaming de respuestas de un LLM. El cliente envía sus acciones con requests HTTP normales y recibe las actualizaciones por SSE.\n\nSSE es más simple que WebSocket por estas razones:\n\n- Usa HTTP normal, así que funciona con proxies, balanceadores y autenticación existentes.\n- `EventSource` reconecta solo y retoma desde el último evento con `Last-Event-ID`.\n- Con HTTP/2 no tiene el límite de 6 conexiones por dominio que sí tiene en HTTP/1.1.\n\nSu límite: solo transmite texto (UTF-8). Además, `EventSource` no permite headers personalizados. Si necesitas un header `Authorization`, usa `fetch` con un stream o una cookie.\n\n## Polling\n\nÚsalo para el estado de un pedido, un dashboard que se actualiza cada 30 s o integraciones con sistemas que no controlas. Es lo más simple de implementar, cachear y depurar.\n\nEl costo es que la latencia depende del intervalo, y muchos requests vuelven vacíos. Si necesitas menos latencia sin cambiar la infraestructura, usa long polling: el servidor retiene el request hasta tener un dato o hasta un timeout.\n\n## Regla práctica\n\n1. Empieza con polling si una latencia de varios segundos es aceptable.\n2. Pasa a SSE si el servidor necesita enviar datos al instante.\n3. Usa WebSocket solo si el cliente también envía mensajes frecuentes y de baja latencia.",
+  "output_tokens": 1004,
+  "thinking_tokens": 29,
+  "input_tokens": 4805,
+  "wall_s": 10.65,
+  "created_at": "2026-10-07T00:19:29.444196+00:00"
+}

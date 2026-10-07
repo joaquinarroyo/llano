@@ -1,0 +1,60 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "consistencia, disponibilidad y tolerancia a particiones",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "En una partición de red, debes elegir entre detener el sistema (sacrificas A) o responder con datos potencialmente desactualizados (sacrificas C).",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "partial",
+      "quote": "Los equipos lo usan menos como herramienta de diseño y más como recordatorio de que no hay soluciones mágicas.",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Postgres elige CA. Un sistema distribuido no puede renunciar a la tolerancia a particiones, así que CA no es una opción real para sistemas distribuidos.",
+      "quote": "Postgres elige CA",
+      "verified": true
+    },
+    {
+      "claim": "La tolerancia a particiones se puede ajustar o sacrificar según el contexto. En realidad las particiones de red ocurren sí o sí y P no es opcional.",
+      "quote": "Los sistemas reales ajustan la consistencia, la disponibilidad y la tolerancia a particiones según el contexto.",
+      "verified": true
+    },
+    {
+      "claim": "Presentar CAP como 'elige dos de tres' es engañoso, porque implica que se puede prescindir de P.",
+      "quote": "un sistema distribuido solo puede garantizar dos de tres propiedades",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

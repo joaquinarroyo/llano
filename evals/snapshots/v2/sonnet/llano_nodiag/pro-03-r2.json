@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano_nodiag",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom para sacar el backup y `pg_restore` para cargarlo en tu base local. Este formato comprime el archivo y permite restaurar en paralelo.\n\n**Peligro:** una base de producción suele tener datos personales o secretos. Guarda el archivo cifrado o bórralo al terminar, y no lo subas a un repositorio ni a un servicio externo.\n\n**Atención:** `pg_dump` solo lee, pero usa CPU y red del servidor. Si la base es grande, ejecútalo en un horario de poca carga o contra una réplica.\n\n1. Verifica que tu `pg_dump` local tenga la misma versión mayor que el servidor, o una más nueva. Una versión más vieja falla.\n\n   ```bash\n   pg_dump --version\n   psql -h PROD_HOST -U PROD_USER -d PROD_DB -c \"SHOW server_version;\"\n   ```\n\n2. Genera el backup. Guarda la contraseña en `~/.pgpass` o en `PGPASSWORD`, no en el comando.\n\n   ```bash\n   pg_dump -h PROD_HOST -U PROD_USER -d PROD_DB \\\n     --format=custom --no-owner --no-acl \\\n     --file=backup.dump\n   ```\n\n   `--no-owner` y `--no-acl` evitan errores porque tu máquina local no tiene los roles de producción.\n\n3. Crea una base vacía en local.\n\n   ```bash\n   createdb mi_base_local\n   ```\n\n4. Restaura el backup.\n\n   ```bash\n   pg_restore -d mi_base_local --jobs=4 --no-owner --no-acl backup.dump\n   ```\n\n5. Verifica que los datos llegaron.\n\n   ```bash\n   psql -d mi_base_local -c \"\\dt\"\n   ```\n\nSi la base de producción usa extensiones (por ejemplo `postgis` o `pg_trgm`), instálalas antes en tu Postgres local. Si no, `pg_restore` muestra errores en esos objetos.\n\nSi el servidor de producción solo es accesible por SSH, abre un túnel y apunta `pg_dump` a él:\n\n```bash\nssh -N -L 5433:localhost:5432 usuario@PROD_HOST\npg_dump -h localhost -p 5433 -U PROD_USER -d PROD_DB --format=custom --file=backup.dump\n```\n\nSi necesitas un archivo SQL de texto en lugar del formato custom, cambia a `--format=plain` y restaura con `psql -d mi_base_local -f backup.sql`. Este formato no permite restauración en paralelo.",
+  "output_tokens": 1101,
+  "thinking_tokens": 212,
+  "input_tokens": 4809,
+  "wall_s": 9.26,
+  "created_at": "2026-10-07T00:11:14.425922+00:00"
+}

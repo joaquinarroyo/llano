@@ -1,0 +1,29 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "key": [
+    "C",
+    "C",
+    "C"
+  ],
+  "answers": [
+    "C",
+    "E",
+    "E"
+  ],
+  "correct": [
+    true,
+    false,
+    false
+  ],
+  "not_said": [
+    false,
+    true,
+    true
+  ],
+  "reader_model": "haiku"
+}

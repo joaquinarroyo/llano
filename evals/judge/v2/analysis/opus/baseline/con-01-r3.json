@@ -1,0 +1,44 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Una operación es **idempotente** si ejecutarla una vez o varias veces con la misma petición produce **el mismo efecto en el servidor**.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "| `PUT` | Sí | \"El usuario 42 tiene email X\": repetirlo deja lo mismo |",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "En sistemas distribuidos **la red falla**, y el cliente no siempre sabe si su petición llegó:",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "### Cómo hacer idempotente un `POST`: claves de idempotencia",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "3. El cliente reintenta → **doble cobro**.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

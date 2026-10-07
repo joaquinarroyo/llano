@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Elige según si necesitas comunicación bidireccional y qué latencia toleras.**\n\nPolling envía una solicitud cada N segundos y espera respuesta. El servidor siempre responde, aunque no haya cambios. Esto genera tráfico innecesario. La latencia mínima es N segundos porque el cliente no sabe si hay novedades hasta preguntar de nuevo.\n\nServer-Sent Events mantiene una conexión abierta. El servidor envía eventos cuando ocurren. El cliente no puede responder. Es más eficiente que polling porque se suscribe una sola vez y recibe todos los cambios. Solo funciona si los datos fluyen en una dirección: del servidor al cliente.\n\nWebSocket abre una conexión bidireccional persistente. Los dos lados envían datos en cualquier momento, sin esperar. Es más complejo porque debes manejar el ciclo de vida de la conexión, pero es el único modo si el cliente también necesita iniciar comunicación.\n\n| Técnica | Latencia | Bidireccional | Caso de uso |\n|---------|----------|-------------|------------|\n| Polling | Alta (segundos) | No | Comprobar novedades cada 5–30 s |\n| Server-Sent Events | Baja (ms) | No | Notificaciones, feed en vivo |\n| WebSocket | Baja (ms) | Sí | Chat, juegos, colaboración en tiempo real |",
+  "output_tokens": 2829,
+  "thinking_tokens": 2475,
+  "input_tokens": 6170,
+  "wall_s": 22.15,
+  "created_at": "2026-10-07T00:08:24.394270+00:00"
+}

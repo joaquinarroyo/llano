@@ -1,0 +1,55 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Añade rotación de refresh tokens con invalidación automática de tokens antiguos",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Detecta intentos de reutilización de refresh tokens revocados y los invala",
+      "verified": false,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "Cobertura completa de escenarios de reuso de tokens",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Actualiza jsonwebtoken de 9.0.0 a 9.0.2",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "`src/auth/tokens.ts`: Lógica de rotación y validación de tokens",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El número de la columna del diffstat (84) cuenta líneas cambiadas, y el gráfico muestra adiciones y eliminaciones mezcladas; no son 84 líneas añadidas.",
+      "quote": "(+84 líneas)",
+      "verified": true
+    },
+    {
+      "claim": "El diffstat de middleware.ts (12) también mezcla adiciones y eliminaciones (+++ y -), así que no son 12 líneas añadidas.",
+      "quote": "(+12 líneas)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

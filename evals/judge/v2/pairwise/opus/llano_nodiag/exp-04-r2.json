@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica el flujo del caso concreto paso a paso, incluye los headers exactos, menciona Allow-Credentials y más frameworks (Django, Next.js), y es más fácil de leer en una pasada, mientras que A es más extensa, con un diagrama y código que añaden carga sin mucha más información."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el concepto con un diagrama claro del flujo de preflight, da código concreto para Express, FastAPI y el proxy de Vite, y señala los errores comunes, mientras que A, aunque correcta y completa, es más abstracta y menos ilustrativa en el flujo y el código."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

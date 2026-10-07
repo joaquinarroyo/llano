@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica con claridad qué dice el log, da una lista corta y ordenada de verificaciones con un comando concreto y se lee de una sola pasada, mientras que B, aunque técnicamente completa, es más densa, con ramificaciones y un quinto punto largo que dificultan seguir un orden único."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el diagnóstico con claridad y da una lista corta y ordenada de pasos con un solo comando, mientras que A, aunque técnicamente más completa, es más densa y larga, con ramificaciones anidadas que dificultan entenderla en una sola lectura."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B es más fácil de leer en una pasada (tabla corta y secciones por opción) y añade información técnica importante que A omite: escalado de WebSocket con sticky sessions o bus de mensajes, la limitación de EventSource con headers Authorization y los costos del polling."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A es más fácil de leer de una sola pasada: una tabla corta de decisión y una sección por opción con casos de uso, costos y la limitación de headers en EventSource, mientras que B repite información entre una lista, una tabla grande y las secciones, lo que sobrecarga la lectura."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

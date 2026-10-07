@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La API v2.4.1 no logra conectarse a Postgres en `10.0.3.17:5432`. Espera 30000 ms (de 14:02:12Z a 14:02:42Z), el pool de conexiones falla y el proceso termina con código 1.\n\nEs un timeout, no un error de credenciales. El nombre `db.internal` sí se resuelve a `10.0.3.17`, pero la conexión nunca recibe respuesta. Si el problema fuera la contraseña, Postgres respondería rápido con un error de autenticación. Si el puerto estuviera cerrado con el servidor encendido, verías `ECONNREFUSED`.\n\nRevisa en este orden:\n\n1. **Prueba la conexión desde donde corre la API** (el mismo host o contenedor, no desde tu computadora):\n   ```\n   nc -zv 10.0.3.17 5432\n   ```\n   o `pg_isready -h db.internal -p 5432`. Si falla, el problema es de red o de la base, no de tu código.\n2. **Verifica que la base esté encendida** y que escuche en el puerto 5432.\n3. **Revisa el firewall o el security group** de la base. Debe permitir el puerto 5432 desde la IP o la subred de la API. Un paquete descartado por una regla produce exactamente este timeout.\n4. **Confirma que `10.0.3.17` es la IP correcta.** Si la base se movió o se recreó, `db.internal` puede apuntar a una IP vieja.\n5. **Si la prueba funciona desde el host pero no desde el contenedor**, revisa la red del contenedor: la red de Docker, la subred y las rutas.\n\nSi el paso 1 falla, dime el resultado y la configuración de red del deploy, y reviso el siguiente paso contigo.",
+  "output_tokens": 1033,
+  "thinking_tokens": 428,
+  "input_tokens": 5343,
+  "wall_s": 8.84,
+  "created_at": "2026-10-07T00:12:27.366442+00:00"
+}

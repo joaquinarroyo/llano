@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B da comandos concretos (nc -zv/telnet) para probar la conectividad y nota correctamente que el DNS ya resolvió a 10.0.3.17, mientras que A pide revisar el DNS como si pudiera fallar y no ofrece un comando para probar el puerto."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "A da comandos concretos para probar la conectividad (nc/telnet), prioriza qué revisar primero y distingue por dónde empezar, mientras que B es más genérica y no ofrece una prueba directa del puerto; el comentario de A sobre DNS es algo confuso pero no resta tanto."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

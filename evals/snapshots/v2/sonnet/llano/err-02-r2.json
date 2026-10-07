@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Falla porque los `float` de Python usan binario y no pueden representar 0.1 de forma exacta. El resultado queda con un error de 1e-14, y `==` exige igualdad exacta.\n\nCon `price=100.0` y `discount=0.1`, por mi cálculo `100.0 * (1 - 0.1)` da `90.0` exacto. No lo ejecuté. Si en tu entorno da `89.99999999999999`, el valor real viene de otro paso: por ejemplo, un descuento calculado como `10 / 100`, un precio con varias operaciones antes, o un impuesto aplicado después. Corre `print(repr(price), repr(discount))` justo antes del cálculo para ver los valores reales.\n\n## Cómo arreglarlo\n\n**Atención:** la solución depende de si el valor es dinero o no.\n\n1. **En el test**, si solo necesitas comparar con tolerancia:\n\n   ```python\n   import pytest\n\n   assert total == pytest.approx(90.0)\n   ```\n\n2. **En el código**, si el total es dinero. `Decimal` evita el error de raíz:\n\n   ```python\n   from decimal import Decimal\n\n   price = Decimal(\"100.00\")\n   discount = Decimal(\"0.10\")\n   total = price * (1 - discount)  # Decimal('90.0000')\n   ```\n\n   Crea los `Decimal` desde strings. `Decimal(0.1)` copia el error del `float`.\n\n3. **Alternativa:** guarda el dinero en centavos como `int` (`10000 * 90 // 100`) y convierte a decimal solo al mostrarlo.\n\nRecomiendo la opción 2 para facturas, porque los errores de redondeo se acumulan entre líneas y las cifras de una factura deben coincidir al centavo. Usa la opción 1 solo si el valor no es monetario.",
+  "output_tokens": 1364,
+  "thinking_tokens": 748,
+  "input_tokens": 5246,
+  "wall_s": 11.2,
+  "created_at": "2026-10-07T00:10:55.407570+00:00"
+}

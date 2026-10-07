@@ -1,0 +1,44 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "**C – Consistencia (linealizabilidad):** toda lectura devuelve la escritura más reciente o un error.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**Cuando hay una partición, ¿prefieres consistencia o disponibilidad?**",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "las particiones de red van a ocurrir**, así que P no es opcional",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "*si hay Partición, elige entre A y C; si no (Else), elige entre Latencia y Consistencia*",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**Sí, pero como punto de partida, no como herramienta de diseño completa.**",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

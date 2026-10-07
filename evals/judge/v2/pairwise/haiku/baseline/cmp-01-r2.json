@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da ejemplos concretos y fáciles de escanear (transacciones, constraints, auditoría) y explica cuándo MongoDB sí aplicaría, mientras que B es más genérica, tiene un error de redacción ('tienes requiere especiales') y aporta menos detalle accionable."
+    },
+    {
+      "winner": "llano",
+      "reason": "B da la recomendación al inicio y la respalda con ejemplos concretos (transacción al crear factura, constraints de borrado, auditoría) en formato fácil de escanear, mientras que A es más genérica y tiene erratas ('requiere especiales')."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

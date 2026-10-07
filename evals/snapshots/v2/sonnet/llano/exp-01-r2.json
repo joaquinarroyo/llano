@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Node ejecuta tu código JavaScript en un solo hilo. El event loop es el ciclo que, cada vez que ese hilo queda libre, toma el siguiente callback pendiente y lo ejecuta.\n\n## La diferencia con Python síncrono\n\nEn Python síncrono, `requests.get(url)` bloquea el hilo hasta que llega la respuesta. Mientras espera, no hace nada más.\n\nEn Node, una operación de I/O no bloquea. Tu código le pide la operación al sistema operativo, registra un callback y sigue con la siguiente línea. Cuando la operación termina, el callback entra en una cola. El event loop lo ejecuta cuando el hilo está libre.\n\n```\nTu código JS ──pide I/O──▶ libuv / sistema operativo\n     ▲                              │\n     │                              ▼ (termina la operación)\nEvent loop ◀──toma el callback── Cola de callbacks\n```\n\nEl hilo de JavaScript nunca espera. Quien espera es el sistema operativo, o el pool de hilos de libuv para operaciones como `fs` o `crypto`.\n\n## Qué hace el ciclo\n\nEl event loop repite estas fases en orden:\n\n1. **timers:** ejecuta los callbacks de `setTimeout` y `setInterval` cuyo tiempo ya venció.\n2. **poll:** ejecuta los callbacks de I/O terminado (red, archivos). Si no hay nada, espera aquí nuevos eventos.\n3. **check:** ejecuta los callbacks de `setImmediate`.\n4. **close:** ejecuta los callbacks de cierre, por ejemplo `socket.on('close')`.\n\nEntre un callback y el siguiente, Node vacía las colas de microtareas. Primero `process.nextTick` y después las promesas (`.then`, `await`). Por eso una promesa resuelta siempre se ejecuta antes que un `setTimeout(fn, 0)`:\n\n```js\nconsole.log(\"1 síncrono\");\nsetTimeout(() => console.log(\"4 timer\"), 0);\nPromise.resolve().then(() => console.log(\"3 promesa\"));\nprocess.nextTick(() => console.log(\"2 nextTick\"));\n```\n\nLa salida es 1, 2, 3, 4. El código síncrono termina primero, después se vacían las microtareas y al final llega el timer.\n\n## Cómo se relaciona con `async`/`await`\n\n`await` no bloquea el hilo. Suspende solo esa función y devuelve el control al event loop. Cuando la promesa se resuelve, la función continúa como una microtarea. Es parecido a `asyncio` en Python, pero con una diferencia: en Node el event loop siempre existe y no lo arrancas tú con `asyncio.run()`.\n\n## La trampa principal\n\n**Atención:** el trabajo de CPU sí bloquea el event loop. Un bucle `for` de 5 segundos, un `JSON.parse` de un archivo enorme o un `readFileSync` congelan todo el proceso. Ningún otro callback se ejecuta y el servidor deja de responder a todos los clientes.\n\nNode rinde bien con mucho I/O concurrente: servidores HTTP, bases de datos, APIs. Para cálculo pesado, usa `worker_threads` o un proceso aparte.",
+  "output_tokens": 1758,
+  "thinking_tokens": 643,
+  "input_tokens": 5168,
+  "wall_s": 13.48,
+  "created_at": "2026-10-07T00:10:32.629343+00:00"
+}

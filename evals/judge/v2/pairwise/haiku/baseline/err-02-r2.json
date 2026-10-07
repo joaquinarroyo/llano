@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica la causa y ofrece opciones claras con una recomendación concreta (redondear a 2 decimales para facturación), mientras que A pide el test sin necesidad y no da una recomendación tan directa; B dice 'dos opciones' pero lista tres, un defecto menor."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica la causa, ofrece soluciones concretas y recomienda una para facturación (redondear a 2 decimales); su único fallo es decir 'dos opciones' y listar tres. B pide ver el test sin necesidad y no da una recomendación clara."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

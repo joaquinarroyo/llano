@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "Ambas tienen la misma información y estructura, pero A añade en el título la duración total (23 minutos) y explica el porqué de la alerta de CPU, lo que da más contexto sin agregar ruido ni inventar hechos relevantes."
+    },
+    {
+      "winner": "llano",
+      "reason": "Ambas son casi idénticas en estructura y contenido, pero B agrega la duración total (23 minutos) en el título y explica el propósito de la alerta de CPU, lo que da más contexto útil en una sola lectura sin añadir ruido."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

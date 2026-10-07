@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "El teorema CAP dice que un sistema distribuido no puede garantizar a la vez consistencia y disponibilidad cuando hay una partición de red. Sigue siendo relevante como idea base. Pero es una herramienta pobre para clasificar bases de datos reales.\n\n## Qué dice\n\nEric Brewer lo propuso como conjetura en el año 2000. Seth Gilbert y Nancy Lynch lo demostraron formalmente en 2002. Las tres propiedades son:\n\n| Letra | Propiedad | Significado en la demostración |\n|---|---|---|\n| C | Consistencia | Linealizabilidad: cada lectura ve la escritura más reciente, como si hubiera una sola copia de los datos. |\n| A | Disponibilidad | Cada nodo que no falló responde a cada solicitud. |\n| P | Tolerancia a particiones | El sistema sigue funcionando aunque la red pierda mensajes entre nodos. |\n\nEn una red real, las particiones ocurren y no se pueden evitar. Por eso P no es una opción. La elección real ocurre solo durante una partición:\n\n- **CP:** el sistema rechaza o retrasa solicitudes para no devolver datos viejos. Ejemplos típicos son etcd, ZooKeeper y Spanner.\n- **AP:** el sistema responde siempre, aunque los nodos queden desincronizados por un tiempo. Ejemplos típicos son Cassandra y DynamoDB con su configuración por defecto.\n\n## Por qué sigue siendo relevante\n\nLa idea central es correcta y útil: ante una partición, cada sistema tiene que decidir entre dar errores y dar datos posiblemente viejos. Esa decisión afecta el diseño de cualquier servicio con réplicas.\n\n## Sus límites\n\n1. **Las definiciones son estrictas.** C significa linealizabilidad y A significa disponibilidad total. Muchos sistemas reales no cumplen ninguna de las dos. Por eso no son ni CP ni AP. Martin Kleppmann lo explicó en 2015 en \"Please stop calling databases CP or AP\".\n2. **Solo habla de particiones.** La mayor parte del tiempo no hay partición. Aun así, existe otro compromiso: la latencia contra la consistencia. Daniel Abadi lo formalizó en el modelo PACELC: si hay Partición, se elige entre A y C; si no (Else), se elige entre Latencia y C.\n3. **La elección no es global.** Un mismo sistema puede elegir distinto en cada operación. Cassandra, por ejemplo, permite configurar el nivel de consistencia en cada consulta.\n4. **La disponibilidad práctica es un número.** Brewer escribió en 2017 que Spanner es técnicamente CP. Pero Google reduce tanto las particiones que el sistema se comporta en la práctica como \"efectivamente CA\", con más de 99.999 % de disponibilidad.\n\nEn resumen práctico: usa CAP para entender el problema. Para elegir o diseñar un sistema, piensa en términos de PACELC y de modelos de consistencia concretos, como la linealizabilidad, la consistencia causal o la consistencia eventual.",
+  "output_tokens": 1325,
+  "thinking_tokens": 229,
+  "input_tokens": 5151,
+  "wall_s": 14.48,
+  "created_at": "2026-10-07T00:16:25.576486+00:00"
+}

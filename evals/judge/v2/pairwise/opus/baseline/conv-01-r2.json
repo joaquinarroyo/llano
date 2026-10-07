@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A va más directo en los tres turnos: pasos numerados, un razonamiento claro de la causa (viajes extra más espera en el pool) y opciones concretas, sin desvíos como el N+1 o la tabla extensa de B, aunque B adapta mejor el voseo en el turno 3."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y compacto en los tres turnos, con pasos numerados y opciones claras (por ejemplo, 14 vs 16 viajes), y su cuenta de 28 viajes extra explica el p95. A es claro, pero más largo y con más relleno (tablas, secciones extra)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

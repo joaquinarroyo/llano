@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B da comandos concretos y ejecutables para cada paso (nslookup, nc -zv, ps aux) y explica que un timeout sin respuesta no es 'connection refused', mientras que A es claro en el diagnóstico pero sus pasos son más vagos y tiene detalles dudosos (ruta fija de postgresql.conf, 'listen_addresses' antes de confirmar conectividad básica)."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da comandos concretos para cada verificación (nslookup, nc -zv, ps aux), distingue timeout de 'connection refused' y es fácil de seguir en una lectura, mientras que B es más vago en los pasos (\"conecta manualmente\") aunque añada el dato útil de listen_addresses."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

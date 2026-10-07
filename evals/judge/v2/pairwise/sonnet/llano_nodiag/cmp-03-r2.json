@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B cubre los mismos puntos técnicos que A, con listas por caso de uso más fáciles de escanear, añade escalado (sticky sessions), serverless y una recomendación final práctica (empezar por SSE), mientras que A aporta el detalle de autenticación en EventSource pero es más densa en prosa."
+    },
+    {
+      "winner": "llano_nodiag",
+      "reason": "Ambas son claras y correctas, pero A cubre más detalles prácticos útiles (sticky sessions/bus de mensajes para escalar, entornos serverless, consejo de empezar por SSE), mientras que B aporta el límite de cabeceras en EventSource pero omite esos puntos; A se lee mejor con listas cortas por caso y una recomendación final accionable."
+    }
+  ],
+  "winner": "llano_nodiag",
+  "judge_model": "sonnet"
+}

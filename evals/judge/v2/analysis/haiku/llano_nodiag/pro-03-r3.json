@@ -1,0 +1,55 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "partial",
+      "quote": "Usa `pg_dump` para hacer el backup y `psql` para restaurarlo.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "partial",
+      "quote": "Usa `pg_dump` para hacer el backup y `psql` para restaurarlo.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "**Crea la base de datos** (si no existe):",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Sugiere que `-W` sirve para proporcionar la contraseña; en realidad solo fuerza el prompt de contraseña (y pg_dump la pide automáticamente si hace falta). Además, la respuesta dice que se use `-W` 'si te pide contraseña', lo cual es innecesario.",
+      "quote": "Usa `-W` si te pide contraseña.",
+      "verified": true
+    },
+    {
+      "claim": "El comando de compresión con gzip se presenta como 'comprime durante la transferencia', pero genera un archivo comprimido en el servidor y no comprime durante la transferencia (scp no se usa en ese flujo).",
+      "quote": "Si el archivo es muy grande, comprime durante la transferencia:",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

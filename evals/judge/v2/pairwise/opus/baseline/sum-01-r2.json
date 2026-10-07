@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A entrega una descripción breve y lista para pegar con todos los cambios técnicos relevantes y advierte que el diffstat no revela el detalle de middleware.ts, mientras que B repite los commits, añade un 'Cómo probar' inventado y resulta más largo sin aportar información técnica nueva."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega una descripción breve, lista para pegar, que cubre los cambios, los archivos y el bump de dependencia, y avisa de que el diffstat no muestra qué cambió en middleware.ts; A es más extensa (commits repetidos, sección de pruebas inventada) y añade más relleno sin aportar información técnica nueva."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

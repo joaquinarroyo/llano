@@ -1,0 +1,50 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "ejecutar la misma operación múltiples veces produce el mismo resultado que ejecutarla una sola vez",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "GET, PUT, DELETE, HEAD, OPTIONS — llamarlos repetidamente es seguro",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si una petición falla y reintentamos, no creamos duplicados o estados inconsistentes. Crítico en redes no confiables.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El servidor procesa esto una sola vez y cachea el resultado. Si llega otra petición con la misma clave, devuelve el resultado anterior sin duplicar la acción.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Llamar esto 3 veces transfiere 300 — cada llamada produce un efecto nuevo.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "La idempotencia no garantiza por sí sola que el resultado sea correcto cuando varios clientes envían la misma petición simultáneamente; eso requiere control de concurrencia (bloqueos, versionado, etc.).",
+      "quote": "Si múltiples clientes envían la misma petición simultáneamente, el resultado final es correcto.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

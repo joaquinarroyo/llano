@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Falla porque `float` no puede representar 0.1 de forma exacta. La multiplicación arrastra un error de redondeo mínimo y por eso el resultado queda en `89.99999999999999`, no en `90.0`. La comparación con `==` exige igualdad bit a bit, así que el test falla.\n\nPython guarda los `float` en binario (IEEE 754). En binario, 0.1 es una fracción periódica, como 1/3 en decimal. El valor guardado es aproximadamente `0.1000000000000000055`, y cada operación redondea otra vez.\n\nCon los literales exactos `100.0 * (1 - 0.1)`, Python da `90.0`, porque los redondeos se compensan. Si tu test da `89.99999999999999`, lo más probable es que `price` o `discount` vengan de otro cálculo, como una suma de ítems o un porcentaje dividido por 100. La causa es la misma.\n\n## Cómo arreglarlo\n\nLa solución depende de si el problema está en el test o en el modelo de datos.\n\n**1. Si el código solo necesita aproximación, corrige el test con `pytest.approx`:**\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto una diferencia relativa de `1e-6`.\n\n**2. Si es dinero, usa `Decimal` en el código.** Esta es la opción que recomiendo para facturas, porque los errores de `float` se acumulan en sumas e impuestos y pueden cambiar un centavo:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.0\")\ndiscount = Decimal(\"0.1\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# Decimal('90.00')\n```\n\nCrea los `Decimal` desde strings, no desde floats. `Decimal(0.1)` copia el error binario: `Decimal('0.1000000000000000055511151231257827...')`.\n\n**3. Otra opción para dinero: guarda centavos como `int`.** Por ejemplo, `price_cents = 10000`. Los enteros son exactos, y solo conviertes a decimal al mostrar el valor.\n\nEvita `round(total, 2) == 90.0` como arreglo general. Funciona en este caso, pero oculta el problema y falla en casos límite de redondeo.",
+  "output_tokens": 1668,
+  "thinking_tokens": 836,
+  "input_tokens": 5241,
+  "wall_s": 17.1,
+  "created_at": "2026-10-07T00:22:41.773190+00:00"
+}

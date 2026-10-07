@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica en prosa el porqué de cada cambio (rotación, invalidación ante reutilización como señal de ataque) y ofrece un bloque listo para pegar en la descripción del PR, mientras que B repite los prefijos de commit y lista archivos con detalles de líneas que no aportan, con una descripción algo confusa del fix."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica de forma directa qué cambió y por qué (rotación para limitar daño, reutilización como señal de ataque) y ofrece un bloque listo para pegar en la descripción del PR, mientras que A es más genérico, repite prefijos de commit y asigna mal el fix (dice que detecta reuso cuando en realidad invalida el token viejo)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

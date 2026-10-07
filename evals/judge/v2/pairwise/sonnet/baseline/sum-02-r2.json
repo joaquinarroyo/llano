@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B pone primero el impacto con la duración (09:12–09:35) y separa la causa, así que el lector entiende qué pasó y cuánto duró de un vistazo; A es claro pero deja la causa y el impacto más dispersos y sin la duración explícita."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A pone el impacto y la causa al inicio, con la duración total del incidente (09:12–09:35), lo que se entiende de un vistazo; B es correcta pero deja el impacto al final y no resume la duración."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

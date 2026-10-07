@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom (`-Fc`) contra producción y `pg_restore` en tu máquina. `pg_dump` toma un snapshot consistente y no bloquea las escrituras.\n\n**Atención:** usa un usuario de solo lectura en producción. El dump de una base grande consume I/O y red, así que evita las horas pico.\n\n## 1. Hacer el backup\n\n```bash\npg_dump -h HOST_PROD -p 5432 -U USUARIO -d NOMBRE_BD \\\n  -Fc --no-owner --no-acl -f backup.dump\n```\n\n- `-Fc` crea un archivo comprimido que `pg_restore` puede cargar en paralelo.\n- `--no-owner` y `--no-acl` evitan errores por roles que no existen en tu máquina local.\n- La versión de `pg_dump` debe ser igual o mayor que la del servidor. Si es menor, el comando falla. Verifica con `pg_dump --version` y `psql -h HOST_PROD -U USUARIO -d NOMBRE_BD -c \"show server_version\"`.\n\nSi solo tienes acceso por SSH al servidor, corre el dump allá y copia el archivo:\n\n```bash\nssh usuario@servidor \"pg_dump -U USUARIO -Fc NOMBRE_BD\" > backup.dump\n```\n\n## 2. Restaurar en local\n\n```bash\ncreatedb NOMBRE_LOCAL\npg_restore -d NOMBRE_LOCAL --no-owner --no-acl -j 4 backup.dump\n```\n\n`-j 4` usa 4 procesos en paralelo. Ajusta el número a los núcleos de tu computadora.\n\nSi la base usa extensiones (por ejemplo `postgis` o `pgcrypto`), instálalas antes en tu Postgres local. Si no, la restauración muestra errores en esos objetos.\n\n## 3. Verificar\n\n```bash\npsql -d NOMBRE_LOCAL -c \"\\dt\"\n```\n\nCompara el conteo de filas de algunas tablas clave entre producción y local.\n\n**Peligro:** el dump contiene datos reales de producción, posiblemente personales. Guárdalo cifrado, no lo subas a git y bórralo cuando termines. Si tienes datos sensibles, anonimízalos en local después de restaurar.\n\n**Peligro:** revisa dos veces el parámetro `-h` en `pg_restore`. Si lo agregas por costumbre y apunta a producción, restauras encima de producción. Los comandos de la sección 2 no lo llevan, así que usan tu servidor local.",
+  "output_tokens": 1053,
+  "thinking_tokens": 167,
+  "input_tokens": 4809,
+  "wall_s": 8.75,
+  "created_at": "2026-10-07T00:12:57.071514+00:00"
+}

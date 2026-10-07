@@ -1,0 +1,55 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "CORS es un mecanismo de seguridad del navegador que controla qué servidores pueden acceder a recursos desde una página web.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "**Puerto** (3000 vs 8000)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Access-Control-Allow-Origin: http://localhost:3000",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Dice que la petición se bloquea porque el origen es distinto, pero en realidad el navegador envía la petición y bloquea la lectura de la respuesta; además, CORS relaja la Same-Origin Policy, no es la misma cosa que la causa del bloqueo. Presentar la diferencia de origen como bloqueo directo omite que el servidor puede responder con los headers adecuados.",
+      "quote": "`localhost:3000` y `localhost:8000` son **orígenes diferentes** → la petición se bloquea.",
+      "verified": true
+    },
+    {
+      "claim": "El ejemplo de .NET está incompleto: define la política 'dev' pero no la activa con app.UseCors, por lo que no funcionaría tal cual.",
+      "quote": "builder.Services.AddCors(options =>\n    options.AddPolicy(\"dev\", p => \n        p.WithOrigins(\"http://localhost:3000\")));",
+      "verified": true
+    }
+  ],
+  "answer_first": false,
+  "diagram": "none"
+}

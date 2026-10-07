@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Una operación es idempotente si repetirla tiene el mismo efecto en el servidor que ejecutarla una vez. La primera llamada cambia el estado. Las repeticiones no lo cambian más.\n\n## Por qué importa\n\nLas redes fallan, y el cliente no siempre sabe si su solicitud llegó. Un timeout puede ocurrir antes o después de que el servidor procese la operación. Si la operación es idempotente, el cliente puede reintentar sin riesgo. Si no lo es, un reintento puede cobrar dos veces o crear dos pedidos.\n\nEsto afecta a muchos componentes, no solo al cliente:\n\n- Los proxies y balanceadores reintentan solicitudes por su cuenta.\n- Las colas de mensajes suelen entregar \"al menos una vez\", así que el consumidor puede recibir el mismo mensaje dos veces.\n- Los usuarios hacen doble clic en \"Pagar\".\n\n## Métodos HTTP\n\n| Método | ¿Idempotente? | Ejemplo |\n|---|---|---|\n| `GET` | Sí | Leer un recurso no lo cambia. |\n| `PUT` | Sí | `PUT /users/7 {\"name\":\"Ana\"}` deja el mismo estado tras 1 o 10 llamadas. |\n| `DELETE` | Sí | El recurso queda borrado. La segunda llamada puede devolver `404`, pero el estado es el mismo. |\n| `POST` | No | `POST /orders` crea un pedido nuevo en cada llamada. |\n| `PATCH` | Depende | `{\"name\":\"Ana\"}` sí lo es. `{\"op\":\"increment\"}` no lo es. |\n\nLa idempotencia se refiere al estado del servidor, no a la respuesta. Por eso un `DELETE` repetido sigue siendo idempotente aunque devuelva otro código.\n\n## Cómo hacer idempotente un `POST`\n\nEl patrón habitual es la **clave de idempotencia**. Es un identificador único que el cliente genera y envía con la solicitud. Stripe usa este patrón:\n\n```\nPOST /payments\nIdempotency-Key: 4f2a9c1e-8b3d-4e7a-9f10-2c6d5b8a7e31\n```\n\n1. El cliente genera un UUID para cada operación lógica. En cada reintento reutiliza el mismo UUID.\n2. El servidor busca la clave en su almacenamiento.\n3. Si la clave no existe, el servidor procesa la operación y guarda la clave junto con la respuesta.\n4. Si la clave existe, el servidor devuelve la respuesta guardada y no procesa nada.\n\n**Atención:** el servidor tiene que guardar la clave y el efecto de forma atómica. Puede usar la misma transacción o una restricción `UNIQUE` en la base de datos. Si no lo hace, dos reintentos simultáneos pueden pasar ambos el paso 2 y procesar la operación dos veces.\n\nLas claves también necesitan una expiración, por ejemplo 24 horas. Sin ella, el almacenamiento crece sin límite.",
+  "output_tokens": 1099,
+  "thinking_tokens": 42,
+  "input_tokens": 5145,
+  "wall_s": 11.05,
+  "created_at": "2026-10-07T00:24:01.319847+00:00"
+}

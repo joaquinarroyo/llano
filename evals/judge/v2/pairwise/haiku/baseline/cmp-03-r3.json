@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B responde directamente a \"cuándo\" usar cada técnica, con criterios claros de uso, ejemplos y una tabla orientada a la decisión, mientras que A explica sobre todo cómo funciona cada una y deja el cuándo implícito en la última columna de la tabla."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da para cada técnica un 'cuándo usarlo' claro con ejemplos concretos, una tabla de decisión por caso de uso y un consejo híbrido; B explica bien el funcionamiento pero indica menos cuándo elegir cada opción."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

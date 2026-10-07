@@ -1,0 +1,50 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "En binario, `0.1` no se puede representar exactamente",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "**3. En el test, comparar con tolerancia**:",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "partial",
+      "quote": "assert abs(total - 90.0) < 1e-9",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "**2. Usar `Decimal` para aritmética exacta** (recomendado para valores monetarios):",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "produce `89.99999999999999` en lugar de `90.0`",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El producto Decimal('100.0') * (Decimal('1') - Decimal('0.1')) da Decimal('90.00') (exponente -2), no Decimal('90.0'). El valor es igual, pero la representación indicada es incorrecta.",
+      "quote": "# Resultado: Decimal('90.0') exacto",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano_nodiag",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La API v2.4.1 no se conecta a Postgres en `10.0.3.17:5432`. Intentó durante 30000 ms (de 14:02:12Z a 14:02:42Z), el pool falló y el proceso terminó con código 1.\n\nEl error es un timeout (`ETIMEDOUT`), no un problema de credenciales. Si la contraseña fuera incorrecta, Postgres respondería con un error de autenticación. Aquí la conexión nunca recibe respuesta. Por eso la causa está en la red o en que la base no está levantada.\n\nRevisa en este orden:\n\n1. **Prueba el puerto desde la máquina o el contenedor de la API.** Ejecuta `nc -zv 10.0.3.17 5432`. Si también da timeout, el problema es de red o la base está caída. Si conecta, el problema está en la configuración de la API.\n2. **Verifica el DNS.** Ejecuta `nslookup db.internal` desde el mismo lugar. Debe devolver `10.0.3.17`. Si devuelve otra IP, la API apunta a un host viejo.\n3. **Verifica que la base esté levantada.** Revisa el estado de la instancia y que Postgres escuche en el puerto 5432.\n4. **Revisa el security group o el firewall.** Debe permitir el puerto 5432 desde la IP o el security group de la API. Un cambio reciente en estas reglas es una causa común de este error.\n\nSi me dices dónde corre la base (RDS, una VM o un contenedor), te indico los comandos exactos para los pasos 3 y 4.",
+  "output_tokens": 1090,
+  "thinking_tokens": 552,
+  "input_tokens": 4989,
+  "wall_s": 10.48,
+  "created_at": "2026-10-07T00:10:54.247510+00:00"
+}

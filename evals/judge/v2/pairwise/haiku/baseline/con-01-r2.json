@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el concepto, el problema de los reintentos en redes poco fiables y cómo resolverlo (clave de idempotencia, almacenar solicitudes ya procesadas) con un ejemplo concreto, mientras que B clasifica bien los métodos HTTP pero trata las idempotency keys de forma superficial y sin ejemplo."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el concepto, el porqué (redes poco fiables y reintentos) y el cómo con un ejemplo concreto de idempotency_key, mientras que A tiene un error técnico (afirma que PUT/PATCH son idempotentes sin matizar, y contradice la idea de DELETE) y dispersa la información en listas redundantes."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

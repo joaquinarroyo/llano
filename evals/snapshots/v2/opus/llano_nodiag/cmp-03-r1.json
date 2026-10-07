@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano_nodiag",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Elige según quién envía datos y con qué frecuencia:\n\n- **WebSocket** si el cliente y el servidor se envían mensajes en los dos sentidos con frecuencia.\n- **Server-Sent Events (SSE)** si solo el servidor envía actualizaciones continuas.\n- **Polling** si los cambios son poco frecuentes o si un retraso de algunos segundos no importa.\n\n| | WebSocket | SSE | Polling |\n|---|---|---|---|\n| Dirección | Bidireccional | Servidor → cliente | El cliente pregunta |\n| Protocolo | Propio (`ws://`, `wss://`), después de un upgrade HTTP | HTTP normal (`text/event-stream`) | HTTP normal |\n| Reconexión | La programas tú | Automática en el navegador, con `Last-Event-ID` | No aplica |\n| Datos binarios | Sí | No, solo texto | Sí |\n| Latencia | Muy baja | Muy baja | Igual al intervalo de consulta |\n| Complejidad en el servidor | Alta: conexiones con estado y escalado con sticky sessions o pub/sub | Media: conexiones abiertas, pero sobre HTTP | Baja: requests sin estado |\n| Proxies y firewalls | A veces bloquean el upgrade | Funcionan casi siempre | Funcionan siempre |\n\n## Cuándo usar cada uno\n\n**WebSocket.** Úsalo para chat, juegos multijugador, edición colaborativa o trading. En estos casos el cliente también envía muchos mensajes. Enviar cada mensaje del cliente como un request HTTP aparte agrega latencia y overhead.\n\n**SSE.** Úsalo para notificaciones, feeds en vivo, progreso de tareas largas o streaming de respuestas de un LLM. El cliente recibe datos, y lo poco que envía va en requests HTTP normales. SSE es más simple que WebSocket porque reusa HTTP, la autenticación y la infraestructura que ya tienes. Con HTTP/1.1, el navegador limita a 6 las conexiones por dominio, y eso incluye las de SSE. Con HTTP/2 o HTTP/3 este límite deja de importar.\n\n**Polling.** Úsalo para el estado de un pedido, un dashboard que se actualiza cada minuto o cuando el servidor no puede mantener conexiones abiertas, como algunas plataformas serverless. Es lo más fácil de escalar y depurar, porque cada request es independiente. Si la mayoría de las respuestas vienen vacías, desperdicias requests. En ese caso considera *long polling*: el servidor retiene el request hasta tener datos o hasta un timeout.\n\n## Regla práctica\n\nEmpieza por lo más simple que cumpla el requisito de latencia: polling, después SSE y al final WebSocket. Cada paso agrega conexiones abiertas y estado que debes escalar y monitorear.",
+  "output_tokens": 1041,
+  "thinking_tokens": 28,
+  "input_tokens": 4805,
+  "wall_s": 11.32,
+  "created_at": "2026-10-07T00:16:02.023359+00:00"
+}

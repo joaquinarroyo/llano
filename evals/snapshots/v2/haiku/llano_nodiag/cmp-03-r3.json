@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Elige según la **dirección de datos** y la **latencia** que necesites:\n\n| Tecnología | Dirección | Cuándo usar | Coste |\n|---|---|---|---|\n| **Polling** | Cliente pregunta | Actualizaciones ocasionales o baja frecuencia (cada 10+ segundos). El navegador debe soportarlo. | Alto: muchas solicitudes HTTP |\n| **SSE** | Servidor envía | Notificaciones o datos del servidor al cliente (unidireccional). Requiere solo HTTP. | Bajo: una conexión, envíos eficientes |\n| **WebSocket** | Bidireccional | Chat, juegos, colaboración tiempo real o actualizaciones de muy baja latencia. Necesita soporte en servidor y cliente. | Bajo: conexión persistente, sin overhead HTTP |\n\n**Decisiones rápidas:**\n\n- ¿Necesita hablar el cliente al servidor mientras recibe datos? → **WebSocket**.\n- ¿Solo el servidor envía? → **SSE** (más simple que WebSocket).\n- ¿Actualizaciones lentas o compatibilidad con todo? → **Polling**.\n\n**Ejemplo:** Un dashboard que muestra métricas del servidor usa SSE. Un videojuego multijugador usa WebSocket. Un contador de visitas que se actualiza cada minuto usa polling.",
+  "output_tokens": 628,
+  "thinking_tokens": 295,
+  "input_tokens": 5896,
+  "wall_s": 7.66,
+  "created_at": "2026-10-07T00:08:11.392173+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Falla porque los `float` de Python usan binario, y en binario `0.1` no tiene representación exacta. Cada operación arrastra un error mínimo, y `==` compara todos los bits. El resultado `89.99999999999999` es el valor esperado más ese error.\n\nCon `price=100.0` y `discount=0.1`, mi cálculo a mano da `90.0` exacto, no `89.99999999999999`. Probablemente hay otra operación en el código real (otro descuento, un impuesto o un redondeo intermedio). Ejecuta `python -c \"print(100.0 * (1 - 0.1))\"` para confirmarlo. La causa y el arreglo son los mismos.\n\nHay dos arreglos, según dónde esté el problema:\n\n1. **Si es dinero en el código de producción:** usa `Decimal`, que representa `0.1` de forma exacta.\n\n   ```python\n   from decimal import Decimal\n\n   price = Decimal(\"100.00\")\n   discount = Decimal(\"0.10\")\n   total = price * (1 - discount)  # Decimal('90.0000')\n   ```\n\n   Crea los `Decimal` desde strings. `Decimal(0.1)` copia el error del `float`.\n\n2. **Si solo el test es demasiado estricto:** compara con tolerancia.\n\n   ```python\n   import pytest\n\n   assert total == pytest.approx(90.0)\n   ```\n\n   Para dinero, esto solo oculta el error. Si el total se guarda o se cobra, prefiere la opción 1 o redondea a centavos con `round(total, 2)` en el punto donde necesites el valor final.\n\nSi me pasas `tests/test_invoice.py` y el módulo de facturación, encuentro la operación exacta que produce el error.",
+  "output_tokens": 1757,
+  "thinking_tokens": 1174,
+  "input_tokens": 5246,
+  "wall_s": 14.86,
+  "created_at": "2026-10-07T00:09:19.197863+00:00"
+}

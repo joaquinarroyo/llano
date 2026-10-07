@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Por qué falla\n\nEs un problema de **coma flotante binaria (IEEE 754)**, no un bug de tu lógica. Valores como `0.1` no tienen representación exacta en binario, igual que 1/3 no la tiene en decimal. Python guarda el double más cercano (`0.1000000000000000055511...`), y al multiplicar o restar esos errores se acumulan. Por eso el resultado es `89.99999999999999` en vez de `90.0`, y `==` compara bit a bit.\n\nUna observación: con literalmente `100.0 * (1 - 0.1)` Python suele dar `90.0` exacto, porque el redondeo lo compensa. Si ves `89.99999999999999`, probablemente `price` o `discount` vienen de otro cálculo, como una suma de líneas o un porcentaje dividido entre 100. El origen es el mismo en ambos casos.\n\n## Cómo arreglarlo\n\nHay dos opciones, según qué quieras corregir.\n\n### 1. Solo el test: comparar con tolerancia\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert calcular_total(100.0, 0.1) == pytest.approx(90.0)\n```\n\nEs correcto si los floats son aceptables en tu dominio.\n\n### 2. Recomendado para facturas: usar `Decimal`\n\nAl tratarse de dinero, lo correcto es no usar `float`. Con `Decimal` las operaciones son exactas en base 10 y controlas el redondeo:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef calcular_total(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (1 - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n```\n\n```python\ndef test_total_with_discount():\n    assert calcular_total(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` a partir de **strings** (`Decimal(\"0.1\")`), no de floats. `Decimal(0.1)` hereda el error binario.\n\nOtra alternativa habitual es trabajar en céntimos con enteros (`10000` en vez de `100.0`).\n\nSi me pasas el fichero de `invoice` y el test, puedo aplicar el cambio directamente.",
+  "output_tokens": 1406,
+  "thinking_tokens": 605,
+  "input_tokens": 1654,
+  "wall_s": 14.55,
+  "created_at": "2026-10-07T00:22:34.236280+00:00"
+}

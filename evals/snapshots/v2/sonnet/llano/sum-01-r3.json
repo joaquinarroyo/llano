@@ -1,0 +1,15 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Aquí tienes la descripción lista para pegar:\n\n```markdown\n## Rotación de refresh tokens\n\nEste PR rota el refresh token en cada uso e invalida el token anterior si alguien lo reutiliza.\n\n### Cambios\n- Rota los refresh tokens en cada uso (`a1f3c2e`).\n- Invalida el refresh token anterior si alguien lo reutiliza (`9b2d7e1`).\n- Agrega tests para la detección de reutilización (`4c8e1a0`).\n- Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2 (`77d0b3f`).\n\n### Archivos\n- `src/auth/tokens.ts`: 84 líneas cambiadas.\n- `src/auth/middleware.ts`: 12 líneas cambiadas.\n- `tests/auth/tokens.test.ts`: 96 líneas nuevas.\n- `package.json`: 2 líneas cambiadas.\n```\n\nLos mensajes de commit no explican el cambio en `src/auth/middleware.ts`, así que no lo describí. Si me dices qué hace, lo agrego a la lista.",
+  "output_tokens": 876,
+  "thinking_tokens": 485,
+  "input_tokens": 5372,
+  "wall_s": 7.11,
+  "created_at": "2026-10-07T00:12:39.964367+00:00"
+}

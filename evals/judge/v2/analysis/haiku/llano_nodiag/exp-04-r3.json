@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "CORS (Cross-Origin Resource Sharing) es un mecanismo de seguridad del navegador.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El protocolo, el host o el puerto distinto son orígenes diferentes.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "res.header('Access-Control-Allow-Origin', 'http://localhost:3000');",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "envía un preflight OPTIONS primero",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que toda petición a un origen diferente dispara un preflight OPTIONS. Solo lo hacen las peticiones no simples (métodos distintos de GET/HEAD/POST, headers personalizados o Content-Type no estándar).",
+      "quote": "Cuando el navegador hace una petición HTTP a un origen diferente, envía un preflight OPTIONS primero.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

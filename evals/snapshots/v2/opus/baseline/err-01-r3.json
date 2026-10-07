@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Qué está pasando\n\nLa app **nunca llegó a hablar con Postgres**. El fallo es de red, no de credenciales ni de configuración de la base de datos:\n\n- `db.internal` **sí resolvió** a `10.0.3.17`, así que el DNS funciona (aunque podría devolver una IP vieja).\n- `ETIMEDOUT` significa que los paquetes TCP **se perdieron sin respuesta**. Si el host estuviera vivo pero sin nada escuchando en 5432, verías `ECONNREFUSED`. Un timeout casi siempre apunta a un firewall o security group que descarta el tráfico, a un problema de routing o subred, o a un host apagado o inexistente.\n- Tras 30 s de reintentos el pool se rinde y el proceso sale con código 1.\n\n## Qué revisar, en orden\n\n1. **Probar la conectividad desde el mismo entorno del deploy** (pod, contenedor o instancia), no desde tu máquina:\n   ```sh\n   nc -vz -w 5 10.0.3.17 5432\n   # o, si no hay nc:\n   timeout 5 bash -c '</dev/tcp/10.0.3.17/5432' && echo OK\n   ```\n   - Si da timeout, el problema es de red o firewall (sigue con el punto 2).\n   - Si da \"refused\", el host existe pero Postgres no escucha en esa interfaz (revisa `listen_addresses` y que el servicio esté arriba).\n   - Si da OK, el problema es intermitente o de timing (mira el punto 5).\n\n2. **Security groups, firewall o NetworkPolicy.** Comprueba que la regla de entrada de la DB permita el 5432 **desde la subred o el SG del nuevo deploy**. Es la causa más común, sobre todo si el deploy cambió de subred, nodo, cluster o security group.\n\n3. **¿`10.0.3.17` sigue siendo la IP correcta?** Si la DB se recreó, hizo failover o cambió de instancia, el registro DNS interno puede estar desactualizado:\n   ```sh\n   dig +short db.internal\n   ```\n   Compara el resultado con la IP real de la instancia en tu proveedor.\n\n4. **¿La DB está viva?** Revisa en la consola o el monitoreo que la instancia esté arriba y no en mantenimiento, reinicio o storage lleno.\n\n5. **¿Qué cambió?** Si el deploy anterior funcionaba, compara: nueva VPC o subred, nuevo nodo, cambios de Terraform o Helm en la red, o variables de entorno (por ejemplo, un `DB_HOST` distinto entre entornos). Si el problema es solo de orden de arranque (la DB levanta después que la app), un reintento con backoff o un `initContainer` o healthcheck lo resolvería, pero eso es menos probable con un timeout limpio de 30 s.\n\nSi me dices dónde corre esto (Kubernetes, ECS, VMs, docker-compose…) y si el deploy anterior funcionaba, te digo exactamente dónde mirar las reglas de red.",
+  "output_tokens": 1185,
+  "thinking_tokens": 122,
+  "input_tokens": 1751,
+  "wall_s": 13.62,
+  "created_at": "2026-10-07T00:22:19.690075+00:00"
+}

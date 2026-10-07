@@ -1,0 +1,25 @@
+{
+  "prompt_id": "cmp-01",
+  "kind": "floor",
+  "key": [
+    "D",
+    "D",
+    "A"
+  ],
+  "answers": [
+    "E",
+    "E",
+    "E"
+  ],
+  "correct": [
+    false,
+    false,
+    false
+  ],
+  "not_said": [
+    true,
+    true,
+    true
+  ],
+  "reader_model": "haiku"
+}

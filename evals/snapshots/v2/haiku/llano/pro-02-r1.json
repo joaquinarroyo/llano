@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Usa `git revert` para crear un nuevo commit que deshace los cambios. Esto es seguro porque no reescribe el historial y todos los desarrolladores se pueden sincronizar sin problemas.\n\n**Pasos:**\n\n1. Trae los cambios más recientes de main:\n   ```\n   git fetch origin\n   git checkout main\n   git pull origin main\n   ```\n\n2. Identifica el hash del commit que quieres revertir:\n   ```\n   git log --oneline\n   ```\n\n3. Revierte el commit:\n   ```\n   git revert <hash-del-commit>\n   ```\n   Git abre un editor para que confirmes el mensaje del commit de reversión. Guarda y cierra.\n\n4. Empuja la reversión a main:\n   ```\n   git push origin main\n   ```\n\n**Por qué es seguro:** `git revert` crea un nuevo commit que deshace los cambios, sin tocar el historial anterior. Los otros desarrolladores solo necesitan hacer `git pull` para sincronizarse. No hay conflictos de rebase ni pérdida de trabajo.\n\n**Si necesitas revertir múltiples commits seguidos:** usa `git revert <hash1>..<hash2>` (revierte desde hash1+1 hasta hash2).\n\n**Evita `git reset --hard` + `git push --force` en una rama compartida** porque reescribe el historial y causa conflictos graves con otros desarrolladores.",
+  "output_tokens": 648,
+  "thinking_tokens": 292,
+  "input_tokens": 6184,
+  "wall_s": 7.4,
+  "created_at": "2026-10-07T00:05:14.242347+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el flujo con un diagrama del preflight, da ejemplos de código completos (Express, FastAPI con credentials, proxy en Vite) y aclara que la solución va en la API, mientras que B es más escueta en los ejemplos, aunque añade el detalle útil del 200/204 en OPTIONS."
+    },
+    {
+      "winner": "llano",
+      "reason": "B ofrece el mismo contenido técnico con ejemplos de código completos y ejecutables (Express, FastAPI, proxy en Vite), un diagrama del flujo preflight y una explicación más clara del porqué, lo que permite resolver el problema en una sola lectura; A es correcta pero más escueta en los ejemplos."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

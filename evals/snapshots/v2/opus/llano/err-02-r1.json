@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "La prueba falla porque `float` guarda los números en binario, y 0.1 no tiene representación exacta en binario. El valor real de `0.1` es `0.1000000000000000055511151231257827…`. Cada operación redondea, y el resultado puede quedar en `89.99999999999999` en lugar de `90.0`. Por eso `==` falla aunque la diferencia sea de 1e-14.\n\n**Atención:** con exactamente `price=100.0` y `discount=0.1`, la expresión `100.0 * (1 - 0.1)` da `90.0` en Python. El `89.99999999999999` probablemente viene de otro valor de entrada. Por ejemplo, `price` puede venir de una suma de líneas. Imprime `repr(price)` y `repr(discount)` dentro del test para confirmarlo. La causa y el arreglo son los mismos en los dos casos.\n\n## Cómo arreglarlo\n\nHay dos niveles de arreglo.\n\n### 1. En el test: compara con tolerancia\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto una diferencia relativa de 1e-6. Este arreglo alcanza si el código calcula valores aproximados a propósito.\n\n### 2. En el código: usa `Decimal` para dinero (recomendado)\n\nUna factura maneja dinero, y el dinero necesita valores exactos en centavos. Con `float`, los errores de redondeo se acumulan en sumas y descuentos.\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.1\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# Decimal('90.00')\n```\n\nCrea los `Decimal` desde strings, no desde floats. `Decimal(0.1)` copia el error binario: da `Decimal('0.1000000000000000055511151231257827…')`.\n\nEl test queda así:\n\n```python\nassert total == Decimal(\"90.00\")\n```\n\nOtra opción es guardar los montos como enteros en centavos (`price_cents = 10000`). También da valores exactos, pero necesitas decidir el redondeo en cada división.",
+  "output_tokens": 1483,
+  "thinking_tokens": 700,
+  "input_tokens": 5241,
+  "wall_s": 15.3,
+  "created_at": "2026-10-07T00:15:17.970496+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa Postgres. Un sistema de facturación depende de la consistencia de los datos, y Postgres la garantiza en la base de datos, no en tu código.\n\n**Por qué Postgres encaja mejor:**\n\n- **Datos relacionales.** Clientes, facturas, líneas, impuestos, pagos y notas de crédito se relacionan entre sí. Las claves foráneas y los `CHECK` evitan facturas sin cliente o totales negativos.\n- **Transacciones ACID.** Emitir una factura, asignar su número consecutivo y registrar el asiento contable deben ocurrir juntos o no ocurrir. MongoDB soporta transacciones entre documentos, pero son más costosas y menos naturales en su modelo.\n- **Reportes con SQL.** Ingresos por mes, cartera vencida e impuestos por periodo son consultas con `JOIN` y agregaciones. Esto es SQL puro. En MongoDB necesitarías pipelines de agregación más difíciles de mantener.\n- **Auditoría.** Puedes usar triggers, tablas de solo inserción y restricciones para que una factura emitida no se modifique.\n- **Multi-tenant.** Row-Level Security aísla los datos de cada cliente dentro de la misma base.\n- **Flexibilidad cuando la necesites.** Las columnas `JSONB` guardan campos variables, como metadatos de un proveedor de pagos, sin renunciar al resto del modelo.\n\n**Cuándo elegirías MongoDB:** si tus datos fueran documentos muy variables, sin relaciones fuertes y con mucho volumen de escritura. Una facturación no tiene ese perfil.\n\n**Punto a decidir:** si esperas más de unos cientos de millones de filas por tabla, planea desde el inicio particionamiento por fecha o por tenant. Postgres lo soporta de forma nativa.",
+  "output_tokens": 919,
+  "thinking_tokens": 272,
+  "input_tokens": 5170,
+  "wall_s": 8.66,
+  "created_at": "2026-10-07T00:11:19.249636+00:00"
+}

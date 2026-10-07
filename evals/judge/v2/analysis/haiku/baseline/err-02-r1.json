@@ -1,0 +1,55 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "El número 0.1 no se puede representar exactamente en binario",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Comparación aproximada en el test",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "assert math.isclose(total, 90.0)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Usar `Decimal` en el código",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "89.99999999999999  # ← error de precisión",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que la comparación aproximada (float con tolerancia) es lo más común y apropiado para dinero, cuando para dinero lo recomendado es Decimal o enteros en centavos.",
+      "quote": "es lo más común para dinero/descuentos",
+      "verified": true
+    },
+    {
+      "claim": "Decimal('100.0') * (1 - Decimal('0.1')) da Decimal('90.00'), no Decimal('90.0'), porque conserva los decimales de los operandos.",
+      "quote": "Decimal('90.0')",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

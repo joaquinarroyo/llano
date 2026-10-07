@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El problema es claro: **la aplicación no puede conectarse a PostgreSQL** en `db.internal:5432`. Agota el timeout después de 30 segundos intentando alcanzar esa dirección.\n\n**Revisa esto primero (en orden):**\n\n1. **¿Existe el servicio de BD?** ¿`db.internal` está disponible y resolviendo a `10.0.3.17`?\n   - `nslookup db.internal` o `ping db.internal`\n\n2. **¿PostgreSQL está corriendo?** \n   - SSH al host de la BD y verifica: `ps aux | grep postgres`\n\n3. **¿El puerto está abierto?**\n   - `telnet db.internal 5432` o `nc -zv db.internal 5432`\n\n4. **¿Hay firewall/security groups bloqueando?**\n   - Verifica reglas de ingress entre la red de la app (`10.0.x.x`) y la BD\n\n5. **¿Cambió algo de networking/DNS?**\n   - Revisa si el registro DNS apunta a la IP correcta\n   - Verifica configuración de red en tu infraestructura\n\n**La causa más común:** o la BD está caída, o hay un problema de red/firewall que bloquea la conexión. El timeout exacto de 30s sugiere que está intentando conectar pero nunca recibe respuesta (no es un \"connection refused\").\n\n¿Qué infraestructura usas? (K8s, Docker Compose, VM, etc.) Eso me ayuda a darte pasos más específicos.",
+  "output_tokens": 588,
+  "thinking_tokens": 187,
+  "input_tokens": 3544,
+  "wall_s": 7.03,
+  "created_at": "2026-10-07T00:06:16.061850+00:00"
+}

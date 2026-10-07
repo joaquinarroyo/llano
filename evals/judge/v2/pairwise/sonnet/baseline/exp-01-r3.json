@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el modelo, la comparación con Python, quién hace el trabajo lento, las fases, el orden de ejecución y el riesgo de bloquear el loop de forma compacta y sin pérdidas técnicas relevantes, mientras que B, aunque completa y con buena analogía, es más extensa, repite ideas (resumen, ejemplos duplicados) y tiene un ligero error al decir que los microtasks se vacían 'entre fases' sin precisión equivalente."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica el modelo con claridad, cubre lo técnico esencial (libuv, pool de hilos, fases, nextTick/microtasks, bloqueo del loop, worker_threads) en un flujo lineal y compacto, mientras que A es más largo y repite conceptos con muchas secciones que dificultan una lectura única."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

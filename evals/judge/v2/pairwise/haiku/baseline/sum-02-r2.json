@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B añade la duración total (23 min) y la causa raíz explícita, y marca el impacto con claridad, mientras que A omite la duración y describe la alerta de forma imprecisa ('supere el umbral', algo que no estaba en el original)."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A incluye el período total afectado (23 minutos) y la causa raíz explícita, y su formato es igual de claro; B añade el umbral de CPU y la normalización a 300 ms pero omite la duración total, aunque ambos son muy similares."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

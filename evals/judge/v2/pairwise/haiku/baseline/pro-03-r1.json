@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica correctamente los formatos (SQL con psql, custom con pg_restore) y sus comandos funcionan, mientras que A genera un dump de texto plano con extensión .dump y luego sugiere pg_restore, que fallaría, lo que confunde."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica claramente los formatos SQL y binario (-F c) y empareja cada uno con psql o pg_restore, mientras que B genera un dump en texto plano pero lo restaura con pg_restore, lo que falla."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

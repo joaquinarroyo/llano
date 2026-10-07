@@ -1,0 +1,44 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js ejecuta tu código JavaScript en un solo hilo.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "La biblioteca libuv se encarga de la espera:",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "El event loop es el ciclo que decide qué callback corre después.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "Node vacía estas dos colas por completo antes de pasar al siguiente callback.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "el código que usa mucha CPU bloquea todo el proceso.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

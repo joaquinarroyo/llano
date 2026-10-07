@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Por qué falla\n\nEs un problema de **aritmética de punto flotante**, no un bug de tu lógica. Python usa `float` (IEEE 754 binario de 64 bits), y valores como `0.1` o `0.9` **no tienen representación exacta en binario**, igual que 1/3 no la tiene en decimal. `0.1` se guarda en realidad como `0.1000000000000000055511151231257827...`. Al multiplicar y restar, esos pequeños errores se acumulan y el resultado queda en `89.99999999999999` en vez de `90.0`. Por eso el `==` estricto falla.\n\n## Cómo arreglarlo\n\nHay dos opciones, según qué quieras corregir.\n\n### 1. En el código: usar `Decimal` (recomendado para facturas)\n\nComo es dinero, lo correcto es no usar `float`:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.10\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# Decimal('90.00')\n```\n\nConstruye los `Decimal` desde **strings**, no desde floats. `Decimal(0.1)` arrastra el mismo error binario.\n\nEl test quedaría así:\n\n```python\nassert total == Decimal(\"90.00\")\n```\n\nOtra alternativa habitual es trabajar en **céntimos con enteros** (`price_cents = 10000`).\n\n### 2. En el test: comparar con tolerancia\n\nSi mantienes `float` en el código, compara con tolerancia:\n\n```python\nimport pytest\n\nassert total == pytest.approx(90.0)\n```\n\nO con `math.isclose(total, 90.0)`.\n\n## Recomendación\n\nPara un módulo de facturación, usa **`Decimal`** en el código. `pytest.approx` solo oculta el síntoma en el test, y los errores de redondeo pueden acabar apareciendo en importes reales, por ejemplo al sumar muchas líneas o al calcular impuestos.\n\nSi me indicas dónde está el código de `invoice`, puedo hacer el cambio a `Decimal` y ajustar los tests.",
+  "output_tokens": 1176,
+  "thinking_tokens": 427,
+  "input_tokens": 1654,
+  "wall_s": 11.6,
+  "created_at": "2026-10-07T00:15:11.497904+00:00"
+}

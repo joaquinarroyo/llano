@@ -1,0 +1,29 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "key": [
+    "B",
+    "D",
+    "A"
+  ],
+  "answers": [
+    "B",
+    "D",
+    "A"
+  ],
+  "correct": [
+    true,
+    true,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Conviene Postgres. Una facturación necesita consistencia estricta y relaciones claras, y Postgres da eso de forma nativa.\n\n**Por qué encaja:**\n- **Transacciones ACID.** Crear una factura, sus líneas, los impuestos y el asiento de pago debe ocurrir completo o no ocurrir. En Postgres es el comportamiento normal. MongoDB tiene transacciones multidocumento, pero son más limitadas y más costosas.\n- **Integridad relacional.** Clientes, facturas, líneas, productos e impuestos se relacionan entre sí. Las claves foráneas y los `CHECK` impiden datos huérfanos o inválidos a nivel de base de datos, no solo en tu código.\n- **Dinero exacto.** El tipo `numeric` evita errores de redondeo. Además, un `UNIQUE` sobre `(tenant_id, numero_factura)` garantiza numeración sin duplicados, algo que muchas normativas fiscales exigen.\n- **Reportes.** Ingresos por mes, cartera vencida e impuestos por periodo son consultas con `JOIN` y agregaciones. SQL las resuelve directamente.\n- **Multitenancy.** Row-Level Security aísla los datos de cada cliente dentro de la misma base.\n- **Flexibilidad cuando la necesites.** `JSONB` guarda campos variables, como metadatos de integraciones o campos personalizados, sin salir de Postgres.\n\n**Cuándo elegir MongoDB:** si tus datos fueran documentos muy heterogéneos, sin relaciones fuertes, o si necesitaras escalar escrituras horizontalmente desde el primer día. Ninguno de los dos casos describe un SaaS de facturación típico.\n\nEsta recomendación supone un SaaS de facturación convencional. Si tienes un requisito inusual, como volúmenes de escritura masivos, dímelo y lo reviso.",
+  "output_tokens": 948,
+  "thinking_tokens": 278,
+  "input_tokens": 5170,
+  "wall_s": 8.59,
+  "created_at": "2026-10-07T00:09:38.370776+00:00"
+}

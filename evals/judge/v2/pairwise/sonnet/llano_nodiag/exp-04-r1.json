@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano_nodiag",
+      "reason": "B explica el flujo en pasos secuenciales y separa bien la petición simple del preflight, mientras que A mezcla ambos y deja confuso si la petición llega al servidor; además, B cubre lo esencial (credenciales, `*` en producción, proxy) de forma más fácil de leer en una sola pasada."
+    },
+    {
+      "winner": "llano",
+      "reason": "Explica lo mismo que A y añade detalles prácticos que evitan repreguntas: por qué curl y Postman sí funcionan, que un OPTIONS con 404 o 500 también produce error de CORS, los headers exactos que debe devolver la API y la tabla de orígenes."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

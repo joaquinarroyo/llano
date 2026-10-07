@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica cuándo usar cada opción con ejemplos claros, menciona la necesidad de manejar reconexión y proxies en WebSocket, y cierra con una guía de decisión práctica (empezar con polling, SSE si solo el servidor envía, WebSocket si ambas direcciones); B es similar pero afirma 'sin latencia' y es algo menos preciso en la recomendación final."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica con claridad cuándo usar cada opción y añade los costos prácticos de WebSocket (reconexión, infraestructura), con una recomendación final más accionable; A contiene imprecisiones (WebSocket 'sin latencia', 'conexión separada') y B es más fiel técnicamente, aunque su fila 'HTTP: No' para WebSocket es algo simplificada."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

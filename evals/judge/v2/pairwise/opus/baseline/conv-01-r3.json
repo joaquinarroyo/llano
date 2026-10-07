@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más claro y directo en los tres turnos, con pasos numerados y sin ruido, mientras que B incluye un comando confuso con autocorrección ('no, mejor:'), mezcla voseo y tuteo, y añade mucho contenido tangencial que dificulta entenderlo en una sola lectura."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directo y fácil de leer en una sola pasada (pasos numerados cortos, sin comandos corregidos a medias como el 'npx npm-check-updates # no, mejor:' de A), mantiene la información técnica clave (42 vs 14 viajes, pool, rollback, N+1) y su PR es limpio; el PR de A afirma que se verificó pg y añade tabla y notas extra que pueden confundir."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

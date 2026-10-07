@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica con claridad quién hace el trabajo lento (SO y pool de libuv), muestra todas las fases del loop en un diagrama y un ejemplo con el orden A, D, C, B explicado paso a paso, mientras que B es más compacto pero tiene una frase confusa sobre el bloqueo ('Esto se nota porque todo hay que hacerlo sin bloquear') y omite fases como pending y close."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica con más claridad quién hace el trabajo lento (epoll/kqueue/IOCP vs pool de libuv), muestra el ciclo completo de fases en un diagrama, y su ejemplo desglosa el orden paso a paso; además A tiene una frase confusa ('Esto se nota porque todo hay que hacerlo sin bloquear') y omite fases como pending y close."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

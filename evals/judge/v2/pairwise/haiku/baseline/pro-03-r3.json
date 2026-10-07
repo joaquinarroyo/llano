@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da un flujo lineal y enfocado (dump, transferencia, crear base, restaurar) con placeholders explicados y la nota de compatibilidad de versiones, mientras que B mezcla pg_dumpall, formatos y tips dispersos que confunden y el scp de un .dump que está en el servidor sin indicar dónde se generó."
+    },
+    {
+      "winner": "llano",
+      "reason": "B sigue un único flujo lineal (dump, transferir, crear base, restaurar) con placeholders explicados y menciona la compatibilidad de versiones, mientras que A mezcla opciones (pg_dumpall, .sql) con tips dispersos, no explica que pg_dumpall no sirve con pg_restore y deja la creación de la base para el final."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B responde igual de directo, pero añade el header Access-Control-Allow-Credentials, un ejemplo de Django y una sección de depuración en DevTools, y su formato (tabla de orígenes, headers de ejemplo concretos) se lee más rápido sin perder precisión técnica."
+    },
+    {
+      "winner": "llano",
+      "reason": "B responde de inmediato la causa (orígenes distintos), explica CORS paso a paso con un diagrama de preflight claro, incluye advertencias de seguridad sobre credenciales y producción, y aclara que el proxy solo sirve en desarrollo; A es completa y con buena depuración, pero omite esas advertencias y empieza con teoría antes de dar la causa directa."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

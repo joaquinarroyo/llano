@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "# Backup y restauración de Postgres de producción\n\nHaz el backup en el servidor de producción, descárgalo en tu máquina y restaura. Los pasos son rápidos si tienes acceso SSH al servidor.\n\n## En el servidor de producción\n\n1. Conéctate por SSH y crea el backup como archivo `.dump`:\n```bash\npg_dump -U postgres -h localhost nombre_base > backup_$(date +%Y%m%d_%H%M%S).dump\n```\nReemplaza `nombre_base` con el nombre real de tu base de datos. Si pides contraseña, usa `.pgpass` en `~/.pgpass` con permisos `600`.\n\n2. Comprime el archivo si es grande (>100 MB):\n```bash\ngzip backup_20261006_120000.dump\n```\n\n## Descarga a tu máquina local\n\nCopia el archivo con `scp` desde tu máquina local:\n```bash\nscp usuario@servidor_produccion:/ruta/backup_20261006_120000.dump.gz ./\ngunzip backup_20261006_120000.dump.gz\n```\n\n## Restaura localmente\n\nCrea una base nueva (si no existe) y restaura el dump:\n```bash\ncreatedb nombre_base_local\npg_restore -U postgres -d nombre_base_local backup_20261006_120000.dump\n```\n\nO con `psql` si el dump es en texto:\n```bash\npsql -U postgres -d nombre_base_local < backup_20261006_120000.dump\n```\n\n## Puntos a revisar\n\n- **Contraseña:** El usuario `postgres` localmente puede no ser el mismo que en producción. Ajusta `-U` según tu configuración.\n- **Permisos:** Postgres restaura los permisos originales. Puedes revisar con `\\dt` después de restaurar.\n- **Tamaño:** Los backups grandes pueden tardarse. Usa `--section=data` en `pg_dump` si solo necesitas datos, sin esquema.",
+  "output_tokens": 790,
+  "thinking_tokens": 286,
+  "input_tokens": 6174,
+  "wall_s": 9.17,
+  "created_at": "2026-10-07T00:05:18.936685+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica de forma directa que P no es opcional, da ejemplos concretos de CP y AP, y añade PACELC (latencia vs consistencia sin partición) y razones de por qué sigue importando, mientras B es correcta pero más genérica y sin ejemplos ni PACELC."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica con claridad que el trade-off real es C vs A durante una partición, da ejemplos concretos de CP y AP, menciona PACELC y técnicas como quorum, y justifica por qué sigue siendo relevante, mientras que A es más genérica y vaga en la relevancia."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

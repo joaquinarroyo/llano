@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "## Qué está pasando\n\nLa API arranca bien, resuelve `db.internal` a `10.0.3.17` e intenta abrir una conexión a Postgres, pero **nadie responde en 30 s**. Como termina en `ETIMEDOUT` y no en `ECONNREFUSED`, los paquetes se están descartando en el camino, no hay un Postgres rechazando la conexión. Por eso el pool no se inicializa y el proceso sale con código 1.\n\nCasi seguro es un problema de red o de disponibilidad del host, no de tu código ni de credenciales (una credencial incorrecta daría un error de autenticación, no un timeout).\n\n## Qué revisar primero\n\n1. **Probar la conectividad desde donde corre el deploy** (el mismo contenedor, pod o instancia, no tu máquina):\n   ```sh\n   nc -zv -w 5 10.0.3.17 5432\n   dig +short db.internal\n   ```\n   - Si `nc` también hace timeout, confirma que es red/firewall.\n   - Si `dig` devuelve una IP distinta de `10.0.3.17`, tienes un DNS desactualizado o distinto según el entorno.\n\n2. **Reglas de acceso hacia el puerto 5432**: security group, firewall, NetworkPolicy de Kubernetes o lista de IPs permitidas en la base. Lo más común es que el entorno del deploy esté en una subred, VPC o namespace nuevo que no está autorizado.\n\n3. **Que la base esté viva**: comprueba que la instancia `10.0.3.17` esté encendida y sana (consola del proveedor, o `pg_isready -h 10.0.3.17 -p 5432` desde un host con acceso). Un failover o reinicio reciente puede haber cambiado la IP o dejado el host caído.\n\n4. **Qué cambió respecto al último deploy que funcionó**: si v2.4.1 es nueva, revisa si cambió la variable de entorno de la URL de la DB, la red, la subred o el entorno de ejecución.\n\nSi me dices dónde corre (Kubernetes, ECS, VM, etc.) y si la versión anterior funcionaba, te digo cuál de estos es más probable. Si quieres, también puedo revisar los archivos de configuración del proyecto para ver cómo se define la conexión.",
+  "output_tokens": 1092,
+  "thinking_tokens": 302,
+  "input_tokens": 1756,
+  "wall_s": 9.84,
+  "created_at": "2026-10-07T00:09:04.333474+00:00"
+}

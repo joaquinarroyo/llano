@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A abre con una definición breve y directa, usa una tabla clara para C/A/P, ordena la relevancia en tres razones concretas y cierra con una pregunta de diseño aplicable y ejemplos de dominio, mientras que B es igual de completa pero más densa y añade matices (CA, lista de ejemplos extensa) que dispersan la lectura."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más directa y fácil de leer en una sola pasada: abre con la idea central, resume las propiedades en una tabla, da tres razones claras de relevancia y cierra con una pregunta práctica y ejemplos de dominio (saldo bancario vs. carrito), sin perder los datos técnicos clave (PACELC, linealizabilidad, Spanner, niveles de consistencia en Cassandra)."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

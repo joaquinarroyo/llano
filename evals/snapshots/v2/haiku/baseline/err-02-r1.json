@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Este es un problema clásico de **precisión en punto flotante**. El número 0.1 no se puede representar exactamente en binario, causando pequeños errores de redondeo:\n\n```python\n>>> 100.0 * (1 - 0.1)\n89.99999999999999  # ← error de precisión\n```\n\n## Soluciones (en orden de recomendación):\n\n**1. Comparación aproximada en el test** (más simple):\n```python\nimport math\n\ndef test_total_with_discount():\n    total = 100.0 * (1 - 0.1)\n    assert math.isclose(total, 90.0)  # Permite pequeña diferencia\n```\n\nO con pytest:\n```python\ndef test_total_with_discount():\n    total = 100.0 * (1 - 0.1)\n    assert total == pytest.approx(90.0)\n```\n\n**2. Usar `Decimal` en el código** (si necesitas precisión exacta):\n```python\nfrom decimal import Decimal\n\ntotal = Decimal('100.0') * (1 - Decimal('0.1'))\n# = Decimal('90.0')  ✓ exacto\n```\n\n**3. Redondear el resultado**:\n```python\ntotal = round(100.0 * (1 - 0.1), 2)  # 90.0\n```\n\n**La opción 1** es lo más común para dinero/descuentos porque acepta que en punto flotante habrá pequeñas imprecisiones. ¿Tienes el archivo del test para que lo corrija directamente?",
+  "output_tokens": 702,
+  "thinking_tokens": 293,
+  "input_tokens": 3474,
+  "wall_s": 6.15,
+  "created_at": "2026-10-07T00:05:01.008837+00:00"
+}

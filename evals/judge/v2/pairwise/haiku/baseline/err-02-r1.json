@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "Las dos explican bien el problema de punto flotante y dan la solución con approx, pero B añade Decimal para dinero, ofrece math.isclose y presenta las opciones ordenadas; A es clara, pero su paso intermedio inventado (1 - 0.1 = 0.8999999999999999) es más engañoso."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica la causa paso a paso (1 - 0.1 = 0.8999999999999999), da una solución clara con `approx` y una alternativa breve, sin repreguntar; A es más completo (incluye Decimal) pero más disperso, con un ejemplo de Decimal impreciso y termina pidiendo el archivo."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

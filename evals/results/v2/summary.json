@@ -1,0 +1,2678 @@
+{
+  "meta": {
+    "run_id": "v2",
+    "claude_cli": "2.1.292",
+    "models": [
+      "haiku",
+      "opus",
+      "sonnet"
+    ],
+    "runs": 3,
+    "arms": {
+      "baseline": "da39a3ee5e",
+      "llano": "b0f996ef7d",
+      "llano_nodiag": "22e84efd06"
+    },
+    "arm_chars": {
+      "baseline": 0,
+      "llano": 9296,
+      "llano_nodiag": 8326
+    },
+    "prompts": 12,
+    "conversations": 2,
+    "structured": [
+      "cmp-03",
+      "err-01",
+      "exp-01",
+      "exp-04",
+      "pro-03",
+      "sum-02"
+    ],
+    "isolation": [
+      "--setting-sources",
+      "project",
+      "--settings",
+      "{\"autoMemoryEnabled\": false}",
+      "--disable-slash-commands",
+      "--strict-mcp-config",
+      "--tools",
+      "",
+      "--no-session-persistence",
+      "CLAUDE_CONFIG_DIR=<empty temp>",
+      "CLAUDE_SECURESTORAGE_CONFIG_DIR=",
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY=1",
+      "CLAUDE_CODE_DISABLE_CLAUDE_MDS=1",
+      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1",
+      "profile without email or names"
+    ],
+    "started_at": "2026-10-07T00:04:23.849636+00:00"
+  },
+  "scopes": {
+    "All models": {
+      "single": {
+        "arms": {
+          "baseline": {
+            "n": 108,
+            "words": 227.0,
+            "output_tokens": 962.5,
+            "visible_tokens": 841.5,
+            "words_per_fact": 49.4,
+            "filler": 0.1574074074074074,
+            "answer_first": 0.7314814814814815,
+            "self_sufficiency": 0.9135802469135802,
+            "self_sufficiency_valid": 0.9135802469135802,
+            "fidelity": 0.9018518518518519,
+            "wrong": 0.25925925925925924,
+            "per100": 1.0547553544884327,
+            "inflesz": 68.94485981308411,
+            "thinking_share": 0.1329343937894817,
+            "input_tokens": 1698.0,
+            "diagram_rate": 0.037037037037037035,
+            "diagram_token_share": 0.11273869173717206,
+            "diagram_verdicts": {
+              "correct": 1,
+              "incorrect": 1,
+              "redundant": 1
+            },
+            "unverified_quotes": 0.001851851851851852
+          },
+          "llano": {
+            "n": 108,
+            "words": 203.0,
+            "output_tokens": 946.0,
+            "visible_tokens": 649.0,
+            "words_per_fact": 45.7,
+            "filler": 0.027777777777777776,
+            "answer_first": 0.8981481481481481,
+            "self_sufficiency": 0.9259259259259259,
+            "self_sufficiency_valid": 0.9259259259259259,
+            "fidelity": 0.9148148148148149,
+            "wrong": 0.37962962962962965,
+            "per100": 0.5053920689114468,
+            "inflesz": 76.1287037037037,
+            "thinking_share": 0.3496792014125627,
+            "input_tokens": 5285.0,
+            "diagram_rate": 0.12962962962962962,
+            "diagram_token_share": 0.09022010206412096,
+            "diagram_verdicts": {
+              "correct": 6,
+              "incorrect": 1,
+              "redundant": 7
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 54,
+            "words": 242.0,
+            "output_tokens": 985.5,
+            "visible_tokens": 647.5,
+            "words_per_fact": 50.0,
+            "filler": 0.037037037037037035,
+            "answer_first": 0.9074074074074074,
+            "self_sufficiency": 0.9074074074074074,
+            "self_sufficiency_valid": 0.9074074074074074,
+            "fidelity": 0.9148148148148149,
+            "wrong": 0.4444444444444444,
+            "per100": 0.8002225602282075,
+            "inflesz": 78.12962962962963,
+            "thinking_share": 0.2687110187110187,
+            "input_tokens": 4972.5,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_baseline": {
+          "words": {
+            "prompts": 12,
+            "better": 9,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": -33.12037037037036,
+            "ci95": [
+              -53.12037037037035,
+              -14.55555555555555
+            ]
+          },
+          "output_tokens": {
+            "prompts": 12,
+            "better": 4,
+            "worse": 8,
+            "equal": 0,
+            "p_sign": 0.3876953125,
+            "mean_diff": 86.01851851851855,
+            "ci95": [
+              -20.611111111111097,
+              201.0925925925926
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 12,
+            "better": 12,
+            "worse": 0,
+            "equal": 0,
+            "p_sign": 0.00048828125,
+            "mean_diff": -155.00925925925927,
+            "ci95": [
+              -221.62037037037035,
+              -95.36111111111113
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 12,
+            "better": 8,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.3876953125,
+            "mean_diff": -6.494796259553206,
+            "ci95": [
+              -11.88515487213404,
+              -1.5459288653733099
+            ]
+          },
+          "filler": {
+            "prompts": 12,
+            "better": 7,
+            "worse": 1,
+            "equal": 4,
+            "p_sign": 0.0703125,
+            "mean_diff": -0.12962962962962962,
+            "ci95": [
+              -0.24074074074074073,
+              -0.037037037037037035
+            ]
+          },
+          "answer_first": {
+            "prompts": 12,
+            "better": 6,
+            "worse": 0,
+            "equal": 6,
+            "p_sign": 0.03125,
+            "mean_diff": 0.16666666666666666,
+            "ci95": [
+              0.04629629629629631,
+              0.3148148148148148
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 12,
+            "better": 4,
+            "worse": 2,
+            "equal": 6,
+            "p_sign": 0.6875,
+            "mean_diff": 0.012345679012345678,
+            "ci95": [
+              -0.012345679012345687,
+              0.03703703703703704
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 12,
+            "better": 4,
+            "worse": 2,
+            "equal": 6,
+            "p_sign": 0.6875,
+            "mean_diff": 0.012345679012345678,
+            "ci95": [
+              -0.012345679012345687,
+              0.03703703703703704
+            ]
+          },
+          "fidelity": {
+            "prompts": 12,
+            "better": 3,
+            "worse": 8,
+            "equal": 1,
+            "p_sign": 0.2265625,
+            "mean_diff": 0.012962962962962982,
+            "ci95": [
+              -0.01759259259259256,
+              0.057407407407407414
+            ]
+          },
+          "wrong": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 8,
+            "equal": 2,
+            "p_sign": 0.109375,
+            "mean_diff": 0.12037037037037036,
+            "ci95": [
+              0.03703703703703703,
+              0.2037037037037037
+            ]
+          },
+          "per100": {
+            "prompts": 12,
+            "better": 11,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.00634765625,
+            "mean_diff": -0.549363285576986,
+            "ci95": [
+              -0.8180739402962094,
+              -0.31216929539663496
+            ]
+          },
+          "inflesz": {
+            "prompts": 12,
+            "better": 12,
+            "worse": 0,
+            "equal": 0,
+            "p_sign": 0.00048828125,
+            "mean_diff": 7.125231481481481,
+            "ci95": [
+              5.1259259259259276,
+              9.170601851851849
+            ]
+          }
+        },
+        "pref_baseline": {
+          "llano": 46,
+          "tie": 21,
+          "other": 41,
+          "score": 0.5231481481481481,
+          "score_ci95": [
+            0.4074074074074074,
+            0.6296296296296297
+          ],
+          "prompts_llano": 7,
+          "prompts_other": 4,
+          "prompts_even": 1,
+          "p_sign": 0.548828125
+        }
+      },
+      "diagrams": {
+        "arms": {
+          "llano": {
+            "n": 54,
+            "words": 238.5,
+            "output_tokens": 1083.5,
+            "visible_tokens": 738.0,
+            "words_per_fact": 53.5,
+            "filler": 0,
+            "answer_first": 0.8518518518518519,
+            "self_sufficiency": 0.9259259259259259,
+            "self_sufficiency_valid": 0.9259259259259259,
+            "fidelity": 0.912962962962963,
+            "wrong": 0.4074074074074074,
+            "per100": 0.5757717448261997,
+            "inflesz": 78.52777777777777,
+            "thinking_share": 0.33964787513570494,
+            "input_tokens": 5326.5,
+            "diagram_rate": 0.24074074074074073,
+            "diagram_token_share": 0.09328206424611674,
+            "diagram_verdicts": {
+              "correct": 5,
+              "incorrect": 1,
+              "redundant": 7
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 54,
+            "words": 242.0,
+            "output_tokens": 985.5,
+            "visible_tokens": 647.5,
+            "words_per_fact": 50.0,
+            "filler": 0.037037037037037035,
+            "answer_first": 0.9074074074074074,
+            "self_sufficiency": 0.9074074074074074,
+            "self_sufficiency_valid": 0.9074074074074074,
+            "fidelity": 0.9148148148148149,
+            "wrong": 0.4444444444444444,
+            "per100": 0.8002225602282075,
+            "inflesz": 78.12962962962963,
+            "thinking_share": 0.2687110187110187,
+            "input_tokens": 4972.5,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_nodiag": {
+          "words": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": -2.1851851851851927,
+            "ci95": [
+              -7.462962962962979,
+              2.7777777777777715
+            ]
+          },
+          "output_tokens": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 6,
+            "equal": 0,
+            "p_sign": 0.03125,
+            "mean_diff": 143.72222222222226,
+            "ci95": [
+              54.14814814814819,
+              242.37037037037047
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": 21.611111111111114,
+            "ci95": [
+              1.3703703703703525,
+              46.01851851851854
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": -1.5166519694297456,
+            "ci95": [
+              -5.377101704879482,
+              1.2687830687830726
+            ]
+          },
+          "filler": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 0,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": -0.037037037037037035,
+            "ci95": [
+              -0.07407407407407407,
+              0
+            ]
+          },
+          "answer_first": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 2,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": -0.05555555555555556,
+            "ci95": [
+              -0.12962962962962962,
+              0.0
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 1,
+            "equal": 2,
+            "p_sign": 0.625,
+            "mean_diff": 0.01851851851851849,
+            "ci95": [
+              -0.006172839506172885,
+              0.04938271604938268
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 1,
+            "equal": 2,
+            "p_sign": 0.625,
+            "mean_diff": 0.01851851851851849,
+            "ci95": [
+              -0.006172839506172885,
+              0.04938271604938268
+            ]
+          },
+          "fidelity": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": -0.0018518518518518452,
+            "ci95": [
+              -0.0222222222222222,
+              0.022222222222222254
+            ]
+          },
+          "wrong": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 1,
+            "equal": 2,
+            "p_sign": 0.625,
+            "mean_diff": -0.03703703703703704,
+            "ci95": [
+              -0.09259259259259262,
+              0.037037037037037035
+            ]
+          },
+          "per100": {
+            "prompts": 6,
+            "better": 4,
+            "worse": 1,
+            "equal": 1,
+            "p_sign": 0.375,
+            "mean_diff": -0.22445081540200773,
+            "ci95": [
+              -0.44711731405815847,
+              -0.020462105792386484
+            ]
+          },
+          "inflesz": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": 0.39814814814814764,
+            "ci95": [
+              -0.7444444444444448,
+              1.4944444444444471
+            ]
+          }
+        },
+        "pref_nodiag": {
+          "llano": 17,
+          "tie": 18,
+          "other": 19,
+          "score": 0.4814814814814815,
+          "score_ci95": [
+            0.3703703703703704,
+            0.5740740740740741
+          ],
+          "prompts_llano": 3,
+          "prompts_other": 3,
+          "prompts_even": 0,
+          "p_sign": 1.0
+        }
+      },
+      "conversation": {
+        "by_turn": {
+          "1": {
+            "baseline": {
+              "n": 18,
+              "words": 318.0,
+              "output_tokens": 1118.0,
+              "visible_tokens": 974.0,
+              "words_per_fact": 79.5,
+              "filler": 0.2777777777777778,
+              "answer_first": 0.7777777777777778,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9375,
+              "wrong": null,
+              "per100": 1.085116075984123,
+              "inflesz": 62.111111111111114,
+              "thinking_share": 0.17515148376404785,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 18,
+              "words": 286.5,
+              "output_tokens": 981.5,
+              "visible_tokens": 784.5,
+              "words_per_fact": 74.25,
+              "filler": 0.05555555555555555,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9305555555555556,
+              "wrong": null,
+              "per100": 0.6514272019833668,
+              "inflesz": 68.93333333333334,
+              "thinking_share": 0.2785088990666126,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "2": {
+            "baseline": {
+              "n": 18,
+              "words": 298.0,
+              "output_tokens": 969.0,
+              "visible_tokens": 767.0,
+              "words_per_fact": 74.5,
+              "filler": 0.2222222222222222,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9722222222222222,
+              "wrong": null,
+              "per100": 1.1791690143100488,
+              "inflesz": 74.53333333333333,
+              "thinking_share": 0.20985291705396686,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 18,
+              "words": 272.0,
+              "output_tokens": 1055.5,
+              "visible_tokens": 690.5,
+              "words_per_fact": 68.0,
+              "filler": 0.05555555555555555,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9513888888888888,
+              "wrong": null,
+              "per100": 0.5119849586335351,
+              "inflesz": 77.89444444444445,
+              "thinking_share": 0.30346385542168675,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "3": {
+            "baseline": {
+              "n": 18,
+              "words": 198.0,
+              "output_tokens": 698.5,
+              "visible_tokens": 633.5,
+              "words_per_fact": 54.01785714285714,
+              "filler": 0.2222222222222222,
+              "answer_first": 0.8888888888888888,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9305555555555556,
+              "wrong": null,
+              "per100": 0.40041169164210894,
+              "inflesz": 78.81111111111112,
+              "thinking_share": 0.09451341609931918,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 18,
+              "words": 115.5,
+              "output_tokens": 761.0,
+              "visible_tokens": 525.0,
+              "words_per_fact": 32.660714285714285,
+              "filler": 0,
+              "answer_first": 0.8333333333333334,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.8888888888888888,
+              "wrong": null,
+              "per100": 0.2913161803889296,
+              "inflesz": 79.0111111111111,
+              "thinking_share": 0.2523628837530183,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          }
+        },
+        "self_sufficiency": {
+          "baseline": 0.9814814814814815,
+          "llano": 0.9814814814814815
+        },
+        "wrong_per_conv": {
+          "baseline": 1.0555555555555556,
+          "llano": 0.6111111111111112
+        },
+        "pref_baseline": {
+          "llano": 16,
+          "tie": 1,
+          "other": 1,
+          "score": 0.9166666666666667,
+          "score_ci95": [
+            0.8333333333333334,
+            1.0
+          ],
+          "prompts_llano": 2,
+          "prompts_other": 0,
+          "prompts_even": 0,
+          "p_sign": 0.5
+        }
+      }
+    },
+    "haiku": {
+      "single": {
+        "arms": {
+          "baseline": {
+            "n": 36,
+            "words": 112.5,
+            "output_tokens": 583.0,
+            "visible_tokens": 405.0,
+            "words_per_fact": 31.682539682539684,
+            "filler": 0.05555555555555555,
+            "answer_first": 0.6944444444444444,
+            "self_sufficiency": 0.787037037037037,
+            "self_sufficiency_valid": 0.787037037037037,
+            "fidelity": 0.775,
+            "wrong": 0.6666666666666666,
+            "per100": 1.0022919991351582,
+            "inflesz": 60.137142857142855,
+            "thinking_share": 0.3471908558786929,
+            "input_tokens": 3410.0,
+            "diagram_rate": 0.027777777777777776,
+            "diagram_token_share": 0.14786462530217567,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 1,
+              "redundant": 1
+            },
+            "unverified_quotes": 0.005555555555555556
+          },
+          "llano": {
+            "n": 36,
+            "words": 136.5,
+            "output_tokens": 682.0,
+            "visible_tokens": 356.0,
+            "words_per_fact": 36.825,
+            "filler": 0.027777777777777776,
+            "answer_first": 0.9444444444444444,
+            "self_sufficiency": 0.8148148148148148,
+            "self_sufficiency_valid": 0.8148148148148148,
+            "fidelity": 0.7777777777777778,
+            "wrong": 1.0555555555555556,
+            "per100": 0.6094522412290041,
+            "inflesz": 72.66111111111111,
+            "thinking_share": 0.5594156724511931,
+            "input_tokens": 6180.0,
+            "diagram_rate": 0.05555555555555555,
+            "diagram_token_share": 0.1466984916336839,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 1,
+              "redundant": 1
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 149.0,
+            "output_tokens": 702.0,
+            "visible_tokens": 425.0,
+            "words_per_fact": 36.5,
+            "filler": 0.1111111111111111,
+            "answer_first": 1.0,
+            "self_sufficiency": 0.7777777777777778,
+            "self_sufficiency_valid": 0.7777777777777778,
+            "fidelity": 0.7944444444444444,
+            "wrong": 1.0555555555555556,
+            "per100": 1.0262630657409133,
+            "inflesz": 73.68333333333334,
+            "thinking_share": 0.4436323366555925,
+            "input_tokens": 5906.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_baseline": {
+          "words": {
+            "prompts": 12,
+            "better": 5,
+            "worse": 7,
+            "equal": 0,
+            "p_sign": 0.7744140625,
+            "mean_diff": 11.38888888888889,
+            "ci95": [
+              -0.9999999999999988,
+              24.94444444444444
+            ]
+          },
+          "output_tokens": {
+            "prompts": 12,
+            "better": 1,
+            "worse": 11,
+            "equal": 0,
+            "p_sign": 0.00634765625,
+            "mean_diff": 216.86111111111111,
+            "ci95": [
+              63.9166666666667,
+              415.80555555555554
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 12,
+            "better": 9,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": -32.36111111111111,
+            "ci95": [
+              -57.666666666666664,
+              -4.083333333333333
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 12,
+            "better": 6,
+            "worse": 6,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": 3.7928350970017637,
+            "ci95": [
+              -1.1656966490299836,
+              8.964351851851852
+            ]
+          },
+          "filler": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 1,
+            "equal": 9,
+            "p_sign": 1.0,
+            "mean_diff": -0.027777777777777776,
+            "ci95": [
+              -0.1388888888888889,
+              0.05555555555555555
+            ]
+          },
+          "answer_first": {
+            "prompts": 12,
+            "better": 5,
+            "worse": 0,
+            "equal": 7,
+            "p_sign": 0.0625,
+            "mean_diff": 0.25,
+            "ci95": [
+              0.05555555555555556,
+              0.4722222222222222
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 12,
+            "better": 3,
+            "worse": 1,
+            "equal": 8,
+            "p_sign": 0.625,
+            "mean_diff": 0.02777777777777778,
+            "ci95": [
+              -0.018518518518518528,
+              0.07407407407407408
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 12,
+            "better": 3,
+            "worse": 1,
+            "equal": 8,
+            "p_sign": 0.625,
+            "mean_diff": 0.02777777777777778,
+            "ci95": [
+              -0.018518518518518528,
+              0.07407407407407408
+            ]
+          },
+          "fidelity": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 7,
+            "equal": 3,
+            "p_sign": 0.1796875,
+            "mean_diff": 0.0027777777777777866,
+            "ci95": [
+              -0.04999999999999999,
+              0.08333333333333334
+            ]
+          },
+          "wrong": {
+            "prompts": 12,
+            "better": 1,
+            "worse": 9,
+            "equal": 2,
+            "p_sign": 0.021484375,
+            "mean_diff": 0.38888888888888884,
+            "ci95": [
+              0.19444444444444442,
+              0.5833333333333333
+            ]
+          },
+          "per100": {
+            "prompts": 12,
+            "better": 6,
+            "worse": 4,
+            "equal": 2,
+            "p_sign": 0.75390625,
+            "mean_diff": -0.39283975790615405,
+            "ci95": [
+              -0.9126959006215832,
+              0.07814618586054789
+            ]
+          },
+          "inflesz": {
+            "prompts": 12,
+            "better": 12,
+            "worse": 0,
+            "equal": 0,
+            "p_sign": 0.00048828125,
+            "mean_diff": 12.477777777777778,
+            "ci95": [
+              8.477777777777776,
+              16.700000000000003
+            ]
+          }
+        },
+        "pref_baseline": {
+          "llano": 12,
+          "tie": 2,
+          "other": 22,
+          "score": 0.3611111111111111,
+          "score_ci95": [
+            0.19444444444444442,
+            0.5416666666666666
+          ],
+          "prompts_llano": 3,
+          "prompts_other": 9,
+          "prompts_even": 0,
+          "p_sign": 0.14599609375
+        }
+      },
+      "diagrams": {
+        "arms": {
+          "llano": {
+            "n": 18,
+            "words": 151.0,
+            "output_tokens": 720.5,
+            "visible_tokens": 393.0,
+            "words_per_fact": 38.175,
+            "filler": 0,
+            "answer_first": 0.8888888888888888,
+            "self_sufficiency": 0.8333333333333334,
+            "self_sufficiency_valid": 0.8333333333333334,
+            "fidelity": 0.7777777777777778,
+            "wrong": 1.2222222222222223,
+            "per100": 0.7172449884079533,
+            "inflesz": 75.47777777777777,
+            "thinking_share": 0.5674946301701823,
+            "input_tokens": 6180.0,
+            "diagram_rate": 0.1111111111111111,
+            "diagram_token_share": 0.1466984916336839,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 1,
+              "redundant": 1
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 149.0,
+            "output_tokens": 702.0,
+            "visible_tokens": 425.0,
+            "words_per_fact": 36.5,
+            "filler": 0.1111111111111111,
+            "answer_first": 1.0,
+            "self_sufficiency": 0.7777777777777778,
+            "self_sufficiency_valid": 0.7777777777777778,
+            "fidelity": 0.7944444444444444,
+            "wrong": 1.0555555555555556,
+            "per100": 1.0262630657409133,
+            "inflesz": 73.68333333333334,
+            "thinking_share": 0.4436323366555925,
+            "input_tokens": 5906.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_nodiag": {
+          "words": {
+            "prompts": 6,
+            "better": 4,
+            "worse": 2,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": -8.555555555555555,
+            "ci95": [
+              -24.83333333333333,
+              5.833333333333331
+            ]
+          },
+          "output_tokens": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": 256.22222222222223,
+            "ci95": [
+              6.2222222222222285,
+              523.7222222222222
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 6,
+            "better": 5,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": 17.611111111111125,
+            "ci95": [
+              -12.666666666666657,
+              71.72222222222223
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": -3.5869929453262768,
+            "ci95": [
+              -12.805687830687827,
+              2.3292768959435626
+            ]
+          },
+          "filler": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 0,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": -0.1111111111111111,
+            "ci95": [
+              -0.2222222222222222,
+              0
+            ]
+          },
+          "answer_first": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 2,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": -0.11111111111111112,
+            "ci95": [
+              -0.22222222222222224,
+              0.0
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 0,
+            "equal": 3,
+            "p_sign": 0.25,
+            "mean_diff": 0.055555555555555546,
+            "ci95": [
+              0.018518518518518507,
+              0.0925925925925926
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 0,
+            "equal": 3,
+            "p_sign": 0.25,
+            "mean_diff": 0.055555555555555546,
+            "ci95": [
+              0.018518518518518507,
+              0.0925925925925926
+            ]
+          },
+          "fidelity": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": -0.01666666666666668,
+            "ci95": [
+              -0.04999999999999999,
+              0.033333333333333305
+            ]
+          },
+          "wrong": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 3,
+            "equal": 2,
+            "p_sign": 0.625,
+            "mean_diff": 0.16666666666666669,
+            "ci95": [
+              -0.11111111111111109,
+              0.4444444444444444
+            ]
+          },
+          "per100": {
+            "prompts": 6,
+            "better": 4,
+            "worse": 0,
+            "equal": 2,
+            "p_sign": 0.125,
+            "mean_diff": -0.30901807733296005,
+            "ci95": [
+              -0.5817137368322048,
+              -0.09275740446799328
+            ]
+          },
+          "inflesz": {
+            "prompts": 6,
+            "better": 4,
+            "worse": 2,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": 1.7944444444444443,
+            "ci95": [
+              -1.466666666666671,
+              4.82777777777778
+            ]
+          }
+        },
+        "pref_nodiag": {
+          "llano": 6,
+          "tie": 3,
+          "other": 9,
+          "score": 0.41666666666666663,
+          "score_ci95": [
+            0.2777777777777778,
+            0.5555555555555556
+          ],
+          "prompts_llano": 1,
+          "prompts_other": 3,
+          "prompts_even": 2,
+          "p_sign": 0.625
+        }
+      },
+      "conversation": {
+        "by_turn": {
+          "1": {
+            "baseline": {
+              "n": 6,
+              "words": 135.0,
+              "output_tokens": 562.5,
+              "visible_tokens": 323.0,
+              "words_per_fact": 42.14285714285714,
+              "filler": 0.16666666666666666,
+              "answer_first": 0.5,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.8125,
+              "wrong": null,
+              "per100": 1.7545719274889564,
+              "inflesz": 49.833333333333336,
+              "thinking_share": 0.43015780245470486,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 145.0,
+              "output_tokens": 615.0,
+              "visible_tokens": 297.5,
+              "words_per_fact": 42.285714285714285,
+              "filler": 0.16666666666666666,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.7916666666666666,
+              "wrong": null,
+              "per100": 1.1945098365061313,
+              "inflesz": 61.983333333333334,
+              "thinking_share": 0.5057074595168569,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "2": {
+            "baseline": {
+              "n": 6,
+              "words": 148.5,
+              "output_tokens": 626.0,
+              "visible_tokens": 376.5,
+              "words_per_fact": 40.57142857142857,
+              "filler": 0.3333333333333333,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9166666666666666,
+              "wrong": null,
+              "per100": 0.948915962602094,
+              "inflesz": 69.88333333333333,
+              "thinking_share": 0.38931703428115866,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 152.5,
+              "output_tokens": 554.5,
+              "visible_tokens": 344.5,
+              "words_per_fact": 43.976190476190474,
+              "filler": 0.16666666666666666,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.8541666666666666,
+              "wrong": null,
+              "per100": 0.4948246786033078,
+              "inflesz": 71.38333333333334,
+              "thinking_share": 0.4073972602739726,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "3": {
+            "baseline": {
+              "n": 6,
+              "words": 90.0,
+              "output_tokens": 503.0,
+              "visible_tokens": 352.5,
+              "words_per_fact": 29.380952380952383,
+              "filler": 0.16666666666666666,
+              "answer_first": 0.8333333333333334,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.875,
+              "wrong": null,
+              "per100": 0.40207779474706334,
+              "inflesz": 85.21666666666667,
+              "thinking_share": 0.18532155130093275,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 109.5,
+              "output_tokens": 559.0,
+              "visible_tokens": 382.5,
+              "words_per_fact": 31.285714285714285,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.8541666666666666,
+              "wrong": null,
+              "per100": 0.594748040375759,
+              "inflesz": 76.88333333333334,
+              "thinking_share": 0.39259468626342564,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          }
+        },
+        "self_sufficiency": {
+          "baseline": 1.0,
+          "llano": 0.9444444444444444
+        },
+        "wrong_per_conv": {
+          "baseline": 2.3333333333333335,
+          "llano": 1.8333333333333333
+        },
+        "pref_baseline": {
+          "llano": 4,
+          "tie": 1,
+          "other": 1,
+          "score": 0.75,
+          "score_ci95": [
+            0.5,
+            1.0
+          ],
+          "prompts_llano": 1,
+          "prompts_other": 0,
+          "prompts_even": 1,
+          "p_sign": 1.0
+        }
+      }
+    },
+    "opus": {
+      "single": {
+        "arms": {
+          "baseline": {
+            "n": 36,
+            "words": 299.0,
+            "output_tokens": 1212.5,
+            "visible_tokens": 1114.5,
+            "words_per_fact": 59.8,
+            "filler": 0.2777777777777778,
+            "answer_first": 0.75,
+            "self_sufficiency": 0.9907407407407407,
+            "self_sufficiency_valid": 0.9907407407407407,
+            "fidelity": 0.9777777777777777,
+            "wrong": 0.05555555555555555,
+            "per100": 1.0853497417501783,
+            "inflesz": 73.66388888888889,
+            "thinking_share": 0.05900577050420963,
+            "input_tokens": 1580.0,
+            "diagram_rate": 0.08333333333333333,
+            "diagram_token_share": 0.1010300472155042,
+            "diagram_verdicts": {
+              "correct": 1,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano": {
+            "n": 36,
+            "words": 280.0,
+            "output_tokens": 1093.0,
+            "visible_tokens": 950.5,
+            "words_per_fact": 56.599999999999994,
+            "filler": 0.05555555555555555,
+            "answer_first": 0.8611111111111112,
+            "self_sufficiency": 0.9814814814814815,
+            "self_sufficiency_valid": 0.9814814814814815,
+            "fidelity": 0.9861111111111112,
+            "wrong": 0.05555555555555555,
+            "per100": 0.3623633720511932,
+            "inflesz": 77.99444444444444,
+            "thinking_share": 0.15921628775697005,
+            "input_tokens": 5167.0,
+            "diagram_rate": 0.19444444444444445,
+            "diagram_token_share": 0.08373527508196746,
+            "diagram_verdicts": {
+              "correct": 5,
+              "incorrect": 0,
+              "redundant": 2
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 287.5,
+            "output_tokens": 1110.0,
+            "visible_tokens": 1051.5,
+            "words_per_fact": 61.63333333333333,
+            "filler": 0,
+            "answer_first": 0.8333333333333334,
+            "self_sufficiency": 0.9814814814814815,
+            "self_sufficiency_valid": 0.9814814814814815,
+            "fidelity": 0.9722222222222222,
+            "wrong": 0.16666666666666666,
+            "per100": 0.5890507309766283,
+            "inflesz": 80.24444444444444,
+            "thinking_share": 0.07965384993608024,
+            "input_tokens": 4812.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_baseline": {
+          "words": {
+            "prompts": 12,
+            "better": 9,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": -42.97222222222222,
+            "ci95": [
+              -78.11111111111111,
+              -9.91666666666667
+            ]
+          },
+          "output_tokens": {
+            "prompts": 12,
+            "better": 7,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.7744140625,
+            "mean_diff": -51.694444444444436,
+            "ci95": [
+              -171.72222222222217,
+              63.44444444444444
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 12,
+            "better": 9,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": -161.16666666666669,
+            "ci95": [
+              -270.72222222222223,
+              -58.97222222222222
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 12,
+            "better": 8,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.3876953125,
+            "mean_diff": -9.780864197530866,
+            "ci95": [
+              -18.408641975308644,
+              -1.7604938271604944
+            ]
+          },
+          "filler": {
+            "prompts": 12,
+            "better": 5,
+            "worse": 0,
+            "equal": 7,
+            "p_sign": 0.0625,
+            "mean_diff": -0.2222222222222222,
+            "ci95": [
+              -0.41666666666666663,
+              -0.05555555555555555
+            ]
+          },
+          "answer_first": {
+            "prompts": 12,
+            "better": 4,
+            "worse": 2,
+            "equal": 6,
+            "p_sign": 0.6875,
+            "mean_diff": 0.11111111111111112,
+            "ci95": [
+              -0.11111111111111112,
+              0.33333333333333337
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 12,
+            "better": 1,
+            "worse": 1,
+            "equal": 10,
+            "p_sign": 1.0,
+            "mean_diff": -0.009259259259259254,
+            "ci95": [
+              -0.05555555555555555,
+              0.02777777777777779
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 12,
+            "better": 1,
+            "worse": 1,
+            "equal": 10,
+            "p_sign": 1.0,
+            "mean_diff": -0.009259259259259254,
+            "ci95": [
+              -0.05555555555555555,
+              0.02777777777777779
+            ]
+          },
+          "fidelity": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 3,
+            "equal": 7,
+            "p_sign": 1.0,
+            "mean_diff": 0.008333333333333331,
+            "ci95": [
+              -0.013888888888888886,
+              0.04166666666666666
+            ]
+          },
+          "wrong": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 1,
+            "equal": 9,
+            "p_sign": 1.0,
+            "mean_diff": 0.0,
+            "ci95": [
+              -0.1111111111111111,
+              0.1388888888888889
+            ]
+          },
+          "per100": {
+            "prompts": 12,
+            "better": 11,
+            "worse": 0,
+            "equal": 1,
+            "p_sign": 0.0009765625,
+            "mean_diff": -0.722986369698985,
+            "ci95": [
+              -0.9890707312715029,
+              -0.47386536934387447
+            ]
+          },
+          "inflesz": {
+            "prompts": 12,
+            "better": 9,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": 4.330555555555555,
+            "ci95": [
+              1.733333333333336,
+              7.047222222222222
+            ]
+          }
+        },
+        "pref_baseline": {
+          "llano": 16,
+          "tie": 11,
+          "other": 9,
+          "score": 0.5972222222222222,
+          "score_ci95": [
+            0.4305555555555555,
+            0.75
+          ],
+          "prompts_llano": 8,
+          "prompts_other": 3,
+          "prompts_even": 1,
+          "p_sign": 0.2265625
+        }
+      },
+      "diagrams": {
+        "arms": {
+          "llano": {
+            "n": 18,
+            "words": 301.0,
+            "output_tokens": 1158.0,
+            "visible_tokens": 1075.5,
+            "words_per_fact": 62.488888888888894,
+            "filler": 0,
+            "answer_first": 0.7777777777777778,
+            "self_sufficiency": 0.9629629629629629,
+            "self_sufficiency_valid": 0.9629629629629629,
+            "fidelity": 0.9833333333333334,
+            "wrong": 0,
+            "per100": 0.3601716665401688,
+            "inflesz": 80.35,
+            "thinking_share": 0.12452554076919559,
+            "input_tokens": 5166.0,
+            "diagram_rate": 0.3333333333333333,
+            "diagram_token_share": 0.08928872197926606,
+            "diagram_verdicts": {
+              "correct": 4,
+              "incorrect": 0,
+              "redundant": 2
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 287.5,
+            "output_tokens": 1110.0,
+            "visible_tokens": 1051.5,
+            "words_per_fact": 61.63333333333333,
+            "filler": 0,
+            "answer_first": 0.8333333333333334,
+            "self_sufficiency": 0.9814814814814815,
+            "self_sufficiency_valid": 0.9814814814814815,
+            "fidelity": 0.9722222222222222,
+            "wrong": 0.16666666666666666,
+            "per100": 0.5890507309766283,
+            "inflesz": 80.24444444444444,
+            "thinking_share": 0.07965384993608024,
+            "input_tokens": 4812.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_nodiag": {
+          "words": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": 5.777777777777786,
+            "ci95": [
+              -10.555555555555538,
+              20.111111111111118
+            ]
+          },
+          "output_tokens": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": 84.94444444444447,
+            "ci95": [
+              29.72222222222219,
+              148.00000000000009
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": 23.66666666666664,
+            "ci95": [
+              -86.88888888888893,
+              125.55555555555554
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 4,
+            "equal": 0,
+            "p_sign": 0.6875,
+            "mean_diff": 0.11358024691357886,
+            "ci95": [
+              -4.348148148148148,
+              3.4641975308641957
+            ]
+          },
+          "filler": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 0,
+            "equal": 6,
+            "p_sign": 1.0,
+            "mean_diff": 0,
+            "ci95": [
+              0,
+              0
+            ]
+          },
+          "answer_first": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 1,
+            "equal": 5,
+            "p_sign": 1.0,
+            "mean_diff": -0.05555555555555555,
+            "ci95": [
+              -0.16666666666666666,
+              0.0
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 1,
+            "equal": 5,
+            "p_sign": 1.0,
+            "mean_diff": -0.018518518518518507,
+            "ci95": [
+              -0.055555555555555525,
+              0.0
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 1,
+            "equal": 5,
+            "p_sign": 1.0,
+            "mean_diff": -0.018518518518518507,
+            "ci95": [
+              -0.055555555555555525,
+              0.0
+            ]
+          },
+          "fidelity": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 0,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": 0.011111111111111108,
+            "ci95": [
+              0.0,
+              0.022222222222222216
+            ]
+          },
+          "wrong": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 0,
+            "equal": 3,
+            "p_sign": 0.25,
+            "mean_diff": -0.16666666666666666,
+            "ci95": [
+              -0.2777777777777778,
+              -0.05555555555555555
+            ]
+          },
+          "per100": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 1,
+            "equal": 2,
+            "p_sign": 0.625,
+            "mean_diff": -0.2288790644364595,
+            "ci95": [
+              -0.5316260598837071,
+              0.04396596859634883
+            ]
+          },
+          "inflesz": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": 0.10555555555555902,
+            "ci95": [
+              -0.7777777777777762,
+              0.9111111111111162
+            ]
+          }
+        },
+        "pref_nodiag": {
+          "llano": 6,
+          "tie": 7,
+          "other": 5,
+          "score": 0.5277777777777778,
+          "score_ci95": [
+            0.38888888888888884,
+            0.6944444444444444
+          ],
+          "prompts_llano": 3,
+          "prompts_other": 3,
+          "prompts_even": 0,
+          "p_sign": 1.0
+        }
+      },
+      "conversation": {
+        "by_turn": {
+          "1": {
+            "baseline": {
+              "n": 6,
+              "words": 344.5,
+              "output_tokens": 1391.5,
+              "visible_tokens": 1318.0,
+              "words_per_fact": 86.125,
+              "filler": 0.16666666666666666,
+              "answer_first": 0.8333333333333334,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.6784857693649616,
+              "inflesz": 70.1,
+              "thinking_share": 0.08048082427017744,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 320.5,
+              "output_tokens": 1110.5,
+              "visible_tokens": 984.0,
+              "words_per_fact": 80.125,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.4218643010395098,
+              "inflesz": 72.98333333333333,
+              "thinking_share": 0.1121566246774928,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "2": {
+            "baseline": {
+              "n": 6,
+              "words": 365.0,
+              "output_tokens": 1446.0,
+              "visible_tokens": 1195.0,
+              "words_per_fact": 91.25,
+              "filler": 0.16666666666666666,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 1.21981986384351,
+              "inflesz": 78.4,
+              "thinking_share": 0.19318987940411445,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 304.0,
+              "output_tokens": 1127.0,
+              "visible_tokens": 864.0,
+              "words_per_fact": 76.0,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.3578854363723841,
+              "inflesz": 80.35,
+              "thinking_share": 0.21925439222968146,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "3": {
+            "baseline": {
+              "n": 6,
+              "words": 201.5,
+              "output_tokens": 970.5,
+              "visible_tokens": 890.0,
+              "words_per_fact": 53.75,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9791666666666666,
+              "wrong": null,
+              "per100": 0.2066473894484759,
+              "inflesz": 77.33333333333334,
+              "thinking_share": 0.0767344078486335,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 147.0,
+              "output_tokens": 801.5,
+              "visible_tokens": 699.0,
+              "words_per_fact": 40.94642857142857,
+              "filler": 0,
+              "answer_first": 0.8333333333333334,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9375,
+              "wrong": null,
+              "per100": 0.22807575641475158,
+              "inflesz": 82.11666666666667,
+              "thinking_share": 0.1623803266378825,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          }
+        },
+        "self_sufficiency": {
+          "baseline": 0.9444444444444444,
+          "llano": 1.0
+        },
+        "wrong_per_conv": {
+          "baseline": 0.5,
+          "llano": 0
+        },
+        "pref_baseline": {
+          "llano": 6,
+          "tie": 0,
+          "other": 0,
+          "score": 1.0,
+          "score_ci95": [
+            1.0,
+            1.0
+          ],
+          "prompts_llano": 2,
+          "prompts_other": 0,
+          "prompts_even": 0,
+          "p_sign": 0.5
+        }
+      }
+    },
+    "sonnet": {
+      "single": {
+        "arms": {
+          "baseline": {
+            "n": 36,
+            "words": 292.5,
+            "output_tokens": 1163.0,
+            "visible_tokens": 1064.5,
+            "words_per_fact": 62.4,
+            "filler": 0.1388888888888889,
+            "answer_first": 0.75,
+            "self_sufficiency": 0.9629629629629629,
+            "self_sufficiency_valid": 0.9629629629629629,
+            "fidelity": 0.9527777777777778,
+            "wrong": 0.05555555555555555,
+            "per100": 1.076624322579962,
+            "inflesz": 72.78888888888889,
+            "thinking_share": 0.09591305827721183,
+            "input_tokens": 1585.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano": {
+            "n": 36,
+            "words": 231.5,
+            "output_tokens": 1220.0,
+            "visible_tokens": 748.5,
+            "words_per_fact": 47.599999999999994,
+            "filler": 0,
+            "answer_first": 0.8888888888888888,
+            "self_sufficiency": 0.9814814814814815,
+            "self_sufficiency_valid": 0.9814814814814815,
+            "fidelity": 0.9805555555555555,
+            "wrong": 0.027777777777777776,
+            "per100": 0.5443605934541432,
+            "inflesz": 77.73055555555555,
+            "thinking_share": 0.3836537380550871,
+            "input_tokens": 5172.0,
+            "diagram_rate": 0.1388888888888889,
+            "diagram_token_share": 0.0767075040113107,
+            "diagram_verdicts": {
+              "correct": 1,
+              "incorrect": 0,
+              "redundant": 4
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 256.5,
+            "output_tokens": 1141.5,
+            "visible_tokens": 897.5,
+            "words_per_fact": 51.3,
+            "filler": 0,
+            "answer_first": 0.8888888888888888,
+            "self_sufficiency": 0.9629629629629629,
+            "self_sufficiency_valid": 0.9629629629629629,
+            "fidelity": 0.9777777777777777,
+            "wrong": 0.1111111111111111,
+            "per100": 0.7853538839670808,
+            "inflesz": 80.46111111111111,
+            "thinking_share": 0.33605622233377447,
+            "input_tokens": 4817.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_baseline": {
+          "words": {
+            "prompts": 12,
+            "better": 12,
+            "worse": 0,
+            "equal": 0,
+            "p_sign": 0.00048828125,
+            "mean_diff": -67.77777777777779,
+            "ci95": [
+              -91.47222222222223,
+              -45.19444444444444
+            ]
+          },
+          "output_tokens": {
+            "prompts": 12,
+            "better": 3,
+            "worse": 9,
+            "equal": 0,
+            "p_sign": 0.14599609375,
+            "mean_diff": 92.88888888888886,
+            "ci95": [
+              -65.63888888888893,
+              233.16666666666669
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 12,
+            "better": 12,
+            "worse": 0,
+            "equal": 0,
+            "p_sign": 0.00048828125,
+            "mean_diff": -271.5,
+            "ci95": [
+              -388.86111111111114,
+              -182.25
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 12,
+            "better": 11,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.00634765625,
+            "mean_diff": -13.642438271604938,
+            "ci95": [
+              -18.729166666666668,
+              -8.539043209876544
+            ]
+          },
+          "filler": {
+            "prompts": 12,
+            "better": 5,
+            "worse": 0,
+            "equal": 7,
+            "p_sign": 0.0625,
+            "mean_diff": -0.1388888888888889,
+            "ci95": [
+              -0.2222222222222222,
+              -0.05555555555555555
+            ]
+          },
+          "answer_first": {
+            "prompts": 12,
+            "better": 3,
+            "worse": 1,
+            "equal": 8,
+            "p_sign": 0.625,
+            "mean_diff": 0.1388888888888889,
+            "ci95": [
+              -0.08333333333333336,
+              0.4166666666666667
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 1,
+            "equal": 9,
+            "p_sign": 1.0,
+            "mean_diff": 0.018518518518518517,
+            "ci95": [
+              -0.018518518518518528,
+              0.06481481481481481
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 1,
+            "equal": 9,
+            "p_sign": 1.0,
+            "mean_diff": 0.018518518518518517,
+            "ci95": [
+              -0.018518518518518528,
+              0.06481481481481481
+            ]
+          },
+          "fidelity": {
+            "prompts": 12,
+            "better": 2,
+            "worse": 1,
+            "equal": 9,
+            "p_sign": 1.0,
+            "mean_diff": 0.02777777777777778,
+            "ci95": [
+              -0.005555555555555554,
+              0.07500000000000001
+            ]
+          },
+          "wrong": {
+            "prompts": 12,
+            "better": 1,
+            "worse": 1,
+            "equal": 10,
+            "p_sign": 1.0,
+            "mean_diff": -0.027777777777777776,
+            "ci95": [
+              -0.16666666666666666,
+              0.08333333333333333
+            ]
+          },
+          "per100": {
+            "prompts": 12,
+            "better": 11,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.00634765625,
+            "mean_diff": -0.5322637291258189,
+            "ci95": [
+              -0.8069627778982026,
+              -0.17891872248163987
+            ]
+          },
+          "inflesz": {
+            "prompts": 12,
+            "better": 11,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.00634765625,
+            "mean_diff": 4.941666666666667,
+            "ci95": [
+              2.7888888888888874,
+              6.95
+            ]
+          }
+        },
+        "pref_baseline": {
+          "llano": 18,
+          "tie": 8,
+          "other": 10,
+          "score": 0.6111111111111112,
+          "score_ci95": [
+            0.4444444444444444,
+            0.7638888888888888
+          ],
+          "prompts_llano": 7,
+          "prompts_other": 3,
+          "prompts_even": 2,
+          "p_sign": 0.34375
+        }
+      },
+      "diagrams": {
+        "arms": {
+          "llano": {
+            "n": 18,
+            "words": 252.5,
+            "output_tokens": 1288.5,
+            "visible_tokens": 899.5,
+            "words_per_fact": 53.5,
+            "filler": 0,
+            "answer_first": 0.8888888888888888,
+            "self_sufficiency": 0.9814814814814815,
+            "self_sufficiency_valid": 0.9814814814814815,
+            "fidelity": 0.9777777777777777,
+            "wrong": 0,
+            "per100": 0.6498985795304774,
+            "inflesz": 79.75555555555556,
+            "thinking_share": 0.3637445289593337,
+            "input_tokens": 5171.0,
+            "diagram_rate": 0.2777777777777778,
+            "diagram_token_share": 0.0767075040113107,
+            "diagram_verdicts": {
+              "correct": 1,
+              "incorrect": 0,
+              "redundant": 4
+            },
+            "unverified_quotes": 0.0
+          },
+          "llano_nodiag": {
+            "n": 18,
+            "words": 256.5,
+            "output_tokens": 1141.5,
+            "visible_tokens": 897.5,
+            "words_per_fact": 51.3,
+            "filler": 0,
+            "answer_first": 0.8888888888888888,
+            "self_sufficiency": 0.9629629629629629,
+            "self_sufficiency_valid": 0.9629629629629629,
+            "fidelity": 0.9777777777777777,
+            "wrong": 0.1111111111111111,
+            "per100": 0.7853538839670808,
+            "inflesz": 80.46111111111111,
+            "thinking_share": 0.33605622233377447,
+            "input_tokens": 4817.0,
+            "diagram_rate": 0.0,
+            "diagram_token_share": null,
+            "diagram_verdicts": {
+              "correct": 0,
+              "incorrect": 0,
+              "redundant": 0
+            },
+            "unverified_quotes": 0.0
+          }
+        },
+        "vs_nodiag": {
+          "words": {
+            "prompts": 6,
+            "better": 5,
+            "worse": 1,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": -3.777777777777781,
+            "ci95": [
+              -15.555555555555552,
+              12.333333333333314
+            ]
+          },
+          "output_tokens": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": 90.00000000000001,
+            "ci95": [
+              26.722222222222268,
+              146.7777777777778
+            ]
+          },
+          "visible_tokens": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 3,
+            "equal": 1,
+            "p_sign": 1.0,
+            "mean_diff": 23.55555555555556,
+            "ci95": [
+              -15.111111111111086,
+              72.27777777777776
+            ]
+          },
+          "words_per_fact": {
+            "prompts": 6,
+            "better": 3,
+            "worse": 3,
+            "equal": 0,
+            "p_sign": 1.0,
+            "mean_diff": -1.0765432098765437,
+            "ci95": [
+              -4.72469135802469,
+              2.0049382716049373
+            ]
+          },
+          "filler": {
+            "prompts": 6,
+            "better": 0,
+            "worse": 0,
+            "equal": 6,
+            "p_sign": 1.0,
+            "mean_diff": 0,
+            "ci95": [
+              0,
+              0
+            ]
+          },
+          "answer_first": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 1,
+            "equal": 4,
+            "p_sign": 1.0,
+            "mean_diff": -9.25185853854297e-18,
+            "ci95": [
+              -0.16666666666666669,
+              0.16666666666666666
+            ]
+          },
+          "self_sufficiency": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 1,
+            "equal": 4,
+            "p_sign": 1.0,
+            "mean_diff": 0.018518518518518507,
+            "ci95": [
+              -0.05555555555555558,
+              0.1111111111111111
+            ]
+          },
+          "self_sufficiency_valid": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 1,
+            "equal": 4,
+            "p_sign": 1.0,
+            "mean_diff": 0.018518518518518507,
+            "ci95": [
+              -0.05555555555555558,
+              0.1111111111111111
+            ]
+          },
+          "fidelity": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 2,
+            "equal": 2,
+            "p_sign": 1.0,
+            "mean_diff": 0.0,
+            "ci95": [
+              -0.033333333333333326,
+              0.033333333333333326
+            ]
+          },
+          "wrong": {
+            "prompts": 6,
+            "better": 2,
+            "worse": 0,
+            "equal": 4,
+            "p_sign": 0.5,
+            "mean_diff": -0.1111111111111111,
+            "ci95": [
+              -0.2222222222222222,
+              0
+            ]
+          },
+          "per100": {
+            "prompts": 6,
+            "better": 4,
+            "worse": 1,
+            "equal": 1,
+            "p_sign": 0.375,
+            "mean_diff": -0.1354553044366035,
+            "ci95": [
+              -0.38272309638959057,
+              0.18743674335538124
+            ]
+          },
+          "inflesz": {
+            "prompts": 6,
+            "better": 1,
+            "worse": 5,
+            "equal": 0,
+            "p_sign": 0.21875,
+            "mean_diff": -0.7055555555555557,
+            "ci95": [
+              -1.3500000000000014,
+              -0.055555555555552395
+            ]
+          }
+        },
+        "pref_nodiag": {
+          "llano": 5,
+          "tie": 8,
+          "other": 5,
+          "score": 0.5,
+          "score_ci95": [
+            0.25,
+            0.6944444444444444
+          ],
+          "prompts_llano": 3,
+          "prompts_other": 2,
+          "prompts_even": 1,
+          "p_sign": 1.0
+        }
+      },
+      "conversation": {
+        "by_turn": {
+          "1": {
+            "baseline": {
+              "n": 6,
+              "words": 337.5,
+              "output_tokens": 1183.5,
+              "visible_tokens": 974.0,
+              "words_per_fact": 84.375,
+              "filler": 0.5,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.8222905310984512,
+              "inflesz": 66.4,
+              "thinking_share": 0.16876398210290827,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 297.0,
+              "output_tokens": 1148.0,
+              "visible_tokens": 784.5,
+              "words_per_fact": 74.25,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.3379074684044591,
+              "inflesz": 71.83333333333333,
+              "thinking_share": 0.3133613811112723,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "2": {
+            "baseline": {
+              "n": 6,
+              "words": 329.5,
+              "output_tokens": 990.5,
+              "visible_tokens": 871.5,
+              "words_per_fact": 82.375,
+              "filler": 0.16666666666666666,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 1.3687712164845425,
+              "inflesz": 75.31666666666666,
+              "thinking_share": 0.12178642056690837,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 291.0,
+              "output_tokens": 1075.0,
+              "visible_tokens": 748.0,
+              "words_per_fact": 72.75,
+              "filler": 0,
+              "answer_first": 1.0,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 1.0,
+              "wrong": null,
+              "per100": 0.6832447609249135,
+              "inflesz": 81.95,
+              "thinking_share": 0.33524875245728114,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          },
+          "3": {
+            "baseline": {
+              "n": 6,
+              "words": 224.5,
+              "output_tokens": 814.5,
+              "visible_tokens": 762.0,
+              "words_per_fact": 56.125,
+              "filler": 0.5,
+              "answer_first": 0.8333333333333334,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.9375,
+              "wrong": null,
+              "per100": 0.5925098907307876,
+              "inflesz": 73.88333333333333,
+              "thinking_share": 0.04288461538461538,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            },
+            "llano": {
+              "n": 6,
+              "words": 103.5,
+              "output_tokens": 976.0,
+              "visible_tokens": 699.5,
+              "words_per_fact": 33.04166666666667,
+              "filler": 0,
+              "answer_first": 0.6666666666666666,
+              "self_sufficiency": null,
+              "self_sufficiency_valid": null,
+              "fidelity": 0.875,
+              "wrong": null,
+              "per100": 0.05112474437627812,
+              "inflesz": 78.03333333333333,
+              "thinking_share": 0.24937833037300178,
+              "input_tokens": null,
+              "diagram_rate": 0.0,
+              "diagram_token_share": null,
+              "diagram_verdicts": {
+                "correct": 0,
+                "incorrect": 0,
+                "redundant": 0
+              },
+              "unverified_quotes": 0.0
+            }
+          }
+        },
+        "self_sufficiency": {
+          "baseline": 1.0,
+          "llano": 1.0
+        },
+        "wrong_per_conv": {
+          "baseline": 0.3333333333333333,
+          "llano": 0
+        },
+        "pref_baseline": {
+          "llano": 6,
+          "tie": 0,
+          "other": 0,
+          "score": 1.0,
+          "score_ci95": [
+            1.0,
+            1.0
+          ],
+          "prompts_llano": 2,
+          "prompts_other": 0,
+          "prompts_even": 0,
+          "p_sign": 0.5
+        }
+      }
+    }
+  },
+  "judge": "sonnet",
+  "reader": "haiku",
+  "floor": {
+    "known": 0,
+    "total": 42,
+    "by_prompt": {
+      "cmp-01": [
+        false,
+        false,
+        false
+      ],
+      "cmp-03": [
+        false,
+        false,
+        false
+      ],
+      "con-01": [
+        false,
+        false,
+        false
+      ],
+      "con-02": [
+        false,
+        false,
+        false
+      ],
+      "conv-01": [
+        false,
+        false,
+        false
+      ],
+      "conv-04": [
+        false,
+        false,
+        false
+      ],
+      "err-01": [
+        false,
+        false,
+        false
+      ],
+      "err-02": [
+        false,
+        false,
+        false
+      ],
+      "exp-01": [
+        false,
+        false,
+        false
+      ],
+      "exp-04": [
+        false,
+        false,
+        false
+      ],
+      "pro-02": [
+        false,
+        false,
+        false
+      ],
+      "pro-03": [
+        false,
+        false,
+        false
+      ],
+      "sum-01": [
+        false,
+        false,
+        false
+      ],
+      "sum-02": [
+        false,
+        false,
+        false
+      ]
+    }
+  }
+}

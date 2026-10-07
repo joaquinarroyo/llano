@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano_nodiag",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "**Polling** cuando el servidor no envía cambios a menudo. El navegador pregunta cada X segundos. Es simple de hacer pero consume ancho de banda si preguntas cada 100 ms a un servidor sin cambios. Úsalo si actualizas cada 30 segundos o más.\n\n**Server-Sent Events (SSE)** cuando solo el servidor envía datos al cliente. El navegador abre una conexión TCP y el servidor empuja eventos. Es más eficiente que polling, usa un port HTTP único y funciona a través de proxies. Los navegadores reconectan automáticamente si se cae. Úsalo para notificaciones, actualizaciones de estado o un chat donde el usuario solo recibe.\n\n**WebSocket** cuando necesitas comunicación bidireccional en tiempo real. Abre un canal duplex que el cliente y el servidor pueden usar al mismo tiempo. WebSocket es más complejo, requiere un servidor específico y algunos proxies lo bloquean, pero es el estándar para videojuegos, edición colaborativa y chats.\n\n| Patrón | Latencia | Eficiencia | Complejidad | Caso |\n|---|---|---|---|---|\n| Polling | Media-alta | Baja | Baja | Estado que cambia cada 30 s + |\n| SSE | Baja | Alta | Media | Servidor → cliente, eventos del servidor |\n| WebSocket | Muy baja | Alta | Alta | Cliente ↔ servidor en tiempo real |\n\nComienza con polling si es suficiente. Cambia a SSE si polling no es eficiente. Usa WebSocket solo si necesitas que el cliente envíe datos en tiempo real.",
+  "output_tokens": 597,
+  "thinking_tokens": 195,
+  "input_tokens": 5896,
+  "wall_s": 7.44,
+  "created_at": "2026-10-07T00:05:32.164878+00:00"
+}

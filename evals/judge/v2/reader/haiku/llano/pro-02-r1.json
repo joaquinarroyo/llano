@@ -1,0 +1,29 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "key": [
+    "D",
+    "B",
+    "B"
+  ],
+  "answers": [
+    "D",
+    "B",
+    "E"
+  ],
+  "correct": [
+    true,
+    true,
+    false
+  ],
+  "not_said": [
+    false,
+    false,
+    true
+  ],
+  "reader_model": "haiku"
+}

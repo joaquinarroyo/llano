@@ -1,0 +1,44 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "CAP tiene tres propiedades:",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "cuando una red se parte, un sistema distribuido no puede ser a la vez consistente y estar disponible",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "no puedes renunciar a P",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "El modelo PACELC (Daniel Abadi, 2012) lo completa: si hay partición, eliges entre A y C. Si no la hay (*else*), eliges entre latencia y consistencia.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Sigue siendo relevante, pero como punto de partida y no como guía completa de diseño.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

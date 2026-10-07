@@ -1,0 +1,29 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "key": [
+    "A",
+    "D",
+    "B"
+  ],
+  "answers": [
+    "A",
+    "D",
+    "B"
+  ],
+  "correct": [
+    true,
+    true,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

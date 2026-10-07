@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "## Idempotencia en APIs\n\n**Idempotencia** significa que ejecutar una operación múltiples veces produce el mismo resultado que ejecutarla una sola vez. La operación es \"segura\" de repetir.\n\n### Ejemplos:\n\n- **GET /user/123** - Idempotente. Consultarlo 100 veces devuelve los mismos datos.\n- **DELETE /user/123** - Idempotente. Borrarlo dos veces da el mismo resultado (usuario eliminado).\n- **PUT /user/123** - Idempotente. Actualizar con los mismos datos no cambia nada en la segunda llamada.\n- **POST /order** - **NO idempotente**. Enviarla dos veces crea dos órdenes diferentes.\n\n### Por qué importa:\n\n1. **Resiliencia a fallos**: Si la respuesta se pierde pero la solicitud se procesó, el cliente puede reintentar sin efectos secundarios duplicados.\n\n2. **Redes poco confiables**: En conexiones inestables, los reintentos automáticos no rompen el sistema.\n\n3. **Experiencia del usuario**: Clicks dobles accidentales o refresco de página no causan duplicados.\n\n4. **Confiabilidad**: Los sistemas pueden fallar parcialmente (timeout mientras se procesa). La idempotencia permite \"recuperarse automáticamente\".\n\n### Técnicas para APIs no-idempotentes:\n\n- Usar **claves de idempotencia**: El cliente envía un ID único; si llega dos veces con el mismo ID, se procesa una sola vez.\n- **Números de secuencia**: Rechazar operaciones fuera de orden.\n- **Transacciones atómicas**: Usar bases de datos para garantizar operaciones únicas.\n\nLa idempotencia es un principio clave en diseño de APIs moderno, especialmente con arquitecturas distribuidas.",
+  "output_tokens": 596,
+  "thinking_tokens": 128,
+  "input_tokens": 3396,
+  "wall_s": 6.36,
+  "created_at": "2026-10-07T00:05:31.586520+00:00"
+}

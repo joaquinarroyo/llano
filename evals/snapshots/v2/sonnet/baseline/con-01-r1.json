@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "# Idempotencia en una API\n\nUna operación es **idempotente** si ejecutarla una vez o varias veces con los mismos datos deja el sistema en el mismo estado final. La respuesta puede variar (por ejemplo, un `201` la primera vez y un `200` después), pero el efecto en el servidor es el mismo.\n\n## Ejemplos por método HTTP\n\n| Método | ¿Idempotente? | Motivo |\n|---|---|---|\n| `GET`, `HEAD`, `OPTIONS` | Sí | Solo leen |\n| `PUT` | Sí | Reemplaza el recurso por un estado concreto |\n| `DELETE` | Sí | Después de la primera llamada el recurso ya no existe |\n| `POST` | **No** | Normalmente crea un recurso nuevo en cada llamada |\n| `PATCH` | Depende | `{\"estado\": \"activo\"}` sí; `{\"saldo\": \"+10\"}` no |\n\n## Por qué importa\n\nLas redes fallan. Si un cliente envía una petición y se agota el tiempo de espera, **no sabe si el servidor la procesó o no**. Su única opción segura es reintentar, y sin idempotencia eso puede causar:\n\n- Cobros duplicados en un pago\n- Pedidos o correos repetidos\n- Saldos o inventarios inconsistentes\n\nCon idempotencia, los reintentos son seguros. Esto además facilita las colas de mensajes con entrega \"al menos una vez\", los reintentos automáticos de clientes y proxies, y los webhooks.\n\n## Cómo hacer idempotente un `POST`: claves de idempotencia\n\nEl patrón habitual (usado por Stripe, por ejemplo) es que el cliente envíe una clave única en una cabecera:\n\n```http\nPOST /pagos\nIdempotency-Key: 8f14e45f-ceea-4b7c-9d1a-2b6c1f0e9a34\nContent-Type: application/json\n\n{\"monto\": 100, \"moneda\": \"EUR\"}\n```\n\nEl servidor:\n\n1. Busca la clave en un almacén (base de datos o caché con TTL).\n2. Si **no existe**, procesa la petición y guarda la clave junto con la respuesta.\n3. Si **ya existe**, devuelve la respuesta guardada sin volver a ejecutar la operación.\n\n## Detalles a cuidar\n\n- **Atomicidad:** registrar la clave y ejecutar la operación debe ser atómico (restricción `UNIQUE` o transacción), o dos peticiones concurrentes con la misma clave podrían ejecutarse a la vez.\n- **Validar el cuerpo:** si llega la misma clave con un cuerpo distinto, lo correcto es rechazarla (por ejemplo, con `422` o `409`).\n- **Expiración:** las claves se conservan un tiempo limitado (p. ej., 24 horas).\n- **La clave la genera el cliente**, normalmente un UUID, y se reutiliza únicamente en los reintentos de la misma operación.\n\nEn resumen: la idempotencia convierte los reintentos, inevitables en sistemas distribuidos, en algo seguro en lugar de una fuente de datos duplicados.",
+  "output_tokens": 1126,
+  "thinking_tokens": 42,
+  "input_tokens": 1563,
+  "wall_s": 8.65,
+  "created_at": "2026-10-07T00:09:47.026126+00:00"
+}

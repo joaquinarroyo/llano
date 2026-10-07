@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el criterio de decisión con ejemplos concretos y una tabla comparativa por criterio (dirección, latencia, ancho, complejidad), mientras que B es más difuso, mezcla espacios con términos en inglés y su tabla solo mapea casos sin explicar por qué."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica cuándo usar cada opción con ejemplos concretos y una tabla comparativa clara (dirección, latencia, ancho de banda, complejidad, HTTP), y menciona consideraciones prácticas como proxies y reconexión; A es correcta pero menos precisa en los criterios de decisión y su tabla repite casos."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

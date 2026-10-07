@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa SSE si solo el servidor envía datos, WebSocket si cliente y servidor se envían mensajes con frecuencia, y polling si los cambios son poco frecuentes o necesitas la opción más simple.\n\n| | Polling | Server-Sent Events | WebSocket |\n|---|---|---|---|\n| Dirección | El cliente pregunta | Servidor → cliente | En ambas direcciones |\n| Protocolo | HTTP normal | HTTP (`text/event-stream`) | Protocolo propio sobre una conexión HTTP actualizada |\n| Latencia | Hasta el intervalo de consulta | Baja | Muy baja |\n| Datos | Cualquiera | Solo texto | Texto y binario |\n| Reconexión | No aplica | Automática en el navegador, con `Last-Event-ID` | La programas tú |\n| Infraestructura | Ninguna especial | Casi ninguna | Proxies y balanceadores deben soportarlo |\n\n## Cuándo usar cada uno\n\n**Polling.** Úsalo cuando los datos cambian poco, cuando un retraso de varios segundos es aceptable o cuando una API de terceros no ofrece otra opción. Su costo es que muchas consultas llegan vacías. Si quieres menos retraso sin cambiar de tecnología, usa long polling: el servidor mantiene la petición abierta hasta que hay un dato nuevo.\n\n**SSE.** Úsalo para notificaciones, feeds en vivo, barras de progreso de tareas largas y streaming de respuestas de un LLM. Es más simple que WebSocket porque es HTTP y el navegador reconecta solo. Tiene tres límites:\n- Solo va en una dirección. Si el cliente necesita enviar datos, usa una petición HTTP aparte.\n- `EventSource` no permite cabeceras personalizadas. Para autenticar, usa cookies o `fetch` con streaming.\n- Con HTTP/1.1 el navegador limita a unas 6 conexiones por dominio. HTTP/2 elimina ese problema.\n\n**WebSocket.** Úsalo cuando el cliente también envía mensajes con frecuencia y la latencia importa: chat, juegos multijugador, edición colaborativa, cotizaciones con órdenes. Su costo es operativo. Cada conexión mantiene estado en el servidor, así que escalar es más difícil. Además debes programar la reconexión, los latidos (heartbeats) y la reanudación del estado.\n\n## Cómo decidir\n\n1. ¿El cliente envía mensajes con frecuencia y necesita respuesta inmediata? Usa WebSocket.\n2. ¿Solo el servidor envía datos y quieres baja latencia? Usa SSE.\n3. ¿Los cambios son raros, o necesitas la opción más simple y fácil de depurar? Usa polling.",
+  "output_tokens": 1442,
+  "thinking_tokens": 459,
+  "input_tokens": 5164,
+  "wall_s": 11.26,
+  "created_at": "2026-10-07T00:11:25.682055+00:00"
+}

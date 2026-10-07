@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "**Un solo thread** ejecuta JavaScript",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las operaciones I/O (red, archivos) se delegan al sistema operativo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Las callbacks se ejecutan cuando terminen",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "si haces CPU pesada, bloquea todo",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Los timers no son operaciones de I/O; los maneja la fase de timers del event loop, no se delegan al sistema como I/O.",
+      "quote": "operación I/O — file, network, timer",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "redundant"
+}

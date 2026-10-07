@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "es una política de seguridad del navegador que bloquea peticiones de JavaScript",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "(el puerto cuenta)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "res.header('Access-Control-Allow-Origin', 'http://localhost:3000');",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma que el navegador intercepta y bloquea la petición antes de enviarla. En peticiones simples la petición sí llega al servidor y el navegador bloquea que JavaScript lea la respuesta.",
+      "quote": "el navegador intercepta la petición y la bloquea porque la API no dice",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

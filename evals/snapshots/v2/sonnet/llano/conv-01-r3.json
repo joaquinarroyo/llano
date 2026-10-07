@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza por confirmar que la causa son las dependencias, y después busca cuál. Es la ruta más corta porque no cambió nada más.\n\n1. **Confirma con un rollback.** Despliega en staging el lockfile anterior y mide el p95. Si vuelve a ~120 ms, la causa está en las dependencias. Si no vuelve, busca fuera del código: versión de Node en la imagen base, base de datos, red o aumento de tráfico.\n2. **Compara los lockfiles.** Ejecuta `git diff <commit-anterior> -- package-lock.json` (o el lockfile que uses). Mira también las dependencias transitivas, porque un paquete que no tocaste puede haber subido de versión dentro de otro.\n3. **Prioriza estos paquetes**, porque están en la ruta de cada request: el driver de base de datos o el ORM, el cliente HTTP, el framework (Express, Fastify), el logger y el middleware de parseo o validación.\n4. **Haz bisect por grupos.** Revierte la mitad de los paquetes actualizados, mide, y repite con la mitad que falle. Con 10 paquetes, 4 pruebas bastan.\n5. **Perfila para ver dónde se va el tiempo.** Ejecuta `node --cpu-prof` o `clinic doctor` bajo carga.\n   - Si el CPU está alto o el event loop se bloquea, el problema es código síncrono o serialización en una dependencia.\n   - Si el CPU está bajo, la API espera I/O. Revisa entonces el tamaño del pool de conexiones, el keep-alive del cliente HTTP y el DNS, porque una actualización puede cambiar esos valores por defecto.\n\n**Atención:** si la actualización incluyó un cambio de versión mayor de Node, revisa primero eso. Cambia el comportamiento por defecto del agente HTTP y del GC, y puede explicar por sí solo un salto así.\n\nSi me pasas el diff del lockfile o la lista de paquetes que cambiaron, te digo cuáles sospechar primero.",
+      "output_tokens": 1325,
+      "thinking_tokens": 617,
+      "input_tokens": 5198
+    },
+    {
+      "text": "La causa más probable es el ORM. Cada request pasa de 14 a 42 comandos hacia Postgres (14 queries más 14 `BEGIN` y 14 `COMMIT`), y eso agrega 28 viajes de red por request. Además, cada transacción retiene una conexión del pool, así que bajo carga los requests empiezan a esperar una conexión libre. Esa espera puede explicar por qué el p95 sube más que el promedio.\n\nPara confirmar y corregir:\n\n1. **Revierte solo el ORM** a la versión anterior y deja `pg` en 8.12. Si el p95 vuelve a ~120 ms, el ORM es la causa y `pg` queda descartado. Es poco probable que un cambio menor de 8.11 a 8.12 produzca este efecto.\n2. **Busca en el changelog del ORM** una opción para desactivar las transacciones implícitas por query. Si es un cambio de comportamiento por defecto, casi siempre hay una opción para volver al anterior. Si me dices qué ORM es y de qué versión a cuál subiste, te indico la opción exacta.\n3. **Mientras tanto, fija la versión anterior del ORM** en el `package.json` (sin `^` ni `~`) para que el próximo `npm install` no la vuelva a subir.\n4. **Si necesitas la versión nueva,** agrupa las 14 queries en una sola transacción explícita por request. Así pagas un `BEGIN` y un `COMMIT` en vez de 14 de cada uno. Cuando sea posible, reduce también el número de queries con joins o con carga anticipada de relaciones (eager loading).\n\nPara verificar el pool, compara en el APM el tiempo de espera de conexión antes y después. Si ahora es alto, `max` del pool está limitando. Subirlo alivia el síntoma, pero no arregla la causa, y puede sobrecargar Postgres.",
+      "output_tokens": 1055,
+      "thinking_tokens": 404,
+      "input_tokens": 6644
+    },
+    {
+      "text": "Reemplaza los valores entre `<>`, porque no tengo el nombre del ORM ni sus versiones.\n\n```markdown\n## fix: fijar `<orm>` en `<versión anterior>` para recuperar el p95\n\n### Problema\nDesde la última actualización de dependencias, el p95 de la API subió de 120 ms a 900 ms. No hubo cambios de código.\n\n### Causa\n`<orm>` `<versión nueva>` abre una transacción por cada query. Cada request hace 14 queries, así que envía 28 comandos extra a Postgres (14 `BEGIN` y 14 `COMMIT`). Cada transacción también retiene una conexión del pool, lo que aumenta la espera bajo carga.\n\n### Cambio\n- Fija `<orm>` en `<versión anterior>` en `package.json`, sin `^` ni `~`, para que `npm install` no lo suba otra vez.\n- `pg` se queda en 8.12. Revertir solo el ORM bastó para recuperar el p95, así que `pg` no influye.\n\n### Verificación\nCon el ORM revertido, el p95 volvió a 130 ms en el APM.\n\n### Pendiente\nAntes de subir el ORM de nuevo, desactivar las transacciones implícitas por query (si hay una opción) o agrupar las queries de cada request en una sola transacción. Seguimiento: `<enlace al issue>`.\n```\n\nSi tu equipo usa otro formato de PR, dime cuál y lo adapto.",
+      "output_tokens": 734,
+      "thinking_tokens": 227,
+      "input_tokens": 7773
+    }
+  ],
+  "created_at": "2026-10-07T00:13:41.963143+00:00"
+}

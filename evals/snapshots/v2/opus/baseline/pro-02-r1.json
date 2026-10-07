@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "arm": "baseline",
+  "run": 1,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "**Usa `git revert`, no `git reset`.** `revert` crea un commit nuevo que deshace los cambios, sin reescribir el historial. Así no rompes los clones de tus compañeros.\n\n### Pasos\n\n1. **Sincroniza tu main local**\n   ```bash\n   git checkout main\n   git pull origin main\n   ```\n\n2. **Identifica el commit**\n   ```bash\n   git log --oneline -n 20\n   git show <sha>   # confirma que es el correcto\n   ```\n\n3. **Revierte**\n   ```bash\n   git revert <sha>\n   ```\n   - Se abre el editor con el mensaje `Revert \"...\"`. Añade el motivo.\n   - **Si es un merge commit**, indica qué padre conservar (normalmente el 1, la rama main):\n     ```bash\n     git revert -m 1 <sha>\n     ```\n   - **Para varios commits**, revierte del más reciente al más antiguo, o en un único commit:\n     ```bash\n     git revert --no-commit <sha_viejo>^..<sha_nuevo>\n     git commit -m \"Revert: <motivo>\"\n     ```\n\n4. **Resuelve conflictos** si los hay (por commits posteriores que tocaron lo mismo):\n   ```bash\n   git status\n   # edita los archivos\n   git add <archivos>\n   git revert --continue\n   ```\n\n5. **Verifica antes de pushear.** Ejecuta los tests y la build, y revisa el diff:\n   ```bash\n   git show HEAD\n   ```\n\n6. **Publica.** Usa push normal, **nunca `--force`**:\n   ```bash\n   git push origin main\n   ```\n   Si main está protegida, haz el revert en una rama y abre un PR:\n   ```bash\n   git checkout -b revert-<sha>\n   git revert <sha>\n   git push -u origin revert-<sha>\n   ```\n\n7. **Avisa al equipo** de qué revertiste y por qué.\n\n### A tener en cuenta\n- **Revertir un merge y luego volver a mergear la rama:** Git considera esos commits ya integrados, así que no los vuelve a aplicar. Para reintroducirlos, revierte el revert (`git revert <sha_del_revert>`).\n- **Si el commit contenía secretos** (claves, tokens), el revert no los borra del historial. Rótalos de inmediato. Limpiar el historial requiere reescribirlo y coordinarlo con todo el equipo.\n\nSi me das el SHA o la salida de `git log`, te ayudo con el comando exacto. El directorio actual no es un repositorio git, así que no puedo verlo desde aquí.",
+  "output_tokens": 889,
+  "thinking_tokens": 0,
+  "input_tokens": 1585,
+  "wall_s": 9.55,
+  "created_at": "2026-10-07T00:15:28.596580+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Idempotencia en APIs\n\nUna operación es **idempotente** si ejecutarla una vez o varias veces con la misma petición produce **el mismo efecto en el servidor**. La respuesta puede variar (por ejemplo, un `DELETE` repetido puede devolver `404`), pero el estado final del sistema es el mismo.\n\n### Métodos HTTP\n\n| Método | ¿Idempotente? | Ejemplo |\n|---|---|---|\n| `GET`, `HEAD`, `OPTIONS` | Sí (además son *seguros*: no modifican estado) | Leer un usuario |\n| `PUT` | Sí | \"El usuario 42 tiene email X\": repetirlo deja lo mismo |\n| `DELETE` | Sí | Borrar el pedido 7: tras la primera vez, ya no existe |\n| `POST` | **No** (por defecto) | \"Crear un pedido\": repetirlo crea pedidos duplicados |\n| `PATCH` | Depende | `{\"saldo\": 100}` sí; `{\"saldo\": \"+10\"}` no |\n\n### Por qué importa\n\nEn sistemas distribuidos **la red falla**, y el cliente no siempre sabe si su petición llegó:\n\n1. El cliente envía \"cobrar 50 €\".\n2. El servidor cobra, pero la respuesta se pierde por un timeout.\n3. El cliente reintenta → **doble cobro**.\n\nCon idempotencia, los **reintentos son seguros**, lo que permite:\n- Reintentos automáticos en clientes, proxies, balanceadores y colas de mensajes.\n- Manejar entregas \"al menos una vez\" (*at-least-once*) sin duplicar efectos.\n- Simplificar la lógica de recuperación ante errores.\n\n### Cómo hacer idempotente un `POST`: claves de idempotencia\n\nEl patrón estándar (usado por Stripe, PayPal, AWS, etc.) es que el cliente genere un identificador único por operación:\n\n```http\nPOST /pagos\nIdempotency-Key: 3f9a1c2e-7b4d-4e8a-9c1f-2d5e6a7b8c9d\nContent-Type: application/json\n\n{\"importe\": 50, \"moneda\": \"EUR\"}\n```\n\nEn el servidor:\n\n1. Si la clave **no existe**: procesar, guardar `clave → resultado` y responder.\n2. Si la clave **ya existe** y terminó: devolver el resultado guardado sin volver a ejecutar.\n3. Si la clave existe pero **está en curso**: responder `409 Conflict` (o esperar).\n4. Si la misma clave llega con un **cuerpo distinto**: rechazar (`422`), es un error del cliente.\n\nDetalles importantes:\n- Guardar la clave y el efecto de forma **atómica** (misma transacción o una restricción `UNIQUE` en BD) para evitar condiciones de carrera.\n- Darle a las claves un **tiempo de expiración** (p. ej., 24 h).\n- El cliente debe reutilizar **la misma clave** en los reintentos, no generar una nueva.\n\n### Resumen\n\nLa idempotencia convierte \"¿se ejecutó o no?\" en una pregunta irrelevante: si dudas, reintentas. Es esencial en cualquier operación con efectos costosos o irreversibles, como pagos, envío de correos, creación de pedidos o reservas.",
+  "output_tokens": 1169,
+  "thinking_tokens": 18,
+  "input_tokens": 1558,
+  "wall_s": 12.26,
+  "created_at": "2026-10-07T00:23:59.977406+00:00"
+}

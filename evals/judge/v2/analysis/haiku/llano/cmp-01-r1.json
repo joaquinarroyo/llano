@@ -1,0 +1,50 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "necesitas transacciones ACID, integridad referencial y consistencia garantizada en datos estructurados",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Postgres es mejor para facturación",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "partial",
+      "quote": "MongoDB es más flexible",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "partial",
+      "quote": "integridad referencial",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Postgres no requiere definir el schema completo desde el inicio: se puede evolucionar con migraciones (ALTER TABLE) y usar JSONB para partes flexibles, así que el costo en agilidad es menor de lo que se afirma.",
+      "quote": "Postgres requiere schema definido desde el inicio (menos cambios ágiles)",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

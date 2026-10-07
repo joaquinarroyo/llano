@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "No pude ejecutar Python aquí (el shell falló con `spawn /bin/zsh ENOENT`), así que no verifiqué el cálculo exacto. La causa es la típica de coma flotante.\n\n## Por qué falla\n\nLos `float` de Python son binarios (IEEE 754). Un número como `0.1` no tiene representación exacta en base 2, igual que 1/3 no la tiene en base 10. Lo que se guarda es una aproximación muy cercana, y al operar con ella el error se arrastra. Por eso sale `89.99999999999999` en vez de `90.0`, y `==` compara bit a bit.\n\nUna curiosidad: con exactamente `100.0 * (1 - 0.1)` lo esperable es `90.0`. Si te sale `89.999…`, probablemente el cálculo real es algo distinto: el descuento viene de `10 / 100`, hay sumas previas o el orden de las operaciones cambia. Conviene mirar el código real, pero la solución es la misma.\n\n## Cómo arreglarlo\n\n**1. Si el código está bien y solo falla el test:** compara con tolerancia.\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert calcular_total(100.0, 0.1) == pytest.approx(90.0)\n```\n\n**2. Si son importes de dinero (lo recomendable en facturas):** usa `Decimal` en el código, no solo en el test.\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef calcular_total(price: Decimal, discount: Decimal) -> Decimal:\n    total = price * (Decimal(\"1\") - discount)\n    return total.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n```\n\n```python\ndef test_total_with_discount():\n    assert calcular_total(Decimal(\"100.00\"), Decimal(\"0.1\")) == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` desde strings (`Decimal(\"0.1\")`). Si haces `Decimal(0.1)`, heredas el error del float.\n\n**Alternativa:** trabajar en céntimos con `int` (`10000` en vez de `100.0`).\n\nPara una factura recomiendo la opción 2. Con dinero, `round(total, 2)` sobre floats también puede dar sorpresas en los redondeos de medio céntimo. Si me pasas el archivo del código y el del test, te hago el cambio.",
+  "output_tokens": 1302,
+  "thinking_tokens": 348,
+  "input_tokens": 1654,
+  "wall_s": 14.36,
+  "created_at": "2026-10-07T00:28:34.395927+00:00"
+}

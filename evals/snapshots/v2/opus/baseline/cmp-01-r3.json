@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "baseline",
+  "run": 3,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "**Postgres, sin dudas.** Para facturación es la opción clara:\n\n- **Transacciones ACID entre múltiples tablas**: emitir una factura toca cliente, líneas, impuestos, numeración correlativa y saldo. Necesitás que todo se aplique o nada. Mongo tiene transacciones multi-documento, pero son un agregado posterior y más caras; en Postgres es lo normal.\n- **Integridad referencial**: foreign keys, `CHECK`, `UNIQUE` (por ejemplo `(tenant_id, serie, numero)`) evitan datos inválidos a nivel base, no solo en la app. En facturación un dato inconsistente es un problema legal/fiscal.\n- **Dinero exacto**: `NUMERIC(…)` sin errores de punto flotante. En Mongo existe `Decimal128`, pero es fácil terminar con `double` por accidente.\n- **Numeración correlativa sin huecos**: se resuelve bien con locks de fila (`SELECT … FOR UPDATE`) sobre una tabla de secuencias por tenant/serie.\n- **Reportes**: libros de IVA, aging de cuentas por cobrar, conciliaciones… son JOINs y agregaciones, el terreno natural de SQL.\n- **Multi-tenant**: Row-Level Security te da aislamiento entre clientes a nivel base.\n- **Flexibilidad cuando la necesites**: `JSONB` cubre los casos semi-estructurados (metadata, payloads de la autoridad fiscal, campos custom por cliente) sin renunciar a lo anterior.\n\n**Cuándo consideraría Mongo**: si el núcleo del producto fuera mayormente documentos heterogéneos sin relaciones fuertes ni requisitos contables. No es el caso de un SaaS de facturación.\n\n**Recomendaciones prácticas para arrancar:**\n- Postgres administrado (RDS/Aurora, Cloud SQL, Neon, Supabase) para no operar backups ni réplicas.\n- `tenant_id` en todas las tablas desde el día uno + RLS.\n- Facturas emitidas inmutables: correcciones vía notas de crédito, nunca `UPDATE`.\n- Guardá montos como `NUMERIC(18,4)` o enteros en centavos, más la moneda en cada fila.\n\nSi querés, te armo un esquema inicial (tenants, clientes, productos, facturas, líneas, impuestos, numeración).",
+  "output_tokens": 852,
+  "thinking_tokens": 0,
+  "input_tokens": 1578,
+  "wall_s": 10.41,
+  "created_at": "2026-10-07T00:23:26.866191+00:00"
+}

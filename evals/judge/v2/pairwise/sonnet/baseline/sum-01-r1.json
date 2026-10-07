@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A entrega una descripción breve, lista para pegar en el PR y con toda la información relevante (qué cambia, archivos, versión de la dependencia), y aclara qué no pudo saber del middleware; B repite los commits y agrega suposiciones no respaldadas, como el 'posible robo de token' y 'ajustes menores' en el middleware."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega una descripción breve, lista para pegar en el PR, que cubre rotación, invalidación por reutilización, tests y actualización de dependencia, y aclara que no describe el cambio de middleware; A agrega secciones y una lista de commits redundante que hacen la lectura más pesada, además de afirmar detalles como el 'posible robo de token' que no están en los commits."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "Ambas contienen la misma información técnica, pero A resume la duración total (23 minutos) en una línea y es más concisa, mientras que B añade una justificación de la acción que no estaba en el incidente original y omite la duración explícita."
+    },
+    {
+      "winner": "tie",
+      "reason": "Ambas tienen la misma información y estructura; A añade una breve justificación del horario de las 03:00 y B explicita la duración de 23 minutos, y ninguna diferencia cambia de forma apreciable la comprensión."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B cubre el flujo completo con comandos concretos y ejecutables (autenticación, túnel SSH, formato directorio, alternativas, verificación, efectos secundarios en local), mientras que A deja vago el caso del servidor SSH (dice generar el dump allá pero no muestra cómo)."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A cubre backup, restauración, alternativas (SQL plano, tubería), túnel SSH, datos sensibles y verificación con comandos claros y bien organizados, mientras que B tiene un error (scp de un dump que nunca se generó en el servidor) y omite el túnel SSH."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

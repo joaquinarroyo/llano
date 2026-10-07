@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más directo y fácil de leer en una sola pasada: pasos numerados concretos, sin listas largas de sospechosos ni preguntas dispersas, y un PR limpio; B usa voseo mezclado con tuteo, inventa cifras (20-30 ms de latencia) y añade más contenido que dispersa la lectura."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es más conciso y directo en los tres turnos, explica por qué el p95 sube más que el promedio y entrega el PR en un bloque de código listo para copiar, sin perder información técnica relevante."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

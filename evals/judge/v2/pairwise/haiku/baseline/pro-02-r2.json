@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B cubre el flujo completo y seguro (actualizar main antes, manejar conflictos con `git revert --continue`, comparar revert vs reset y la opción `--no-commit`), mientras que A omite el pull previo y los conflictos, y además sugiere force-push como alternativa en una rama compartida."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da pasos seguros y completos (pull previo, manejo de conflictos con revert --continue, explicación de por qué no reset) y se centra en la opción segura, mientras que B omite actualizar main y los conflictos, y propone reset --hard + force push en una rama compartida."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

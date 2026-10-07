@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el concepto, la causa concreta, el preflight y la solución con un flujo claro y sin relleno, mientras que B es más largo, cubre más frameworks y consejos, pero dispersa la atención y tiene detalles imprecisos (p. ej. 'con ciertos casos')."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica de forma más directa y fácil de seguir en una sola lectura (tabla de orígenes, pasos numerados, diagrama del preflight) y cubre lo esencial (causa, preflight, solución, proxy, cookies), mientras que A es más extensa y añade ejemplos de Django/Flask y consejos que dispersan la lectura."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

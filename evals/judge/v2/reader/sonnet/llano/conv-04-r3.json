@@ -1,0 +1,29 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "key": [
+    "D",
+    "B",
+    "D"
+  ],
+  "answers": [
+    "D",
+    "B",
+    "D"
+  ],
+  "correct": [
+    true,
+    true,
+    true
+  ],
+  "not_said": [
+    false,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

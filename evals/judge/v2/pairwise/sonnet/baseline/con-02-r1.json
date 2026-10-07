@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A abre con la respuesta directa (elegir entre C y A durante una partición, y sigue siendo relevante pero limitado), usa una tabla clara de las tres propiedades, explica el error de 'elige 2 de 3' y cubre PACELC y las limitaciones sin redundancia; B es correcta pero más extensa y repite ideas (configurabilidad, latencia) y su afirmación sobre Spanner/CockroachDB añade matiz pero distrae."
+    },
+    {
+      "winner": "llano",
+      "reason": "B da la respuesta central en la primera frase, usa una tabla clara para las tres propiedades y cubre lo esencial (CP/AP, PACELC, limitaciones, ejemplos) con menos ruido, mientras que A es más largo y añade detalles secundarios sin mejorar la comprensión."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

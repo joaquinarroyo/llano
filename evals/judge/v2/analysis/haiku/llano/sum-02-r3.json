@@ -1,0 +1,50 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "A las 09:12, la latencia p95 del checkout subió de 300 ms a 4 s.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "un job de reindexado de Elasticsearch, programado por error en horario laboral, saturaba el cluster",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "A las 09:31 pausamos el job y la latencia volvió a la normalidad a las 09:35.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "212 usuarios abandonaron el checkout. No hubo pérdida de pedidos.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Movemos el job de reindexado a las 03:00. Agregamos una alerta de CPU del cluster",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Presenta como ya realizadas las acciones de mover el job a las 03:00 y agregar la alerta de CPU, cuando en el incidente figuran como pendientes.",
+      "quote": "Movemos el job de reindexado a las 03:00. Agregamos una alerta de CPU del cluster para evitar que se sature sin detectarlo.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

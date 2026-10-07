@@ -1,0 +1,20 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "conversation",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A entrega en el chat un plan corto, claro y directo, con fases, responsables y criterios de decisión fáciles de leer de una vez; B escribe un archivo con un plan largo (5 fases, tabla, emojis, métricas inventadas) que no se pidió así y obliga a abrirlo, y su respuesta de chat resume en vez de mostrar el plan."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega el plan completo en el chat, corto y directo, listo para presentar; A lo guarda en un archivo y solo resume, con fases solapadas y asignaciones de Dev A–F más difíciles de seguir."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

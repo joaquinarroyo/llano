@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "conversation",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "text": "Empieza comparando el lockfile de antes y de ahora, porque el cambio de dependencias es la única diferencia conocida. Con `npm install` y rangos con `^`, también cambian dependencias transitivas que no tocaste.\n\n1. **Haz un diff del lockfile.** Compara `package-lock.json` (o `yarn.lock`, `pnpm-lock.yaml`) entre el último deploy bueno y el actual: `git diff <commit-bueno> -- package-lock.json`. Busca saltos de versión mayor en el driver de base de datos, el cliente HTTP, el logger y el framework (Express, Fastify), porque estos pasan por cada solicitud.\n\n2. **Revisa la versión de Node.** Si el Dockerfile usa una etiqueta flotante como `node:20`, la imagen base pudo cambiar sin que lo notaras. Compara `node -v` en producción con el de antes.\n\n3. **Revierte el lockfile en staging.** Despliega el lockfile anterior con `npm ci` y mide el p95. Si baja a ~120 ms, la causa está en las dependencias. Esta prueba es la más rápida y descarta todo lo demás.\n\n4. **Si se recupera, busca por mitades.** Actualiza la mitad de los paquetes cambiados y mide. Repite con el grupo que reproduce la lentitud hasta quedarte con un solo paquete.\n\n5. **Si no se recupera, el problema está fuera del código.** Revisa la base de datos, los servicios externos y la infraestructura. Compara el tiempo de las llamadas salientes con el tiempo total de la solicitud para ver dónde se va el tiempo.\n\nPara ver qué hace el proceso mientras está lento, perfila con `node --cpu-prof` o con `clinic doctor`. Si el event loop está bloqueado, el perfil muestra qué función consume el CPU. Si el CPU está bajo y la latencia es alta, el proceso espera algo externo: un pool de conexiones más pequeño por un cambio de valores por defecto, o un cliente HTTP que ya no reutiliza conexiones (keep-alive).\n\nSi me dices qué paquetes cambiaron, o me indicas dónde está el proyecto, reviso el diff del lockfile y marco los candidatos.",
+      "output_tokens": 1301,
+      "thinking_tokens": 519,
+      "input_tokens": 5198
+    },
+    {
+      "text": "Es muy probable que el ORM sea la causa. Cada request pasa de 14 a 42 sentencias (14 queries más 14 `BEGIN` y 14 `COMMIT`), y cada una es un viaje de ida y vuelta a Postgres.\n\nVerifica que esto explique todo el aumento. El p95 subió unos 780 ms, así que 28 sentencias extra explican el aumento completo solo si cada una tarda cerca de 28 ms. Si tu base está en la misma región, cada viaje debería tardar mucho menos. En ese caso, probablemente también hay contención en el pool: cada transacción retiene la conexión más tiempo, y las requests esperan por una conexión libre. Mira en el APM el tiempo de espera del pool y la latencia de un `SELECT 1`.\n\n1. **Aísla el ORM.** Fija solo el ORM a su versión anterior en staging, deja `pg` en 8.12 y mide el p95. Si baja a ~120 ms, el ORM es el único culpable. Si no baja del todo, revierte también `pg` a 8.11.\n2. **Busca la opción en el changelog del ORM.** Muchos ORM permiten desactivar la transacción implícita por query, pero el nombre cambia según el ORM. Si me dices cuál es y su versión, te señalo la opción exacta.\n3. **Despliega el fix.** Lo más rápido es fijar la versión anterior del ORM en `package.json`, sin `^`, y volver a generar el lockfile. Así los próximos `npm install` no vuelven a subirla.\n4. **Después, agrupa las queries.** Si la lógica necesita transacción, usa una explícita por request. Eso deja 1 `BEGIN` y 1 `COMMIT` en lugar de 28 sentencias extra. Revisa también por qué un request hace 14 queries, porque puede haber un patrón N+1.\n\nPara confirmar el fix, compara en el APM el p95 y el número de sentencias por request: deberían volver a ~120 ms y 14.",
+      "output_tokens": 1259,
+      "thinking_tokens": 563,
+      "input_tokens": 6620
+    },
+    {
+      "text": "```markdown\nfix: fijar <ORM> en <versión anterior> para recuperar la latencia de la API\n\n## Problema\n\nDesde la actualización de dependencias del 2026-10-05, el p95 de la API pasó de 120 ms a 900 ms. No hubo cambios de código.\n\n## Causa\n\n`<ORM> <versión nueva>` abre una transacción por cada query. Cada request hace 14 queries, así que agrega 14 `BEGIN` y 14 `COMMIT`: 42 sentencias en lugar de 14. Los viajes extra a Postgres y la retención de la conexión durante cada transacción aumentan la latencia.\n\n## Cambio\n\n- Fija `<ORM>` en `<versión anterior>`, sin `^`, para que `npm install` no vuelva a subirlo.\n- Actualiza el lockfile.\n- `pg` se queda en 8.12.\n\n## Verificación\n\n- El p95 en staging volvió a 130 ms (antes del fix: 900 ms).\n\n## Pendiente\n\n- Revisar en el changelog de `<ORM>` la opción para desactivar la transacción implícita por query, y actualizar con esa opción.\n- Revisar por qué un request hace 14 queries (posible patrón N+1).\n- Usar una transacción explícita por request donde la lógica la necesite.\n```\n\nReemplaza `<ORM>`, `<versión nueva>` y `<versión anterior>` con los valores reales. Ajusta la fecha si el deploy fue otro día. Si el p95 de 130 ms lo mediste en producción y no en staging, cambia esa línea.",
+      "output_tokens": 917,
+      "thinking_tokens": 374,
+      "input_tokens": 7953
+    }
+  ],
+  "created_at": "2026-10-07T00:12:03.976059+00:00"
+}

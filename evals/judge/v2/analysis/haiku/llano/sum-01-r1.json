@@ -1,0 +1,50 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Rota los refresh tokens en cada uso",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Invalida el token anterior si detecta reutilización",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Agrega 96 líneas de tests nuevos para la detección de reutilización.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Actualiza `jsonwebtoken` de 9.0.0 a 9.0.2.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Afirma cobertura completa de la detección de reutilización, algo que el commit y el diff no demuestran (solo se sabe que hay 96 líneas de tests).",
+      "quote": "cobertura completa de la detección de reutilización",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

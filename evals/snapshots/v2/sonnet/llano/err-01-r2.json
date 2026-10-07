@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "La API v2.4.1 no logra conectarse a Postgres en `10.0.3.17:5432` y termina con código 1. Empezó a conectar a las 14:02:12Z y falló a las 14:02:42Z, justo cuando se cumplieron los 30000 ms del timeout del pool.\n\nEs un timeout de red, no un error de credenciales ni de DNS. El nombre `db.internal` sí se resolvió a `10.0.3.17`, pero esa dirección nunca respondió. Un problema de usuario o contraseña habría dado un error de autenticación, no `ETIMEDOUT`.\n\nQué revisar, en este orden:\n\n1. **Que la base esté levantada.** Confirma que la instancia de Postgres está corriendo y aceptando conexiones.\n2. **Que la IP sea la actual.** Verifica que `10.0.3.17` siga siendo la dirección de la base. Si la instancia se recreó, `db.internal` puede apuntar a una IP vieja.\n3. **El firewall o security group.** Revisa que permita el puerto 5432 desde la red de la API. Es la causa más común cuando no hay respuesta.\n4. **La ruta de red.** Confirma que la API y la base están en la misma VPC o que hay una ruta entre sus subredes.\n\nPara confirmarlo, prueba la conexión desde el mismo entorno donde corre la API (el contenedor o el servidor del deploy), no desde tu computadora:\n\n```\nnc -zv -w 5 db.internal 5432\n```\n\nSi también se queda sin respuesta, el problema es de red o de la base, y no del código de la API. Si conecta, revisa si el deploy cambió la variable de host o puerto de la base de datos.",
+  "output_tokens": 935,
+  "thinking_tokens": 352,
+  "input_tokens": 5343,
+  "wall_s": 7.63,
+  "created_at": "2026-10-07T00:10:44.211934+00:00"
+}

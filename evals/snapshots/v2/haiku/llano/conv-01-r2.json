@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Empieza por confirmar que fue la actualización: revierte las dependencias a la versión anterior y verifica si el p95 baja.\n\nSi baja, sabes que una dependencia nueva causó el problema. Luego:\n\n1. **Identifica cuál se actualizó.** Compara `package-lock.json` de antes y después. Los cambios en versiones principales (`X.0.0`) son los más sospechosos.\n\n2. **Revisa los logs del servidor.** Busca errores, timeouts o warnings nuevos. Si usas New Relic, DataDog o similar, mira qué operación se volvió lenta.\n\n3. **Perfila la CPU.** Si tienes acceso al servidor, captura un heap snapshot o usa `clinic.js` para ver dónde se gasta el tiempo. Sube cuando la API esté lenta.\n\n4. **Comprueba memoria y garbage collection.** Una dependencia con memory leak causa ralentización gradual. Mira `--expose-gc` si sospechas GC forzado.\n\n5. **Reactualiza una por una.** Si fueron varias, revierte todas, después actualiza cada dependencia de forma aislada. Así aislas la culpable.\n\nSi la actualización vino de una dependencia transitiva (algo que usa tu dependencia), necesitarás `npm update --depth=3` o bloquear la versión en `package.json` hasta que haya un fix.\n\n¿Ves errores en los logs o qué dependencia cambió?",
+      "output_tokens": 737,
+      "thinking_tokens": 356,
+      "input_tokens": 6198
+    },
+    {
+      "text": "Encontraste la causa: pg 8.12 cambió el comportamiento del ORM, que ahora envuelve cada query en BEGIN/COMMIT. Con 14 queries por request, son 28 roundtrips de red extra.\n\n**Solución rápida:** revierte pg a 8.11 ahora. Eso te deja operativo mientras investigas la configuración.\n\n**Arreglo permanente:** depende de tu ORM. Mira las opciones:\n\n- **Sequelize / TypeORM / Prisma:** busca un flag como `transaction: false` o `autoTransaction: false` en la configuración. Algunos permiten desactivarlo globalmente.\n- **Knex:** agrupa tus queries en una transacción manual en lugar de dejar que cada una sea una.\n- **Postgres.js o pg nativo:** verifica si el cliente está en modo autocommit o si el ORM está llamando a BEGIN/COMMIT implícitamente.\n\n**Mejor aún:** agrupa esas 14 queries en una o dos transacciones explícitas. Eso reduce latencia y mejora la consistencia. Si todas son lecturas, no necesitan transacción.\n\n¿Qué ORM usas? Con eso te digo la config exacta.",
+      "output_tokens": 557,
+      "thinking_tokens": 246,
+      "input_tokens": 7043
+    },
+    {
+      "text": "```\nRevert: pin ORM version to fix transactional regression\n\npg 8.12 introduced a behavior change that caused the ORM to wrap every query \nin an implicit BEGIN/COMMIT. With 14 queries per request, this added 28 \nnetwork roundtrips and degraded p95 latency from 120 ms to 900 ms.\n\nReverting the ORM to the previous version restores p95 to 130 ms.\n\nAlternatives to investigate:\n- ORM configuration flag to disable autocommit per query\n- Explicit transaction grouping for related queries\n```\n\nO en español si lo prefieres:\n\n```\nRevert: fijar versión anterior del ORM para corregir regresión de transacciones\n\npg 8.12 cambió el comportamiento: el ORM ahora envuelve cada query en \nBEGIN/COMMIT implícito. Con 14 queries por request, eso sumó 28 roundtrips \nde red y degradó el p95 de 120 ms a 900 ms.\n\nRevertir el ORM a la versión anterior restaura el p95 a 130 ms.\n\nAlternativas para investigar:\n- Flag de configuración del ORM para desactivar transacciones por query\n- Agrupar queries relacionadas en transacciones explícitas\n```\n\nReemplaza \"ORM\" por el nombre exacto si quieres que sea más específico.",
+      "output_tokens": 840,
+      "thinking_tokens": 495,
+      "input_tokens": 7677
+    }
+  ],
+  "created_at": "2026-10-07T00:07:20.864517+00:00"
+}

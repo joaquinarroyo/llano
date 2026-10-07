@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "sonnet",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "Ambas incluyen toda la información técnica, pero A abre con un resumen de causa y duración en dos líneas y mantiene un formato limpio, mientras que B agrega emoji y checkboxes que no aportan y deja la causa menos explícita en el impacto."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A separa claramente estado, causa, cronología, impacto y acciones con checkboxes, y conserva todos los datos técnicos, así que se escanea más rápido en un canal de equipo; B es correcta pero más densa en el primer párrafo."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

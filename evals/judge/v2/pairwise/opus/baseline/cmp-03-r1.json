@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A abre con un criterio de decisión claro, lo resume en una tabla comparativa y una regla rápida, y cubre lo esencial (reconexión, escalado, límite de conexiones HTTP/1.1, long polling) en menos texto; B es más largo y detallado, pero repite información y exige más lectura."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A lleva al lector de lo más simple a lo más complejo, con pros y contras por opción, una tabla corta y una guía de decisión clara; incluye además detalles útiles que B omite (EventSource sin cabeceras Authorization, buffering de proxies, backpressure), mientras que B es más largo y repite información entre tabla y texto."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

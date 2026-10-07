@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Una operación es idempotente cuando ejecutarla una vez o varias veces deja al servidor en el mismo estado. Importa porque las redes fallan y los clientes reintentan: si la operación no es idempotente, un reintento puede duplicar el efecto, por ejemplo cobrar dos veces.\n\n## El problema que resuelve\n\nUn cliente envía un pago y la conexión se corta antes de que llegue la respuesta. El cliente no sabe si el servidor procesó la solicitud. Si reintenta y la operación no es idempotente, el pago puede quedar duplicado. Si no reintenta, el pago puede perderse. La idempotencia permite reintentar sin riesgo.\n\n## Métodos HTTP\n\n| Método | ¿Idempotente? | Por qué |\n|---|---|---|\n| `GET`, `HEAD`, `OPTIONS` | Sí | Solo leen. |\n| `PUT` | Sí | Reemplaza el recurso con el mismo contenido cada vez. |\n| `DELETE` | Sí | Después del primer borrado, el recurso ya no existe. |\n| `POST` | No | Cada llamada suele crear un recurso nuevo. |\n| `PATCH` | Depende | `{\"estado\": \"pagado\"}` es idempotente. `{\"saldo\": \"+10\"}` no lo es. |\n\nLa idempotencia se refiere al estado del servidor, no a la respuesta. Un segundo `DELETE` puede devolver `404`, pero el estado final es el mismo.\n\n## Cómo hacer idempotente un `POST`\n\nUsa una clave de idempotencia:\n\n1. El cliente genera un identificador único, como un UUID, y lo envía en un header: `Idempotency-Key: 7c9e...`.\n2. El servidor guarda la clave junto con el resultado de la primera ejecución.\n3. Si llega la misma clave otra vez, el servidor devuelve el resultado guardado y no repite la operación.\n\nAtención: el servidor debe guardar la clave y ejecutar la operación de forma atómica. Si no, dos reintentos simultáneos pueden pasar la verificación a la vez y duplicar el efecto. También conviene rechazar una clave reutilizada con un cuerpo distinto, porque eso indica un error del cliente.\n\nStripe y otras APIs de pagos usan este patrón.",
+  "output_tokens": 1090,
+  "thinking_tokens": 293,
+  "input_tokens": 5150,
+  "wall_s": 8.58,
+  "created_at": "2026-10-07T00:09:50.178402+00:00"
+}

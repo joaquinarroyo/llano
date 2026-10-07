@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "## Qué está pasando\n\nLa app **no llega a abrir una conexión TCP** con Postgres. No es un problema de credenciales ni de la base de datos en sí:\n\n- `db.internal` **sí resolvió** a `10.0.3.17`, así que el DNS funciona.\n- `ETIMEDOUT` significa que los paquetes no recibieron **ninguna respuesta**, ni siquiera un rechazo. Si Postgres estuviera caído pero el host fuera alcanzable, verías `ECONNREFUSED`. Si fueran credenciales, verías `password authentication failed`.\n- El pool reintentó durante 30 s y la app terminó con código 1.\n\nUn timeout casi siempre indica que **algo en la red está descartando el tráfico** o que **el host no existe o está apagado**.\n\n## Qué revisar, en orden\n\n**1. Probar la conectividad desde donde corre la app** (el pod, contenedor o instancia, no desde tu máquina):\n```bash\nnc -vz -w 5 10.0.3.17 5432\n# o, si no hay nc:\ntimeout 5 bash -c '</dev/tcp/10.0.3.17/5432' && echo OK\n```\n- Si da timeout, el problema es de red. Sigue con el punto 2.\n- Si conecta, el problema es intermitente o de tiempos de arranque. Mira el punto 5.\n\n**2. Firewall / Security Groups / NetworkPolicy.** Es la causa más común.\n- El SG o firewall de la DB debe permitir entrada al **5432 desde la subred o SG de la app**.\n- En Kubernetes, revisa si hay una `NetworkPolicy` de egress que bloquee la salida.\n- Pregunta clave: **¿cambió algo en este deploy?** Por ejemplo, nueva subred, nuevo nodo pool, nuevo SG, o la app ahora corre en otra zona o cuenta.\n\n**3. ¿`10.0.3.17` sigue siendo la IP correcta?**\n- Si la DB se recreó, se hizo failover o se migró, la IP pudo cambiar y `db.internal` puede tener un registro viejo o cacheado.\n- Compara con la IP o endpoint actual en la consola del proveedor (RDS, Cloud SQL, etc.).\n\n**4. Ruteo entre redes.** Si la app y la DB están en VPCs o VNets distintas, revisa el peering, las route tables y los NACLs. Recuerda que los NACLs no tienen estado y necesitan reglas también para el tráfico de retorno, en puertos efímeros.\n\n**5. Estado de la DB.** Confirma que la instancia esté *running/available* y escuchando en 5432 (`listen_addresses`). Si solo escucha en `localhost`, normalmente verías `ECONNREFUSED`, no timeout, pero conviene descartarlo.\n\n## Lo que más te va a ayudar\n\nSi me dices:\n- dónde corre la app (Kubernetes, ECS, VM…) y dónde está la DB (RDS, autogestionada…),\n- si el deploy anterior funcionaba y qué cambió,\n- y el resultado del `nc` del punto 1,\n\nte puedo decir con bastante precisión cuál es el problema.",
+  "output_tokens": 1199,
+  "thinking_tokens": 92,
+  "input_tokens": 1751,
+  "wall_s": 13.55,
+  "created_at": "2026-10-07T00:18:04.158937+00:00"
+}

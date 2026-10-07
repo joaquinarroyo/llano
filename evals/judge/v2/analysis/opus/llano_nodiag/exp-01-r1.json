@@ -1,0 +1,44 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js ejecuta todo tu código JavaScript en un solo hilo.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Node le pasa la espera al sistema operativo y sigue con otra tarea.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "El event loop es el ciclo que saca callbacks de las colas y los ejecuta, uno por uno.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "Hay dos colas más que se vacían después de cada callback, antes de seguir:",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Si un callback tarda, todo lo demás espera: peticiones HTTP, timers y otros callbacks.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

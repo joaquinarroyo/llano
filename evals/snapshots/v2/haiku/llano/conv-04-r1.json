@@ -1,0 +1,30 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "conversation",
+  "model": "claude-haiku-4-5-20251001",
+  "turns": [
+    {
+      "text": "Probablemente no, a menos que el monolito sea el cuello de botella real.\n\nCon 6 desarrolladores, cada microservicio necesita CI/CD, logging distribuido, deploys independientes y un equipo que lo entienda. Ese overhead operacional consume velocidad. Microservicios te dan autonomía de equipos, pero pierde valor si todos ellos son pequeños o si necesitas cambios coordenados frecuentes.\n\nRecomendación: primero identifica qué duele. Si es el tiempo de build, los deploys acoplados o equipos bloqueados entre sí, quizás módulos bien separados en Rails resuelven lo mismo sin la complejidad. Si es escala en producción (una base de datos lenta, un componente que falla y tira todo), eso sí es caso para dividir.",
+      "output_tokens": 484,
+      "thinking_tokens": 279,
+      "input_tokens": 6185
+    },
+    {
+      "text": "Eso no requiere microservicios. El problema es arquitectura dentro del monolito, no el monolito en sí.\n\nLos 40 minutos salen de tests lentos, assets o migraciones. El cambio en facturación que rompió login significa que el código está acoplado: probablemente comparten modelos o hay una dependencia oculta. Microservicios no solucionan eso, solo lo hacen más costoso de debuggear.\n\nHaz esto primero, en orden:\n\n1. **Acelera los deploys.** Divide los tests: unit rápidos primero, integración en paralelo. Cachea assets y dependencias. Apunta a 10 minutos.\n2. **Desacopla facturación y login.** Extrae login a un módulo aislado: su propia base de datos, sus propios tests, sin tocar el resto del código. Lo haces sin microservicios.\n3. **Mide la ganancia.** Si ahora los equipos son independientes, los tests pasan solos y los deploys no rompen cosas, ganaste lo que microservicios promete.\n\nRevisa en 3 semanas. Si el monolito sigue siendo cuello de botella *después* de esto, microservicios tiene sentido.",
+      "output_tokens": 480,
+      "thinking_tokens": 158,
+      "input_tokens": 6742
+    },
+    {
+      "text": "# Plan de Optimización del Monolito Rails\n\n## Objetivo\nReducir deploys de 40 minutos a ~10 minutos y desacoplar módulos críticos sin microservicios.\n\n## Fase 1: Acelerar Tests (Semana 1-2)\n1. Perfila los tests: cuál tarda más, dónde está el bottleneck.\n2. Divide ejecución: unit tests en paralelo, tests de integración como segundo paso.\n3. Cachea dependencias y assets en CI/CD.\n4. Apunta a <15 minutos de test.\n\n**Responsable:** 1-2 devs.\n\n## Fase 2: Desacoplar Login (Semana 3-4)\n1. Extrae el modelo `User` y su lógica de autenticación a un módulo independiente.\n2. Login obtiene su propia tabla (o schema), sin tocar facturación.\n3. Facturación llama a login por API interna, no comparte código.\n4. Tests del módulo corren solos, sin ejecutar facturación.\n\n**Responsable:** 2 devs. El resto sigue con features normales.\n\n## Fase 3: Medir y Decidir (Semana 5)\n- ¿Deploys en ~10 minutos?\n- ¿Teams independientes pueden pushear sin bloqueos?\n- ¿Cambios en facturación no rompen login?\n\nSi sí a los 3: ganaste. Repite con otros módulos si hace falta.  \nSi no: entonces microservicios tiene sentido; pero ahora sabes qué necesitas.\n\n**Total:** 4 semanas, 6 personas trabajando en features + 2 en la optimización.",
+      "output_tokens": 576,
+      "thinking_tokens": 135,
+      "input_tokens": 7276
+    }
+  ],
+  "created_at": "2026-10-07T00:06:01.918631+00:00"
+}

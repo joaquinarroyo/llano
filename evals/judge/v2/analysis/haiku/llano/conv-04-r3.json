@@ -1,0 +1,108 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Con 6 personas, ese costo sobrepasa el beneficio.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "¿Qué problema del monolito estás tratando de resolver?",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "modularizar el monolito, mejorar los tests, o separar un servicio crítico si es necesario",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "necesitas invertir tiempo en observabilidad y deployment",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Esto se arregla con paralelización, caché de dependencias, o running tests solo en las rutas afectadas.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Rails permite hacer esto sin microservicios",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Escribe tests de integración que verifiquen que cambios en facturación no rompen auth.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Microservicios no los arreglan, solo los disimulan.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "**Resultado esperado:** Deploys en 15-20 minutos.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Aísla facturación en un módulo separado.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Crea un test de integración: \"cambios en facturación no deben afectar login\".",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Si aún tienen problemas de escala o necesitan deploys independientes, microservicios tienen sentido.",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El término correcto en DDD es 'bounded context', no 'bounded domain'.",
+      "quote": "bounded domain en DDD",
+      "verified": true
+    }
+  ]
+}

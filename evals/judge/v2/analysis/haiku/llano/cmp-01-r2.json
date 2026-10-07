@@ -1,0 +1,50 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "La facturación necesita transacciones ACID y integridad referencial (clientes, facturas, pagos)",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Postgres. La facturación necesita transacciones ACID",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "MongoDB es mejor si trabajas con documentos sin estructura clara",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "integridad referencial (clientes, facturas, pagos)",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "MongoDB no garantiza transacciones ACID ni integridad: desde la versión 4.0 soporta transacciones ACID multidocumento.",
+      "quote": "que MongoDB no te garantiza",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica origen, bloqueo en el navegador, preflight, solución por framework, proxy con ejemplo de Vite y errores comunes (OPTIONS con 401, 500 que parece CORS) de forma compacta y accionable, mientras que A es correcta pero omite esos errores frecuentes."
+    },
+    {
+      "winner": "llano",
+      "reason": "B responde primero la causa directa, explica por qué existe CORS (con el ejemplo del banco), muestra el flujo del preflight en un diagrama y cubre las advertencias clave (credenciales con '*', producción) con un hilo narrativo más fácil de seguir en una sola lectura, mientras que A es correcta pero más densa y fragmentada."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

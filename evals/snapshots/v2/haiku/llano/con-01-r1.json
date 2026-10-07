@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación idempotente en una API devuelve el mismo resultado aunque la ejecutes una sola vez o cien veces.\n\nUna solicitud idempotente es segura de reintentar. Si la red falla, el cliente reintenta sin miedo a duplicar datos, crear dinero extra, o enviar dos correos. El servidor puede recibir la misma solicitud dos veces y hacer exactamente lo mismo las dos veces.\n\n**Por qué importa:**\n\nLas redes fallan. Un timeout no significa que el servidor no recibió tu solicitud: pudo procesarla pero no enviar la respuesta. Sin idempotencia, reintentar te cuesta dinero duplicado o registros rotos.\n\n**Métodos HTTP idempotentes:**\n\n- `GET`: leer no cambia nada\n- `PUT`: reemplazar con el mismo valor es seguro\n- `DELETE`: borrar una segunda vez devuelve 404, igual resultado\n- `POST`: **no es idempotente.** Crear dos veces = dos recursos\n\n**Cómo hacerlo idempotente:**\n\nUsa una clave única del cliente. El servidor la guarda: si ve la misma clave dos veces, devuelve el resultado anterior en lugar de ejecutar de nuevo.\n\n```\nPOST /transferencias\n{\n  \"idempotency_key\": \"cli-8f4d2c1b\",\n  \"monto\": 100,\n  \"destino\": \"cuenta-202\"\n}\n```\n\nLa primera solicitud crea la transferencia. La segunda, con la misma clave, devuelve la transferencia anterior. Sin crear el dinero dos veces.",
+  "output_tokens": 668,
+  "thinking_tokens": 270,
+  "input_tokens": 6166,
+  "wall_s": 7.96,
+  "created_at": "2026-10-07T00:05:33.653214+00:00"
+}

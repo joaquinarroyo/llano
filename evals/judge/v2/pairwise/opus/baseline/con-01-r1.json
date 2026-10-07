@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A explica el concepto, el motivo y los métodos HTTP con un flujo lineal y conciso, e incluye los puntos técnicos clave (clave de idempotencia, atomicidad, concurrencia, idempotencia respecto al estado y no a la respuesta) sin la carga extra de B, que añade técnicas secundarias y repite ideas."
+    },
+    {
+      "winner": "llano",
+      "reason": "B explica con claridad qué es la idempotencia, por qué importa, los métodos HTTP y la clave de idempotencia (con atomicidad y concurrencia) de forma más concisa y fácil de leer en una pasada, mientras que A es más completa pero mucho más larga y densa, con material extra (otras técnicas, expiración, códigos de error) que no hace falta para entender lo esencial."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

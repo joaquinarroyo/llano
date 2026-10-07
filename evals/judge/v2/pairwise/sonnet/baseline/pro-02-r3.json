@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B es más fácil de seguir en una lectura: pasos con verificación (git show), casos especiales claramente separados, cómo abortar, --no-commit y la excepción de secretos filtrados, mientras que A es correcta pero omite esos detalles útiles."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A presenta pasos numerados con verificación, casos especiales (merge, varios commits, conflictos, rama protegida), advertencia sobre secretos y cierra ofreciendo ayuda concreta; B es correcto y conciso pero omite el caso de secretos y la verificación del diff, y aporta menos estructura visual."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "El teorema CAP dice que, cuando falla la red entre nodos de un sistema distribuido, el sistema tiene que elegir entre consistencia y disponibilidad. No puede dar las dos a la vez. Sigue siendo relevante, pero como una regla de diseño limitada, no como una clasificación completa de las bases de datos.\n\n## Las tres propiedades\n\n| Letra | Propiedad | Significado exacto |\n|---|---|---|\n| C | Consistencia | Cada lectura ve la escritura más reciente, como si hubiera una sola copia de los datos (linealizabilidad). |\n| A | Disponibilidad | Todo nodo que funciona responde a cada solicitud, sin error ni timeout. |\n| P | Tolerancia a particiones | El sistema sigue funcionando cuando la red pierde o retrasa mensajes entre nodos. |\n\nEric Brewer propuso la idea en 2000. Seth Gilbert y Nancy Lynch la demostraron en 2002.\n\n## Por qué no se eligen dos de tres\n\nLa explicación popular, \"elige 2 de 3\", confunde. En una red real las particiones ocurren, así que no puedes renunciar a P. La elección real aparece solo durante una partición:\n\n- **CP:** el sistema rechaza o retrasa solicitudes en el lado que no puede confirmar el dato más reciente. Mantiene la consistencia y pierde disponibilidad. Ejemplos: etcd, ZooKeeper.\n- **AP:** cada lado sigue respondiendo con los datos que tiene. Mantiene la disponibilidad y acepta datos distintos entre nodos, que se reconcilian después. Ejemplos: Cassandra y DynamoDB, según su configuración.\n\nSin partición, un sistema puede ser consistente y disponible a la vez.\n\n## Qué sigue vigente y qué no\n\n**Vigente:** CAP obliga a decidir qué hace tu sistema cuando la red falla. Por ejemplo, un carrito de compras suele preferir aceptar la escritura (AP). Un sistema de saldos bancarios suele preferir rechazarla (CP).\n\n**Limitado**, por tres razones:\n\n1. Las definiciones son estrictas. \"Consistencia\" significa linealizabilidad, y muchos sistemas ofrecen niveles intermedios que CAP no describe.\n2. Ignora la latencia. En producción, un sistema lento se comporta casi como uno no disponible.\n3. Describe solo el momento de la partición, que es raro. La mayor parte del tiempo la red funciona.\n\nPor eso se usa también **PACELC** (Daniel Abadi, 2012). Dice que, si hay partición (P), eliges entre disponibilidad (A) y consistencia (C). Si no la hay (E, \"else\"), eliges entre latencia (L) y consistencia (C). Ese segundo caso es la decisión del día a día.\n\nMuchas bases de datos modernas tampoco son CP o AP de forma fija. Cassandra y DynamoDB permiten elegir el nivel de consistencia por consulta.",
+  "output_tokens": 1402,
+  "thinking_tokens": 347,
+  "input_tokens": 5156,
+  "wall_s": 11.23,
+  "created_at": "2026-10-07T00:09:58.039737+00:00"
+}

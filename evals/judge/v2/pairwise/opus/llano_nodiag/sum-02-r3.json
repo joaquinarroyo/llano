@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-02",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "single",
+  "other": "llano_nodiag",
+  "orders": [
+    {
+      "winner": "tie",
+      "reason": "Ambas contienen la misma información técnica (cronología, causa, impacto, acciones) con estructura casi idéntica y claridad equivalente; la tabla de B y las listas de A se leen igual de fácil."
+    },
+    {
+      "winner": "tie",
+      "reason": "Ambas contienen la misma información técnica completa con estructura casi idéntica (resumen, cronología, impacto, acciones); A usa tabla y B lista, y B condensa causa e impacto en el primer párrafo, pero ninguna es claramente más fácil de entender en una sola lectura."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

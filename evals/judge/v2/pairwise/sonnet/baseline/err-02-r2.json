@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "sonnet",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "Las dos explican bien la causa y dan las mismas tres soluciones, pero B es más fácil de seguir: separa «por qué falla» de «cómo arreglarlo», incluye el assert con Decimal, evita el ejemplo de enteros poco claro de A (`10000 * 90 // 100`) y ofrece revisar la función de `invoice` para localizar el error."
+    },
+    {
+      "winner": "llano",
+      "reason": "Ambas explican bien la causa y dan las mismas tres soluciones, pero B añade un paso concreto para diagnosticar el origen real del error (`print(repr(...))`) y justifica la recomendación de `Decimal` para facturas, mientras que A solo ofrece revisar el código."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

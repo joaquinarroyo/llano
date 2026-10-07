@@ -1,0 +1,15 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "Usa `pg_dump` en formato custom (`-Fc`) para el backup y `pg_restore` para restaurarlo. Este formato comprime el archivo y permite restaurar en paralelo.\n\n**Atención:** `pg_dump` agrega carga a producción. Si tienes una réplica de lectura, haz el dump desde ella. Si no, hazlo en un horario de poco tráfico. El dump no bloquea las escrituras, porque lee un snapshot consistente.\n\n**Peligro:** el archivo contiene datos reales de producción, posiblemente datos personales. No lo subas a git ni a un almacenamiento compartido. Bórralo cuando termines.\n\n1. Verifica que tu `pg_dump` local sea de la misma versión mayor que el servidor, o más nueva. Una versión más vieja falla. Compruébalo con `pg_dump --version` y `psql -h HOST -U USUARIO -d NOMBRE_BD -c \"SHOW server_version;\"`.\n\n2. Crea el backup:\n\n   ```\n   pg_dump \"postgresql://USUARIO@HOST:5432/NOMBRE_BD\" -Fc -f backup.dump\n   ```\n\n   Si la base es grande, agrega `-j 4 -Fd -f backup_dir`. El modo paralelo solo funciona con el formato directorio (`-Fd`).\n\n3. Crea la base local vacía:\n\n   ```\n   createdb mi_bd_local\n   ```\n\n4. Restaura:\n\n   ```\n   pg_restore --no-owner --no-acl -j 4 -d mi_bd_local backup.dump\n   ```\n\n   `--no-owner` y `--no-acl` evitan errores por roles de producción que no existen en tu máquina.\n\n5. Verifica la restauración:\n\n   ```\n   psql -d mi_bd_local -c '\\dt'\n   ```\n\n   Compara también el conteo de filas de una o dos tablas grandes con producción.\n\nSi `pg_restore` falla con `extension \"...\" is not available`, instala esa extensión en tu Postgres local y repite el paso 4. Si la restauración quedó a medias, ejecuta `dropdb mi_bd_local`, vuelve al paso 3 y repite desde ahí.",
+  "output_tokens": 1227,
+  "thinking_tokens": 475,
+  "input_tokens": 5163,
+  "wall_s": 9.94,
+  "created_at": "2026-10-07T00:12:52.445246+00:00"
+}

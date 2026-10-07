@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A es más fácil de leer en una sola pasada: abre con la respuesta directa, usa secciones claras, una tabla comparativa y recomendaciones prácticas numeradas, sin perder información técnica; B es denso y usa voseo y jerga (RLS, aging, window functions) sin explicarla."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es igual de directa pero agrega una tabla comparativa y recomendaciones prácticas concretas (numeric(19,4) o centavos, facturas inmutables con notas de crédito, numeración con secuencia o lock, backups y PITR), que se leen más rápido y aportan más información accionable; A es sólida pero más densa y con menos detalle operativo."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

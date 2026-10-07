@@ -1,0 +1,20 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A señala que `100.0 * (1 - 0.1)` en realidad da `90.0` y sugiere imprimir `repr` para encontrar el valor de entrada real, mientras que B da por hecho que esos valores producen `89.99999999999999`; ambas explican bien la causa y la solución con `Decimal` o `approx`."
+    },
+    {
+      "winner": "llano",
+      "reason": "B señala que con price=100.0 y discount=0.1 la expresión da 90.0 exacto en Python, así que el 89.99999999999999 viene de otra entrada, y sugiere imprimir `repr` para confirmarlo; A afirma sin matiz que esos valores producen el error. Ambas dan el mismo arreglo con `Decimal` y `pytest.approx`."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

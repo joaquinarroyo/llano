@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación es idempotente cuando el resultado es el mismo si la ejecutas una vez o múltiples veces. En una API significa que repetir la misma solicitud no produce efectos secundarios: si envías `POST /transfer` dos veces por error, el dinero se transfiere una sola vez, no dos.\n\n**Por qué importa:**\n\nLas redes no son confiables. Tu cliente puede no recibir la respuesta, así que reintenta. Sin idempotencia, ese reintento duplica la acción. Con idempotencia, puedes reintentar sin miedo.\n\n**Cómo lograrla:**\n\n- Usa `GET`, `PUT`, `DELETE` siempre que puedas: ya son idempotentes por diseño.\n- Para `POST` (crear), pasa un ID único del cliente: la API genera el recurso una sola vez con ese ID.\n- Almacena qué solicitudes ya completaste: revisa antes de ejecutar.\n\n**Ejemplo:**\n\n```\nPOST /payments\n{\n  \"idempotency_key\": \"order-12345-v1\",\n  \"amount\": 100\n}\n```\n\nEl primer `POST` crea el pago. El segundo con la misma `idempotency_key` devuelve el pago que ya existe, sin cobrar de nuevo.\n\nSin idempotencia, tus usuarios pierden dinero, datos se duplican o el sistema se queda en un estado roto cuando falla la red. Con ella, los reintentos son seguros.",
+  "output_tokens": 619,
+  "thinking_tokens": 248,
+  "input_tokens": 6166,
+  "wall_s": 7.92,
+  "created_at": "2026-10-07T00:06:54.620970+00:00"
+}

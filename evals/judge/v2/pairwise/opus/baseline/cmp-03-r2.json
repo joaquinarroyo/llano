@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da la regla de decisión, una tabla comparativa y una regla práctica en un formato compacto que se entiende en una sola lectura, mientras que B es más largo y repite información, aunque agrega detalles útiles como escalado y auth en EventSource."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A se lee en un solo pase con secciones por tecnología (cuándo usarlo, limitaciones, coste), una regla rápida clara y un resumen, e incluye detalles útiles como el límite de EventSource con headers y el escalado de WebSocket con pub/sub; B es bueno pero más disperso, con una tabla densa que repite lo que luego explica."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

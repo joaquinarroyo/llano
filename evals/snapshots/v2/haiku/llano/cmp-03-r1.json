@@ -1,0 +1,15 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "arm": "llano",
+  "run": 1,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Elige según si necesitas comunicación en ambas direcciones y la latencia que toleras.\n\n| Cuándo | Caso de uso |\n|---|---|\n| **WebSocket** | Necesitas que el cliente y el servidor se hablen sin pausa: un chat, un juego multijugador, una hoja colaborativa. La latencia es crítica. Abre una conexión persistente; ambos envían datos cuando quieren. |\n| **Server-Sent Events** | El servidor empuja datos al cliente, pero el cliente no necesita responder al instante: notificaciones de stock, actualizaciones de página, eventos de un sistema. La conexión sigue abierta, pero solo el servidor envía. |\n| **Polling** | Tienes clientes viejos o redes que no permiten WebSocket. Aceptas latencia alta: el cliente pregunta cada N segundos si hay datos nuevos. Es simple pero consume más ancho de banda y energía. |\n\nLa razón: WebSocket abre un canal único y reutilizable (bajo costo). SSE usa HTTP estándar en ambas direcciones, así que no necesita upgrade. Polling hace solicitudes nuevas cada vez (caro).\n\n**Elige WebSocket si el cliente y el servidor conversan.** SSE es más sencillo y bastante para notificaciones. Polling es el plan B cuando no hay otra opción.",
+  "output_tokens": 714,
+  "thinking_tokens": 379,
+  "input_tokens": 6170,
+  "wall_s": 9.49,
+  "created_at": "2026-10-07T00:05:31.325105+00:00"
+}

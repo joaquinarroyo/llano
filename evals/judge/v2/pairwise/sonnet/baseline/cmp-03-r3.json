@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-03",
+  "category": "comparacion",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da la regla de decisión al inicio, una tabla comparativa compacta, casos de uso, costos y una regla práctica, todo en una lectura; B es más largo y repite, aunque aporta detalles útiles (long polling, limitación de EventSource con cabeceras), así que A es más directo sin perder lo esencial."
+    },
+    {
+      "winner": "llano",
+      "reason": "B abre con una regla de decisión clara, resume las diferencias en una tabla comparable y cubre costos, escalado y la regla práctica (SSE + POST) sin repetir ni divagar, mientras que A es más largo y menos escaneable aunque también completo."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

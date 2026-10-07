@@ -1,0 +1,102 @@
+{
+  "prompt_id": "conv-04",
+  "category": "conversacion",
+  "arm": "llano",
+  "model_alias": "opus",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Con 6 desarrolladores, los microservicios suelen costar más de lo que resuelven.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Pregúntale al equipo qué problema concreto quiere resolver.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "un **monolito modular** suele resolverlo con mucho menos costo",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Cada servicio necesita su propio deploy, monitoreo, logs, alertas y versionado.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Paralelizar con `parallel_tests`, `knapsack_pro` o la paralelización nativa de Rails (`parallelize`).",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Agrega Packwerk y define paquetes para `billing` y `auth`.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Escribe 2 o 3 tests de sistema para el login",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Ninguno de los dos problemas necesita microservicios.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Medir cuánto tarda cada etapa del pipeline: tests, assets, build de Docker, migraciones y rollout.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Instalar Packwerk y definir los primeros paquetes: `billing` y `auth`.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Escribir tests de sistema para el login: login correcto, contraseña incorrecta y sesión expirada.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "partial",
+          "quote": "Volvemos a evaluar microservicios si pasa alguna de estas cosas:",
+          "verified": true,
+          "score": 0.5
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": []
+}

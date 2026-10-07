@@ -1,0 +1,108 @@
+{
+  "prompt_id": "conv-01",
+  "category": "conversacion",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "conversation",
+  "judge_model": "sonnet",
+  "turns": [
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Revisa el diff del lockfile y el entorno (10 min)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Mide dónde se va el tiempo",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Validación o serialización (ajv, zod) compilando esquemas en cada request.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Despliega el lockfile anterior en una instancia canary y confirma que el p95 vuelve a ~120 ms.",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Ese es el culpable, y la cuenta cuadra",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "pasas de 14 a 42 round trips por request (14 queries + 14 BEGIN + 14 COMMIT)",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisar el changelog del ORM:",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "una sola transacción explícita por request (1 BEGIN + 1 COMMIT) es mucho mejor que 14",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    },
+    {
+      "facts": [
+        {
+          "status": "present",
+          "quote": "Se fija `<ORM>` en `<versión anterior>` (versión exacta, sin `^`).",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "La nueva versión abre una transacción implícita por cada query.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Con este cambio desplegado, el p95 volvió a ~130 ms.",
+          "verified": true,
+          "score": 1.0
+        },
+        {
+          "status": "present",
+          "quote": "Revisar el changelog de `<ORM>` `<nueva>` por una opción para desactivar las transacciones implícitas",
+          "verified": true,
+          "score": 1.0
+        }
+      ],
+      "answer_first": true,
+      "diagram": "none"
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "La cifra de 20-30 ms de latencia por query no es coherente con el p95 base de ~120 ms: 14 queries a 20-30 ms ya serían 280-420 ms antes del cambio, así que la cuenta no 'cuadra' como se afirma.",
+      "quote": "Con 20-30 ms de latencia efectiva a la DB, eso explica el salto de ~120 a ~900 ms.",
+      "verified": true
+    }
+  ]
+}

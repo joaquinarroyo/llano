@@ -1,0 +1,70 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js tiene un único thread (hilo) que ejecuta tu código JavaScript.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Node.js evita esperas bloqueantes moviendo operaciones lentas fuera del flujo principal.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "Cuando la respuesta llega, la pone en una cola para ejecutarla después.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Las Promesas se ejecutan **antes que los timers**, aunque el timer sea 0 ms.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Node.js no ejecuta el código de forma asíncrona por defecto: el código JS es síncrono y solo las operaciones diferidas (I/O, timers, promesas) son asíncronas. Python tampoco es solo síncrono, tiene asyncio.",
+      "quote": "Node.js ejecuta código asíncrono **por defecto**, mientras que Python es síncrono",
+      "verified": true
+    },
+    {
+      "claim": "Una operación lenta sin await no bloquea Node: fetch devuelve una promesa y el hilo sigue. Lo que bloquea el event loop es el código síncrono pesado de CPU.",
+      "quote": "Si haces una operación lenta sin `await` en Node.js, todo se bloquea.",
+      "verified": true
+    },
+    {
+      "claim": "fetch(url) sin await no bloquea nada, solo devuelve una promesa pendiente. Await no es lo que evita el bloqueo.",
+      "quote": "// ✗ Malo: bloquea todo",
+      "verified": true
+    },
+    {
+      "claim": "Es falso que haya que usar await o .then() para no bloquear. Sin ellos la petición sigue sin bloquear, solo que no se obtiene el resultado.",
+      "quote": "Por eso siempre debes usar `await` o `.then()`",
+      "verified": true
+    },
+    {
+      "claim": "Es una simplificación errónea presentar las microtareas como una fase única entre el código síncrono y los callbacks. La cola de microtareas se vacía después de cada macrotarea, no una sola vez por vuelta del loop.",
+      "quote": "Cada fase termina antes de pasar a la siguiente.",
+      "verified": true
+    }
+  ],
+  "answer_first": false,
+  "diagram": "redundant"
+}

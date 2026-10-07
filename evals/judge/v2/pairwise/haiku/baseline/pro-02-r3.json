@@ -1,0 +1,20 @@
+{
+  "prompt_id": "pro-02",
+  "category": "procedimiento",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B da los pasos de git revert en un bloque de código claro, cubre conflictos y múltiples commits, explica por qué es seguro y evita ramas confusas; A mezcla la opción de reset --hard con force-with-lease, que añade riesgo y ruido para un equipo compartido."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A da los pasos seguros con git revert, cubre conflictos y múltiples commits y advierte contra reset --hard sin ofrecer una alternativa riesgosa, mientras que B sugiere reset --hard + force push en main compartido, lo cual confunde y es peligroso para la pregunta de 'pasos seguros'."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

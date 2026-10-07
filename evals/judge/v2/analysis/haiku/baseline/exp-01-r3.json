@@ -1,0 +1,65 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js tiene un **único thread** que ejecuta tu JavaScript",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Siempre continúa ejecutando código mientras las operaciones I/O se procesan en paralelo gracias al SO",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "cuando las operaciones finalicen",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "se ejecuta antes que setTimeout",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "MALO - bloquea todo",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "El diagrama presenta las microtareas como una fase del event loop que va después de I/O. En realidad se vacían entre cada callback y fase, antes de la siguiente macrotarea. Esto contradice el propio ejemplo, donde la Promise sale antes que setTimeout.",
+      "quote": "4. Procesar microtasks (Promises)",
+      "verified": true
+    },
+    {
+      "claim": "Node.js sí espera bloqueando en algunos casos, por ejemplo con APIs síncronas como readFileSync o con cálculos de CPU. La afirmación absoluta es falsa.",
+      "quote": "Node.js **nunca** espera bloqueando.",
+      "verified": true
+    },
+    {
+      "claim": "Las operaciones de I/O no son procesadas solo por el SO. libuv usa un thread pool para fs, DNS y otras operaciones, así que 'sin threads' es impreciso.",
+      "quote": "sin threads",
+      "verified": true
+    },
+    {
+      "claim": "Un setTimeout con 0 no distribuye el trabajo por sí solo. Hay que trocear explícitamente el cálculo, y el ejemplo 'BUENO' no lo muestra.",
+      "quote": "// ✅ BUENO - distribuye el trabajo",
+      "verified": true
+    }
+  ],
+  "answer_first": false,
+  "diagram": "incorrect"
+}

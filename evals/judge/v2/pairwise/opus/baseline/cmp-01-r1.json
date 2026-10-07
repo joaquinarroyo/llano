@@ -1,0 +1,20 @@
+{
+  "prompt_id": "cmp-01",
+  "category": "comparacion",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A presenta la comparación en una tabla que se entiende de una sola lectura, cubre relaciones, ACID, montos, integridad, reportes y auditoría, y aclara cuándo sí convendría MongoDB; B es bueno pero más disperso y cierra con una repregunta que el desarrollador no necesitaba."
+    },
+    {
+      "winner": "llano",
+      "reason": "B entrega la misma recomendación con una tabla comparativa que se lee de un vistazo, cubre relaciones, ACID, montos, integridad, reportes y JSONB, e incluye cuándo sí conviene Mongo y un aviso clave sobre guardar montos e impuestos en la factura emitida; A es sólido pero más largo y disperso en viñetas."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

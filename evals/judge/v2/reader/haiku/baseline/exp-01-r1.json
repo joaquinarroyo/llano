@@ -1,0 +1,29 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "baseline",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "key": [
+    "A",
+    "C",
+    "C"
+  ],
+  "answers": [
+    "E",
+    "C",
+    "C"
+  ],
+  "correct": [
+    false,
+    true,
+    true
+  ],
+  "not_said": [
+    true,
+    false,
+    false
+  ],
+  "reader_model": "haiku"
+}

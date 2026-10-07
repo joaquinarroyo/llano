@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "El event loop de Node.js ejecuta una tarea a la vez, pero alterna entre ellas para que el proceso nunca se bloquee. Así diferencia:\n\n**Python síncrono**: una operación larga (lectura de archivo, red) detiene todo el programa hasta terminar.\n\n```python\n# Esto espera 5 segundos; nada más se ejecuta\nresultado = requests.get(\"https://api.ejemplo.com\")\n```\n\n**Node.js**: cuando llamas una operación que tarda, Node.js delega el trabajo al sistema operativo o a un pool de threads y sigue ejecutando tu código.\n\n## Cómo funciona\n\nEl event loop tiene una cola de tareas. En cada ciclo:\n\n1. Ejecuta el código síncrono que hay.\n2. Revisa si hay callbacks listos (una operación terminó).\n3. Los ejecuta uno por uno.\n4. Vuelve a empezar.\n\n```javascript\n// El código corre ahora\nconsole.log(\"1. Inicio\");\n\n// Se envía al sistema operativo; el loop no espera\nfs.readFile(\"archivo.txt\", (err, datos) => {\n  console.log(\"3. Archivo leído\");\n});\n\n// Esto corre ya; el archivo aún se lee\nconsole.log(\"2. Después de readFile\");\n\n// Salida: 1, 2, 3\n```\n\n## La diferencia clave\n\n| Python | Node.js |\n|---|---|\n| `requests.get()` espera hasta terminar. El programa está congelado. | `fetch()` devuelve una promesa ahora. El event loop sigue. Cuando la respuesta llega, ejecuta el callback. |\n| Necesitas threads o async/await para no bloquear. | El modelo no bloqueante es el que viene por defecto. |\n| Poco escalable si tienes miles de conexiones (un thread por conexión). | Muy escalable: un solo thread maneja miles de conexiones. |\n\n## Un ejemplo con promesas\n\n```javascript\nconsole.log(\"Antes\");\n\nfetch(\"https://api.ejemplo.com/datos\")\n  .then(res => res.json())\n  .then(datos => console.log(\"Datos:\", datos));\n\nconsole.log(\"Después\");\n\n// Salida:\n// Antes\n// Después\n// Datos: {...}\n```\n\nEl `fetch()` no espera. Deja la tarea al navegador/Node.js y el programa sigue. Cuando la respuesta llega, el callback se ejecuta.\n\n**Resumido**: Node.js no tiene threads en el lenguaje. Un solo thread corre el loop, pero gracias a que las operaciones I/O son delegadas, parece que muchas cosas suceden al mismo tiempo. Python síncrono no delega: espera bloqueado.",
+  "output_tokens": 920,
+  "thinking_tokens": 233,
+  "input_tokens": 6178,
+  "wall_s": 11.01,
+  "created_at": "2026-10-07T00:06:08.714204+00:00"
+}

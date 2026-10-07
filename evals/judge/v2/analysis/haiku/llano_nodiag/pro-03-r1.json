@@ -1,0 +1,55 @@
+{
+  "prompt_id": "pro-03",
+  "category": "procedimiento",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 1,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "--format=custom",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Usa `pg_dump` para extraer la base en producción y `pg_restore` o `psql` para restaurarla localmente.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "createdb --user=<usuario_local> <nombre_db_local>",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "Cuidalo como datos de producción.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "pg_dump no tiene la opción --globals-only; esa opción pertenece a pg_dumpall.",
+      "quote": "Usa `pg_dump --globals-only` si necesitas recrearlos.",
+      "verified": true
+    },
+    {
+      "claim": "--jobs en pg_dump solo funciona con el formato directory (-Fd), no con plain ni custom, que son los formatos usados en los ejemplos.",
+      "quote": "Usa `--jobs=4` en `pg_dump` para paralelizar.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

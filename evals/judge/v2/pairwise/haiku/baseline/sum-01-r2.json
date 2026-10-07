@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "llano",
+      "reason": "A da un resumen directo y listo para pegar en la descripción del PR, con el efecto de seguridad y la actualización de dependencia, mientras que B es largo, ofrece dos versiones (una en inglés), repite información y afirma sin respaldo que la actualización trae parches de seguridad."
+    },
+    {
+      "winner": "llano",
+      "reason": "B es directa y se puede pegar tal cual en la descripción del PR, explica el efecto de seguridad y menciona el bump de dependencia, mientras que A es más larga, mezcla idiomas, ofrece dos versiones y afirma sin respaldo que el bump trae parches de seguridad y que la cobertura de tests es completa."
+    }
+  ],
+  "winner": "llano",
+  "judge_model": "sonnet"
+}

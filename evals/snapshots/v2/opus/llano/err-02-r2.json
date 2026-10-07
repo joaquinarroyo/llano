@@ -1,0 +1,15 @@
+{
+  "prompt_id": "err-02",
+  "category": "error",
+  "arm": "llano",
+  "run": 2,
+  "model_alias": "opus",
+  "kind": "single",
+  "model": "claude-opus-5-5",
+  "text": "Falla porque `float` guarda los números en binario, y 0.1 no tiene una representación binaria exacta. El resultado queda a una distancia mínima de 90.0, y `==` compara bit a bit.\n\nCon `price=100.0` y `discount=0.1` exactos, `100.0 * (1 - 0.1)` da `90.0` en Python. El `89.99999999999999` indica que el test usa otros valores o que el código calcula el total de otra forma, por ejemplo con más operaciones. Revisa qué valores llegan realmente a esa línea. El arreglo es el mismo en los dos casos.\n\n## Opción 1: comparar con tolerancia en el test\n\nSi el total es un valor aproximado, usa `pytest.approx`:\n\n```python\nimport pytest\n\ndef test_total_with_discount():\n    assert total == pytest.approx(90.0)\n```\n\n`pytest.approx` acepta por defecto un error relativo de `1e-6`.\n\n## Opción 2: usar `Decimal` para dinero (recomendada en facturas)\n\nEn una factura los centavos deben ser exactos, así que conviene usar `Decimal` en el código de producción:\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nprice = Decimal(\"100.00\")\ndiscount = Decimal(\"0.1\")\ntotal = (price * (1 - discount)).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n# total == Decimal(\"90.00\")\n```\n\nCrea los `Decimal` desde strings, no desde floats. `Decimal(0.1)` copia el error binario del float: `0.1000000000000000055511151231257827...`.\n\nEl test queda así:\n\n```python\nassert total == Decimal(\"90.00\")\n```\n\n**Atención:** si cambias a `Decimal`, cada valor que entra en el cálculo también debe ser `Decimal`. Python lanza `TypeError` si mezclas `Decimal` y `float` en una operación.",
+  "output_tokens": 1540,
+  "thinking_tokens": 885,
+  "input_tokens": 5241,
+  "wall_s": 16.24,
+  "created_at": "2026-10-07T00:18:22.014762+00:00"
+}

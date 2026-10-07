@@ -1,0 +1,15 @@
+{
+  "prompt_id": "exp-04",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "run": 3,
+  "model_alias": "sonnet",
+  "kind": "single",
+  "model": "claude-sonnet-5-5",
+  "text": "CORS (Cross-Origin Resource Sharing) es un mecanismo del navegador que decide si una página puede leer respuestas de otro origen. Te bloquea porque `localhost:3000` y `localhost:8000` son orígenes distintos y tu API no dice que acepta al primero.\n\n## Por qué son orígenes distintos\n\nUn origen es la combinación de esquema, host y puerto. Aquí el puerto cambia (3000 y 8000), así que la política de mismo origen (same-origin policy) trata la API como ajena.\n\n## Qué pasa en el navegador\n\n1. Tu JavaScript en `localhost:3000` hace un `fetch` a `localhost:8000`.\n2. Si la petición no es simple (usa `Content-Type: application/json`, `Authorization` o métodos como `PUT` y `DELETE`), el navegador envía antes una petición `OPTIONS` llamada preflight. Pregunta si el servidor permite esa petición.\n3. Si la respuesta no trae `Access-Control-Allow-Origin` con tu origen, el navegador no deja que tu código lea la respuesta y muestra el error en la consola.\n\nEl servidor sí recibe la petición. El bloqueo ocurre en el navegador, por eso `curl` y Postman funcionan sin problema.\n\n## Cómo arreglarlo\n\nArréglalo en la API. El frontend no puede resolverlo por su cuenta.\n\nFastAPI:\n\n```python\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:3000\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n```\n\nExpress:\n\n```js\nimport cors from \"cors\";\napp.use(cors({ origin: \"http://localhost:3000\" }));\n```\n\nSi usas otro framework, la idea es la misma: responder a `OPTIONS` y agregar estos headers:\n\n```\nAccess-Control-Allow-Origin: http://localhost:3000\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE\nAccess-Control-Allow-Headers: Content-Type, Authorization\n```\n\n**Atención:** si envías cookies o `credentials: \"include\"`, el servidor también debe responder `Access-Control-Allow-Credentials: true`. En ese caso `Access-Control-Allow-Origin` no puede ser `*`: debe ser el origen exacto.\n\n## Alternativa solo para desarrollo\n\nConfigura un proxy en el servidor de desarrollo del frontend (por ejemplo, `server.proxy` en Vite) para que el navegador llame a `localhost:3000/api` y el proxy reenvíe a `localhost:8000`. Así el navegador ve un solo origen y no aplica CORS.\n\nSi después de configurarlo sigue fallando, pega el mensaje exacto de la consola y los headers de la respuesta `OPTIONS` (pestaña Network). Con eso se ve qué header falta.",
+  "output_tokens": 1452,
+  "thinking_tokens": 429,
+  "input_tokens": 4820,
+  "wall_s": 10.98,
+  "created_at": "2026-10-07T00:12:26.785088+00:00"
+}

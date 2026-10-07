@@ -1,0 +1,44 @@
+{
+  "prompt_id": "err-01",
+  "category": "error",
+  "arm": "baseline",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "resuelve `db.internal` a `10.0.3.17` y trata de abrir una conexión TCP al puerto 5432",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Esa conexión no recibe respuesta en 30 s",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "así que la app se rinde y sale con código 1",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "present",
+      "quote": "Security group, firewall o NetworkPolicy de la DB: ¿permite entrada al 5432 desde la subred o el security group de la app?",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "Si la versión anterior funcionaba y la 2.4.1 no",
+      "verified": true,
+      "score": 0.5
+    }
+  ],
+  "incorrect_claims": [],
+  "answer_first": true,
+  "diagram": "none"
+}

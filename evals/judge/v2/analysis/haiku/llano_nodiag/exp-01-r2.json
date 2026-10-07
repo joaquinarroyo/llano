@@ -1,0 +1,50 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "arm": "llano_nodiag",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "judge_model": "sonnet",
+  "facts": [
+    {
+      "status": "present",
+      "quote": "Node.js ejecuta JavaScript en un único hilo",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "present",
+      "quote": "Node.js pasa esa tarea a un sistema externo (no JavaScript). Tu código no espera.",
+      "verified": true,
+      "score": 1.0
+    },
+    {
+      "status": "partial",
+      "quote": "el event loop coloca esa respuesta en una cola.",
+      "verified": true,
+      "score": 0.5
+    },
+    {
+      "status": "absent",
+      "quote": "",
+      "verified": true,
+      "score": 0.0
+    },
+    {
+      "status": "present",
+      "quote": "Para operaciones CPU-intensivas (cálculos largos), Node.js se bloquea igual que Python síncrono.",
+      "verified": true,
+      "score": 1.0
+    }
+  ],
+  "incorrect_claims": [
+    {
+      "claim": "Node.js no se cierra según si la cola está vacía, sino según si quedan operaciones o handles activos pendientes (por ejemplo, un servidor escuchando sigue vivo con la cola vacía).",
+      "quote": "Cuando la cola está vacía, Node.js cierra.",
+      "verified": true
+    }
+  ],
+  "answer_first": true,
+  "diagram": "none"
+}

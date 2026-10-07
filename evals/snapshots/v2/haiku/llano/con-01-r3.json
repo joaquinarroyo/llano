@@ -1,0 +1,15 @@
+{
+  "prompt_id": "con-01",
+  "category": "conceptual",
+  "arm": "llano",
+  "run": 3,
+  "model_alias": "haiku",
+  "kind": "single",
+  "model": "claude-haiku-4-5-20251001",
+  "text": "Una operación es idempotente cuando produce el mismo resultado aunque la ejecutes una o muchas veces.\n\nEn una API, importa porque las redes fallan. Si un cliente no recibe la respuesta a una solicitud, no sabe si el servidor la ejecutó. Por eso reintenta. Si el servidor no es idempotente, la misma solicitud se ejecuta dos veces con resultados distintos.\n\n**Ejemplo de no idempotente:**\n```\nPOST /cuentas/123/transferencias\n{ \"monto\": 100 }\n```\nSi reintenta, transfiere 200 en total.\n\n**Ejemplo idempotente:**\n```\nPOST /cuentas/123/transferencias\n{ \"idempotencyKey\": \"abc-123\", \"monto\": 100 }\n```\nEl servidor guarda `abc-123`. Si ve la misma clave, devuelve el resultado anterior sin ejecutar de nuevo.\n\n**Métodos HTTP seguros:**\n- GET, HEAD, OPTIONS: idempotentes por naturaleza, no cambian datos.\n- PUT: idempotente, reemplaza un recurso. Enviar dos veces con los mismos datos es igual que uno.\n- DELETE: idempotente, borrar dos veces da el mismo resultado.\n- POST: no idempotente por defecto. Crea un nuevo recurso cada vez.\n\n**Cómo implementar idempotencia en POST:**\nUsa una clave única en cada solicitud (un UUID que el cliente genera). El servidor la registra la primera vez y ignora reintentos con la misma clave. Así los duplicados de red no causan efectos secundarios.\n\nImporta en pagos, transferencias y cualquier operación que no pueda repetirse sin causar daño.",
+  "output_tokens": 679,
+  "thinking_tokens": 249,
+  "input_tokens": 6166,
+  "wall_s": 8.43,
+  "created_at": "2026-10-07T00:08:15.393540+00:00"
+}

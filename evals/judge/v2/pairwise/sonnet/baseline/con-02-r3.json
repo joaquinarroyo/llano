@@ -1,0 +1,20 @@
+{
+  "prompt_id": "con-02",
+  "category": "conceptual",
+  "model_alias": "sonnet",
+  "run": 3,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B explica CAP, la interpretación correcta, sus límites (incluida la confusión C de CAP vs. ACID) y da preguntas prácticas concretas con ejemplos, en un formato compacto; A es claro pero omite la distinción con ACID y es menos accionable."
+    },
+    {
+      "winner": "llano",
+      "reason": "B abre con un resumen directo de una frase, usa una tabla clara para CP/AP y cubre las mismas ideas técnicas clave (linealizabilidad, PACELC, configurabilidad, Spanner) sin redundancia, mientras que A es correcta pero más dispersa y repite puntos."
+    }
+  ],
+  "winner": "tie",
+  "judge_model": "sonnet"
+}

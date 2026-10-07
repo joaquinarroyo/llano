@@ -1,0 +1,20 @@
+{
+  "prompt_id": "exp-01",
+  "category": "explicacion",
+  "model_alias": "haiku",
+  "run": 2,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B es más compacto y fácil de captar en una lectura (analogía del camarero, fases del loop, comparación Python/Node) e incluye la advertencia clave de que una tarea pesada de CPU bloquea el loop; A es útil pero más repetitivo y omite esa limitación importante."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A explica el modelo con una analogía clara, enumera las fases reales del event loop (timers, poll, check, etc.), compara con Python y advierte que el trabajo pesado de CPU bloquea el loop; B es claro pero omite las fases y la advertencia sobre CPU, y repite el ejemplo de fetch."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}

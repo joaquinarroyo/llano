@@ -1,0 +1,20 @@
+{
+  "prompt_id": "sum-01",
+  "category": "resumen",
+  "model_alias": "opus",
+  "run": 1,
+  "kind": "single",
+  "other": "baseline",
+  "orders": [
+    {
+      "winner": "baseline",
+      "reason": "B entrega una descripción de PR lista para pegar (resumen, cambios por archivo, commits, cómo probar) y señala puntos a verificar como la invalidación de toda la familia de tokens y el posible breaking change, mientras que A es más escueta y deja fuera contexto técnico útil."
+    },
+    {
+      "winner": "baseline",
+      "reason": "A entrega una descripción de PR lista para pegar (resumen, cambios por archivo, cómo probar) y señala puntos técnicos relevantes como la invalidación de toda la familia de tokens y el posible breaking change, mientras que B es más escueta y deja fuera el contexto de seguridad y el cómo probar."
+    }
+  ],
+  "winner": "baseline",
+  "judge_model": "sonnet"
+}
