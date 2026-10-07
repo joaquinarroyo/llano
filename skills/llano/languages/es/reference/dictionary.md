@@ -1,4 +1,7 @@
-# Spanish (es) — dictionary
+# Spanish (es) — full dictionary
+
+Reference list. The agent reads it only in mode `all` or when it reviews a text. The
+eval linter also uses it. The most frequent entries are already in `../rules.md`.
 
 Each approved word has one meaning. When two approved words look similar, the "Note"
 column says when to use each one.
@@ -61,6 +64,10 @@ column says when to use each one.
 | a nivel de | en |
 | en base a | según, con base en |
 | es por eso que, es por esto que | por eso |
+| asimismo, adicionalmente | también |
+| de este modo, de esta manera, de esta forma | así |
+| cuando se trata de, en el ámbito de | en, para |
+| en última instancia | al final |
 | el mismo, la misma (as pronoun) | él, ella, eso, or repeat the noun |
 
 ## Calques
@@ -88,20 +95,24 @@ Delete these. If the sentence breaks without them, rewrite it.
 "No dudes en preguntar", "Si tienes más preguntas…", "¡Éxito!", "En resumen" or
 "En conclusión" followed by a repetition.
 
-**Meta-phrases:** "Cabe destacar que", "Cabe mencionar que",
-"Es importante mencionar/señalar/destacar/tener en cuenta que", "Vale la pena mencionar",
-"Como mencioné anteriormente", "Como se puede observar", "Hay que tener en cuenta que",
-"Lo que esto significa es que".
+**Meta-phrases:** "Cabe destacar que", "Cabe mencionar que", "Cabe señalar que",
+"Es importante mencionar que", "Es importante señalar que", "Es importante destacar que",
+"Es importante tener en cuenta que", "Vale la pena mencionar", "Vale la pena señalar",
+"Como mencioné anteriormente", "Como se mencionó anteriormente", "Como se puede observar",
+"Hay que tener en cuenta que", "Lo que esto significa es que", "Así que, como puedes ver",
+"Podría decirse que", "En un mundo donde".
 
 **Intensifiers:** "básicamente", "esencialmente", "realmente", "sin lugar a dudas",
 "definitivamente", "claramente", "absolutamente", "literalmente", "simplemente",
-"en términos generales".
+"indudablemente", "ciertamente", "en términos generales".
 
 **Empty adjectives and clichés:** "robusto", "potente", "integral", "holístico",
 "de manera eficiente", "sin problemas", "sin fricciones", "de vanguardia",
-"aprovechar al máximo", "profundizar en", "sumergirse en", "juega un papel
-crucial/fundamental/clave", "en el panorama actual", "navegar la complejidad",
-"un mundo de posibilidades", "llevar al siguiente nivel".
+"aprovechar al máximo", "profundizar en", "sumergirse en", "juega un papel crucial",
+"juega un papel fundamental", "juega un papel clave", "en el panorama actual",
+"navegar la complejidad", "un mundo de posibilidades", "llevar al siguiente nivel".
+Also avoid groups of three adjectives that list no real items ("rápido, confiable y
+escalable"), and "-ísimo" intensifiers.
 
 ## Technical terms
 

@@ -1,91 +1,67 @@
-# Spanish (es) — rules
+# Spanish (es)
 
-## Variant and register
-
-- **Neutral Spanish.** No regionalisms. No voseo ("revisa", not "revisá"). No "vosotros".
-- **Address the user as "tú"**, in a direct and neutral way ("puedes", "revisa"). Do not
-  use "usted".
-- When a neutral word and a regional word compete, use the one with the widest reach:
-  "computadora" over "ordenador", "archivo" over "fichero", "celular" over "móvil".
+Write neutral Spanish. Address the user as "tú" ("revisa", "puedes"), with no voseo and
+no "usted". Prefer the word with the widest reach: "computadora", "archivo", "celular".
 
 ## Labels
 
-- Danger: **Peligro:** (irreversible action, data loss, security risk)
-- Caution: **Atención:** (can fail or break in a reversible way)
+- **Peligro:** irreversible action, data loss or security risk.
+- **Atención:** something that can fail or break in a reversible way.
 
-## Grammar traps
+## How the core rules apply in Spanish
 
-### 1. Impersonal / passive "se" that hides the agent
+- **Length.** Aim for 20 words in steps and 25 in explanations. Spanish needs more
+  words than English, so 30 is the ceiling. Vary the length.
+- **Agent.** Name who acts when it matters: "La migración `0042` borró la tabla", not
+  "Se borró la tabla". Use "se" when the agent does not matter: "El archivo se guarda
+  en `/tmp`".
+- **Real verbs.** "Instalé las dependencias", not "Realicé la instalación de las
+  dependencias". Use one verb, not a chain: "puede configurarlo", not "va a poder ser
+  configurado".
+- **Asides.** Move an explanation between commas to its own sentence.
+- **Gerunds.** Use a gerund only for an action at the same time. For a later action,
+  write two sentences: "Ejecuté los tests. Fallaron 3."
+- **Clauses.** Use one "que" clause per sentence and no more than three nouns joined
+  by "de".
+- **Subjunctive.** Use it where grammar requires it ("para que funcione", "si quieres
+  que...").
+- **Positive phrasing.** "Mantén el token en el servidor", not "No dejes de no
+  exponer el token".
+- **Numbers.** Use digits, units and a point for decimals in technical values
+  (`0.5 s`). Use absolute dates.
 
-Why: "se" removes the subject. The reader does not know who did the action, and that
-is often the most important fact in a technical report.
+## Words
 
-- ✗ "Se borró la tabla de usuarios."
-- ✓ "La migración `0042` borró la tabla de usuarios."
+Use the word on the right:
 
-"Se" is fine when the agent does not matter: "El archivo se guarda en `/tmp`."
+| Instead of | Use |
+|---|---|
+| utilizar, emplear | usar |
+| realizar, efectuar, llevar a cabo | the real verb |
+| proceder a + infinitive | the infinitive |
+| comprobar, chequear | verificar |
+| eliminar, suprimir (data, files) | borrar |
+| remover (from a list or code) | quitar |
+| añadir, adicionar | agregar |
+| requerir, precisar | necesitar |
+| poseer, disponer de | tener |
+| proporcionar, brindar | dar |
+| en el caso de que | si |
+| con el fin de, a fin de | para |
+| debido a que, dado que, ya que | porque |
+| no obstante, sin embargo | pero |
+| por lo tanto, por consiguiente | por eso |
+| asimismo, adicionalmente | también |
+| previo a | antes de |
+| posteriormente | después |
+| a nivel de | en |
+| librería (code) | biblioteca |
 
-### 2. Nominalization with light verbs
+Keep technical terms as the ecosystem uses them: commit, branch, deploy, endpoint,
+token, hook, cache, log, test, script.
 
-Why: "realizar / llevar a cabo / efectuar / hacer + noun" adds two or three words and
-hides the real verb.
+## Start and end
 
-- ✗ "Realicé la instalación de las dependencias."
-- ✓ "Instalé las dependencias."
-
-### 3. Gerund misuse
-
-Why: a gerund for a later action, or a chain of gerunds, blurs the order of events.
-
-- ✗ "Ejecuté los tests, obteniendo 3 errores."
-- ✓ "Ejecuté los tests. Fallaron 3."
-- ✗ "Revisando el log y viendo que faltaba la variable, agregándola se resolvió."
-- ✓ "El log mostraba que faltaba `API_URL`. Agregué la variable y el error desapareció."
-
-A gerund for a simultaneous action is fine: "El servidor responde 500 mientras procesa
-la cola" (or "procesando la cola").
-
-### 4. "de" chains (noun clusters)
-
-Why: Spanish builds noun clusters with "de". Long chains make the reader parse
-backwards. Core rule 5 (three nouns max) applies to the "de" chain.
-
-- ✗ "el archivo de configuración del servidor de producción del cliente"
-- ✓ "el archivo de configuración de producción (`prod.yaml`)"
-
-### 5. Subordinate clauses chained with "que"
-
-Why: each "que" opens a clause. Two or three in a row overload memory.
-
-- ✗ "Creo que el problema es que la función que valida el token no considera que puede
-  expirar."
-- ✓ "La función que valida el token no considera la expiración. Esa es la causa
-  probable."
-
-### 6. Anglicism calques
-
-Why: they read as translation errors and some change the meaning. See the "Calques"
-section of `dictionary.md`.
-
-### 7. Hedging stacks
-
-Why: Spanish LLM output stacks "podría", "quizás", "posiblemente", "en principio" in one
-sentence. Core rule 18: one uncertainty, concrete, with its reason.
-
-- ✗ "En principio, quizás podría deberse posiblemente a la caché."
-- ✓ "La causa probable es la caché. No lo verifiqué."
-
-## Adjustments to core rules
-
-- **Sentence length:** keep 20 / 25 words. Spanish uses more function words than
-  English, so treat the limit as a target. If a sentence needs 27 words to keep a
-  condition intact, the exception rule applies.
-- **Questions:** use opening marks (¿ ¡). Avoid rhetorical questions in answers.
-
-## Numbers and dates
-
-- Decimals with a point in technical context (`0.5 s`, `1.25 GB`), because code and
-  tools use a point.
-- Thousands without separator in technical values (`10000 ms`). In prose with large
-  quantities, use a space (`1 500 000 usuarios`).
-- Absolute dates: `5 de octubre de 2026` or ISO `2026-10-05`.
+Start with the answer, not with "¡Claro!", "Excelente pregunta" or "Cabe destacar
+que". End with the last piece of content, not with "Espero que te sirva" or a summary
+of what you already said.

@@ -41,7 +41,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SKILL = ROOT.parent / "skills" / "llano"
 SNAPSHOTS = ROOT / "snapshots"
-PACK_FILES = ["rules.md", "dictionary.md", "examples.md"]
+PACK_FILES = ["rules.md", "examples.md"]  # always-loaded part of the pack; reference/ is on demand
 PERSONAL_FIELDS = ["emailAddress", "displayName", "fullName", "organizationName"]
 ISOLATION = [
     "--setting-sources", "project",
@@ -66,16 +66,21 @@ def leak_markers() -> list[str]:
     return ["llano", "caveman", "asd-ste100", "context-mode", "auto memory", home.lower(), f"/{getpass.getuser().lower()}/"]
 
 
-def llano_prompt(lang: str = "es") -> str:
-    parts = [f"The llano skill is active: mode=responses, lang={lang}.", (SKILL / "SKILL.md").read_text()]
-    parts.append(f"# Language pack: {lang}")
-    parts += [(SKILL / "languages" / lang / f).read_text() for f in PACK_FILES]
-    return "\n\n".join(parts)
+NO_DIAGRAMS = "## Diagrams\n\nDo not draw diagrams. When structure helps, use a numbered list or a table.\n"
+
+
+def llano_prompt(lang: str = "es", diagrams: bool = True) -> str:
+    skill = (SKILL / "SKILL.md").read_text()
+    pack = [(SKILL / "languages" / lang / f).read_text() for f in PACK_FILES]
+    if not diagrams:  # ablation arm: same skill, diagram section and diagram example removed
+        skill = re.sub(r"## Diagrams\n.*?(?=\n## )", NO_DIAGRAMS, skill, flags=re.S)
+        pack = [re.sub(r"<example>(?:(?!</example>).)*?```(?:(?!</example>).)*?</example>\s*", "", f, flags=re.S) for f in pack]
+    return "\n\n".join([f"The llano skill is active: mode=responses, lang={lang}.", skill, f"# Language pack: {lang}", *pack])
 
 
 def arms() -> dict[str, str | None]:
     """Arm name -> text appended to Claude Code's default system prompt (None = nothing)."""
-    return {"baseline": None, "llano": llano_prompt()}
+    return {"baseline": None, "llano": llano_prompt(), "llano_nodiag": llano_prompt(diagrams=False)}
 
 
 def session_env(config_dir: str) -> dict[str, str]:
@@ -236,13 +241,24 @@ def main() -> None:
     ap.add_argument("--runs", type=int, default=1)
     ap.add_argument("--prompts", nargs="+", default=[str(ROOT / "prompts" / "es.jsonl"), str(ROOT / "prompts" / "es_conversations.jsonl")])
     ap.add_argument("--only", nargs="*", help="prompt ids to run")
+    ap.add_argument("--set", help="JSON file with 'single', 'conversations' and 'structured' prompt ids")
+    ap.add_argument("--arms", nargs="+", default=["baseline", "llano", "llano_nodiag"])
     ap.add_argument("--workers", type=int, default=4)
     args = ap.parse_args()
 
     prompts = load_prompts(args.prompts)
+    structured = None
+    if args.set:
+        sel = json.loads(Path(args.set).read_text())
+        prompts = [p for p in prompts if p["id"] in set(sel["single"]) | set(sel["conversations"])]
+        structured = set(sel.get("structured", []))
     if args.only:
         prompts = [p for p in prompts if p["id"] in args.only]
-    arm_text = arms()
+    arm_text = {k: v for k, v in arms().items() if k in args.arms}
+
+    def wanted(arm: str, prompt: dict) -> bool:
+        # The no-diagram arm only runs where a diagram could help.
+        return arm != "llano_nodiag" or (structured is not None and prompt["id"] in structured)
     out_dir = SNAPSHOTS / args.run_id
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -254,6 +270,7 @@ def main() -> None:
             "arms": {k: hashlib.sha1((v or "").encode()).hexdigest()[:10] for k, v in arm_text.items()},
             "arm_chars": {k: len(v or "") for k, v in arm_text.items()},
             "prompts": sum("turns" not in p for p in prompts), "conversations": sum("turns" in p for p in prompts),
+            "structured": sorted(structured) if structured else [],
             "isolation": ISOLATION + ["CLAUDE_CONFIG_DIR=<empty temp>", "CLAUDE_SECURESTORAGE_CONFIG_DIR=",
                                       "CLAUDE_CODE_DISABLE_AUTO_MEMORY=1", "CLAUDE_CODE_DISABLE_CLAUDE_MDS=1",
                                       "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1",
@@ -276,7 +293,7 @@ def main() -> None:
              "model": m, "arm": arm, "append": text, "run": r,
              **({"turns": p["turns"]} if "turns" in p else {"prompt": p["prompt"]})}
             for m in args.models for r in range(1, args.runs + 1)
-            for p in prompts for arm, text in arm_text.items()
+            for p in prompts for arm, text in arm_text.items() if wanted(arm, p)
         ]
         done = 0
         with cf.ThreadPoolExecutor(args.workers) as pool:

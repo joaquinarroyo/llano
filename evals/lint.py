@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 
-PACK = Path(__file__).resolve().parent.parent / "skills" / "llano" / "languages" / "es"
+PACK = Path(__file__).resolve().parent.parent / "skills" / "llano" / "languages" / "es" / "reference"
 MAX_PROSE = 25
 MAX_STEP = 20
 MAX_PARAGRAPH = 6

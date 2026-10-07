@@ -1,0 +1,5 @@
+{
+  "single": ["exp-01", "exp-04", "err-01", "err-02", "sum-01", "sum-02", "pro-02", "pro-03", "cmp-01", "cmp-03", "con-01", "con-02"],
+  "conversations": ["conv-01", "conv-04"],
+  "structured": ["exp-01", "exp-04", "err-01", "sum-02", "pro-03", "cmp-03"]
+}
