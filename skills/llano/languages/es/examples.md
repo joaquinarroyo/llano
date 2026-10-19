@@ -17,8 +17,13 @@ Llano:
 > 30000 ms y el proceso termina con código 1.
 >
 > Es un timeout, no un error de credenciales: la conexión nunca recibe respuesta. Revisa
-> primero que la base esté levantada y que el security group permita el puerto 5432
-> desde la API.
+> primero que la base esté levantada, desde el host de la API:
+>
+> ```bash
+> pg_isready -h 10.0.3.17 -p 5432
+> ```
+>
+> Si no responde, revisa que el security group permita el puerto 5432 desde la API.
 </example>
 
 <example>
@@ -58,8 +63,7 @@ Input: "Dibújame cómo fluye una solicitud de login." The system has a gateway,
 auth service, Postgres and Redis.
 
 Llano:
-> El login pasa por cuatro componentes. El gateway valida el formato. El servicio de
-> autenticación verifica la contraseña en Postgres y guarda la sesión en Redis.
+> El gateway valida el formato y pasa la solicitud al servicio de autenticación.
 >
 > ```
 > Cliente ──POST /login──▶ Gateway ──▶ Auth ──▶ Postgres (verifica el hash)
@@ -69,6 +73,6 @@ Llano:
 >
 > Si Postgres no responde en 2 s, el servicio de autenticación devuelve 503.
 
-The user asked for a diagram. It shows only the relations that the text states, with
-the same names.
+The user asked for a diagram. It uses the names from the input. The text adds only
+what the diagram does not show: the format check and the 2 s timeout.
 </example>

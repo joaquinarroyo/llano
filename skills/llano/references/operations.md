@@ -4,19 +4,22 @@ Read this file only when the user runs a `/llano` command or asks about llano's 
 
 ## Configuration
 
-The persistent configuration lives in `~/.config/llano/config.json` (or the path in
-`$LLANO_CONFIG`):
+The configuration lives in a marked, plain-text block in the global instructions of each
+agent. `doctor.mjs --install` writes it:
 
-```json
-{ "mode": "responses", "lang": "es" }
+```markdown
+<!-- llano:start -->
+llano: mode=responses, lang=es
+
+Load the `llano` skill at the start of every session and apply it with this configuration. …
+<!-- llano:end -->
 ```
 
 Where the active configuration comes from, in order:
 1. A change the user made in this session with a command below.
-2. The SessionStart hook message (`llano is active: mode=…, lang=…`).
-3. A `llano: mode=…, lang=…` line in AGENTS.md or CLAUDE.md (agents without hooks).
-4. The config file.
-5. Defaults: `mode=responses, lang=es`.
+2. A `llano: mode=…, lang=…` line in CLAUDE.md, AGENTS.md or GEMINI.md: the block, or a
+   line the user added by hand.
+3. Defaults: `mode=responses, lang=es`.
 
 ## Commands
 
@@ -24,15 +27,21 @@ Where the active configuration comes from, in order:
 |---|---|
 | `/llano <mode>` or "llano all" | Change the mode for this session only. |
 | `/llano lang <id>` | Change the language for this session only. |
-| `/llano set mode=<m> lang=<id>` | Save the change: run `node "<doctor>" --set mode=<m> lang=<id>`. |
+| `/llano set mode=<m> lang=<id>` | Save the change in the block: run `node "<doctor>" --set mode=<m> lang=<id>`. |
+| `/llano install` | Write or update the block: run `node "<doctor>" --install`. |
+| `/llano uninstall` | Remove the block: run `node "<doctor>" --uninstall`. |
 | `/llano status` | Show the current mode and language. |
 | `/llano doctor` | Run `node "<doctor>"` and summarize the result. |
-| `/llano install-hook` | Run `node "<doctor>" --install-hook` (Claude Code only). |
 
-`<doctor>` is an absolute path. Take it from the SessionStart hook message. Without
-that message, use `scripts/doctor.mjs` inside the folder that contains SKILL.md
-(usually `~/.claude/skills/llano` or `~/.agents/skills/llano`). Do not run a relative
-path: the working directory is the user's project, not the skill folder.
+`--set`, `--install` and `--uninstall` write to the user's global instructions. When you
+run them, there is no terminal to ask in, so the script only shows its plan and exits
+with 1. Show the plan to the user. Run the same command again with `--yes` only after the
+user approves it.
+
+`<doctor>` is an absolute path. Take it from the llano block. Without the block, use
+`scripts/doctor.mjs` inside the folder that contains SKILL.md (usually
+`~/.claude/skills/llano` or `~/.agents/skills/llano`). Do not run a relative path: the
+working directory is the user's project, not the skill folder.
 
 Confirm a change in one sentence.
 
@@ -47,10 +56,19 @@ Confirm a change in one sentence.
 
 To add a language, copy `languages/es/` and follow `languages/_template.md`.
 
-## Activation in other agents
+## Activation in each agent
 
 | Agent | Always-on activation |
 |---|---|
-| Claude Code | SessionStart hook: `node "<doctor>" --install-hook` |
-| Codex and others that read AGENTS.md | A `llano: mode=responses, lang=es` line in AGENTS.md |
+| Claude Code | The block in `~/.claude/CLAUDE.md` (`--install`) |
+| Codex | The block in `~/.codex/AGENTS.md` (`--install`) |
+| Gemini CLI | The block in `~/.gemini/GEMINI.md` (`--install`) |
+| Others that read AGENTS.md | A `llano: mode=responses, lang=es` line in the project's AGENTS.md |
 | Cursor | An always-apply rule that loads the llano skill |
+
+## Version 1
+
+Version 1 used a SessionStart hook and `~/.config/llano/config.json`. `--install` removes
+that hook from `~/.claude/settings.json` and copies the values from the config file into
+the block. After that, nothing reads the config file. The doctor reports a hook in any
+other settings file, and the user removes it by hand.

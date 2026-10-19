@@ -121,5 +121,5 @@ pull request (PR), deploy, build, endpoint, token, hook, framework, runtime, pay
 header, query, cache (also "caché"), log, bug, test, script, prompt, skill, plugin,
 pipeline, worker, timeout, feature flag.
 
-Pick one form per response and keep it (core rule 1). "Caché" and "cache" are the same
+Pick one form per response and keep it (core rule 7). "Caché" and "cache" are the same
 word: do not alternate.
