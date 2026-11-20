@@ -4,8 +4,8 @@ Plain technical writing style for coding agents, adapted from
 [ASD-STE100](https://www.asd-ste100.org/) (Simplified Technical English). Idea from
 [Andrej Karpathy](https://x.com/karpathy/status/2105819303471976479).
 
-Language-agnostic core plus switchable language packs. Available packs: `es` (neutral
-Spanish).
+Language-agnostic core plus switchable language packs. Available packs: `en`
+(plain international English, default) and `es` (neutral Spanish).
 
 ## Install
 
@@ -28,7 +28,7 @@ The block holds the configuration:
 
 ```markdown
 <!-- llano:start -->
-llano: mode=responses, lang=es
+llano: mode=responses, lang=en
 
 Load the `llano` skill at the start of every session and apply it with this configuration. …
 <!-- llano:end -->
@@ -77,7 +77,7 @@ not load on its own.
 ## Configuration
 
 ```bash
-node ~/.agents/skills/llano/scripts/doctor.mjs --set mode=all lang=es
+node ~/.agents/skills/llano/scripts/doctor.mjs --set lang=es   # switch to Spanish
 ```
 
 `--set` rewrites the block in each agent, with the same plan and confirmation as
@@ -117,5 +117,5 @@ Commands: `/llano <mode>`, `/llano lang <id>`, `/llano set …`, `/llano install
 
 ## Add a language
 
-Copy `skills/llano/languages/es/` to `languages/<id>/` and follow
+Copy `skills/llano/languages/en/` to `languages/<id>/` and follow
 `skills/llano/languages/_template.md`.

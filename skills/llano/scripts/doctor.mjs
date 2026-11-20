@@ -37,7 +37,7 @@ const SETTINGS = path.join(HOME, ".claude", "settings.json");
 // Version 1 kept the configuration here and read it from a SessionStart hook.
 const LEGACY_CONFIG = process.env.LLANO_CONFIG || path.join(HOME, ".config", "llano", "config.json");
 const MODES = ["explain", "responses", "all", "off"];
-const DEFAULTS = { mode: "responses", lang: "es" };
+const DEFAULTS = { mode: "responses", lang: "en" };
 const PACK_FILES = ["rules.md", "examples.md"];
 const STYLE_CONFLICTS = ["caveman"];
 const LANG_ID = /^[A-Za-z0-9_-]+$/;
@@ -134,7 +134,10 @@ function legacyConfig() {
 // Values for a new block: the ones given, else an installed block, else the version 1 config file.
 function resolveConfig(given) {
   const installed = AGENTS.map((a) => fileConfig(read(a.path))).find(Boolean);
-  const { mode, lang } = { ...DEFAULTS, ...legacyConfig(), ...installed, ...given };
+  // Version 1 defaulted to Spanish, so a migration keeps "es" when its config has no lang.
+  const isV1 = exists(LEGACY_CONFIG) || settingsWithoutLegacyHook(read(SETTINGS)) !== null;
+  const defaults = isV1 ? { ...DEFAULTS, lang: "es" } : DEFAULTS;
+  const { mode, lang } = { ...defaults, ...legacyConfig(), ...installed, ...given };
   const config = { mode: String(mode), lang: String(lang) };
   validate(config);
   return config;
@@ -372,7 +375,7 @@ try {
     case undefined: report(); break;
     case "--install": await change(resolveConfig(parsePairs(pairs)), flags); break;
     case "--set":
-      if (!pairs.length) throw new Error("nothing to set (example: --set mode=all lang=es)");
+      if (!pairs.length) throw new Error("nothing to set (example: --set mode=all lang=en)");
       await change(resolveConfig(parsePairs(pairs)), flags);
       break;
     case "--uninstall": await change(null, flags); break;

@@ -9,7 +9,7 @@ agent. `doctor.mjs --install` writes it:
 
 ```markdown
 <!-- llano:start -->
-llano: mode=responses, lang=es
+llano: mode=responses, lang=en
 
 Load the `llano` skill at the start of every session and apply it with this configuration. …
 <!-- llano:end -->
@@ -19,7 +19,7 @@ Where the active configuration comes from, in order:
 1. A change the user made in this session with a command below.
 2. A `llano: mode=…, lang=…` line in CLAUDE.md, AGENTS.md or GEMINI.md: the block, or a
    line the user added by hand.
-3. Defaults: `mode=responses, lang=es`.
+3. Defaults: `mode=responses, lang=en`.
 
 ## Commands
 
@@ -51,10 +51,9 @@ Confirm a change in one sentence.
   language and a pack exists for it, use that pack. If no pack exists, answer in the
   user's language with the core rules only.
 - **Mode `all`:** use the language of the destination (the repo, the doc, the commit
-  history). If no pack exists for it, apply the core rules only. For English, the core
-  rules are ASD-STE100 at about 80%.
+  history). If no pack exists for it, apply the core rules only.
 
-To add a language, copy `languages/es/` and follow `languages/_template.md`.
+To add a language, copy `languages/en/` and follow `languages/_template.md`.
 
 ## Activation in each agent
 
@@ -63,7 +62,7 @@ To add a language, copy `languages/es/` and follow `languages/_template.md`.
 | Claude Code | The block in `~/.claude/CLAUDE.md` (`--install`) |
 | Codex | The block in `~/.codex/AGENTS.md` (`--install`) |
 | Gemini CLI | The block in `~/.gemini/GEMINI.md` (`--install`) |
-| Others that read AGENTS.md | A `llano: mode=responses, lang=es` line in the project's AGENTS.md |
+| Others that read AGENTS.md | A `llano: mode=responses, lang=en` line in the project's AGENTS.md |
 | Cursor | An always-apply rule that loads the llano skill |
 
 ## Version 1

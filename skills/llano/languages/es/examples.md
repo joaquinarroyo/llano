@@ -4,9 +4,10 @@ Each example shows a typical answer and the llano version. The llano version kee
 every value and cause from the input. It only removes filler and ambiguity.
 
 <example>
-Input: a deploy log with `ERROR connect ETIMEDOUT 10.0.3.17:5432` and
-`Failed to initialize database pool after 30000 ms` and `Exiting with code 1`,
-version v2.4.1.
+Input: a deploy log from the API service, version v2.4.1, with
+`ERROR connect ETIMEDOUT 10.0.3.17:5432` and
+`Failed to initialize database pool after 30000 ms` and `Exiting with code 1`. The
+database is Postgres. A security group controls access to it.
 
 Before:
 > ¡Claro! Básicamente, parece que se produjo un problema de conexión con la base de
@@ -59,8 +60,10 @@ Llano:
 </example>
 
 <example>
-Input: "Dibújame cómo fluye una solicitud de login." The system has a gateway, an
-auth service, Postgres and Redis.
+Input: "Dibújame cómo fluye una solicitud de login." The client sends `POST /login` to
+the gateway. The gateway validates the request format and sends it to the auth
+service. The auth service verifies the password hash in Postgres and stores the
+session in Redis. If Postgres does not reply in 2 s, it returns 503.
 
 Llano:
 > El gateway valida el formato y pasa la solicitud al servicio de autenticación.
@@ -73,6 +76,7 @@ Llano:
 >
 > Si Postgres no responde en 2 s, el servicio de autenticación devuelve 503.
 
-The user asked for a diagram. It uses the names from the input. The text adds only
-what the diagram does not show: the format check and the 2 s timeout.
+The user asked for a diagram. It draws only the relations in the input, with the same
+names. The text adds only what the diagram does not show: the format check and the
+2 s timeout.
 </example>
