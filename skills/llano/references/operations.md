@@ -61,7 +61,9 @@ To add a language, copy `languages/en/` and follow `languages/_template.md`.
 |---|---|
 | Claude Code | The block in `~/.claude/CLAUDE.md` (`--install`) |
 | Codex | The block in `~/.codex/AGENTS.md` (`--install`) |
-| Others that read AGENTS.md (for example, Antigravity) | A `llano: mode=responses, lang=en` line in the project's AGENTS.md |
+| Antigravity CLI (`agy`) | The block in `~/.gemini/AGENTS.md` (`--install`) |
+| OpenCode | The block in `~/.config/opencode/AGENTS.md` (`--install`) |
+| Others that read AGENTS.md | A `llano: mode=responses, lang=en` line in the project's AGENTS.md |
 | Cursor | An always-apply rule that loads the llano skill |
 
 ## Version 1
