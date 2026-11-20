@@ -17,7 +17,7 @@ Load the `llano` skill at the start of every session and apply it with this conf
 
 Where the active configuration comes from, in order:
 1. A change the user made in this session with a command below.
-2. A `llano: mode=…, lang=…` line in CLAUDE.md, AGENTS.md or GEMINI.md: the block, or a
+2. A `llano: mode=…, lang=…` line in CLAUDE.md or AGENTS.md: the block, or a
    line the user added by hand.
 3. Defaults: `mode=responses, lang=en`.
 
@@ -61,8 +61,7 @@ To add a language, copy `languages/en/` and follow `languages/_template.md`.
 |---|---|
 | Claude Code | The block in `~/.claude/CLAUDE.md` (`--install`) |
 | Codex | The block in `~/.codex/AGENTS.md` (`--install`) |
-| Gemini CLI | The block in `~/.gemini/GEMINI.md` (`--install`) |
-| Others that read AGENTS.md | A `llano: mode=responses, lang=en` line in the project's AGENTS.md |
+| Others that read AGENTS.md (for example, Antigravity) | A `llano: mode=responses, lang=en` line in the project's AGENTS.md |
 | Cursor | An always-apply rule that loads the llano skill |
 
 ## Version 1

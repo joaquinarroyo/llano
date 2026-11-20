@@ -5,7 +5,7 @@ description: >
   English of aircraft manuals) and Karpathy's idea of writing "80% of the way" to it.
   Answers become direct and easy to understand on the first read, without losing any
   fact. Language packs: en (default), es. Modes: explain, responses (default), all, off.
-  Load it at the start of every session when CLAUDE.md, AGENTS.md or GEMINI.md says
+  Load it at the start of every session when CLAUDE.md or AGENTS.md says
   so, and when the user says "/llano", "modo llano", "llano all",
   "lenguaje llano", "plain language mode", "STE", "ASD-STE100", "less verbose",
   "menos verborragia" or "respuestas más claras".

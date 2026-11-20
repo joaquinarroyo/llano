@@ -22,7 +22,6 @@ finds:
 
 - **Claude Code:** `~/.claude/CLAUDE.md`
 - **Codex:** `~/.codex/AGENTS.md`
-- **Gemini CLI:** `~/.gemini/GEMINI.md`
 
 The block holds the configuration:
 
@@ -44,7 +43,7 @@ node ~/.agents/skills/llano/scripts/doctor.mjs --install --yes      # apply with
 node ~/.agents/skills/llano/scripts/doctor.mjs --uninstall          # remove the block (backups stay)
 ```
 
-**Other agents:** add the `llano:` line and the sentence below it to the project's
+**Other agents (for example, Antigravity):** add the `llano:` line and the sentence below it to the project's
 `AGENTS.md`. For Cursor, use an always-apply rule that loads the llano skill.
 
 The paths above assume the `~/.agents/skills/llano` install. If the skill lives in

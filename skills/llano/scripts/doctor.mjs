@@ -3,7 +3,7 @@
 //
 // A skill alone loads on demand. --install adds one marked, plain-text block to the global
 // instructions of each agent it finds:
-//   ~/.claude/CLAUDE.md (Claude Code), ~/.codex/AGENTS.md (Codex), ~/.gemini/GEMINI.md (Gemini CLI).
+//   ~/.claude/CLAUDE.md (Claude Code), ~/.codex/AGENTS.md (Codex).
 // The block holds the configuration (mode, lang). The script adds no hooks and nothing that
 // runs on its own. It shows what it will change and asks before writing. Each changed file
 // is backed up first.
@@ -57,9 +57,8 @@ const block = (config) =>
 const AGENTS = [
   { agent: "Claude Code", path: path.join(HOME, ".claude", "CLAUDE.md") },
   { agent: "Codex", path: path.join(HOME, ".codex", "AGENTS.md") },
-  { agent: "Gemini CLI", path: path.join(HOME, ".gemini", "GEMINI.md") },
 ].filter((a) => fs.existsSync(path.dirname(a.path)));
-const NO_AGENT = "no agent found (~/.claude, ~/.codex or ~/.gemini)";
+const NO_AGENT = "no agent found (~/.claude or ~/.codex)";
 
 // Version 1 added a SessionStart hook that ran `node ".../doctor.mjs" --hook`.
 const isLegacyHook = (h) => /llano.*doctor\.mjs"?\s+--hook\b/.test(String(h?.command ?? ""));
